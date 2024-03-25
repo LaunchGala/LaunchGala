@@ -61,21 +61,14 @@ export default defineNuxtConfig({
         config.resolve.alias.vue = 'vue/dist/vue.esm-bundler.js'
     },
   },
-  nitro: {
-    vercel: {
-      functions: {
-        maxDuration: 300, // 5mins maximum possible for Vercel Pro
-      },
-    },
-  },
   googleFonts: {
     families: {
       Inter: '400..800',
     },
   },
   site: {
-    name: 'vue0',
-    description: 'Generate Component with simple text prompts.',
+    name: 'LaunchGala',
+    description: 'Host events',
     defaultLocale: 'en',
   },
 })
