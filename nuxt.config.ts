@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   // devtools totally broken, not sure why
   devtools: { enabled: false },
+  ssr: false,
   app: {
     head: {
       link: [{ rel: 'icon', type: 'image/svg', href: '/logo.svg' }],
@@ -45,14 +46,6 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     viewer: false,
-  },
-  ogImage: {
-    debug: true,
-    compatibility: {
-      prerender: {
-        chromium: false,
-      },
-    },
   },
   hooks: {
     'vite:extendConfig': (config, { isClient }) => {
