@@ -1,75 +1,56 @@
-# Nuxt 3 Minimal Starter
+<br />
+<p align="center">
+  <a href="https://github.com/zernonia/vue0">
+    <img src="https://www.vue0.dev/logo.svg" alt="Logo" width="150" />
+  </a>
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+<h1 align="center">
+vue0
+</h1>
 
-## Setup
+<p align="center">
+<a href="https://github.com/zernonia/vue0" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/zernonia/vue0?flat&colorA=002438&colorB=41c399"></a>
+</p>
 
-Make sure to install the dependencies:
+<p align="center">
+Vue version open source alternative for <a href="https://v0.dev" target="__blank">v0</a>.
+<p>
 
-```bash
-# npm
-npm install
+<img alt="hero image" src="public/og.png"  width="100%" height="100%">
 
-# pnpm
-pnpm install
+## Contributing
 
-# yarn
-yarn install
+We would love to have your contributions! All PRs all welcomed! We need help building the core components, docs, tests, stories! Join our discord and we will get you up and running!
 
-# bun
-bun install
-```
+## Dev Setup
 
-## Development Server
+### Docs
 
-Start the development server on `http://localhost:3000`:
+1. Clone the repo
+2. Run `pnpm i`
+3. Run `pnpm dev` to run Nuxt3
+4. Open `http://localhost:3000`
 
-```bash
-# npm
-npm run dev
+## Credits
 
-# pnpm
-pnpm run dev
+All credits go to these open-source works and resources
 
-# yarn
-yarn dev
+- [v0.dev](https://v0.dev)
+- [openv0](https://github.com/raidendotai/openv0/)
+- [Atinux's Todos Edge](https://github.com/Atinux/nuxt-todos-edge)
+- [Nuxt SSE](https://gist.github.com/Atinux/05836469acca9649fa2b9e865df898a2)
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Execution plan:
+- [x] Generate metadata `json` for component
+- [x] Write multi-pass step
+- [x] Write iteration steps
+- [x] Store components in fs
+- [x] Render generated code
+- [ ] Support image upload (https://platform.openai.com/docs/models/gpt-4-and-gpt-4-turbo)
+- [x] Add user feature
+- [x] Support fork components
+- [x] Screen capture generated componet
+- [x] Simple Meta
+- [ ] Improve user feedback for iteration
+- [ ] Allow local hosting without GitHub OAuth
+- [x] Improve caching

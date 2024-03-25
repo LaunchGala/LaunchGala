@@ -1,5 +1,11 @@
+<script setup lang="ts">
+</script>
+
 <template>
-  <div>
-    <NuxtPage />
-  </div>
+  <UiTooltipProvider>
+    <NuxtLoadingIndicator color="hsl(var(--primary))" />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </UiTooltipProvider>
 </template>
