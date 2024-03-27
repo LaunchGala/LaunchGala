@@ -20,38 +20,105 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Toggle } from '@/components/ui/toggle';
+
+import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
+import { Badge } from '@/components/ui/badge';
+import { Calendar } from '@/components/ui/calendar';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+
+
+const isOpen = ref(false)
+const date = ref<Date>()
 </script>
 
 <template>
-  <div class="dark:bg-black">
-    <div class="flex flex-col md:flex-row md:justify-between md:items-center px-6 py-4 bg-gray-100 dark:bg-gray-800">
-      <div class="flex items-center gap-4">
-        <h1 class="text-xl font-semibold mb-4 md:mb-0 dark:text-white">Explore Speakers & Experts</h1>
-        <Button variant="outline" class="rounded">
-          <Plus class="w-5 h-5" /> Offer your expertise
-        </Button>
-      </div>
-      <div class="flex gap-4">
-        <Input type="text" placeholder="Search by name..." class="rounded" />
-        <Select>
-          <SelectTrigger class="rounded-md">
-            <SelectValue placeholder="Filter by" />
-            <ChevronDown class="w-5 h-5" />
-          </SelectTrigger>
-          <SelectContent class="rounded-md">
-            <SelectGroup>
-              <SelectItem value="name">Name</SelectItem>
-              <SelectItem value="date">Date</SelectItem>
-              <SelectItem value="location">Location</SelectItem>
-              <SelectItem value="industry">Industry</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <Button variant="outline" class="rounded">
-          <Filter class="w-4 h-4 mr-1" /> Advanced
-        </Button>
-      </div>
+  <div class="flex flex-col space-y-4 p-6 dark:bg-black">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold dark:text-white">Find Experts</h1>
+      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide Your Expertise</Button>
+
     </div>
+    
+    <Collapsible v-model:open="isOpen" class="px-6 py-4">
+        <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
+            <span>Search Filters</span>
+            <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
+        </CollapsibleTrigger>
+
+      <CollapsibleContent class="space-y-4 pb-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <Input placeholder="Location" />
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Size" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="studio">Studio</SelectItem>
+              <SelectItem value="1br">1 Bedroom</SelectItem>
+              <SelectItem value="2br">2 Bedroom</SelectItem>
+              <SelectItem value="3brplus">3+ Bedroom</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Venue Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="apartment">Apartment</SelectItem>
+              <SelectItem value="house">House</SelectItem>
+              <SelectItem value="condo">Condo</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Amenities" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="pool">Pool</SelectItem>
+              <SelectItem value="gym">Gym</SelectItem>
+              <SelectItem value="wifi">WiFi</SelectItem>
+            </SelectContent>
+          </Select>
+          <Popover>
+            <PopoverTrigger as-child>
+              <Button
+                variant="outline"
+                class="dark:text-white dark:bg-gray-700 dark:border-gray-700"
+              >
+                <CalendarIcon class="mr-2 h-4 w-4" />
+                Pick a date
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent class="w-auto p-0">
+              <Calendar v-model="date" />
+            </PopoverContent>
+          </Popover>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Sponsor" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="sponsored">Sponsored</SelectItem>
+              <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md">
+            <Search class="w-5 h-5 mr-2" />
+            Search
+          </Button>
+        </div>
+      </CollapsibleContent>
+
+    </Collapsible>
     <div class="px-6 py-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card v-for="n in 6" :key="n" class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">

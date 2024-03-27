@@ -16,7 +16,25 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 
+import { Calendar as CalendarIcon } from 'lucide-vue-next';
+import { Badge } from '@/components/ui/badge';
+import { Calendar } from '@/components/ui/calendar';
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+const isOpen = ref(false)
+const date = ref<Date>()
 const postExpanded = ref(new Array(5).fill(false));
 const searchValue = ref('');
 const showSearch = ref(false);
@@ -24,38 +42,84 @@ const searchFilter = ref('author');
 </script>
 
 <template>
-  <div class="dark:bg-black">
-    <div class="px-6 py-8">
-      <!-- Header Bar -->
-      <div class="flex justify-between items-center mb-4">
-        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Community Talk</h1>
-        <Button variant="default">
-          Create a Post
-        </Button>
-      </div>
+  <div class="flex flex-col space-y-4 p-6 dark:bg-black">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold dark:text-white">Community Forum</h1>
+      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Create a Post</Button>
 
-      <!-- Animated Search Bar -->
-      <div class="mb-6 relative">
-        <Input
-          v-model="searchValue"
-          @focus="showSearch = true"
-          @blur="showSearch = false"
-          class="w-full pr-10 transition-all duration-300 ease-in-out rounded-lg shadow dark:bg-gray-900"
-          placeholder="Search by author name, topic, top trending, newest"
-          type="text"
-        />
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <Search class="w-5 h-5 text-gray-400" />
+    </div>
+    
+    <Collapsible v-model:open="isOpen" class="px-6 py-4">
+        <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
+            <span>Search Filters</span>
+            <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
+        </CollapsibleTrigger>
+
+      <CollapsibleContent class="space-y-4 pb-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <Input placeholder="Location" />
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Size" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="studio">Studio</SelectItem>
+              <SelectItem value="1br">1 Bedroom</SelectItem>
+              <SelectItem value="2br">2 Bedroom</SelectItem>
+              <SelectItem value="3brplus">3+ Bedroom</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Venue Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="apartment">Apartment</SelectItem>
+              <SelectItem value="house">House</SelectItem>
+              <SelectItem value="condo">Condo</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Amenities" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="pool">Pool</SelectItem>
+              <SelectItem value="gym">Gym</SelectItem>
+              <SelectItem value="wifi">WiFi</SelectItem>
+            </SelectContent>
+          </Select>
+          <Popover>
+            <PopoverTrigger as-child>
+              <Button
+                variant="outline"
+                class="dark:text-white dark:bg-gray-700 dark:border-gray-700"
+              >
+                <CalendarIcon class="mr-2 h-4 w-4" />
+                Pick a date
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent class="w-auto p-0">
+              <Calendar v-model="date" />
+            </PopoverContent>
+          </Popover>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Sponsor" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="sponsored">Sponsored</SelectItem>
+              <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md">
+            <Search class="w-5 h-5 mr-2" />
+            Search
+          </Button>
         </div>
-        <button
-          class="absolute inset-y-0 right-0 flex items-center pr-3"
-          :class="{ 'text-gray-400 hover:text-gray-500': !searchValue, 'text-red-500 hover:text-red-600': searchValue }"
-          @click="searchValue = ''"
-        >
-          <X v-if="searchValue" class="w-5 h-5" />
-        </button>
-      </div>
+      </CollapsibleContent>
 
+    </Collapsible>
       <!-- Posts List -->
       <div v-for="(isExpanded, index) in postExpanded" :key="`post-${index}`" class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden transition-all duration-300">
         <Collapsible v-model:open="postExpanded[index]">
@@ -102,5 +166,5 @@ const searchFilter = ref('author');
         </Collapsible>
       </div>
     </div>
-  </div>
+
 </template>
