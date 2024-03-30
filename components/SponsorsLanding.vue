@@ -57,10 +57,12 @@ import { Button } from '@/components/ui/button'
       </Card>
     </div>
     <div class="py-8">
+      <NuxtLink to="AllSponsors">
       <Button class="text-xl font-semibold bg-blue-500 text-white rounded-lg px-6 py-3 hover:bg-blue-600 transition-colors">
         View All
         <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
+        </NuxtLink>
     </div>
 
   </section>

@@ -20,11 +20,9 @@ const eventSize = ref('')
 </script>
 
 <template>
-  <div class="min-h-screen flex items-left justify-left bg-gray-100 dark:bg-black p-4">
-      <img src="/placeholder.svg" alt="Landing Page" class="object-cover w-full h-full">
-    <div class="w-full max-w-lg p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-      <div class="space-y-4">
-        <div class="flex flex-col gap-6 p-4 bg-white dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
+  <div class="flex items-left justify-left bg-gray-100 dark:bg-black p-4">
+      <div class="space-y-4 w-1/4 z-20 mx-10">
+        <div class="flex flex-col gap-6 p-10 bg-white dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
           <h>Find a venue for your event</h>
         <!-- Start Date and Time Picker -->
         <Popover>
@@ -100,8 +98,8 @@ const eventSize = ref('')
         </Select>
 
         <!-- Event Size Dropdown Menu -->
-        <div class="flex gap-4 items-center">
-          <Users class="h-5 w-5 text-gray-700 dark:text-gray-300" />
+        <div class="flex items-center">
+          <Users class="h-5 text-gray-700 dark:text-gray-300" />
           <Select v-model="eventSize" class="w-full">
             <SelectTrigger>
               <SelectValue placeholder="Event size" />
@@ -126,7 +124,7 @@ const eventSize = ref('')
       </NuxtLink>
       </div>
     </div>
-  </div>
+  <img src="/venueBG01.jpeg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl">
 </div>
 
 </template>

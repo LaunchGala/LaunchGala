@@ -5,6 +5,7 @@
   <VolunteersLanding/>
   <SponsorsLanding/>
   <OtherServicesLanding/>
+  <UpcomingEventLanding/>
   <CreateEventLanding/>
   <FAQlanding/>
 </div>

@@ -22,6 +22,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Home Party Card -->
       <Card as-child>
+        <NuxtLink to="AllSpeakers">
         <a href="/home-party" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/placeholder.svg" alt="Home Party" class="w-full h-full object-cover">
@@ -34,10 +35,12 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             Create an intimate event at your home.
           </CardContent>
         </a>
+      </NuxtLink>
       </Card>
 
       <!-- Corporate Event Card -->
       <Card as-child>
+        <NuxtLink to="AllMedia">
         <a href="/corporate-event" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/placeholder.svg" alt="Corporate Event" class="w-full h-full object-cover">
@@ -50,10 +53,12 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             Organize your business conferences.
           </CardContent>
         </a>
+      </NuxtLink>
       </Card>
 
       <!-- Private Meeting Card -->
       <Card as-child>
+        <NuxtLink to="AllVendors">
         <a href="/private-meeting" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/placeholder.svg" alt="Private Meeting" class="w-full h-full object-cover">
@@ -66,10 +71,12 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             Plan confidential discussions.
           </CardContent>
         </a>
+      </NuxtLink>
       </Card>
 
       <!-- Workshops Card -->
       <Card as-child>
+        <NuxtLink to="AllResources">
         <a href="/workshops" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/placeholder.svg" alt="Workshops" class="w-full h-full object-cover">
@@ -82,6 +89,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             Design and conduct workshops.
           </CardContent>
         </a>
+      </NuxtLink>
       </Card>
     </div>
     <!-- <div class="mt-8 flex justify-center">

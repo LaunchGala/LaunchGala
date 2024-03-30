@@ -6,7 +6,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
 
 <template>
   <div class="mx-8 my-8 bg-white dark:bg-black">
-    <div class="text-xl font-bold text-gray-900 dark:text-white p-6">Our Venues</div>
+    <div class="text-xl font-bold text-gray-900 dark:text-white p-6">Upcoming Events</div>
     <Button variant="default" class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Provide your Venue</Button>
 
     <div class="carousel flex space-x-6 overflow-x-auto py-6">
@@ -49,7 +49,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
 
     </div>
     <div class="py-8">
-      <NuxtLink to="AllVenues">
+      <NuxtLink to="AllEvents">
       <Button class="text-xl font-semibold bg-blue-500 text-white rounded-lg px-6 py-3 hover:bg-blue-600 transition-colors">
         View All
         <ArrowRight class="w-5 h-5 ml-2" />
