@@ -17,7 +17,7 @@ import { Tiktoken } from 'js-tiktoken';
 <template>
   <footer class="bg-gray-100 dark:bg-black text-gray-700 dark:text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-10 gap-y-8">
         <div>
           <h3 class="font-bold text-lg mb-4">Company</h3>
           <ul>
@@ -56,10 +56,10 @@ import { Tiktoken } from 'js-tiktoken';
           <h3 class="font-bold text-lg mb-4">Host</h3>
           <ul>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Host your home</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Host your venue</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Host an experience</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Host an event</a>
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Responsible hosting</a>
@@ -83,6 +83,23 @@ import { Tiktoken } from 'js-tiktoken';
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Neighborhood Support</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-4">Legal & Privacy</h3>
+          <ul>
+            <li class="mb-2">
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Privacy policy</a>
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Terms of use</a>
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">EU & other compliance</a>
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cookies & other policies</a>
             </li>
           </ul>
         </div>
