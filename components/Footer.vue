@@ -100,12 +100,17 @@ import { Tiktoken } from 'js-tiktoken';
                   <SelectItem value="english">
                     English
                   </SelectItem>
-                  <SelectItem value="spanish">
-                    Español
+                  <SelectItem value="german">
+                    Deutsch
                   </SelectItem>
                   <SelectItem value="french">
                     Français
                   </SelectItem>
+                  <SelectItem value="spanish">
+                    Español
+                  </SelectItem>
+
+                  
                 </SelectGroup>
               </SelectContent>
             </Select>

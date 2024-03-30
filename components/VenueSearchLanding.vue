@@ -20,10 +20,12 @@ const eventSize = ref('')
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-black p-4">
+  <div class="min-h-screen flex items-left justify-left bg-gray-100 dark:bg-black p-4">
+      <img src="/placeholder.svg" alt="Landing Page" class="object-cover w-full h-full">
     <div class="w-full max-w-lg p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
       <div class="space-y-4">
-
+        <div class="flex flex-col gap-6 p-4 bg-white dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
+          <h>Find a venue for your event</h>
         <!-- Start Date and Time Picker -->
         <Popover>
           <PopoverTrigger as-child>
@@ -51,10 +53,8 @@ const eventSize = ref('')
             <Input type="time" v-model="endTime" class="mt-2 w-full" placeholder="HH:mm" />
           </PopoverContent>
         </Popover>
-      </div>
         <!-- Start time and end time picker -->
 
-  <div class="flex flex-col gap-6 p-4 bg-white dark:bg-black shadow rounded-md max-w-md mx-auto my-8">
     <div>
       <label for="start-time" class="block text-sm font-medium text-gray-700 dark:text-white mb-1">Start Time</label>
       <Input
@@ -127,4 +127,8 @@ const eventSize = ref('')
       </div>
     </div>
   </div>
+</div>
+
 </template>
+
+
