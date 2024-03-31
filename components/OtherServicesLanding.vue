@@ -25,7 +25,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
         <NuxtLink to="AllSpeakers">
         <a href="/home-party" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/placeholder.svg" alt="Home Party" class="w-full h-full object-cover">
+            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Home Party" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
             <Home class="w-5 h-5 dark:text-white" />
@@ -43,7 +43,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
         <NuxtLink to="AllMedia">
         <a href="/corporate-event" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/placeholder.svg" alt="Corporate Event" class="w-full h-full object-cover">
+            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Corporate Event" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
             <Check class="w-5 h-5 dark:text-white" />
@@ -61,7 +61,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
         <NuxtLink to="AllVendors">
         <a href="/private-meeting" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/placeholder.svg" alt="Private Meeting" class="w-full h-full object-cover">
+            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Private Meeting" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
             <User class="w-5 h-5 dark:text-white" />
@@ -79,7 +79,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
         <NuxtLink to="AllResources">
         <a href="/workshops" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/placeholder.svg" alt="Workshops" class="w-full h-full object-cover">
+            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Workshops" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
             <ArrowRight class="w-5 h-5 dark:text-white" />

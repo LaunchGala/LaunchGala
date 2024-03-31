@@ -12,7 +12,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
     <div class="carousel flex space-x-6 overflow-x-auto py-6">
       
       <div class="flex-none w-[500px] h-[540px] max-w-none rounded-lg shadow-lg bg-white dark:bg-gray-800">
-        <img src="/placeholder.svg" alt="Venue" class="rounded-t-lg object-cover w-full h-[360px]" />
+        <img src="/Bootstrapping.png" alt="Venue" class="rounded-t-lg object-cover w-full h-[360px]" />
         <div class="p-8">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">Chic Urban Loft</h5>
           <p class="text-base text-gray-700 dark:text-gray-300 mt-2">A stylish venue for modern gatherings.</p>
@@ -24,7 +24,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
       </div>
       
       <div class="flex-none w-[500px] h-[540px] max-w-none rounded-lg shadow-lg bg-white dark:bg-gray-800">
-        <img src="/placeholder.svg" alt="Venue" class="rounded-t-lg object-cover w-full h-[360px]" />
+        <img src="/Bootstrapping.png" alt="Venue" class="rounded-t-lg object-cover w-full h-[360px]" />
         <div class="p-8">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">Elegant Ballroom</h5>
           <p class="text-base text-gray-700 dark:text-gray-300 mt-2">Perfect for weddings and gala events.</p>
@@ -36,7 +36,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
       </div>
       
       <div class="flex-none w-[500px] h-[540px] max-w-none rounded-lg shadow-lg bg-white dark:bg-gray-800">
-        <img src="/placeholder.svg" alt="Venue" class="rounded-t-lg object-cover w-full h-[360px]" />
+        <img src="/Bootstrapping.png" alt="Venue" class="rounded-t-lg object-cover w-full h-[360px]" />
         <div class="p-8">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">Cozy Conference Room</h5>
           <p class="text-base text-gray-700 dark:text-gray-300 mt-2">Ideal space for meetings and seminars.</p>
