@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 <template>
 
 
-  <section class="py-16 bg-white dark:bg-black">
+  <section class="mx-8 my-8 bg-white dark:bg-black">
     <div class="text-center mb-12">
       <h2 class="text-4xl font-bold mb-4">Securing Sponsorship</h2>
       <p class="text-gray-600 dark:text-gray-400">Learn how to get companies to sponsor your events</p>

@@ -6,7 +6,7 @@ import { Home, ArrowRight } from 'lucide-vue-next';
 
 <template>
   <section class="px-4 py-16 bg-white dark:bg-black">
-    <div class="mx-auto max-w-4xl">
+    <div class="mx-8 my-8">
       <div class="mb-10 text-center">
         <!-- <Home class="mx-auto mb-4 h-8 w-8 text-gray-700 dark:text-gray-300" /> -->
         <h2 class="text-3xl font-bold tracking-tight text-gray-800 dark:text-white">Frequently asked questions</h2>

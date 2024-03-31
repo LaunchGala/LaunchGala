@@ -12,7 +12,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 </script>
 
 <template>
-  <section class="py-10 px-4  bg-gray-100 dark:bg-black">
+  <section class="py-10 px-4 mx-8 my-8 bg-gray-100 dark:bg-black">
     <!-- Header and Description -->
     <div class="mb-10 text-center">
       <h2 class="text-2xl font-bold dark:text-white">Create your event</h2>

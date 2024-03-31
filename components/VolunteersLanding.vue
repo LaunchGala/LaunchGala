@@ -15,20 +15,24 @@ import { Button } from '@/components/ui/button'
 
     </div>
     <div class="flex justify-center gap-8 flex-wrap px-8">
-      <div class="flex flex-col items-center justify-center w-72 h-72 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
+      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
         <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Admin Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">Admin</span>
+        <span class="text-xl text-gray-800 dark:text-white">Administrative Support</span>
       </div>
-      <div class="flex flex-col items-center justify-center w-72 h-72 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
+      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
         <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Tech Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">Tech</span>
+        <span class="text-xl text-gray-800 dark:text-white">Tech Support</span>
       </div>
-      <div class="flex flex-col items-center justify-center w-72 h-72 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
+      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
         <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Building Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">Building</span>
+        <span class="text-xl text-gray-800 dark:text-white">Logistics & Coordination</span>
+      </div>
+      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
+        <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Building Category"/>
+        <span class="text-xl text-gray-800 dark:text-white">Catering & Hospitality</span>
       </div>
       <NuxtLink to="AllVolunteers">
-      <div class="flex flex-col items-center justify-center w-72 h-72 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
+      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
         <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="More Category"/>
         <span class="text-xl text-gray-800 dark:text-white">More...</span>
       </div>
