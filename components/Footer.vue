@@ -79,7 +79,7 @@ import { Tiktoken } from 'js-tiktoken';
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Help Center</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cancellation Options</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cancellation & Insurance</a>
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Neighborhood Support</a>
