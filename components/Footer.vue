@@ -39,16 +39,16 @@ import { Tiktoken } from 'js-tiktoken';
           <h3 class="font-bold text-lg mb-4">Community</h3>
           <ul>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Diversity & Belonging</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Ambassador program</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Accessibility</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Become our Partner</a>
+            </li>
+            <li class="mb-2">
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Diversity & Accessibility</a>
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Guest Referrals</a>
-            </li>
-            <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Gift Cards</a>
             </li>
           </ul>
         </div>
@@ -56,13 +56,13 @@ import { Tiktoken } from 'js-tiktoken';
           <h3 class="font-bold text-lg mb-4">Host</h3>
           <ul>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Host your venue</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Provide a Venue</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Host an event</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Host an Event</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Responsible hosting</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Responsible Hosting</a>
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Resource Center</a>
@@ -79,7 +79,7 @@ import { Tiktoken } from 'js-tiktoken';
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Help Center</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cancellation options</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cancellation Options</a>
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Neighborhood Support</a>
@@ -90,16 +90,16 @@ import { Tiktoken } from 'js-tiktoken';
           <h3 class="font-bold text-lg mb-4">Legal & Privacy</h3>
           <ul>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Privacy policy</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Privacy Policy</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Terms of use</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Terms of Service</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">EU & other compliance</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">EU & Other Compliance</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cookies & other policies</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cookies & Other Policies</a>
             </li>
           </ul>
         </div>
