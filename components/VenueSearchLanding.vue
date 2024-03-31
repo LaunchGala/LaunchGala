@@ -23,7 +23,7 @@ const eventSize = ref('')
   <div class="flex items-left justify-left bg-gray-100 dark:bg-black p-4">
       <div class="space-y-4 w-1/4 z-20 mx-10">
         <div class="flex flex-col gap-6 p-10 bg-white dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
-          <h>Find a venue for your event</h>
+          <h>Create your event</h>
         <!-- Start Date and Time Picker -->
         <Popover>
           <PopoverTrigger as-child>
