@@ -3,6 +3,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ArrowRight, Search } from 'lucide-vue-next'
+
 
 </script>
 
@@ -42,7 +44,7 @@ import { Button } from '@/components/ui/button'
     <NuxtLink to="AllVolunteers">
       <Button class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-300 transition-colors">
       View All
-      <!-- <ArrowRight class="w-5 h-5 ml-2" /> -->
+      <ArrowRight class="w-5 h-5 ml-2" />
         </Button>
       </NuxtLink>
   </div>
