@@ -10,9 +10,9 @@ import { Button } from '@/components/ui/button'
 
 
   <section class="mx-8 my-8 bg-white dark:bg-black">
-    <div class="text-center mb-12">
+    <div class="text-center mb-12 flex justify-between">
       <h2 class="text-4xl font-bold mb-4">Securing Sponsorship</h2>
-      <p class="text-gray-600 dark:text-gray-400">Learn how to get companies to sponsor your events</p>
+      <!-- <p class="text-gray-600 dark:text-gray-400">Learn how to get companies to sponsor your events</p> -->
       <Button variant="default" class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Become a sponsor</Button>
 
     </div>

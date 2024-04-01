@@ -6,9 +6,10 @@ import { ArrowRight, Search } from 'lucide-vue-next'
 
 <template>
   <div class="mx-8 my-8 bg-white dark:bg-black">
+    <div class="flex justify-between">
     <div class="text-xl font-bold text-gray-900 dark:text-white p-6">Our Venues</div>
-    <Button variant="default" class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Provide your Venue</Button>
-
+    <Button variant="default" class="mt-5 bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Provide your Venue</Button>
+  </div>
     <div class="carousel flex space-x-6 overflow-x-auto py-6">
       
       <div class="flex-none w-[500px] h-[540px] max-w-none rounded-lg shadow-lg bg-white dark:bg-gray-800">

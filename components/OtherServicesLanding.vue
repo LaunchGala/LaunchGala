@@ -12,7 +12,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 </script>
 
 <template>
-  <section class="py-16 mx-8 my-8 bg-gray-100 dark:bg-black">
+  <section class="py-16  bg-gray-100 dark:bg-black">
     
     <!-- Header and Description -->
     <div class="mb-10 text-center">
@@ -20,7 +20,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
       <p class="text-md mt-3 dark:text-gray-400">Finding speakers, media, influencers and vendors</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Home Party Card -->
       <Card as-child>
         <NuxtLink to="AllSpeakers">

@@ -142,16 +142,16 @@ import { Tiktoken } from 'js-tiktoken';
           <a href="#">
             <Facebook class="h-6 w-6 hover:text-gray-900 dark:hover:text-gray-300" />
           </a>
-          <a href="#">
+          <a href="https://twitter.com/LaunchGala">
             <Twitter class="h-6 w-6 hover:text-gray-900 dark:hover:text-gray-300" />
           </a>
-          <a href="#">
+          <a href="https://www.instagram.com/launchgala/">
             <Instagram class="h-6 w-6 hover:text-gray-900 dark:hover:text-gray-300" />
           </a>
           <a href="#">
             <Youtube class="h-6 w-6 hover:text-gray-900 dark:hover:text-gray-300" />
           </a>
-          <a href="#">
+          <a href="https://www.linkedin.com/company/launch-gala/">
             <Linkedin class="h-6 w-6 hover:text-gray-900 dark:hover:text-gray-300" />
           </a>
           <!-- <a href="#">

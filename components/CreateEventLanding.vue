@@ -12,14 +12,16 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 </script>
 
 <template>
-  <section class="py-10 px-4 mx-8 my-8 bg-gray-100 dark:bg-black">
+  <section class="py-10 px-4 bg-gray-100 dark:bg-black">
     <!-- Header and Description -->
-    <div class="mb-10 text-center">
+    <div class="mb-10 mr-8 ml-8 flex justify-between">
       <h2 class="text-2xl font-bold dark:text-white">Create your event</h2>
-      <p class="text-md mt-3 dark:text-gray-400">Choose the event type that suits your need</p>
+      <!-- <p class="text-md mt-3 dark:text-gray-400">Choose the event type that suits your need</p> -->
+      <Button class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Create Event</Button>
+
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Home Party Card -->
       <Card as-child>
         <a href="/home-party" class="block">
@@ -84,8 +86,8 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
         </a>
       </Card>
     </div>
-    <div class="mt-8 flex justify-center">
+    <!-- <div class="mt-8 flex justify-center">
       <Button class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Create Event</Button>
-    </div>
+    </div> -->
   </section>
 </template>
