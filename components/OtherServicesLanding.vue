@@ -17,7 +17,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     <!-- Header and Description -->
     <div class="mb-10 text-center">
       <h2 class="text-2xl font-bold dark:text-white">We also help you with</h2>
-      <p class="text-md mt-3 dark:text-gray-400">Finding speakers, media, influencers and vendors</p>
+      <p class="text-md mt-3 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
     </div>
 
     <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

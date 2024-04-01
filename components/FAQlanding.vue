@@ -46,7 +46,7 @@ import { Home, ArrowRight } from 'lucide-vue-next';
       </Accordion>
     </div>
     <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
-            Sign Up
+            Sign Up for Free
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
   </section>
