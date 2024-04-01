@@ -35,7 +35,12 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
           <CardContent class="dark:text-gray-400">
             Create an intimate event at your home.
           </CardContent>
+          
         </a>
+        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+            Explore
+            <ArrowRight class="w-5 h-5 ml-2" />
+          </Button>
       </NuxtLink>
       </Card>
 
@@ -54,6 +59,10 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             Organize your business conferences.
           </CardContent>
         </a>
+        <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+            Explore
+            <ArrowRight class="w-5 h-5 ml-2" />
+          </Button>
       </NuxtLink>
       </Card>
 
@@ -69,9 +78,13 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             <CardTitle class="text-lg dark:text-white">Vendors</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
-            Plan confidential discussions.
+            Plan confidential discussions...................
           </CardContent>
         </a>
+        <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+            Explore
+            <ArrowRight class="w-5 h-5 ml-2" />
+          </Button>
       </NuxtLink>
       </Card>
 
@@ -87,9 +100,13 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             <CardTitle class="text-lg dark:text-white">Resources</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
-            Design and conduct workshops.
+            Design and conduct workshops....................
           </CardContent>
         </a>
+        <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+            Explore
+            <ArrowRight class="w-5 h-5 ml-2" />
+          </Button>
       </NuxtLink>
       </Card>
     </div>
