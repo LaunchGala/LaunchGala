@@ -7,6 +7,7 @@
   <OtherServicesLanding/>
   <UpcomingEventLanding/>
   <CreateEventLanding/>
+  <RequestServiceLanding/>
   <FAQlanding/>
 </div>
   
