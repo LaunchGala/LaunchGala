@@ -117,7 +117,7 @@ const eventSize = ref('')
 
         <!-- Search Button -->
         <NuxtLink to="VenueSearchResults">
-        <Button class="flex w-full items-center justify-center rounded-md bg-blue-500 dark:bg-blue-600 text-white hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
+        <Button class="flex w-full items-center justify-center rounded-md  OrangeCol font-semibold text-white hover:bg-orange-400 transition-colors">
           <Search class="mr-2 h-5 w-5" />
           <span>Search Venue</span>
         </Button>
@@ -130,3 +130,20 @@ const eventSize = ref('')
 </template>
 
 
+<style>
+ .OrangeCol {   
+  background-color: #ff6900;
+ }
+
+ .ButtonCol {
+  background-color: white;
+  color:#ff6900;
+  border-color: #ff6900;
+  border-radius: solid 15px;
+  border-width: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+ }
+</style>

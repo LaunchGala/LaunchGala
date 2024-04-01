@@ -16,7 +16,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     
     <!-- Header and Description -->
     <div class="mb-10 text-center">
-      <h2 class="text-2xl font-bold dark:text-white">We also help you with</h2>
+      <h2 class="text-2xl font-semibold mb-4  text-gray-700">We also help you with</h2>
       <p class="text-md mt-3 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
     </div>
 
@@ -29,7 +29,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Home Party" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
-            <Home class="w-5 h-5 dark:text-white" />
+            <!-- <Home class="w-5 h-5 dark:text-white" /> -->
             <CardTitle class="text-lg dark:text-white">Speakers</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
@@ -37,7 +37,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
           </CardContent>
           
         </a>
-        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -52,14 +52,14 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Corporate Event" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
-            <Check class="w-5 h-5 dark:text-white" />
+            <!-- <Check class="w-5 h-5 dark:text-white" /> -->
             <CardTitle class="text-lg dark:text-white">Media & influencers</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
             Organize your business conferences.
           </CardContent>
         </a>
-        <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -74,14 +74,14 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Private Meeting" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
-            <User class="w-5 h-5 dark:text-white" />
+            <!-- <User class="w-5 h-5 dark:text-white" /> -->
             <CardTitle class="text-lg dark:text-white">Vendors</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
             Plan confidential discussions...................
           </CardContent>
         </a>
-        <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -96,14 +96,14 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Workshops" class="w-full h-full object-cover">
           </AspectRatio>
           <CardHeader>
-            <ArrowRight class="w-5 h-5 dark:text-white" />
+            <!-- <ArrowRight class="w-5 h-5 dark:text-white" /> -->
             <CardTitle class="text-lg dark:text-white">Resources</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
             Design and conduct workshops....................
           </CardContent>
         </a>
-        <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -115,3 +115,22 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     </div> -->
   </section>
 </template>
+
+
+<style>
+ .OrangeCol {   
+  border-color: #ff6900;
+ }
+
+ .ButtonCol {
+  background-color: white;
+  color:#ff6900;
+  border-color: #ff6900;
+  border-radius: solid 15px;
+  border-width: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+ }
+</style>

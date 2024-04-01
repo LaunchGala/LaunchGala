@@ -9,8 +9,8 @@ import { Button } from '@/components/ui/button'
 <template>
   <section class="py-16 bg-gray-100 dark:bg-black">
     <div class="mx-8 text-center mb-12 flex justify-between">
-      <h2 class="text-4xl font-bold mb-4">Find Volunteers</h2>
-      <Button variant="default" class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Become a volunteer</Button>
+      <h2 class=" text-2xl font-semibold mb-4  text-gray-700">Find Volunteers</h2>
+      <Button variant="default" class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-300 transition-colors">Become a volunteer</Button>
       <!-- <p class="text-gray-600 dark:text-gray-400">Explore our volunteer categories</p> -->
 
     </div>
@@ -40,9 +40,9 @@ import { Button } from '@/components/ui/button'
   </div>
   <div class="py-8 ml-10 mt-10">
     <NuxtLink to="AllVolunteers">
-    <Button class=" text-xl font-semibold bg-blue-500 text-white rounded-lg px-6 py-3 hover:bg-blue-600 transition-colors">
+      <Button class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-300 transition-colors">
       View All
-      <ArrowRight class="w-5 h-5 ml-2" />
+      <!-- <ArrowRight class="w-5 h-5 ml-2" /> -->
         </Button>
       </NuxtLink>
   </div>
@@ -50,3 +50,22 @@ import { Button } from '@/components/ui/button'
   </section>
 
 </template>
+
+
+<style>
+ .OrangeCol {   
+  border-color: #ff6900;
+ }
+
+ .ButtonCol {
+  background-color: white;
+  color:#ff6900;
+  border-color: #ff6900;
+  border-radius: solid 15px;
+  border-width: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+ }
+</style>

@@ -11,45 +11,45 @@ import { Button } from '@/components/ui/button'
 
   <section class="mx-8 my-8 bg-white dark:bg-black">
     <div class="text-center mb-12 flex justify-between">
-      <h2 class="text-4xl font-bold mb-4">Securing Sponsorship</h2>
+      <h2 class="text-2xl font-semibold mb-4  text-gray-700">Securing Sponsorship</h2>
       <!-- <p class="text-gray-600 dark:text-gray-400">Learn how to get companies to sponsor your events</p> -->
-      <Button variant="default" class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Become a sponsor</Button>
+      <Button variant="default" class="ButtonCol  hover:bg-gray-300 transition-colors">Become a sponsor</Button>
 
     </div>
 
     
     <div class="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
-      <Card>
+      <Card class="OrangeCol text-white">
         <CardHeader>
-          <CardTitle>Startups</CardTitle>
-          <CardDescription>Sponsor new and innovative ideas.</CardDescription>
+          <CardTitle class="font-bold">Startups</CardTitle>
+          <CardDescription class="font-semibold text-gray-300">Sponsor new and innovative ideas.</CardDescription>
         </CardHeader>
         <CardContent>
           New tech startups tend to support grassroots efforts in exchange for exposure.
         </CardContent>
       </Card>
-      <Card>
+      <Card class="OrangeCol text-white">
         <CardHeader>
-          <CardTitle>Local Businesses</CardTitle>
-          <CardDescription>Strengthen community ties.</CardDescription>
+          <CardTitle class="font-bold">Local Businesses</CardTitle>
+          <CardDescription class="font-semibold text-gray-300">Strengthen community ties.</CardDescription>
         </CardHeader>
         <CardContent>
           Local companies may be interested in events that contribute to local growth and presence.
         </CardContent>
       </Card>
-      <Card>
+      <Card class="OrangeCol text-white">
         <CardHeader>
-          <CardTitle>Major Corporations</CardTitle>
-          <CardDescription>Large scale support.</CardDescription>
+          <CardTitle class="font-bold">Major Corporations</CardTitle>
+          <CardDescription class="font-semibold text-gray-300">Large scale support.</CardDescription>
         </CardHeader>
         <CardContent>
           Big names can provide significant funds and added prestige to your event.
         </CardContent>
       </Card>
-      <Card>
+      <Card class="OrangeCol text-white">
         <CardHeader>
-          <CardTitle>Alumni Networks</CardTitle>
-          <CardDescription>Foster loyalty.</CardDescription>
+          <CardTitle class="font-bold">Alumni Networks</CardTitle>
+          <CardDescription class="font-semibold text-gray-300">Foster loyalty.</CardDescription>
         </CardHeader>
         <CardContent>
           Tap into the goodwill of successful alumni who want to give back to their community.
@@ -58,12 +58,29 @@ import { Button } from '@/components/ui/button'
     </div>
     <div class="py-8">
       <NuxtLink to="AllSponsors">
-      <Button class="text-xl font-semibold bg-blue-500 text-white rounded-lg px-6 py-3 hover:bg-blue-600 transition-colors">
+      <Button class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-300 transition-colors">
         View All
-        <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
         </NuxtLink>
     </div>
 
   </section>
 </template>
+
+<style>
+ .OrangeCol {   
+  border-color: #ff6900;
+ }
+
+ .ButtonCol {
+  background-color: white;
+  color:#ff6900;
+  border-color: #ff6900;
+  border-radius: solid 15px;
+  border-width: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+ }
+</style>

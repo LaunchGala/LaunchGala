@@ -9,7 +9,7 @@ import { Home, ArrowRight } from 'lucide-vue-next';
     <div class="mx-8 my-8">
       <div class="mb-10">
         <!-- <Home class="mx-auto mb-4 h-8 w-8 text-gray-700 dark:text-gray-300" /> -->
-        <h2 class="text-3xl font-bold tracking-tight text-gray-800 dark:text-white">Frequently asked questions</h2>
+        <h2 class=" tracking-tight text-2xl font-semibold mb-4  text-gray-600">Frequently asked questions</h2>
         <p class="mt-3 text-lg text-gray-500 dark:text-gray-400">
           Can't find the answer you're looking for? Reach out to our 
           <a href="#" class="font-medium text-blue-500 hover:text-blue-600 dark:hover:text-blue-400">customer support</a> team.
@@ -45,9 +45,28 @@ import { Home, ArrowRight } from 'lucide-vue-next';
         </AccordionItem>
       </Accordion>
     </div>
-    <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+    <Button class="mt-2 ml-6 mr-12 mb-8 inline-flex items-center OrangeCol font-semibold text-white rounded-md py-2 px-4 hover:bg-orange-400 transition-colors">
             Sign Up for Free
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
   </section>
 </template>
+
+
+<style>
+ .OrangeCol {   
+  background-color: #ff6900;
+ }
+
+ .ButtonCol {
+  background-color: white;
+  color:#ff6900;
+  border-color: #ff6900;
+  border-radius: solid 15px;
+  border-width: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+ }
+</style>

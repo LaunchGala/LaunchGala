@@ -15,9 +15,9 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
   <section class="py-10 px-4 bg-gray-100 dark:bg-black">
     <!-- Header and Description -->
     <div class="mb-10 mr-8 ml-8 flex justify-between">
-      <h2 class="text-2xl font-bold dark:text-white">Create your event</h2>
+      <h2 class="text-2xl font-semibold mb-4  text-gray-700">Create your event</h2>
       <!-- <p class="text-md mt-3 dark:text-gray-400">Choose the event type that suits your need</p> -->
-      <Button class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Create Event</Button>
+      <Button class="ButtonCol  hover:bg-gray-200 transition-colors">Create Event</Button>
 
     </div>
 
@@ -91,3 +91,21 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     </div> -->
   </section>
 </template>
+
+<style>
+ .OrangeCol {   
+  border-color: #ff6900;
+ }
+
+ .ButtonCol {
+  background-color: white;
+  color:#ff6900;
+  border-color: #ff6900;
+  border-radius: solid 15px;
+  border-width: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+ }
+</style>

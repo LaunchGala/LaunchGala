@@ -7,8 +7,8 @@ import { ArrowRight, Search } from 'lucide-vue-next'
 <template>
   <div class="mx-8 my-8 bg-white dark:bg-black">
     <div class="flex justify-between">
-    <div class=" text-xl font-bold text-gray-900 dark:text-white p-6">Upcoming Events</div>
-    <Button variant="default" class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700 mt-8">Provide your Venue</Button>
+    <div class=" text-2xl font-semibold mb-4  text-gray-700">Upcoming Events</div>
+    <Button variant="default" class="ButtonCol  hover:bg-gray-200 transition-colors">Provide your Venue</Button>
   </div>
     <div class="carousel flex space-x-6 overflow-x-auto py-6">
       
@@ -17,7 +17,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
         <div class="p-8">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">Chic Urban Loft</h5>
           <p class="text-base text-gray-700 dark:text-gray-300 mt-2">A stylish venue for modern gatherings.</p>
-          <Button class="mt-4 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -29,7 +29,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
         <div class="p-8">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">Elegant Ballroom</h5>
           <p class="text-base text-gray-700 dark:text-gray-300 mt-2">Perfect for weddings and gala events.</p>
-          <Button class="mt-4 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -41,7 +41,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
         <div class="p-8">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">Cozy Conference Room</h5>
           <p class="text-base text-gray-700 dark:text-gray-300 mt-2">Ideal space for meetings and seminars.</p>
-          <Button class="mt-4 inline-flex items-center bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors">
+          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -51,7 +51,7 @@ import { ArrowRight, Search } from 'lucide-vue-next'
     </div>
     <div class="py-8">
       <NuxtLink to="AllEvents">
-      <Button class="text-xl font-semibold bg-blue-500 text-white rounded-lg px-6 py-3 hover:bg-blue-600 transition-colors">
+        <Button class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-200 transition-colors">
         View All
         <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
@@ -61,3 +61,21 @@ import { ArrowRight, Search } from 'lucide-vue-next'
 </template>
 
 
+
+<style>
+ .OrangeCol {   
+  border-color: #ff6900;
+ }
+
+ .ButtonCol {
+  background-color: white;
+  color:#ff6900;
+  border-color: #ff6900;
+  border-radius: solid 15px;
+  border-width: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+ }
+</style>
