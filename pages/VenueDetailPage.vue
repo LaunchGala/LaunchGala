@@ -49,11 +49,11 @@ const date = ref<Date>()
             </Button>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2">
-          <img src="/placeholder.svg" alt="Main place" class="w-full h-48 object-cover col-span-2 rounded-lg dark:bg-gray-700"/>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 ">
+          <img src="/venueBG01.jpeg" alt="Main place" class="w-full h-120 object-cover col-span-2 rounded-lg dark:bg-gray-700"/>
           <div class="flex flex-col space-y-2">
-            <img src="/placeholder.svg" alt="Place image" class="w-full h-24 object-cover rounded-lg dark:bg-gray-700"/>
-            <img src="/placeholder.svg" alt="Place image" class="w-full h-24 object-cover rounded-lg dark:bg-gray-700"/>
+            <img src="/Bootstrapping.png" alt="Place image" class="w-full h-70 object-cover rounded-lg dark:bg-gray-700"/>
+            <img src="/Bootstrapping.png" alt="Place image" class="w-full h-70 object-cover rounded-lg dark:bg-gray-700"/>
           </div>
         </div>
         <div class="flex justify-between p-2">
