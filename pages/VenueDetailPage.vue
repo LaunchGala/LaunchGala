@@ -33,7 +33,7 @@ const date = ref<Date>()
 </script>
 
 <template>
-  <div class="dark:bg-black">
+  <div class="dark:bg-black m-8">
     <Card class="max-w-5xl mx-auto overflow-hidden rounded-lg shadow-lg dark:border-gray-700">
       <CardHeader class="relative bg-white dark:bg-gray-800">
         <div class="flex justify-between items-center p-4 border-b dark:border-gray-700">
