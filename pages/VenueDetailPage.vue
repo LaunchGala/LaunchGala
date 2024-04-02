@@ -41,10 +41,10 @@ const date = ref<Date>()
             Elegant Venue in the City Center
           </CardTitle>
           <div class="flex space-x-2">
-            <Button variant="ghost" class="text-indigo-600 dark:text-indigo-400">
+            <Button variant="ghost" class="OrangeText">
               <Save class="w-5 h-5" /> Save
             </Button>
-            <Button variant="ghost" class="text-indigo-600 dark:text-indigo-400">
+            <Button variant="ghost" class="OrangeText">
               <Share2 class="w-5 h-5" /> Share
             </Button>
           </div>
@@ -383,6 +383,10 @@ const date = ref<Date>()
 <style>
  .OrangeCol {   
   background-color: #ff6900;
+ }
+
+ .OrangeText {
+  color: #ff6900;
  }
 </style>
 
