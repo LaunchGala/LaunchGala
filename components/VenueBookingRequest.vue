@@ -35,6 +35,8 @@ const numberOfGuests = ref('');
       </div> -->
 
       <div class="grid grid-cols-1 gap-4">
+        <h3 class="font-semibold text-lg mb-2">Book this venue: </h3>
+
         <Popover>
           <PopoverTrigger as-child>
             <Button variant="outline" class="w-full flex justify-between items-center">
@@ -66,7 +68,7 @@ const numberOfGuests = ref('');
         <Input v-model="endTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
       </div>
 
-      <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" />
+      <!-- <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" /> -->
 
       <Select v-model="eventStyle" class="border-gray-300 focus:border-indigo-500 rounded-md shadow-sm">
         <SelectTrigger class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
@@ -81,6 +83,8 @@ const numberOfGuests = ref('');
           </SelectGroup>
         </SelectContent>
       </Select>
+
+      <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" />
 
       <Textarea v-model="note" placeholder="Additional notes" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize-none" />
 
