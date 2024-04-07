@@ -20,7 +20,7 @@ const numberOfGuests = ref('');
 </script>
 
 <template>
-  <div class="bg-white dark:bg-black p-6 rounded-md shadow-lg w-1/3 mx-60 ">
+  <div class="bg-white dark:bg-black p-6 rounded-md shadow-lg w-1/3  ">
     <div class="space-y-4">
 
       <!-- <div class="grid grid-cols-2 gap-4 font-medium text-gray-700 dark:text-gray-200">

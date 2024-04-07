@@ -10,12 +10,14 @@ import { ArrowRight, Search } from 'lucide-vue-next'
 
 <template>
   <section class="py-16 bg-gray-100 dark:bg-black">
-    <div class="mx-8 text-center mb-12 flex justify-between">
+    <div class="mx-8 text-center mb-8 flex justify-between">
       <h2 class=" text-2xl font-semibold mb-4  text-gray-700">Find Volunteers</h2>
       <Button variant="default" class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-300 transition-colors">Become a volunteer</Button>
       <!-- <p class="text-gray-600 dark:text-gray-400">Explore our volunteer categories</p> -->
 
     </div>
+    <p class="text-md mb-8 ml-8 mr-8 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
+
     <div class="flex justify-center gap-8 flex-wrap px-8">
       <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
         <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Admin Category"/>

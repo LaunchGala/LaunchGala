@@ -26,6 +26,68 @@ import {
 
 const isOpen = ref(false)
 const date = ref<Date>()
+const allVenues = ref([
+  {
+    img: "/Bootstrapping.png",
+    title: "Chic Urban office",
+    price: "$1,200 / hour",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "https://github.com/radix-vue.png",
+    sponsorBadge: true,
+    likeVenue: false
+  },
+  {
+    img: "/Bootstrapping.png",
+    title: "Chic Urban office",
+    price: "$1,200 / hour",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "https://github.com/radix-vue.png",
+    sponsorBadge: true,
+    likeVenue: true
+  },  
+  {
+    img: "/Bootstrapping.png",
+    title: "Chic Urban office",
+    price: "$200 / hour",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "https://github.com/radix-vue.png",
+    sponsorBadge: false,
+    likeVenue: false
+  },  
+  {
+    img: "/Bootstrapping.png",
+    title: "Chic Urban office",
+    price: "N/A",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "https://github.com/radix-vue.png",
+    sponsorBadge: true,
+    likeVenue: false
+  },  
+  {
+    img: "/Bootstrapping.png",
+    title: "House Party",
+    price: "$1 / hour",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "https://github.com/radix-vue.png",
+    sponsorBadge: true,
+    likeVenue: true
+  },  
+  {
+    img: "/Bootstrapping.png",
+    title: "Chic Urban office",
+    price: "$1,200 / hour",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "https://github.com/radix-vue.png",
+    sponsorBadge: true,
+    likeVenue: false
+  },
+])
 </script>
 
 <template>
@@ -109,28 +171,30 @@ const date = ref<Date>()
     </Collapsible>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      <div v-for="i in 6" :key="'apartment-' + i" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
+      <div v-for="venue in allVenues" :key="'apartment-' + i" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
-          <img class="w-full h-64 object-cover" src="/placeholder.svg" alt="Apartment image" />
-          <Badge v-if="i % 2 === 0" variant="secondary" class="absolute top-3 right-3">Sponsored</Badge>
+          <img class="w-full h-64 object-cover" :src="venue.img" alt="Apartment image" />
+          <Badge v-if="venue.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Sponsored</Badge>
         </div>
         <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2 dark:text-white">$1,200 / month</div>
+          <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
+
+          <div class="font-bold text-xl mb-2 dark:text-white">{{ venue.price }}</div>
           <p class="text-gray-700 text-base dark:text-gray-300">
-            Modern two-bedroom apartment located in the heart of downtown. Close to public transportation and shopping centers.
+            {{ venue.description }}
           </p>
         </div>
         <div class="px-6 pt-4 pb-2">
           <div class="flex items-center">
             <Avatar class="bg-gray-200 dark:bg-gray-700">
-              <AvatarImage src="https://github.com/radix-vue.png" alt="@radix-vue" />
+              <AvatarImage :src="venue.avatar" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
-            <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Downtown, New York</span>
+            <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
           </div>
           <div class="flex items-center justify-between mt-3">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
-              <Heart class="w-5 h-5 mr-1" />
+              <Heart :fill="venue.likeVenue ? 'red': 'none'" class="w-5 h-5 mr-1" />
               Like
             </Button>
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">

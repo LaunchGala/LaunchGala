@@ -21,8 +21,12 @@ const email = ref('');
 
 <template>
     <!-- Background image -->
- <section class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black">
-    <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-900">
+
+ <section class="relative flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black">
+  <div >
+      <img src="/bootstrapping.png" alt="">
+    </div>
+    <div class="absolute z-30 p-6 bg-white rounded-lg shadow-lg dark:bg-gray-900">
       <div class="space-y-4">
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Finding the Right Fit? We've Got Your Back!</h2>
         <p class="text-sm text-gray-600 dark:text-gray-400">Get personalized assistance from our team to identify the ideal choice for your business.</p>

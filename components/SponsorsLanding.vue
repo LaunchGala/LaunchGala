@@ -12,12 +12,13 @@ import { ArrowRight, Search } from 'lucide-vue-next'
 
 
   <section class="mx-8 my-8 bg-white dark:bg-black">
-    <div class="text-center mb-12 flex justify-between">
-      <h2 class="text-2xl font-semibold mb-4  text-gray-700">Securing Sponsorship</h2>
+    <div class="text-center mb-8 flex justify-between">
+      <h2 class="text-2xl font-semibold   text-gray-700">Securing Sponsorship</h2>
       <!-- <p class="text-gray-600 dark:text-gray-400">Learn how to get companies to sponsor your events</p> -->
       <Button variant="default" class="ButtonCol  hover:bg-gray-300 transition-colors">Become a sponsor</Button>
 
     </div>
+    <p class="text-md  dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
 
     
     <div class="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">

@@ -77,7 +77,7 @@ const date = ref<Date>()
       </CardHeader>
       
       <CardContent class="p-4 space-y-4 dark:bg-gray-800 dark:text-white">
-        <div class="flex">
+        <div class="flex justify-between">
           
           <div>
             
@@ -127,6 +127,7 @@ const date = ref<Date>()
           <span>San Francisco, United States</span>
         </div>
       </div>
+      
         <!-- <VenueSearchLanding/> -->
       <VenueBookingRequest/>
       </div>

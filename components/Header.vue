@@ -1,5 +1,8 @@
+
+
+
 <template>
-        <header class="w-full h-16 flex items-center justify-between px-4 headerMain shadow-md">
+        <div class=" w-full h-16 flex items-center justify-between px-4 headerMain shadow-md">
       <a class="flex items-center gap-2 font-semibold text-lg" href="/" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -20,47 +23,47 @@
       </a>
       <nav class="hidden lg:flex gap-6">
         <NuxtLink to="AllVenues">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Venues
           </a>
         </NuxtLink>
         <NuxtLink to="AllVolunteers">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Volunteers
           </a>
         </NuxtLink>
         <NuxtLink to="AllSponsors">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Sponsors
           </a>
         </NuxtLink>
         <NuxtLink to="AllSpeakers">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Speakers
           </a>
         </NuxtLink>
         <NuxtLink to="AllMedia">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Media/PR
           </a>
         </NuxtLink>
         <NuxtLink to="AllVendors">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Vendors
           </a>
         </NuxtLink>
         <NuxtLink to="AllEvents">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Events
           </a>
         </NuxtLink>
         <NuxtLink to="AllCommunities">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m font-medium  hover:underline">
             Communities
           </a>
         </NuxtLink>
         <NuxtLink to="AllResources">
-          <a class="text-m font-medium font-bold hover:underline">
+          <a class="text-m  font-bold hover:underline">
             Resources
           </a>
         </NuxtLink>
@@ -76,7 +79,7 @@
         Login/Profile 
       </button>
     </NuxtLink>
-    </header>
+  </div>
 </template>
 
 <style>

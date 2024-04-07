@@ -20,6 +20,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
       <Button class="ButtonCol  hover:bg-gray-200 transition-colors">Create Event</Button>
 
     </div>
+    <p class="text-md mb-4 mt-0 ml-8 mr-8 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
 
     <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Home Party Card -->

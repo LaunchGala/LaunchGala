@@ -38,6 +38,52 @@ import {
 
 const isOpen = ref(false)
 const date = ref<Date>()
+
+const allExperts = ref([
+  {
+    name: "Sundar Pichai",
+    position: "CEO",
+    company: "Google",
+    industry: "IT",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "https://conferences.law.stanford.edu/directorscollege2022/wp-content/uploads/sites/112/2022/05/Sundar-Pichai-Headshot-212x212.png",
+    likeExpert: false
+  },
+  {
+    name: "Tim Cook",
+    position: "CEO",
+    company: "Apple",
+    industry: "Technology",
+    description: "Leading the world in innovation and consumer electronics.",
+    location: "Cupertino, CA",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
+    likeExpert: true
+  },
+
+  {
+    name: "Mary Barra",
+    position: "CEO",
+    company: "General Motors",
+    industry: "Automotive",
+    description: "Driving towards a greener future with electric vehicles.",
+    location: "Detroit, MI",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
+    likeExpert: true
+  },
+
+  {
+    name: "Jeff Bezos",
+    position: "Founder & Former CEO",
+    company: "Amazon",
+    industry: "E-commerce",
+    description: "Transforming the way we shop online and beyond.",
+    location: "Seattle, WA",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
+    likeExpert: false
+  }
+
+])
 </script>
 
 <template>
@@ -121,22 +167,25 @@ const date = ref<Date>()
     </Collapsible>
     <div class="px-6 py-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="n in 6" :key="n" class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
           <Avatar class="m-4 w-24 h-24">
-            <AvatarImage src="/placeholder.svg" alt="Profile" />
+            <AvatarImage :src="expert.avatar" alt="Profile" />
             <AvatarFallback>XX</AvatarFallback>
           </Avatar>
           <CardContent class="p-4">
-            <h3 class="text-lg font-semibold dark:text-white">Name Surname</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Title at Company</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Industry</p>
-            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae porta massa. Nulla tincidunt nisi ac purus posuere gravida.</p>
+            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}} at {{expert.company}}</p>
+            
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p>
+            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.description}}</p>
+            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
+
             <div class="flex items-center justify-between mt-4">
               <Button class="flex items-center text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300 dark:border-white dark:text-white">
-                <MessageCircle class="w-4 h-4 mr-2" /> Request
+                <MessageCircle class="w-4 h-4 mr-2" /> Contact
               </Button>
               <Toggle aria-label="Like">
-                <Heart class="w-5 h-5" />
+                <Heart :fill="expert.likeExpert ? 'red': 'none'" class="w-5 h-5" />
               </Toggle>
             </div>
           </CardContent>

@@ -15,7 +15,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
   <section class="py-16  bg-gray-100 dark:bg-black">
     
     <!-- Header and Description -->
-    <div class="mb-10 text-center">
+    <div class=" mx-8 mb-16 text-left">
       <h2 class="text-2xl font-semibold mb-4  text-gray-700">We also help you with</h2>
       <p class="text-md mt-3 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
     </div>
