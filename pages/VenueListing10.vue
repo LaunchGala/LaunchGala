@@ -18,15 +18,15 @@ import { Checkbox } from '@/components/ui/checkbox';
         <CardContent>
           <div class="space-y-6">
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Peak Season Pricing</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance required</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Peak Season Pricing</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning Fees</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Peak Season Pricing</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
               <Switch />
             </div>
             <!-- Current switch sections omitted for brevity -->
@@ -34,7 +34,29 @@ import { Checkbox } from '@/components/ui/checkbox';
           <!-- Operating Days Section -->
           <div class="mt-8 border-t pt-6">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Operating Days and Hours</h3>
+            <p> This is your business operating hours NOT the Venue availability</p>
             <div class="space-y-4">
+              <div class="flex items-center">
+                <Checkbox id="monday" />
+                <label for="monday" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-200">Monday</label>
+                <input type="time" class="ml-auto border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="From">
+                <span class="mx-2 text-sm text-gray-500 dark:text-gray-400">to</span>
+                <input type="time" class="border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="To">
+              </div>
+              <div class="flex items-center">
+                <Checkbox id="monday" />
+                <label for="monday" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-200">Monday</label>
+                <input type="time" class="ml-auto border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="From">
+                <span class="mx-2 text-sm text-gray-500 dark:text-gray-400">to</span>
+                <input type="time" class="border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="To">
+              </div>
+              <div class="flex items-center">
+                <Checkbox id="monday" />
+                <label for="monday" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-200">Monday</label>
+                <input type="time" class="ml-auto border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="From">
+                <span class="mx-2 text-sm text-gray-500 dark:text-gray-400">to</span>
+                <input type="time" class="border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="To">
+              </div>
               <div class="flex items-center">
                 <Checkbox id="monday" />
                 <label for="monday" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-200">Monday</label>

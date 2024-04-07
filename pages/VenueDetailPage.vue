@@ -83,7 +83,7 @@ const date = ref<Date>()
             
         <div class="flex items-center space-x-2">
           <Star class="w-5 h-5 text-yellow-400" />
-          <span class="text-lg font-semibold">421 Endorsement</span>
+          <span class="text-lg font-semibold">421 Likes</span>
         </div>
         
         <div class="flex items-center space-x-2">
