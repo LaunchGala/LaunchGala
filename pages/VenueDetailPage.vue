@@ -78,11 +78,14 @@ const date = ref<Date>()
       
       <CardContent class="p-4 space-y-4 dark:bg-gray-800 dark:text-white">
         <div class="flex">
+          
           <div>
+            
         <div class="flex items-center space-x-2">
           <Star class="w-5 h-5 text-yellow-400" />
           <span class="text-lg font-semibold">421 Endorsement</span>
         </div>
+        
         <div class="flex items-center space-x-2">
           <User class="w-5 h-5" />
           <span>Hosted by <strong>Kevin</strong></span>
@@ -127,6 +130,10 @@ const date = ref<Date>()
         <!-- <VenueSearchLanding/> -->
       <VenueBookingRequest/>
       </div>
+      <h3 class="font-semibold text-lg mb-2">Description:</h3>
+        <p class="leading-relaxed">
+          Discover the charms of the city in this exclusive apartment with fine finishes, thoughtful design, and a peaceful terrace views. After exploring the city, relax in the serene bedroom or enjoy the local restaurants within walking distance.
+        </p>
         <div>
           <h3 class="font-semibold text-lg mb-2">Venue good for:</h3>
           <div class="flex flex-wrap gap-2">
@@ -269,10 +276,6 @@ const date = ref<Date>()
             </span>
           </div>
         </div>
-        <h3 class="font-semibold text-lg mb-2">Description:</h3>
-        <p class="leading-relaxed">
-          Discover the charms of the city in this exclusive apartment with fine finishes, thoughtful design, and a peaceful terrace views. After exploring the city, relax in the serene bedroom or enjoy the local restaurants within walking distance.
-        </p>
 
       </CardContent>
       
