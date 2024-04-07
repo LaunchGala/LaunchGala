@@ -77,7 +77,8 @@ const date = ref<Date>()
       </CardHeader>
       
       <CardContent class="p-4 space-y-4 dark:bg-gray-800 dark:text-white">
-        
+        <div class="flex">
+          <div>
         <div class="flex items-center space-x-2">
           <Star class="w-5 h-5 text-yellow-400" />
           <span class="text-lg font-semibold">421 Endorsement</span>
@@ -118,12 +119,14 @@ const date = ref<Date>()
           <User class="w-5 h-5" />
           <span>Cleaning Fees: <strong>No</strong></span>
         </div>
-
-        
         <div class="flex items-center space-x-2">
           <MapPin class="w-5 h-5" />
           <span>San Francisco, United States</span>
         </div>
+      </div>
+        <!-- <VenueSearchLanding/> -->
+      <VenueBookingRequest/>
+      </div>
         <div>
           <h3 class="font-semibold text-lg mb-2">Venue good for:</h3>
           <div class="flex flex-wrap gap-2">
@@ -270,7 +273,9 @@ const date = ref<Date>()
         <p class="leading-relaxed">
           Discover the charms of the city in this exclusive apartment with fine finishes, thoughtful design, and a peaceful terrace views. After exploring the city, relax in the serene bedroom or enjoy the local restaurants within walking distance.
         </p>
+
       </CardContent>
+      
       <CardFooter class="flex justify-between pt-4 border-t dark:border-gray-700">
         <div>
           <div class="flex items-center space-x-2 mb-2">
