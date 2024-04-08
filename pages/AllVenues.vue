@@ -32,6 +32,8 @@ const allVenues = ref([
     title: "Chic Urban office",
     price: "Price: $1,200 / hour",
     sponsorshipOption: "Sponsorship option: Yes",
+    venueSize: "Size: Large (100-200)",
+    venueType: "Type: Office space",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
@@ -44,6 +46,8 @@ const allVenues = ref([
     title: "Chic Urban office",
     price: "Price: $1,200 / hour",
     sponsorshipOption: "Sponsorship option: No",
+    venueSize: "Size: Medium (50-100)",
+    venueType: "Type: Co-working space",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
@@ -56,6 +60,8 @@ const allVenues = ref([
     title: "Chic Urban office",
     price: "Price: $0 / hour",
     sponsorshipOption: "Sponsorship option: Yes",
+    venueSize: "Size: Small (1-50)",
+    venueType: "Type: Gallery",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
@@ -68,6 +74,8 @@ const allVenues = ref([
     title: "Chic Urban office",
     price: "Price: N/A",
     sponsorshipOption: "Sponsorship option: Yes",
+    venueSize: "Size: X-large (200-300)",
+    venueType: "Type: Museum",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
@@ -80,6 +88,8 @@ const allVenues = ref([
     title: "House Party",
     price: "Price: $1 / hour",
     sponsorshipOption: "Sponsorship option: Yes",
+    venueSize: "Size: Medium (50-100)",
+    venueType: "Type: Office space",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
@@ -92,6 +102,8 @@ const allVenues = ref([
     title: "Chic Urban office",
     price: "Price: Request quote",
     sponsorshipOption: "Sponsorship option: No",
+    venueSize: "Size: Medium (50-100)",
+    venueType: "Type: Office space",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
@@ -194,6 +206,8 @@ const allVenues = ref([
           <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
           <div class=" text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.price }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.sponsorshipOption }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueSize }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueType }}</div>
 
           <p class="text-gray-700 text-base mt-4 dark:text-gray-300">
             {{ venue.description }}
