@@ -191,9 +191,9 @@ const allVenues = ref([
         <div class="px-6 py-4">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
 
-          <span class=" font-semibold text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
-          <div class="font-semibold text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.price }}</div>
-          <div class="font-semibold text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.sponsorshipOption }}</div>
+          <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
+          <div class=" text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.price }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.sponsorshipOption }}</div>
 
           <p class="text-gray-700 text-base mt-4 dark:text-gray-300">
             {{ venue.description }}
@@ -208,6 +208,10 @@ const allVenues = ref([
             <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
             
           </div>
+          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
+            Explore
+            <ArrowRight class="w-5 h-5 ml-2" />
+          </Button>
           <div class="flex items-center justify-between mt-3">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
               <Heart :fill="venue.likeVenue ? 'orange': 'none'" class="w-5 h-5 mr-1" />
