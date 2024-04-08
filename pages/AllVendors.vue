@@ -113,9 +113,9 @@ const date = ref<Date>()
           </div>
         </div>
         <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2 dark:text-white">Service Name</div>
+          <div class="font-bold text-xl mb-2 dark:text-white">Royal Banners</div>
           <p class="text-gray-700 text-base dark:text-gray-300">
-            Learn more about our service offerings in the domains of Catering, Cleaning, etc. We operate in various locations!
+            Get all your printing ready for you event 24/7
           </p>
         </div>
         <div class="px-6 pt-4 pb-2">

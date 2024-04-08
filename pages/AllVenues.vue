@@ -30,61 +30,73 @@ const allVenues = ref([
   {
     img: "/Bootstrapping.png",
     title: "Chic Urban office",
-    price: "$1,200 / hour",
+    price: "Price: $1,200 / hour",
+    sponsorshipOption: "Sponsorship option: Yes",
     description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
+    location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
+    hostName: "Host: Mozart",
     sponsorBadge: true,
     likeVenue: false
   },
   {
     img: "/Bootstrapping.png",
     title: "Chic Urban office",
-    price: "$1,200 / hour",
+    price: "Price: $1,200 / hour",
+    sponsorshipOption: "Sponsorship option: No",
     description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
+    location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
-    sponsorBadge: true,
+    hostName: "Host: Mozart",
+    sponsorBadge: false,
     likeVenue: true
   },  
   {
     img: "/Bootstrapping.png",
     title: "Chic Urban office",
-    price: "$200 / hour",
+    price: "Price: $200 / hour",
+    sponsorshipOption: "Sponsorship option: Yes",
     description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
+    location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
-    sponsorBadge: false,
+    hostName: "Host: Mozart",
+    sponsorBadge: true,
     likeVenue: false
   },  
   {
     img: "/Bootstrapping.png",
     title: "Chic Urban office",
-    price: "N/A",
+    price: "Price: N/A",
+    sponsorshipOption: "Sponsorship option: Yes",
     description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
+    location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
+    hostName: "Host: Mozart",
     sponsorBadge: true,
     likeVenue: false
   },  
   {
     img: "/Bootstrapping.png",
     title: "House Party",
-    price: "$1 / hour",
+    price: "Price: $1 / hour",
+    sponsorshipOption: "Sponsorship option: Yes",
     description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
+    location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
+    hostName: "Host: Mozart",
     sponsorBadge: true,
     likeVenue: true
   },  
   {
     img: "/Bootstrapping.png",
     title: "Chic Urban office",
-    price: "$1,200 / hour",
+    price: "Price: $1,200 / hour",
+    sponsorshipOption: "Sponsorship option: No",
     description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
+    location: "Location: SF, CA",
     avatar: "https://github.com/radix-vue.png",
-    sponsorBadge: true,
+    hostName: "Host: Mozart",
+    sponsorBadge: false,
     likeVenue: false
   },
 ])
@@ -174,13 +186,16 @@ const allVenues = ref([
       <div v-for="venue in allVenues" :key="'apartment-' + i" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
           <img class="w-full h-64 object-cover" :src="venue.img" alt="Apartment image" />
-          <Badge v-if="venue.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Sponsored</Badge>
+          <Badge v-if="venue.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
         </div>
         <div class="px-6 py-4">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
 
-          <div class="font-bold text-xl mb-2 dark:text-white">{{ venue.price }}</div>
-          <p class="text-gray-700 text-base dark:text-gray-300">
+          <span class=" font-semibold text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
+          <div class="font-semibold text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.price }}</div>
+          <div class="font-semibold text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.sponsorshipOption }}</div>
+
+          <p class="text-gray-700 text-base mt-4 dark:text-gray-300">
             {{ venue.description }}
           </p>
         </div>
@@ -190,11 +205,12 @@ const allVenues = ref([
               <AvatarImage :src="venue.avatar" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
-            <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
+            <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
+            
           </div>
           <div class="flex items-center justify-between mt-3">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
-              <Heart :fill="venue.likeVenue ? 'red': 'none'" class="w-5 h-5 mr-1" />
+              <Heart :fill="venue.likeVenue ? 'orange': 'none'" class="w-5 h-5 mr-1" />
               Like
             </Button>
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
