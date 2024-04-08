@@ -200,7 +200,15 @@ const allVenues = ref([
           <img class="w-full h-64 object-cover" :src="venue.img" alt="Apartment image" />
           <Badge v-if="venue.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
         </div>
-        <div class="px-6 py-4">
+        <div class="px-6 py-4">          
+          <div class="flex items-center mt-4 mb-4">
+            <Avatar class="bg-gray-200 dark:bg-gray-700">
+              <AvatarImage :src="venue.avatar" alt="@radix-vue" />
+              <AvatarFallback class="dark:text-white">CN</AvatarFallback>
+            </Avatar>
+            <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
+            
+          </div>
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
 
           <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
@@ -214,14 +222,14 @@ const allVenues = ref([
           </p>
         </div>
         <div class="px-6 pt-4 pb-2">
-          <div class="flex items-center">
+          <!-- <div class="flex items-center">
             <Avatar class="bg-gray-200 dark:bg-gray-700">
               <AvatarImage :src="venue.avatar" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
             <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
             
-          </div>
+          </div> -->
           <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
