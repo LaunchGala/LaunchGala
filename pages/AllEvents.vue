@@ -34,6 +34,85 @@ import {
 
 const isOpen = ref(false)
 const date = ref<Date>()
+
+const allEvents = ref([
+  {
+    img: "/Bootstrapping.png",
+    eventName: "House Party",
+    organizerName: "Mr. X",
+    organizerAvatar: "https://github.com/radix-vue.png",
+    eventType: "Networking",
+    industry: "AI",
+    eventDate: "04/21/2024",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    likeEvent: true
+  },
+  {
+    img: "/Bootstrapping.png",
+    eventName: "Tech Expo",
+    organizerName: "Ms. Y",
+    organizerAvatar: "https://github.com/radix-vue.png",
+    eventType: "Exhibition",
+    industry: "Technology",
+    eventDate: "09/15/2024",
+    description: "Showcasing the latest tech innovations and products.",
+    location: "San Francisco, CA",
+    likeEvent: false
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    eventName: "Startup Summit",
+    organizerName: "Mr. Z",
+    organizerAvatar: "https://github.com/radix-vue.png",
+    eventType: "Conference",
+    industry: "Entrepreneurship",
+    eventDate: "11/02/2024",
+    description: "Bringing together aspiring and experienced entrepreneurs.",
+    location: "New York City, NY",
+    likeEvent: false
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    eventName: "AI Symposium",
+    organizerName: "Dr. A",
+    organizerAvatar: "https://github.com/radix-vue.png",
+    eventType: "Symposium",
+    industry: "Artificial Intelligence",
+    eventDate: "06/30/2024",
+    description: "Exploring the future of AI technology and applications.",
+    location: "Los Angeles, CA",
+    likeEvent: true
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    eventName: "Fashion Week",
+    organizerName: "Ms. B",
+    organizerAvatar: "https://github.com/radix-vue.png",
+    eventType: "Fashion Show",
+    industry: "Fashion",
+    eventDate: "02/12/2024",
+    description: "A showcase of the latest trends and designs in fashion.",
+    location: "Paris, France",
+    likeEvent: true
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    eventName: "Food Festival",
+    organizerName: "Mr. C",
+    organizerAvatar: "https://github.com/radix-vue.png",
+    eventType: "Culinary Event",
+    industry: "Food & Beverage",
+    eventDate: "08/08/2024",
+    description: "Celebrating the diversity of world cuisine with delicious food and drinks.",
+    location: "Miami, FL",
+    likeEvent: true
+  }
+])
 </script>
 
 <template>
@@ -116,35 +195,38 @@ const date = ref<Date>()
 
     </Collapsible>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div v-for="event in 6" :key="'event-' + event" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
+      <div v-for="event in allEvents" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
-          <img class="w-full h-64 object-cover" src="/placeholder.svg" alt="Event image" />
+          <img class="w-full h-64 object-cover" :src="event.img" alt="Event image" />
         </div>
         <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2 dark:text-white">Event Name</div>
+          <div class="font-bold text-xl mb-2 dark:text-white">{{event.eventName}}</div>
           <div class="text-gray-700 text-base dark:text-gray-300">
             <div class="flex items-center mb-1">
-              <User class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
-              Host Name
+              <Avatar class="bg-gray-200 dark:bg-gray-700 mr-4">
+              <AvatarImage :src="event.organizerAvatar" alt="@radix-vue" />
+              <AvatarFallback class="dark:text-white">CN</AvatarFallback>
+            </Avatar>
+              {{event.organizerName}}
             </div>
             <div class="flex items-center mb-1">
               <Tag class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
-              Event Type
+              {{event.eventType}}
             </div>
             <div class="flex items-center mb-1">
               <Tag class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
-              Industry
+              {{event.industry}}
             </div>
             <div class="flex items-center mb-1">
               <Calendar class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
-              Event Date
+              {{event.eventDate}}
             </div>
             <div class="flex items-center mb-1">
               <MapPin class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
-              Location
+              {{event.location}}
             </div>
             <p class="mt-2">
-              An exciting event discussing the latest trends in the industry. Join us for insightful talks and networking opportunities.
+              {{event.description}}
             </p>
           </div>
         </div>
@@ -156,7 +238,7 @@ const date = ref<Date>()
           </div>
           <div class="flex items-center justify-between">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
-              <Heart class="w-5 h-5 mr-1" />
+              <Heart :fill="event.likeEvent ? 'red': 'none'" class="w-5 h-5 mr-1" />
               Like
             </Button>
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">

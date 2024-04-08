@@ -41,6 +41,7 @@ const date = ref<Date>()
 
 const allExperts = ref([
   {
+    img: "/Bootstrapping.png",
     name: "Sundar Pichai",
     position: "CEO",
     company: "Google",
@@ -51,6 +52,7 @@ const allExperts = ref([
     likeExpert: false
   },
   {
+    img: "/Bootstrapping.png",
     name: "Tim Cook",
     position: "CEO",
     company: "Apple",
@@ -62,6 +64,7 @@ const allExperts = ref([
   },
 
   {
+    img: "/Bootstrapping.png",
     name: "Mary Barra",
     position: "CEO",
     company: "General Motors",
@@ -73,6 +76,7 @@ const allExperts = ref([
   },
 
   {
+    img: "/Bootstrapping.png",
     name: "Jeff Bezos",
     position: "Founder & Former CEO",
     company: "Amazon",
@@ -168,6 +172,9 @@ const allExperts = ref([
     <div class="px-6 py-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <div class="relative">
+          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
+        </div>
           <Avatar class="m-4 w-24 h-24">
             <AvatarImage :src="expert.avatar" alt="Profile" />
             <AvatarFallback>XX</AvatarFallback>
@@ -181,7 +188,7 @@ const allExperts = ref([
             <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
 
             <div class="flex items-center justify-between mt-4">
-              <Button class="flex items-center text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300 dark:border-white dark:text-white">
+              <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
                 <MessageCircle class="w-4 h-4 mr-2" /> Contact
               </Button>
               <Toggle aria-label="Like">

@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { PhoneOutgoing } from 'lucide-vue-next';
+import { MessageCircle } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -28,6 +28,68 @@ import {
 
 const isOpen = ref(false)
 const date = ref<Date>()
+
+const AllSponsors = ref([
+  {
+    img: "/Bootstrapping.png",
+    sponsorName: "SVB",
+    sponsorAvatar: "https://github.com/radix-vue.png",
+    industry: "Banking",
+    offer: "Offering full sponsorship for Software Development Industry. Contact us for more details!",
+    likeSponsor: true,
+    sponsorBadge: true,
+
+  },
+  {
+    img: "/Bootstrapping.png",
+    sponsorName: "IBM",
+    sponsorAvatar: "https://github.com/radix-vue.png",
+    industry: "Technology",
+    offer: "Providing cutting-edge technology solutions for businesses. Reach out to explore partnership opportunities!",
+    likeSponsor: true,
+    sponsorBadge: true
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    sponsorName: "Nike",
+    sponsorAvatar: "https://github.com/radix-vue.png",
+    industry: "Retail",
+    offer: "Empowering athletes and promoting active lifestyles. Partner with us for sports sponsorships and collaborations!",
+    likeSponsor: true,
+    sponsorBadge: true
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    sponsorName: "McKinsey & Company",
+    sponsorAvatar: "https://github.com/radix-vue.png",
+    industry: "Consulting",
+    offer: "Offering strategic consulting services for business transformation. Contact us to enhance your company's performance!",
+    likeSponsor: true,
+    sponsorBadge: true
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    sponsorName: "Tesla",
+    sponsorAvatar: "https://github.com/radix-vue.png",
+    industry: "Automotive",
+    offer: "Pioneering electric vehicle technology and sustainable energy solutions. Collaborate with us for a greener future!",
+    likeSponsor: true,
+    sponsorBadge: false
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    sponsorName: "PepsiCo",
+    sponsorAvatar: "https://github.com/radix-vue.png",
+    industry: "Beverages",
+    offer: "Leading the way in refreshing beverages and snacks. Connect with us for brand partnerships and sponsorships!",
+    likeSponsor: true,
+    sponsorBadge: true
+  }
+])
 </script>
 
 <template>
@@ -111,26 +173,32 @@ const date = ref<Date>()
     </Collapsible>
     <!-- Corporate Sponsors -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      <div v-for="i in 6" :key="'corporate-sponsor-' + i" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
+      <div v-for="sponsor in AllSponsors" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
           <img class="w-full h-64 object-cover" src="/placeholder.svg" alt="Corporate Sponsor image" />
-          <Badge v-if="i % 2 === 0" variant="secondary" class="absolute top-3 right-3">Sponsored</Badge>
+          <Badge v-if="sponsor.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Cash Sponsor</Badge>
         </div>
         <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2 dark:text-white">Sponsor Name</div>
+          <!-- <Avatar class="m-4 w-24 h-24">
+            <AvatarImage :src="sponsor.sponsorAvatar" alt="Profile" />
+            <AvatarFallback>XX</AvatarFallback>
+          </Avatar> -->
+          <div class="font-bold text-xl mb-2 dark:text-white">{{sponsor.sponsorName}}</div>
+          <div class="font-bold text-xl mb-2 dark:text-white">{{sponsor.industry}}</div>
+
           <p class="text-gray-700 text-base dark:text-gray-300">
-            Offering full sponsorship for Software Development Industry. Contact us for more details!
+            {{sponsor.offer}}
           </p>
         </div>
         <div class="px-6 pt-4 pb-2">
           <div class="flex items-center justify-between mt-3">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
-              <PhoneOutgoing class="w-5 h-5 mr-2" />
+              <MessageCircle class="w-5 h-5 mr-2" />
               Contact
             </Button>
             <div class="flex items-center space-x-4">
               <Button variant="ghost" class="flex items-center justify-center dark:text-white">
-                <Heart class="w-5 h-5 mr-1" />
+                <Heart :fill="sponsor.likeSponsor ? 'red': 'none'" class="w-5 h-5 mr-1" />
                 Like
               </Button>
               <Button variant="ghost" class="flex items-center justify-center dark:text-white">
