@@ -54,7 +54,7 @@ const allVenues = ref([
   {
     img: "/Bootstrapping.png",
     title: "Chic Urban office",
-    price: "Price: $200 / hour",
+    price: "Price: $0 / hour",
     sponsorshipOption: "Sponsorship option: Yes",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
@@ -90,7 +90,7 @@ const allVenues = ref([
   {
     img: "/Bootstrapping.png",
     title: "Chic Urban office",
-    price: "Price: $1,200 / hour",
+    price: "Price: Request quote",
     sponsorshipOption: "Sponsorship option: No",
     description: "A stylish venue for modern gatherings.",
     location: "Location: SF, CA",
