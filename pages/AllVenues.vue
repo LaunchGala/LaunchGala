@@ -1,10 +1,12 @@
 
 <script setup lang="ts">
 import { Heart, Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
+import { supabase } from '../utils/supabase'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
+
 import {
   Collapsible,
   CollapsibleContent,
@@ -24,94 +26,23 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+
+
 const isOpen = ref(false)
 const date = ref<Date>()
-const allVenues = ref([
-  {
-    img: "/Bootstrapping.png",
-    title: "Chic Urban office",
-    price: "Price: $1,200 / hour",
-    sponsorshipOption: "Sponsorship option: Yes",
-    venueSize: "Size: Large < 200",
-    venueType: "Type: Office space",
-    description: "A stylish venue for modern gatherings.",
-    location: "Location: SF, CA",
-    avatar: "https://github.com/radix-vue.png",
-    hostName: "Host: Mozart",
-    sponsorBadge: true,
-    likeVenue: false
-  },
-  {
-    img: "/Bootstrapping.png",
-    title: "Chic Urban office",
-    price: "Price: $1,200 / hour",
-    sponsorshipOption: "Sponsorship option: No",
-    venueSize: "Size: Medium < 100",
-    venueType: "Type: Co-working space",
-    description: "A stylish venue for modern gatherings.",
-    location: "Location: SF, CA",
-    avatar: "https://github.com/radix-vue.png",
-    hostName: "Host: Mozart",
-    sponsorBadge: false,
-    likeVenue: true
-  },  
-  {
-    img: "/Bootstrapping.png",
-    title: "Chic Urban office",
-    price: "Price: $0 / hour",
-    sponsorshipOption: "Sponsorship option: Yes",
-    venueSize: "Size: Small < 50",
-    venueType: "Type: Gallery",
-    description: "A stylish venue for modern gatherings.",
-    location: "Location: SF, CA",
-    avatar: "https://github.com/radix-vue.png",
-    hostName: "Host: Mozart",
-    sponsorBadge: true,
-    likeVenue: false
-  },  
-  {
-    img: "/Bootstrapping.png",
-    title: "Chic Urban office",
-    price: "Price: N/A",
-    sponsorshipOption: "Sponsorship option: Yes",
-    venueSize: "Size: X-large < 500",
-    venueType: "Type: Museum",
-    description: "A stylish venue for modern gatherings.",
-    location: "Location: SF, CA",
-    avatar: "https://github.com/radix-vue.png",
-    hostName: "Host: Mozart",
-    sponsorBadge: true,
-    likeVenue: false
-  },  
-  {
-    img: "/Bootstrapping.png",
-    title: "House Party",
-    price: "Price: $1 / hour",
-    sponsorshipOption: "Sponsorship option: Yes",
-    venueSize: "Size: Medium < 100",
-    venueType: "Type: Office space",
-    description: "A stylish venue for modern gatherings.",
-    location: "Location: SF, CA",
-    avatar: "https://github.com/radix-vue.png",
-    hostName: "Host: Mozart",
-    sponsorBadge: true,
-    likeVenue: true
-  },  
-  {
-    img: "/Bootstrapping.png",
-    title: "Chic Urban office",
-    price: "Price: Request quote",
-    sponsorshipOption: "Sponsorship option: No",
-    venueSize: "Size: Medium < 100",
-    venueType: "Type: Office space",
-    description: "A stylish venue for modern gatherings.",
-    location: "Location: SF, CA",
-    avatar: "https://github.com/radix-vue.png",
-    hostName: "Host: Mozart",
-    sponsorBadge: false,
-    likeVenue: false
-  },
-])
+const allVenues = ref<any[] | null>(null);
+
+
+async function getAllVenues() {
+  const { data: AllVenues, error } = await supabase.from('AllVenues').select()
+  console.log(error)
+  allVenues.value = AllVenues;
+}
+
+onMounted(() => {
+  getAllVenues()
+})
+ 
 </script>
 
 <template>
