@@ -147,6 +147,7 @@ onMounted(() => {
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400"> Sponsorship option: {{ venue.sponsorshipOption }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueSize }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueType }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.Amenities. }}</div>
 
           <p class="text-gray-700 text-base mt-4 dark:text-gray-300">
             {{ venue.description }}
