@@ -134,7 +134,7 @@ onMounted(() => {
         <div class="px-6 py-4">          
           <div class="flex items-center mt-4 mb-4">
             <Avatar class="bg-gray-200 dark:bg-gray-700">
-              <AvatarImage :src="venue.avatar" alt="@radix-vue" />
+              <AvatarImage :src="venue.hostAvatar" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
             <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
@@ -144,7 +144,7 @@ onMounted(() => {
 
           <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
           <div class=" text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.price }}</div>
-          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.sponsorshipOption }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400"> Sponsorship option: {{ venue.sponsorshipOption }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueSize }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueType }}</div>
 
