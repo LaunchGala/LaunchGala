@@ -49,7 +49,7 @@ onMounted(() => {
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Explore all Venues</h1>
-      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide your Venue</Button>
+      <Button @click="console.log(allVenues[allVenues.length - 1].Amenities[0])" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide your Venue</Button>
 
     </div>
     
@@ -147,7 +147,9 @@ onMounted(() => {
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400"> Sponsorship option: {{ venue.sponsorshipOption }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueSize }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueType }}</div>
-          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.Amenities. }}</div>
+          <div v-for="amenity in venue.Amenities" :key="amenity">
+            <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ amenity }}</div>
+          </div>
 
           <p class="text-gray-700 text-base mt-4 dark:text-gray-300">
             {{ venue.description }}
