@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import Id from './s/[id].vue';
 
 
 
@@ -49,7 +50,7 @@ onMounted(() => {
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Explore all Venues</h1>
-      <Button @click="console.log(allVenues[allVenues.length - 1].Amenities[0])" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide your Venue</Button>
+      <Button @click="console.log(allVenues)" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide your Venue</Button>
 
     </div>
     
@@ -126,7 +127,7 @@ onMounted(() => {
     </Collapsible>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      <div v-for="venue in allVenues" :key="'apartment-' + i" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
+      <div v-for="venue in allVenues" :key="venue.id" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
           <img class="w-full h-64 object-cover" :src="venue.img" alt="Apartment image" />
           <Badge v-if="venue.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
