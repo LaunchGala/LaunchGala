@@ -8,6 +8,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
+
+function addAmenity(amenity: string) {
+  if (props.venueListing.amenities.includes(amenity)) {
+    console.log('amenity already exists');
+  } else {
+    props.venueListing.amenities = [...props.venueListing.amenities, amenity];
+    console.log(props.venueListing.amenities);
+  }
+}
+
 </script>
 
 <template>
@@ -22,7 +32,7 @@ console.log(props.venueListing);
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
                     <Checkbox id="wifi" class="sr-only" />
                     <Wifi class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Wi-Fi</span>
@@ -36,7 +46,7 @@ console.log(props.venueListing);
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
                     <Checkbox id="tv" class="sr-only" />
                     <Tv class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">TV</span>
@@ -50,7 +60,7 @@ console.log(props.venueListing);
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Projector')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
                     <Checkbox id="ac" class="sr-only" />
                     <Airplay class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Projector</span>
@@ -64,7 +74,7 @@ console.log(props.venueListing);
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('AC')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
                     <Checkbox id="heat" class="sr-only" />
                     <Sun class="w-6 h-6 mb-2 text-yellow-500" />
                     <span class="text-lg font-semibold mb-1">Heating</span>
@@ -78,7 +88,7 @@ console.log(props.venueListing);
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Coffee Machine')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
                     <Checkbox id="coffee" class="sr-only" />
                     <Coffee class="w-6 h-6 mb-2 text-brown-500" />
                     <span class="text-lg font-semibold mb-1">Coffee Machine</span>
@@ -92,7 +102,7 @@ console.log(props.venueListing);
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Computer')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
                     <Checkbox id="monitor" class="sr-only" />
                     <Monitor class="w-6 h-6 mb-2 text-purple-500" />
                     <span class="text-lg font-semibold mb-1">Computer</span>
@@ -106,7 +116,7 @@ console.log(props.venueListing);
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Heating')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
                     <Checkbox id="audio" class="sr-only" />
                     <Speaker class="w-6 h-6 mb-2 text-red-500" />
                     <span class="text-lg font-semibold mb-1">Sound System</span>

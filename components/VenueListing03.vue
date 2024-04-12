@@ -26,6 +26,7 @@ console.log(props.venueListing);
               <span class="text-sm">Up to 50 guests</span>
             </div>
             <div 
+              @click="props.venueListing.capacity = 200"
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Medium</span>

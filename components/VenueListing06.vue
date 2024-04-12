@@ -1,6 +1,5 @@
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
@@ -8,6 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronRight } from 'lucide-vue-next';
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
+
+function updateChecked(toggleState: boolean) {
+  props.venueListing.addressExact = toggleState
+}
 </script>
 
 <template>
@@ -32,7 +35,7 @@ console.log(props.venueListing);
           <div class="mb-6">
             <label for="displayLocation" class="flex items-center gap-2">
               <span>Show exact location:</span>
-              <Switch id="displayLocation" />
+              <Switch :default-checked="props.venueListing.addressExact" @update:checked="updateChecked" id="displayLocation" />
             </label>
           </div>
           <div class="relative h-72 w-full mb-6">
