@@ -14,7 +14,7 @@ console.log(props.venueListing);
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
-          <CardTitle>Choose Venue Size</CardTitle>
+          <CardTitle>Type of Events to host at this venue:</CardTitle>
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -22,19 +22,19 @@ console.log(props.venueListing);
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Hackathone</span>
-              <span class="text-sm">Up to 50 guests</span>
+              <!-- <span class="text-sm">Up to 50 guests</span> -->
             </div>
             <div 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Networking Event</span>
-              <span class="text-sm">Up to 200 guests</span>
+              <!-- <span class="text-sm">Up to 200 guests</span> -->
             </div>
             <div 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Conference</span>
-              <span class="text-sm">Up to 500 guests</span>
+              <!-- <span class="text-sm">Up to 500 guests</span> -->
             </div>
             <div 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"

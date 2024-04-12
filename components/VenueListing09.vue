@@ -32,7 +32,7 @@ console.log(props.venueListing);
           <div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 py-4">
             <div class="flex items-center space-x-3">
               <CardTitle>Offer Venue for Sponsorship</CardTitle>
-              <CardDescription>Provide the venue for events at no cost under sponsorship agreements.</CardDescription>
+              <CardDescription>Provide an option to accept request for free venue for selected events as sponsor (you will receive a request and you can review it, accept it or reject it).</CardDescription>
             </div>
             <Switch />
           </div>
