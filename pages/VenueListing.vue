@@ -19,7 +19,7 @@ const newVenueListing = ref({
   zip: '',
   addressExact: true,
   description: '',
-  venueSize: '',
+  capacity: 0,
   price: 0,
   priceEnabled: false, 
   venueType: [],
