@@ -11,7 +11,7 @@ const selectedStyle = ref('');
 // Handlers for handling click events
 const selectStyle = style => {
   selectedStyle.value = style;
-  props.venueListing.style = style;
+  props.venueListing.venueType = style;
 };
 
 const isSelected = style => {
