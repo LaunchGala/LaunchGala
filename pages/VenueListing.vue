@@ -6,6 +6,8 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 
+const supabase = useSupabaseClient()
+
 
 const selectedStyle = ref('');
 const currentStep = ref(1);
@@ -39,10 +41,21 @@ const selectStyle = style => {
 const isSelected = style => {
   return selectedStyle.value === style;
 };
+
+function addVenueListing() {
+  console.log(newVenueListing.value)
+  supabase.from('AllVenues').insert([
+    newVenueListing.value
+  ]).then(response => {
+    console.log(response)
+  }).catch(error => {
+    console.log(error)
+  })
+}
 </script>
 
 <template>
-  <Button class="text-4xl font-bold" @click="console.log(newVenueListing)">Big Button</Button>
+  <Button class="text-4xl font-bold" @click="addVenueListing">Big Button</Button>
   <div>
     <VenueListing01 :venue-listing="newVenueListing" v-show="currentStep === 1" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
     <VenueListing02 :venue-listing="newVenueListing" v-show="currentStep === 2" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
