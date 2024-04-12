@@ -7,6 +7,14 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
+
+function priceEnabled(toggleState: boolean) {
+  props.venueListing.priceEnabled = toggleState
+}
+
+function sponsorshipOption(toggleState: boolean) {
+  props.venueListing.sponsorshipOption = toggleState
+}
 </script>
 
 <template>
@@ -24,17 +32,17 @@ console.log(props.venueListing);
               <CardTitle>Enable Payment Option</CardTitle>
               <CardDescription>Allow users to rent the venue at an hourly rate.</CardDescription>
             </div>
-            <Switch />
+            <Switch :default-checked="props.venueListing.priceEnabled" @update:checked="priceEnabled" id="displayPrice" />
           </div>
           <div class="py-4">
-            <Input placeholder="Hourly Price (e.g. $50/hour)" class="w-full border-gray-300 rounded-md dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"/>
+            <Input v-model="props.venueListing.price" placeholder="Hourly Price (e.g. $50/hour)" class="w-full border-gray-300 rounded-md dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"/>
           </div>
           <div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 py-4">
             <div class="flex items-center space-x-3">
               <CardTitle>Offer Venue for Sponsorship</CardTitle>
               <CardDescription>Provide an option to accept request for free venue for selected events as sponsor (you will receive a request and you can review it, accept it or reject it).</CardDescription>
             </div>
-            <Switch />
+            <Switch :default-checked="props.venueListing.sponsorshipOption" @update:checked="sponsorshipOption" id="displaySponsorship" />
           </div>
         </CardContent>
 

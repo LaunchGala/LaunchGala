@@ -20,25 +20,31 @@ console.log(props.venueListing);
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div 
+            @click="props.venueListing.capacity = 50"
+
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Small</span>
               <span class="text-sm">Up to 50 guests</span>
             </div>
             <div 
-              @click="props.venueListing.capacity = 200"
+              @click="props.venueListing.capacity = 100"
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Medium</span>
               <span class="text-sm">Up to 200 guests</span>
             </div>
             <div 
+            @click="props.venueListing.capacity = 200"
+
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Large</span>
               <span class="text-sm">Up to 500 guests</span>
             </div>
             <div 
+            @click="props.venueListing.capacity = 500"
+
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Extra Large</span>

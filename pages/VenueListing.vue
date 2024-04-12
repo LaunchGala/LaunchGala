@@ -64,10 +64,10 @@ function addVenueListing() {
     <VenueListing05 :venue-listing="newVenueListing" v-show="currentStep === 5" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
     <VenueListing06 :venue-listing="newVenueListing" v-show="currentStep === 6" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
     <VenueListing07 :venue-listing="newVenueListing" v-show="currentStep === 7" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing08 :venue-listing="newVenueListing" v-show="currentStep === 8" @next-step="currentStep += 1" @previous-ste@p="currentStep -= 1"/>
-    <VenueListing09 :venue-listing="newVenueListing" v-show="currentStep === 9" @next-step="currentStep += 1" @previous-ste@p="currentStep -= 1"/>    
-    <VenueListing10 :venue-listing="newVenueListing" v-show="currentStep === 10" @next-step="currentStep += 1" @previous-ste@p="currentStep -= 1"/>    
-    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" @next-step="currentStep += 1" @previous-ste@p="currentStep -= 1"/>    
+    <VenueListing08 :venue-listing="newVenueListing" v-show="currentStep === 8" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
+    <VenueListing09 :venue-listing="newVenueListing" v-show="currentStep === 9" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>    
+    <VenueListing10 :venue-listing="newVenueListing" v-show="currentStep === 10" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>    
+    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>    
   </div>
 
 

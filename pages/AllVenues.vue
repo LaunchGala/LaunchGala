@@ -130,7 +130,7 @@ onMounted(() => {
       <div v-for="venue in allVenues" :key="venue.id" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
           <img class="w-full h-64 object-cover" :src="venue.images" alt="Apartment image" />
-          <Badge v-if="venue.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
+          <Badge v-if="venue.sponsorshipOption" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
         </div>
         <div class="px-6 py-4">          
           <div class="flex items-center mt-4 mb-4">
@@ -145,7 +145,7 @@ onMounted(() => {
 
           <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.city }}, {{ venue.country }}</span>
           <div class=" text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">Price: ${{ venue.price }}/hr</div>
-          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400"> Sponsorship option: {{ venue.sponsorshipOption }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400"> Sponsorship option: {{ venue.sponsorshipOption ? 'Yes' : 'No' }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">Capacity: {{ venue.capacity }}</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">Venue type: {{ venue.venueType }}</div>
           <div v-for="amenity in venue.Amenities" :key="amenity">

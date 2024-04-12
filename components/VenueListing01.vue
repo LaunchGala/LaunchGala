@@ -32,10 +32,7 @@ console.log(props.venueListing);
               <Plus class="w-5 h-5" />
               Create New Listing
             </Button>
-            <Button variant="outline" class="flex items-center gap-2">
-              <FilePlus class="w-5 h-5" />
-              Import Listings
-            </Button>
+
           </div>
           <Table>
             <TableHeader>

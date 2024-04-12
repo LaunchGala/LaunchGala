@@ -31,10 +31,34 @@ console.log(props.venueListing);
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
               <Switch />
             </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance required</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning Fees</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance required</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning Fees</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
+              <Switch />
+            </div>
             <!-- Current switch sections omitted for brevity -->
           </div>
           <!-- Operating Days Section -->
-          <div class="mt-8 border-t pt-6">
+          <!-- <div class="mt-8 border-t pt-6">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Operating Days and Hours</h3>
             <p> This is your business operating hours NOT the Venue availability</p>
             <div class="space-y-4">
@@ -86,17 +110,16 @@ console.log(props.venueListing);
                 <input type="time" class="ml-auto border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="From">
                 <span class="mx-2 text-sm text-gray-500 dark:text-gray-400">to</span>
                 <input type="time" class="border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="To">
-              </div>
+              </div> -->
               <!-- Other days omitted for brevity -->
-            </div>
-          </div>
+
         </CardContent>
-        <div class="flex items-center justify-end gap-4 p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <!-- <div class="flex items-center justify-end gap-4 p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
           <Button variant="outline">Cancel</Button>
           <Button class="text-white bg-blue-600 hover:bg-blue-700">
             <ChevronRight class="w-4 h-4 mr-2" /> Save Changes
           </Button>
-        </div>
+        </div> -->
 
         <div class="flex justify-between p-4">
           <Button @click="$emit('previousStep')" as-child variant="default">

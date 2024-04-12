@@ -7,6 +7,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
+
+function addEventType(eventType: string) {
+  if (props.venueListing.eventType.includes(eventType)) {
+    console.log('eventType already exists');
+  } else {
+    props.venueListing.eventType = [...props.venueListing.eventType, eventType];
+    console.log(props.venueListing.eventType);
+  }
+}
 </script>
 
 <template>
@@ -19,24 +28,32 @@ console.log(props.venueListing);
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div 
+            @click="addEventType('Hackathon')"
+
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
-              <span class="text-xl font-semibold mb-4">Hackathone</span>
+              <span class="text-xl font-semibold mb-4">Hackathon</span>
               <!-- <span class="text-sm">Up to 50 guests</span> -->
             </div>
             <div 
+            @click="addEventType('Networking')"
+
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Networking Event</span>
               <!-- <span class="text-sm">Up to 200 guests</span> -->
             </div>
             <div 
+            @click="addEventType('Conference')"
+
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Conference</span>
               <!-- <span class="text-sm">Up to 500 guests</span> -->
             </div>
             <div 
+            @click="addEventType('Dinner')"
+
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
             >
               <span class="text-xl font-semibold mb-4">Dinner</span>
