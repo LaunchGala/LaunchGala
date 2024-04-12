@@ -25,7 +25,9 @@ const venues = ref([
   <div class="mx-8 my-8 bg-white dark:bg-black">
     <div class="flex justify-between">
     <div class=" text-2xl font-semibold mb-4  text-gray-700">Our Venues</div>
+    <NuxtLink to="VenueListing">
     <Button variant="default" class="ButtonCol  hover:bg-gray-200 transition-colors">Provide your Venue</Button>
+  </NuxtLink>
   </div>
   <p class="text-md mt-3 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
 

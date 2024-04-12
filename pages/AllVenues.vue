@@ -49,8 +49,9 @@ onMounted(() => {
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Explore all Venues</h1>
+      <NuxtLink to="VenueListing">
       <Button @click="console.log(allVenues)" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide your Venue</Button>
-
+    </NuxtLink>
     </div>
     
     <Collapsible v-model:open="isOpen" class="px-6 py-4">
@@ -128,7 +129,7 @@ onMounted(() => {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       <div v-for="venue in allVenues" :key="venue.id" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
-          <img class="w-full h-64 object-cover" :src="venue.img" alt="Apartment image" />
+          <img class="w-full h-64 object-cover" :src="venue.images" alt="Apartment image" />
           <Badge v-if="venue.sponsorBadge" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
         </div>
         <div class="px-6 py-4">          
@@ -137,16 +138,16 @@ onMounted(() => {
               <AvatarImage :src="venue.hostAvatar" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
-            <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
+            <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">Host: {{ venue.hostName}}</span>
             
           </div>
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
 
-          <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.location}}</span>
-          <div class=" text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.price }}</div>
+          <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.city }}, {{ venue.country }}</span>
+          <div class=" text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">Price: ${{ venue.price }}/hr</div>
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400"> Sponsorship option: {{ venue.sponsorshipOption }}</div>
-          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueSize }}</div>
-          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ venue.venueType }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">Capacity: {{ venue.capacity }}</div>
+          <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">Venue type: {{ venue.venueType }}</div>
           <div v-for="amenity in venue.Amenities" :key="amenity">
             <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ amenity }}</div>
           </div>

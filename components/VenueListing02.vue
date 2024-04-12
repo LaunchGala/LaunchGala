@@ -79,6 +79,31 @@ console.log(props.venueListing);
               <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
               <span class="text-sm font-semibold">Office</span>
             </button>
+
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Office</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Office</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Office</span>
+            </button>
             <!-- Additional categories would go here -->
           </div>
         </CardContent>
