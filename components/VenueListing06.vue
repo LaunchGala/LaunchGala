@@ -6,6 +6,8 @@ import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronRight } from 'lucide-vue-next';
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>
@@ -44,11 +46,18 @@ import { ChevronRight } from 'lucide-vue-next';
           </div>
         </CardContent>
         <div class="flex justify-between p-4">
-          <Button variant="default">
-            Cancel
+          <Button @click="$emit('previousStep')" as-child variant="default">
+            <div  class="flex items-center">
+              <ArrowLeft class="w-4 h-4 mr-2" />
+              Back
+            </div>
           </Button>
-          <Button variant="default">
-            Save
+          <Progress :model-value="33" class="w-1/2" />
+          <Button @click="$emit('nextStep')" as-child variant="default">
+            <div  class="flex items-center">
+              Next
+              <ArrowRight class="w-4 h-4 ml-2" />
+            </div>
           </Button>
         </div>
       </Card>

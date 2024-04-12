@@ -5,9 +5,12 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>
+  
   <div class="bg-white dark:bg-black min-h-screen py-10 flex justify-center items-center">
     <div class="w-full max-w-4xl mx-auto px-4 lg:px-8">
       <Card>
@@ -34,12 +37,20 @@ import { Button } from '@/components/ui/button';
             <Switch />
           </div>
         </CardContent>
-        <div class="flex justify-end gap-4 p-4">
-          <Button variant="outline" class="border-gray-300 text-gray-600 dark:border-gray-600 dark:text-gray-200">
-            Cancel
+
+        <div class="flex justify-between p-4">
+          <Button @click="$emit('previousStep')" as-child variant="default">
+            <div  class="flex items-center">
+              <ArrowLeft class="w-4 h-4 mr-2" />
+              Back
+            </div>
           </Button>
-          <Button>
-            Save Changes
+          <Progress :model-value="33" class="w-1/2" />
+          <Button @click="$emit('nextStep')" as-child variant="default">
+            <div  class="flex items-center">
+              Next
+              <ArrowRight class="w-4 h-4 ml-2" />
+            </div>
           </Button>
         </div>
       </Card>

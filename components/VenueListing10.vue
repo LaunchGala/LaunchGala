@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-vue-next';
 import { Checkbox } from '@/components/ui/checkbox';
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>
@@ -93,6 +95,22 @@ import { Checkbox } from '@/components/ui/checkbox';
           <Button variant="outline">Cancel</Button>
           <Button class="text-white bg-blue-600 hover:bg-blue-700">
             <ChevronRight class="w-4 h-4 mr-2" /> Save Changes
+          </Button>
+        </div>
+
+        <div class="flex justify-between p-4">
+          <Button @click="$emit('previousStep')" as-child variant="default">
+            <div  class="flex items-center">
+              <ArrowLeft class="w-4 h-4 mr-2" />
+              Back
+            </div>
+          </Button>
+          <Progress :model-value="33" class="w-1/2" />
+          <Button @click="$emit('nextStep')" as-child variant="default">
+            <div  class="flex items-center">
+              Next
+              <ArrowRight class="w-4 h-4 ml-2" />
+            </div>
           </Button>
         </div>
       </Card>

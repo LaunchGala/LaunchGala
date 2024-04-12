@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Toggle } from '@/components/ui/toggle';
 import { Button } from '@/components/ui/button';
 import { Home, Calendar, MapPin, Clock } from 'lucide-vue-next';
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>

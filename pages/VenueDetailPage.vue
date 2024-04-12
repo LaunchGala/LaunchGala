@@ -76,53 +76,53 @@ const date = ref<Date>()
         </div>
       </CardHeader>
       
-      <CardContent class="p-4 space-y-4 dark:bg-gray-800 dark:text-white">
-        <div class="flex justify-between">
+      <CardContent class="p-4 space-y-4  dark:bg-gray-800 dark:text-white">
+        <div class="flex justify-between ">
           
           <div>
             
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <Star class="w-5 h-5 text-yellow-400" />
           <span class="text-lg font-semibold">421 Likes</span>
         </div>
         
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Hosted by <strong>Kevin</strong></span>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Company <strong>Google</strong></span>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Price <strong>$100/hr</strong></span>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Sponsor option: <strong>Yes</strong></span>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Venue type: <strong>Office room</strong></span>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Total capacity/Venue size: <strong>180</strong></span>
         </div>
-        <div class="flex items-center space-x-2">
+        <!-- <div class="flex items-center space-x-2 space-y-2">
           <User class="w-5 h-5" />
           <span>Multiple rooms: <strong>Yes</strong></span>
-        </div>
-        <div class="flex items-center space-x-2">
+        </div> -->
+        <!-- <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Additional Insurance required: <strong>No</strong></span>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
           <span>Cleaning Fees: <strong>No</strong></span>
-        </div>
-        <div class="flex items-center space-x-2">
+        </div> -->
+        <div class="flex items-center space-x-2 space-y-4">
           <MapPin class="w-5 h-5" />
           <span>San Francisco, United States</span>
         </div>

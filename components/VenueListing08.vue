@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ChevronRight } from 'lucide-vue-next';
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>
@@ -20,14 +22,19 @@ import { ChevronRight } from 'lucide-vue-next';
           <Input placeholder="Venue Name" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500" />
           <Textarea placeholder="Short description of the venue" rows="4" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500"></Textarea>
         </CardContent>
-        <div class="flex justify-end p-4 space-x-4">
-          <Button variant="outline" class="border-gray-300 text-gray-700 hover:text-gray-500 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white">
-            <span>Cancel</span>
-            <ChevronRight class="w-4 h-4 ml-2" />
+        <div class="flex justify-between p-4">
+          <Button @click="$emit('previousStep')" as-child variant="default">
+            <div  class="flex items-center">
+              <ArrowLeft class="w-4 h-4 mr-2" />
+              Back
+            </div>
           </Button>
-          <Button>
-            <span>Save</span>
-            <ChevronRight class="w-4 h-4 ml-2" />
+          <Progress :model-value="33" class="w-1/2" />
+          <Button @click="$emit('nextStep')" as-child variant="default">
+            <div  class="flex items-center">
+              Next
+              <ArrowRight class="w-4 h-4 ml-2" />
+            </div>
           </Button>
         </div>
       </Card>

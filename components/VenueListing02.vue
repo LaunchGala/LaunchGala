@@ -11,15 +11,19 @@ const selectedStyle = ref('');
 // Handlers for handling click events
 const selectStyle = style => {
   selectedStyle.value = style;
+  props.venueListing.style = style;
 };
 
 const isSelected = style => {
   return selectedStyle.value === style;
 };
+
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>
-  <div class="bg-white dark:bg-black min-h-screen py-10">
+  <div class="bg-white dark:bg-red min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
@@ -79,18 +83,18 @@ const isSelected = style => {
           </div>
         </CardContent>
         <div class="flex justify-between p-4">
-          <Button as-child variant="default">
-            <a href="#" class="flex items-center">
+          <Button @click="$emit('previousStep')" as-child variant="default">
+            <div  class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
-            </a>
+            </div>
           </Button>
           <Progress :model-value="33" class="w-1/2" />
-          <Button as-child variant="default">
-            <a href="#" class="flex items-center">
+          <Button @click="$emit('nextStep')" as-child variant="default">
+            <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />
-            </a>
+            </div>
           </Button>
         </div>
       </Card>

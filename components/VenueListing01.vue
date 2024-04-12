@@ -11,6 +11,9 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>
@@ -25,7 +28,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
         </CardHeader>
         <CardContent>
           <div class="flex flex-wrap items-center justify-start gap-4 mb-6">
-            <Button class="flex items-center gap-2">
+            <Button @click="$emit('nextStep')" class="flex items-center gap-2">
               <Plus class="w-5 h-5" />
               Create New Listing
             </Button>

@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+const props = defineProps(['venueListing']);
+console.log(props.venueListing);
 </script>
 
 <template>
@@ -118,13 +120,20 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
             </div>
           </CardContent>
           <div class="flex justify-between p-4">
-            <Button variant="default">
-              Prev
-            </Button>
-            <Button variant="default">
+          <Button @click="$emit('previousStep')" as-child variant="default">
+            <div  class="flex items-center">
+              <ArrowLeft class="w-4 h-4 mr-2" />
+              Back
+            </div>
+          </Button>
+          <Progress :model-value="33" class="w-1/2" />
+          <Button @click="$emit('nextStep')" as-child variant="default">
+            <div  class="flex items-center">
               Next
-            </Button>
-          </div>
+              <ArrowRight class="w-4 h-4 ml-2" />
+            </div>
+          </Button>
+        </div>
         </Card>
       </div>
     </TooltipProvider>
