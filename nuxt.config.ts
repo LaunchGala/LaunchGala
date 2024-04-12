@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxtseo/module',
     '@nuxt/content',
+    '@nuxtjs/supabase'
   ],
   extends: ['nuxt-umami'],
   appConfig: {
