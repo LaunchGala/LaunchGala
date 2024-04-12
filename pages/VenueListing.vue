@@ -27,7 +27,7 @@ const newVenueListing = ref({
   venueType: [],
   amenities: [],
   eventType: [],
-  images: [],
+  images: "/Bootstrapping.png",
   sponsorshipOption: true,
 
 });
