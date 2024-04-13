@@ -3,6 +3,23 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Apple, Linkedin, Mail } from 'lucide-vue-next';
+
+const supabase = useSupabaseClient()
+const email = ref('')
+const password = ref('')
+
+const signInWithEmail = async () => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email.value,
+    password: password.value,
+    options: {
+      emailRedirectTo: 'http://localhost:3000/confirm',
+    }
+  })
+  if (error) console.log(error)
+  if (data) console.log(data)
+}
+
 </script>
 
 <template>
@@ -24,14 +41,14 @@ import { Apple, Linkedin, Mail } from 'lucide-vue-next';
           <Linkedin class="w-4 h-4" /> <span>Sign-in with LinkedIn</span>
         </Button>
         <div class="my-6 border-t border-gray-300 dark:border-gray-700"></div>
-        <form class="flex flex-col space-y-4">
-          <Input class="w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-gray-400 dark:border-gray-700 dark:focus:ring-indigo-500 dark:bg-gray-900" placeholder="Email Address" />
-          <Input class="w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-gray-400 dark:border-gray-700 dark:focus:ring-indigo-500 dark:bg-gray-900" placeholder="Password" />
+        <div class="flex flex-col space-y-4">
+          <Input v-model="email" type="email" class="w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-gray-400 dark:border-gray-700 dark:focus:ring-indigo-500 dark:bg-gray-900" placeholder="Email Address" />
+          <Input v-model="password" type="password" class="w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-gray-400 dark:border-gray-700 dark:focus:ring-indigo-500 dark:bg-gray-900" placeholder="Password" />
 
-          <Button class="flex items-center justify-center w-full px-4 py-2 space-x-2 text-white transition duration-200 ease-in bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <Button @click="signInWithEmail" class="flex items-center justify-center w-full px-4 py-2 space-x-2 text-white transition duration-200 ease-in bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span>Continue</span> <Mail class="w-4 h-4"/>
           </Button>
-        </form>
+        </div>
       </div>
       <div class="text-center">
         <a href="#signup" class="font-medium text-indigo-600 dark:text-indigo-300 hover:text-indigo-500">Or create a new account</a>
