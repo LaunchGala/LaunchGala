@@ -55,7 +55,7 @@ function addVenueListing() {
 </script>
 
 <template>
-  <Button class="text-4xl font-bold" @click="addVenueListing">Big Button</Button>
+  <Button class="text-white text-l font-bold ml-14 mt-6" @click="addVenueListing">Save</Button>
   <div>
     <VenueListing01 :venue-listing="newVenueListing" v-show="currentStep === 1" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
     <VenueListing02 :venue-listing="newVenueListing" v-show="currentStep === 2" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
