@@ -178,7 +178,7 @@ console.log(isSelected);
                 <TooltipTrigger as-child>
                   <label @click="addAmenity('AC & heating controls')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'border-green-500': props.venueListing.amenities.includes('AC & heating controls'), 'border-gray-500': !props.venueListing.amenities.includes('AC & heating controls') }">
-                    <AirVentIcon class="w-6 h-6 mb-2 text-red-500" />
+                    <AirVentIcon class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">AC & heating controls</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
@@ -283,7 +283,7 @@ console.log(isSelected);
                 <TooltipTrigger as-child>
                   <label @click="addAmenity('Outdoor spaces')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'border-green-500': props.venueListing.amenities.includes('Outdoor spaces'), 'border-gray-500': !props.venueListing.amenities.includes('Outdoor spaces') }">
-                    <Sun class="w-6 h-6 mb-2 text-green-500" />
+                    <Sun class="w-6 h-6 mb-2 text-yellow-500" />
                     <span class="text-lg font-semibold mb-1">Outdoor spaces</span>
                     <span class="text-sm dark:text-gray-300">(e.g., gardens, terraces)</span>
                   </label>
@@ -296,7 +296,7 @@ console.log(isSelected);
                 <TooltipTrigger as-child>
                   <label @click="addAmenity('Signage & branding')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'border-green-500': props.venueListing.amenities.includes('Signage & branding'), 'border-gray-500': !props.venueListing.amenities.includes('Signage & branding') }">
-                    <FlagIcon class="w-6 h-6 mb-2 text-orange-500" />
+                    <FlagIcon class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Signage & branding option</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -481,14 +481,14 @@ console.log(isSelected);
             </div>
           </CardContent>
           <div class="flex justify-between p-4">
-          <Button @click="$emit('previousStep')" as-child variant="default">
+          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
             <div  class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
           <Progress :model-value="33" class="w-1/2" />
-          <Button @click="$emit('nextStep')" as-child variant="default">
+          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

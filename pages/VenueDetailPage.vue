@@ -291,7 +291,7 @@ const date = ref<Date>()
           </Button>
         </div>
         <div class="flex flex-col items-end space-y-2">
-          <Button class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white OrangeCol hover:bg-gray-400 dark:hover:bg-gray-400">
+          <Button class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white OrangeCol hover:bg-orange-400 rounded-md">
             <span>Contact Host</span>
             <ArrowRight class="w-4 h-4 ml-2" />
           </Button>
@@ -363,23 +363,23 @@ const date = ref<Date>()
         <div class="px-4 py-4 dark:bg-gray-800">
       <h3 class="text-lg font-semibold mb-4 text-black">Venues you might like</h3>
       <div class="flex space-x-4 overflow-x-auto pb-4">
-        <div v-for="index in 6" :key="`item-${index}`" class="min-w-60 inline-block rounded shadow-lg bg-white dark:bg-gray-700">
-          <img src="/placeholder.svg" alt="Venue image" class="h-40 w-full object-cover rounded-t">
+        <div v-for="index in 20" :key="`item-${index}`" class="min-w-80 inline-block rounded-md shadow-lg bg-white dark:bg-gray-700">
+          <img src="/placeholder.svg" alt="Venue image" class="h-60 w-full object-cover rounded-t-md">
           <div class="p-4">
             <h4 class="text-lg font-bold mb-2 dark:text-white">Venue Name</h4>
             <p class="text-sm text-gray-500 dark:text-gray-300">Location</p>
             <p class="text-sm text-gray-500 dark:text-gray-300">Size: Large</p>
             <p class="text-sm font-semibold dark:text-white">$500 / event</p>
             <p class="text-sm text-gray-500 mb-2 dark:text-gray-300">Sponsored</p>
-            <Button class="w-full" variant="default">
+            <!-- <Button class="w-full bg-white rounded-md shadow-lg hover:bg-gray-400 text-orange-500 border-orange-500 font-semibold" variant="default">
               View
-            </Button>
+            </Button> -->
           </div>
         </div>
       </div>
       <!-- "View more options" button -->
       <div class="flex justify-center mt-4">
-        <Button variant="outline" class="text-white border-black hover:text-black hover:bg-white bg-black">
+        <Button variant="outline" class="p-6 mt-6 w-1/6 OrangeCol rounded-md shadow-lg hover:bg-orange-400 text-white font-semibold hover:text-white" >
           View more options
         </Button>
       </div>

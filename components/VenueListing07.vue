@@ -35,14 +35,14 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
           </div>
         </CardContent>
         <div class="flex justify-between p-4">
-          <Button @click="$emit('previousStep')" as-child variant="default">
+          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
             <div  class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
           <Progress :model-value="33" class="w-1/2" />
-          <Button @click="$emit('nextStep')" as-child variant="default">
+          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

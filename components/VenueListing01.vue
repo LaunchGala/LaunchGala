@@ -28,7 +28,7 @@ console.log(props.venueListing);
         </CardHeader>
         <CardContent>
           <div class="flex flex-wrap items-center justify-start gap-4 mb-6">
-            <Button @click="$emit('nextStep')" class="flex items-center gap-2">
+            <Button @click="$emit('nextStep')" class="flex items-center gap-2 bg-orange-500 hover:bg-orange-300">
               <Plus class="w-5 h-5" />
               Create New Listing
             </Button>

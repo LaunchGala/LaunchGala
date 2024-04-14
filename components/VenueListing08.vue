@@ -25,14 +25,14 @@ console.log(props.venueListing);
           <Textarea v-model="props.venueListing.description" placeholder="Short description of the venue" rows="4" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500"></Textarea>
         </CardContent>
         <div class="flex justify-between p-4">
-          <Button @click="$emit('previousStep')" as-child variant="default">
+          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
             <div  class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
           <Progress :model-value="33" class="w-1/2" />
-          <Button @click="$emit('nextStep')" as-child variant="default">
+          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />
