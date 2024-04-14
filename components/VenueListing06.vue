@@ -5,6 +5,8 @@ import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronRight } from 'lucide-vue-next';
+import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
 

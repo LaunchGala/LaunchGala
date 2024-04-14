@@ -25,6 +25,8 @@ import { AlarmSmokeIcon } from 'lucide-vue-next';
 import { DoorOpenIcon } from 'lucide-vue-next';
 import { GamepadIcon } from 'lucide-vue-next';
 import { Fish } from 'lucide-vue-next';
+import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
 

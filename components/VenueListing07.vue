@@ -4,6 +4,8 @@ import { ref } from 'vue';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Upload, X } from 'lucide-vue-next';
+import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+
 </script>
 
 <template>

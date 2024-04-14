@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ChevronRight } from 'lucide-vue-next';
+import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
 </script>
