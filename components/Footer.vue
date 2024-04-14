@@ -45,10 +45,10 @@ import { Tiktoken } from 'js-tiktoken';
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Become our Partner</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Diversity & Accessibility</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Inclusion & Diversity</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Guest Referrals</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Refer a Friend</a>
             </li>
           </ul>
         </div>
@@ -79,7 +79,7 @@ import { Tiktoken } from 'js-tiktoken';
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Help Center</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cancellation & Insurance</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Reservation Rules</a>
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Neighborhood Support</a>

@@ -36,8 +36,8 @@ console.log(props.venueListing);
               :class="{ 'shadow-lg': isSelected('office') }"
               @click="selectStyle('office')"
             >
-              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Office</span>
+              <img src="/Bootstrapping.png" alt="Office" class="w-full h-20 mb-2 rounded-lg ">
+              <span class="text-sm font-semibold">Office space</span>
             </button>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
@@ -45,7 +45,7 @@ console.log(props.venueListing);
               @click="selectStyle('museum')"
             >
               <img src="/placeholder.svg" alt="Museum" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Museum</span>
+              <span class="text-sm font-semibold">Meeting room</span>
             </button>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
@@ -61,7 +61,7 @@ console.log(props.venueListing);
               @click="selectStyle('office')"
             >
               <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Office</span>
+              <span class="text-sm font-semibold">Co-Working space</span>
             </button>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
@@ -69,7 +69,7 @@ console.log(props.venueListing);
               @click="selectStyle('office')"
             >
               <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Office</span>
+              <span class="text-sm font-semibold">Private room</span>
             </button>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
@@ -77,16 +77,7 @@ console.log(props.venueListing);
               @click="selectStyle('office')"
             >
               <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Office</span>
-            </button>
-
-            <button 
-              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
-              :class="{ 'shadow-lg': isSelected('office') }"
-              @click="selectStyle('office')"
-            >
-              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Office</span>
+              <span class="text-sm font-semibold">Auditorium</span>
             </button>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
@@ -94,7 +85,7 @@ console.log(props.venueListing);
               @click="selectStyle('office')"
             >
               <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Office</span>
+              <span class="text-sm font-semibold">Conference center</span>
             </button>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
@@ -102,7 +93,87 @@ console.log(props.venueListing);
               @click="selectStyle('office')"
             >
               <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Office</span>
+              <span class="text-sm font-semibold">Convention center</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Hotels & banquet halls</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Exhibition hall</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Theaters & performance space</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Museum</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">University & college facility</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Library</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Historical building</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Restaurant & bar</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Sports arena and facility</span>
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md focus:shadow-md focus:outline-none"
+              :class="{ 'shadow-lg': isSelected('office') }"
+              @click="selectStyle('office')"
+            >
+              <img src="/placeholder.svg" alt="Office" class="w-20 h-20 mb-2">
+              <span class="text-sm font-semibold">Outdoor event space</span>
             </button>
             <!-- Additional categories would go here -->
           </div>

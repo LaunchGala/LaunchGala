@@ -20,39 +20,43 @@ console.log(props.venueListing);
         <CardContent>
           <div class="space-y-6">
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance required</span>
-              <Switch />
-            </div>
-            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning Fees</span>
-              <Switch />
-            </div>
-            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance required</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Mask required</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning Fees</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">No pets</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">No commercial photography</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance required</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Security cameras on property</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning Fees</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning after required</span>
               <Switch />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Must climb stairs</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Open space (No gate or lock)</span>
+              <Switch />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Others (Check with the host)</span>
               <Switch />
             </div>
             <!-- Current switch sections omitted for brevity -->
