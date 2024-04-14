@@ -51,7 +51,7 @@ function addAmenity(amenity: string) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <Car class="w-6 h-6 mb-2 text-gray-500" />
                     <span class="text-lg font-semibold mb-1">On-site parking</span>
@@ -64,7 +64,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <Bus class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Public transportation access</span>
@@ -77,7 +77,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <Wifi class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Wi-Fi</span>
@@ -90,7 +90,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <AudioLinesIcon class="w-6 h-6 mb-2 text-purple-500" />
                     <span class="text-lg font-semibold mb-1">Audiovisual equipment</span>
@@ -103,7 +103,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <TheaterIcon class="w-6 h-6 mb-2 text-red-500" />
                     <span class="text-lg font-semibold mb-1">Stage/Speaking platform</span>
@@ -116,7 +116,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <Mic class="w-6 h-6 mb-2 text-yellow-500" />
                     <span class="text-lg font-semibold mb-1">Mic & Sound system</span>
@@ -129,7 +129,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <Tv2 class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Projectors & Screens</span>
@@ -142,7 +142,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <LightbulbIcon class="w-6 h-6 mb-2 text-yellow-500" />
                     <span class="text-lg font-semibold mb-1">Adjustable lighting</span>
@@ -155,7 +155,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <sofa class="w-6 h-6 mb-2 text-gray-500" />
                     <span class="text-lg font-semibold mb-1">Tables & chairs</span>
@@ -168,7 +168,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('wifi')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="wifi" class="sr-only" />
                     <AirVentIcon class="w-6 h-6 mb-2 text-red-500" />
                     <span class="text-lg font-semibold mb-1">AC & heating controls</span>
@@ -182,7 +182,7 @@ function addAmenity(amenity: string) {
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <shower-head class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Restrooms</span>
@@ -195,7 +195,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <AccessibilityIcon class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Disability access</span>
@@ -208,7 +208,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <shield class="w-6 h-6 mb-2 text-red-500" />
                     <span class="text-lg font-semibold mb-1">Security services</span>
@@ -221,7 +221,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <book-user class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Reception/Registration area</span>
@@ -234,7 +234,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <DivideIcon class="w-6 h-6 mb-2 text-gray-500" />
                     <span class="text-lg font-semibold mb-1">Room/space divider options</span>
@@ -247,7 +247,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <door-closed class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Private meeting rooms</span>
@@ -260,7 +260,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <BedIcon class="w-6 h-6 mb-2 text-purple-500" />
                     <span class="text-lg font-semibold mb-1">On-site accommodations</span>
@@ -273,7 +273,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <Sun class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Outdoor spaces</span>
@@ -286,7 +286,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <FlagIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Signage & branding option</span>
@@ -299,7 +299,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <Check class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Cloakroom/Coat check</span>
@@ -312,7 +312,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <Crown class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Green room/VIP area</span>
@@ -325,7 +325,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <AlarmSmokeIcon class="w-6 h-6 mb-2 text-red-500" />
                     <span class="text-lg font-semibold mb-1">Smoke alarm</span>
@@ -338,7 +338,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <refrigerator class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Refrigerator</span>
@@ -351,7 +351,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <microwave class="w-6 h-6 mb-2 text-yellow-500" />
                     <span class="text-lg font-semibold mb-1">Microwave</span>
@@ -364,7 +364,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <DoorOpenIcon class="w-6 h-6 mb-2 text-green-500" />
                     <span class="text-lg font-semibold mb-1">Private entrance</span>
@@ -377,7 +377,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('tv')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="tv" class="sr-only" />
                     <arrow-up-down class="w-6 h-6 mb-2 text-gray-500" />
                     <span class="text-lg font-semibold mb-1">Elevators</span>
@@ -390,7 +390,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('Projector')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Projector')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="ac" class="sr-only" />
                     <Martini class="w-6 h-6 mb-2 text-purple-500" />
                     <span class="text-lg font-semibold mb-1">Bar space</span>
@@ -404,7 +404,7 @@ function addAmenity(amenity: string) {
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('AC')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('AC')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="heat" class="sr-only" />
                     <chef-hat class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Kitchen</span>
@@ -418,7 +418,7 @@ function addAmenity(amenity: string) {
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('Coffee Machine')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Coffee Machine')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="coffee" class="sr-only" />
                     <Coffee class="w-6 h-6 mb-2 text-black" />
                     <span class="text-lg font-semibold mb-1">Coffee Machine</span>
@@ -432,7 +432,7 @@ function addAmenity(amenity: string) {
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('Computer')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Computer')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="monitor" class="sr-only" />
                     <Monitor class="w-6 h-6 mb-2 text-gray-500" />
                     <span class="text-lg font-semibold mb-1">Computer</span>
@@ -446,7 +446,7 @@ function addAmenity(amenity: string) {
 
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('Heating')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Heating')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="audio" class="sr-only" />
                     <GamepadIcon class="w-6 h-6 mb-2 text-red-500" />
                     <span class="text-lg font-semibold mb-1">Games</span>
@@ -459,7 +459,7 @@ function addAmenity(amenity: string) {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger as-child>
-                  <label @click="addAmenity('Heating')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md">
+                  <label @click="addAmenity('Heating')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer dark:border-gray-700 hover:shadow-md focus-within:shadow-md focus-within:border-orange-500">
                     <Checkbox id="audio" class="sr-only" />
                     <Fish class="w-6 h-6 mb-2 text-blue-500" />
                     <span class="text-lg font-semibold mb-1">Waterfront</span>
