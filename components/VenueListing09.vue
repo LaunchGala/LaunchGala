@@ -11,6 +11,7 @@ console.log(props.venueListing);
 function priceEnabled(toggleState: boolean) {
   props.venueListing.priceEnabled = toggleState
 }
+// if false do not display the price in the venue listing everywhere
 
 function sponsorshipOption(toggleState: boolean) {
   props.venueListing.sponsorshipOption = toggleState
@@ -35,7 +36,7 @@ function sponsorshipOption(toggleState: boolean) {
             <Switch :default-checked="props.venueListing.priceEnabled" @update:checked="priceEnabled" id="displayPrice" />
           </div>
           <div class="py-4">
-            <Input v-model="props.venueListing.price" placeholder="Hourly Price (e.g. $50/hour)" class="w-full border-gray-300 rounded-md dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"/>
+            <Input v-model="props.venueListing.price" placeholder="Hourly Price (e.g. If the rent is $50/hour, please enter JUST the number 50)" class="w-full border-gray-300 rounded-md dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"/>
           </div>
           <div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 py-4">
             <div class="flex items-center space-x-3">

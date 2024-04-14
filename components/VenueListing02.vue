@@ -27,7 +27,7 @@ console.log(props.venueListing);
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
-          <CardTitle>Select Venue Style</CardTitle>
+          <CardTitle>Select Venue Style: (Select only one)</CardTitle>
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

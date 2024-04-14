@@ -23,7 +23,7 @@ function addEventType(eventType: string) {
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
-          <CardTitle>Type of Events to host at this venue:</CardTitle>
+          <CardTitle>Type of Events to host at this venue: (Select all applicable)</CardTitle>
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
