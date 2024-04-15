@@ -37,11 +37,11 @@ const newVenueListing = ref({
   noPets: true,
   noCommercialPhotography: false,
   securityCameras: true,
-  postEventCleaning: true,
+  postEventCleaning: false,
   mustClimbStairs: false,
   additionalInsurance: false,
   openSpace: false,
-  
+
 
 
 

@@ -205,7 +205,7 @@ function addEventTypes(eventTypes: string) {
                   <label @click="addEventTypes('Panel discussions & roundtables')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Panel discussions & roundtables'), 'bg-white': !props.venueListing.eventType.includes('Panel discussions & roundtables') }">
                     <AccessibilityIcon class="w-6 h-6 mb-2 text-blue-500" />
-                    <span class="text-lg font-semibold mb-1">Panel discussions & roundtables</span>
+                    <span class="text-lg font-semibold mb-1 ">Panel & roundtables</span>
                     <span class="text-sm dark:text-gray-300">ramps or elevators</span>
                   </label>
                 </TooltipTrigger>
