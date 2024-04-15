@@ -6,6 +6,36 @@ import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-vue-next';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+import { Progress } from '@/components/ui/progress';
+
+ 
+function setNonSmoking(toggleState: boolean) {
+  props.venueListing.nonSmoking = toggleState
+}
+function setMaskRequired(toggleState: boolean) {
+  props.venueListing.maskRequired = toggleState
+}
+function setNoPets(toggleState: boolean) {
+  props.venueListing.noPets = toggleState
+}
+function setNoCommercialPhotography(toggleState: boolean) {
+  props.venueListing.noCommercialPhotography = toggleState
+}
+function setSecurityCameras(toggleState: boolean) {
+  props.venueListing.securityCameras = toggleState
+}
+function setPostEventCleaning(toggleState: boolean) {
+  props.venueListing.postEventCleaning = toggleState
+}
+function setMustClimbStairs(toggleState: boolean) {
+  props.venueListing.mustClimbStairs = toggleState
+}
+function setOpenSpace(toggleState: boolean) {
+  props.venueListing.openSpace = toggleState
+}
+function setAdditionalInsurance(toggleState: boolean) {
+  props.venueListing.additionalInsurance = toggleState
+}
 
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
@@ -22,45 +52,47 @@ console.log(props.venueListing);
         <CardContent>
           <div class="space-y-6">
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Non-smoking</span>
-              <Switch />
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Non smoking</span>
+              <Switch :default-checked="props.venueListing.nonSmoking" @update:checked="setNonSmoking" id="displayPrice" />
+
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Mask required</span>
-              <Switch />
+              <Switch :default-checked="props.venueListing.maskRequired" @update:checked="setMaskRequired" id="displayPrice" />
+
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">No pets</span>
-              <Switch />
+              <Switch :default-checked="props.venueListing.noPets" @update:checked="setNoPets" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">No commercial photography</span>
-              <Switch />
+              <Switch :default-checked="props.venueListing.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Security cameras on property</span>
-              <Switch />
+              <Switch :default-checked="props.venueListing.securityCameras" @update:checked="setSecurityCameras" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Cleaning after required</span>
-              <Switch />
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Post event cleaning required</span>
+              <Switch :default-checked="props.venueListing.postEventCleaning" @update:checked="setPostEventCleaning" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Must climb stairs</span>
-              <Switch />
+              <Switch :default-checked="props.venueListing.mustClimbStairs" @update:checked="setMustClimbStairs" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Additional Insurance</span>
-              <Switch />
+              <Switch :default-checked="props.venueListing.additionalInsurance" @update:checked="setAdditionalInsurance" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Open space (No gate or lock)</span>
-              <Switch />
+              <Switch :default-checked="props.venueListing.openSpace" @update:checked="setOpenSpace" id="displayPrice" />
             </div>
-            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+            <!-- <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Others (Check with the host)</span>
-              <Switch />
-            </div>
+              <Switch :default-checked="props.venueListing.priceEnabled" @update:checked="priceEnabled" id="displayPrice" />
+            </div> -->
             <!-- Current switch sections omitted for brevity -->
           </div>
           <!-- Operating Days Section -->
@@ -127,15 +159,15 @@ console.log(props.venueListing);
           </Button>
         </div> -->
 
-        <div class="flex justify-between p-4">
-          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
+        <div class="flex justify-between items-center p-4 ">
+          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
             <div  class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
-          <Progress :model-value="33" class="w-1/2" />
-          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
+          <Progress :model-value="90"  />
+          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2 ">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

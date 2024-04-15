@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Upload, X } from 'lucide-vue-next';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+import { Progress } from '@/components/ui/progress';
 
 </script>
 
@@ -34,15 +35,15 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
             </div>
           </div>
         </CardContent>
-        <div class="flex justify-between p-4">
-          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
+        <div class="flex justify-between items-center p-4">
+          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
             <div  class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
-          <Progress :model-value="33" class="w-1/2" />
-          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
+          <Progress :model-value="60"  />
+          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

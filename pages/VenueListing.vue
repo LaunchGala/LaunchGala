@@ -8,11 +8,14 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 
 const supabase = useSupabaseClient()
 
+const user = useSupabaseUser()
+
 
 const selectedStyle = ref('');
 const currentStep = ref(1);
 
 const newVenueListing = ref({
+  createdBy: user.value?.id,
   title: '',
   street: '',
   city: '',
@@ -29,6 +32,18 @@ const newVenueListing = ref({
   eventType: [],
   images: "/Bootstrapping.png",
   sponsorshipOption: true,
+  nonSmoking: true,
+  maskRequired: false,
+  noPets: true,
+  noCommercialPhotography: false,
+  securityCameras: true,
+  postEventCleaning: true,
+  mustClimbStairs: false,
+  additionalInsurance: false,
+  openSpace: false,
+  
+
+
 
 });
 
@@ -52,22 +67,33 @@ function addVenueListing() {
     console.log(error)
   })
 }
+
+function nextStep() {
+  currentStep.value += 1;
+  window.scrollTo(0, 0);
+}
+
+function previousStep() {
+  currentStep.value -= 1;
+  window.scrollTo(0, 0);
+}
+
 </script>
 
 <template>
   <Button class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addVenueListing">Save</Button>
   <div>
-    <VenueListing01 :venue-listing="newVenueListing" v-show="currentStep === 1" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing02 :venue-listing="newVenueListing" v-show="currentStep === 2" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing03 :venue-listing="newVenueListing" v-show="currentStep === 3" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing04 :venue-listing="newVenueListing" v-show="currentStep === 4" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing05 :venue-listing="newVenueListing" v-show="currentStep === 5" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing06 :venue-listing="newVenueListing" v-show="currentStep === 6" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing07 :venue-listing="newVenueListing" v-show="currentStep === 7" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing08 :venue-listing="newVenueListing" v-show="currentStep === 8" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>
-    <VenueListing09 :venue-listing="newVenueListing" v-show="currentStep === 9" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>    
-    <VenueListing10 :venue-listing="newVenueListing" v-show="currentStep === 10" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>    
-    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" @next-step="currentStep += 1" @previous-step="currentStep -= 1"/>    
+    <VenueListing01 :venue-listing="newVenueListing" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing02 :venue-listing="newVenueListing" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing03 :venue-listing="newVenueListing" v-show="currentStep === 3" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing04 :venue-listing="newVenueListing" v-show="currentStep === 4" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing05 :venue-listing="newVenueListing" v-show="currentStep === 5" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing06 :venue-listing="newVenueListing" v-show="currentStep === 6" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing07 :venue-listing="newVenueListing" v-show="currentStep === 7" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing08 :venue-listing="newVenueListing" v-show="currentStep === 8" @next-step="nextStep" @previous-step="previousStep"/>
+    <VenueListing09 :venue-listing="newVenueListing" v-show="currentStep === 9" @next-step="nextStep" @previous-step="previousStep"/>    
+    <VenueListing10 :venue-listing="newVenueListing" v-show="currentStep === 10" @next-step="nextStep" @previous-step="previousStep"/>    
+    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" @next-step="nextStep" @previous-step="previousStep"/>    
   </div>
 
 

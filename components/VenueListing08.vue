@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ChevronRight } from 'lucide-vue-next';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+import { Progress } from '@/components/ui/progress';
+
 
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
@@ -24,15 +26,15 @@ console.log(props.venueListing);
           <Input v-model="props.venueListing.title" placeholder="Venue Name" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500" />
           <Textarea v-model="props.venueListing.description" placeholder="Short description of the venue" rows="4" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500"></Textarea>
         </CardContent>
-        <div class="flex justify-between p-4">
-          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
+        <div class="flex justify-between items-center p-4">
+          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
             <div  class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
-          <Progress :model-value="33" class="w-1/2" />
-          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold">
+          <Progress :model-value="70"  />
+          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

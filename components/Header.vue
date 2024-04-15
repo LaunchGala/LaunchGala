@@ -1,4 +1,10 @@
+<script setup lang="ts">
 
+const user = useSupabaseUser()
+
+const isLoggedIn = computed(() => user.value !== null)
+
+</script>
 
 
 <template>
@@ -74,9 +80,14 @@
       <span class="absolute top-4 right-4 -mt-1 -mr-1 colorOrangeBg text-white rounded-full text-xs px-1">
                         69
                     </span>
-      <NuxtLink to="logIn">
-                    <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
-        Login/Profile 
+    <NuxtLink v-if="!isLoggedIn" to="logIn">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
+        Login
+      </button>
+    </NuxtLink>
+      <NuxtLink v-else to="Profile">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
+        Profile 
       </button>
     </NuxtLink>
   </div>

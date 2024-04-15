@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Toggle } from '@/components/ui/toggle';
 import { Button } from '@/components/ui/button';
 import { Home, Calendar, MapPin, Clock } from 'lucide-vue-next';
+import { Progress } from '@/components/ui/progress';
+
+
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
 </script>
@@ -77,10 +80,12 @@ console.log(props.venueListing);
             </div>
           </div>
         </CardContent>
-        <div class="flex justify-end gap-4 p-4">
+        <div class="flex justify-end gap-4 p-4 items-center">
           <Button variant="outline" class="border-gray-300 text-gray-600 dark:border-gray-600 dark:text-gray-200">
             Edit Details
           </Button>
+          <Progress :model-value="100"   />
+
           <Button>
             Publish Listing
           </Button>
