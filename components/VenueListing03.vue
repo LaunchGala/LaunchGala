@@ -34,7 +34,7 @@ console.log(props.venueListing);
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <button 
               class="flex flex-col items-center p-4 border rounded-lg shadow-lg "
-              :class="{ 'shadow-orange-500': selectedCapacity == 100, 'shadow-lg': selectedCapacity != 100 }"
+              :class="{ 'shadow-orange-500': selectedCapacity == 50, 'shadow-lg': selectedCapacity != 50 }"
 
               @click="selectCapacity(50)"
             >
