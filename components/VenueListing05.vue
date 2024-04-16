@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Check, Wifi, Tv, Airplay, Sun, Coffee, Monitor, Speaker, Car, Bus, Shield, Network, Crown, Refrigerator, Microwave, ArrowUpDown, Martini, ChefHat, ShowerHead, BookUser, DoorClosed, Sofa } from 'lucide-vue-next';
+import { Check, Wifi, Tv, Airplay, Sun, Coffee, Monitor, Speaker, Car, Bus, Shield, Network, Crown, Refrigerator, Microwave, ArrowUpDown, Martini, ChefHat, ShowerHead, Book, DoorClosed, Sofa, Code, DollarSign, GraduationCap, MicIcon, UserCircle2, DollarSignIcon , SmilePlus, Briefcase, Trophy, UsersRoundIcon, GitGraphIcon, Utensils, CameraIcon, SquareUser, Globe, Palette, TrendingUp, RocketIcon, BarChart3, PieChart } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -27,6 +27,7 @@ import { GamepadIcon } from 'lucide-vue-next';
 import { Fish } from 'lucide-vue-next';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
+import { BookCheck } from 'lucide-vue-next';
 
 
 const props = defineProps(['venueListing']);
@@ -58,7 +59,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Hackathon')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md" 
                     :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Hackathon'), 'bg-white': !props.venueListing.eventType.includes('Hackathon') }">
-                    <Car class="w-6 h-6 mb-2 text-gray-500" />
+                    <Code class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Hackathon</span>
                     <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
                   </label>
@@ -72,7 +73,7 @@ function addEventTypes(eventTypes: string) {
                   <label @click="addEventTypes('Networking Event')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Networking Event'), 'bg-white': !props.venueListing.eventType.includes('Networking Event') }">
                     <!-- <Checkbox id="wifi" class="sr-only" /> -->
-                    <Bus class="w-6 h-6 mb-2 text-green-500" />
+                    <smile-plus class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Networking Event</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
@@ -86,7 +87,7 @@ function addEventTypes(eventTypes: string) {
                   <label @click="addEventTypes('Pitching event')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Pitching event'), 'bg-white': !props.venueListing.eventType.includes('Pitching event') }">
                     <!-- <Checkbox id="wifi" class="sr-only" /> -->
-                    <Wifi class="w-6 h-6 mb-2 text-blue-500" />
+                    <trending-up class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Pitching event</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
@@ -99,7 +100,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Dinner event')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Dinner event'), 'bg-white': !props.venueListing.eventType.includes('Dinner event') }">
-                    <AudioLinesIcon class="w-6 h-6 mb-2 text-purple-500" />
+                    <ChefHat class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Dinner event</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
@@ -112,8 +113,8 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Sales expo')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Sales expo'), 'bg-white': !props.venueListing.eventType.includes('Sales expo') }">
-                    <TheaterIcon class="w-6 h-6 mb-2 text-red-500" />
-                    <span class="text-lg font-semibold mb-1">Sales expo</span>
+                    <Briefcase class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Sales & Trade show</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
                 </TooltipTrigger>
@@ -121,24 +122,22 @@ function addEventTypes(eventTypes: string) {
                   High-speed wireless internet connectivity.
                 </TooltipContent> -->
               </Tooltip>
-              <Tooltip>
+              <!-- <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Trade show')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Trade show'), 'bg-white': !props.venueListing.eventType.includes('Trade show') }">
-                    <Mic class="w-6 h-6 mb-2 text-yellow-500" />
+                    <UsersRoundIcon class="w-6 h-6 mb-2 text-yellow-500" />
                     <span class="text-lg font-semibold mb-1">Trade show</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
                 </TooltipTrigger>
-                <!-- <TooltipContent>
-                  High-speed wireless internet connectivity.
-                </TooltipContent> -->
-              </Tooltip>
+
+              </Tooltip> -->
               <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Conference')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Conference'), 'bg-white': !props.venueListing.eventType.includes('Conference') }">
-                    <Tv2 class="w-6 h-6 mb-2 text-green-500" />
+                    <MicIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Conference</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
@@ -151,7 +150,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Seminar & workshop')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Seminar & workshop'), 'bg-white': !props.venueListing.eventType.includes('Seminar & workshop') }">
-                    <LightbulbIcon class="w-6 h-6 mb-2 text-yellow-500" />
+                    <LightbulbIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Seminar & workshop</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
@@ -164,7 +163,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Product launch')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Product launch'), 'bg-white': !props.venueListing.eventType.includes('Product launch') }">
-                    <sofa class="w-6 h-6 mb-2 text-gray-500" />
+                    <RocketIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Product launch</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
@@ -177,8 +176,8 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Corporate meetings & retreats')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Corporate meetings & retreats'), 'bg-white': !props.venueListing.eventType.includes('Corporate meetings & retreats') }">
-                    <AirVentIcon class="w-6 h-6 mb-2 text-blue-500" />
-                    <span class="text-lg font-semibold mb-1">Corporate meetings & retreats</span>
+                    <pie-chart class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Corporate events & retreats</span>
                     <span class="text-sm dark:text-gray-300">High-speed internet</span>
                   </label>
                 </TooltipTrigger>
@@ -187,7 +186,7 @@ function addEventTypes(eventTypes: string) {
                 </TooltipContent> -->
               </Tooltip>
 
-              <Tooltip>
+              <!-- <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Training session')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Training session'), 'bg-white': !props.venueListing.eventType.includes('Training session') }">
@@ -196,15 +195,13 @@ function addEventTypes(eventTypes: string) {
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
                 </TooltipTrigger>
-                <!-- <TooltipContent>
-                  Flat-screen TV with satellite channels.
-                </TooltipContent> -->
-              </Tooltip>
+   
+              </Tooltip> -->
               <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Panel discussions & roundtables')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Panel discussions & roundtables'), 'bg-white': !props.venueListing.eventType.includes('Panel discussions & roundtables') }">
-                    <AccessibilityIcon class="w-6 h-6 mb-2 text-blue-500" />
+                    <TheaterIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1 ">Panel & roundtables</span>
                     <span class="text-sm dark:text-gray-300">ramps or elevators</span>
                   </label>
@@ -217,7 +214,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Award ceremony & Gala')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Award ceremony & Gala'), 'bg-white': !props.venueListing.eventType.includes('Award ceremony & Gala') }">
-                    <shield class="w-6 h-6 mb-2 text-red-500" />
+                    <trophy class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Award ceremony & Gala</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -230,7 +227,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Job fair & career expo')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Job fair & career expo'), 'bg-white': !props.venueListing.eventType.includes('Job fair & career expo') }">
-                    <book-user class="w-6 h-6 mb-2 text-green-500" />
+                    <square-user class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Job fair & career expo</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -243,7 +240,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Academic conference')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Academic conference'), 'bg-white': !props.venueListing.eventType.includes('Academic conference') }">
-                    <DivideIcon class="w-6 h-6 mb-2 text-gray-500" />
+                    <GraduationCap class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Academic conference</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -256,7 +253,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Investor & funding meetup')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Investor & funding meetup'), 'bg-white': !props.venueListing.eventType.includes('Investor & funding meetup') }">
-                    <door-closed class="w-6 h-6 mb-2 text-green-500" />
+                    <DollarSignIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Investor & funding meetup</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -269,7 +266,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Startup accelerator & incubator')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Startup accelerator & incubator'), 'bg-white': !props.venueListing.eventType.includes('Startup accelerator & incubator') }">
-                    <BedIcon class="w-6 h-6 mb-2 text-purple-500" />
+                    <BarChart3 class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Startup accelerator & incubator</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -278,7 +275,7 @@ function addEventTypes(eventTypes: string) {
                   Flat-screen TV with satellite channels.
                 </TooltipContent> -->
               </Tooltip>
-              <Tooltip>
+              <!-- <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Corporate event')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Corporate event'), 'bg-white': !props.venueListing.eventType.includes('Corporate event') }">
@@ -287,16 +284,14 @@ function addEventTypes(eventTypes: string) {
                     <span class="text-sm dark:text-gray-300">(e.g., gardens, terraces)</span>
                   </label>
                 </TooltipTrigger>
-                <!-- <TooltipContent>
-                  Flat-screen TV with satellite channels.
-                </TooltipContent> -->
-              </Tooltip>
+
+              </Tooltip> -->
               <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Industry-specific summit')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Industry-specific summit'), 'bg-white': !props.venueListing.eventType.includes('Industry-specific summit') }">
-                    <FlagIcon class="w-6 h-6 mb-2 text-green-500" />
-                    <span class="text-lg font-semibold mb-1">Industry-specific summit</span>
+                    <Globe class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Summit & Symposium</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
                 </TooltipTrigger>
@@ -308,7 +303,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Press conference')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Press conference'), 'bg-white': !props.venueListing.eventType.includes('Press conference') }">
-                    <Check class="w-6 h-6 mb-2 text-blue-500" />
+                    <CameraIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Press conference</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -321,7 +316,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Executive & leadership forum')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Executive & leadership forum'), 'bg-white': !props.venueListing.eventType.includes('Executive & leadership forum') }">
-                    <Crown class="w-6 h-6 mb-2 text-green-500" />
+                    <Crown class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Executive & leadership forum</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -330,7 +325,7 @@ function addEventTypes(eventTypes: string) {
                   Flat-screen TV with satellite channels.
                 </TooltipContent> -->
               </Tooltip>
-              <Tooltip>
+              <!-- <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Symposium')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Symposium'), 'bg-white': !props.venueListing.eventType.includes('Symposium') }">
@@ -339,15 +334,13 @@ function addEventTypes(eventTypes: string) {
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
                 </TooltipTrigger>
-                <!-- <TooltipContent>
-                  Flat-screen TV with satellite channels.
-                </TooltipContent> -->
-              </Tooltip>
+
+              </Tooltip> -->
               <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Publishing & signing event')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Publishing & signing event'), 'bg-white': !props.venueListing.eventType.includes('Publishing & signing event') }">
-                    <refrigerator class="w-6 h-6 mb-2 text-blue-500" />
+                    <BookCheck class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Publishing & signing event</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>
@@ -360,7 +353,7 @@ function addEventTypes(eventTypes: string) {
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes('Art show & exhibition')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Art show & exhibition'), 'bg-white': !props.venueListing.eventType.includes('Art show & exhibition') }">
-                    <microwave class="w-6 h-6 mb-2 text-yellow-500" />
+                    <Palette class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Art show & exhibition</span>
                     <span class="text-sm dark:text-gray-300">Satellite channels</span>
                   </label>

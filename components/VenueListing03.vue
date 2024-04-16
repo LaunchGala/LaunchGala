@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+import { User } from 'lucide-vue-next'
+
 
 const selectedCapacity = ref(0);
 
@@ -28,7 +30,7 @@ console.log(props.venueListing);
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
-          <CardTitle>Choose Venue Size: (Select only one)</CardTitle>
+          <CardTitle>Choose Venue Size/Capacity: (Select only one)</CardTitle>
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -38,9 +40,20 @@ console.log(props.venueListing);
 
               @click="selectCapacity(50)"
             >
-              <img src="/Bootstrapping.png" alt="Office" class="w-full h-20 mb-2 rounded-lg ">
-              <span class="text-sm font-semibold">X-Small</span>
-              <span class="text-sm dark:text-gray-300">Up to 50 guests</span>
+            <CardContent class="p-5 flex flex-col items-center">
+        <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
+          <User size="48" class="text-orange-500 dark:text-white" />
+        </div>
+        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+          X-Small
+        </CardDescription>
+        <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+          Up to 50 guests
+        </p>
+      </CardContent>
+              <!-- <img src="/Bootstrapping.png" alt="Office" class="w-full h-20 mb-2 rounded-lg "> -->
+              <!-- <span class="text-sm font-semibold">X-Small</span>
+              <span class="text-sm dark:text-gray-300">Up to 50 guests</span> -->
 
             </button>
             <button 
@@ -48,9 +61,18 @@ console.log(props.venueListing);
               :class="{ 'shadow-orange-500': selectedCapacity == 100, 'shadow-lg': selectedCapacity != 100 }"
               @click="selectCapacity(100)"
             >
-            <img src="/Bootstrapping.png" alt="Office" class="w-full h-20 mb-2 rounded-lg ">
-              <span class="text-sm font-semibold">Small</span>
-              <span class="text-sm dark:text-gray-300">Up to 100 guests</span>
+            <CardContent class="p-5 flex flex-col items-center">
+        <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
+          <User size="48" class="text-orange-500 dark:text-white" />
+        </div>
+        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+          Small
+        </CardDescription>
+        <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+          Up to 100 guests
+        </p>
+      </CardContent>
+ 
 
             </button>
             <button 
@@ -58,9 +80,18 @@ console.log(props.venueListing);
               :class="{ 'shadow-orange-500': selectedCapacity == 200, 'shadow-lg': selectedCapacity != 200 }"
               @click="selectCapacity(200)"
             >
-            <img src="/Bootstrapping.png" alt="Gallery" class="w-full h-20 mb-2 rounded-lg ">
-              <span class="text-sm font-semibold">Medium</span>
-              <span class="text-sm dark:text-gray-300">Up to 200 guests</span>
+            <CardContent class="p-5 flex flex-col items-center">
+        <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
+          <User size="48" class="text-orange-500 dark:text-white" />
+        </div>
+        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+          Medium
+        </CardDescription>
+        <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+          Up to 200 guests
+        </p>
+      </CardContent>
+        
 
             </button>
             <button 
@@ -68,9 +99,17 @@ console.log(props.venueListing);
               :class="{ 'shadow-orange-500': selectedCapacity == 350, 'shadow-lg': selectedCapacity != 350 }"
               @click="selectCapacity(350)"
             >
-              <img src="/placeholder.svg" alt="Co-Working space" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Large</span>
-              <span class="text-sm dark:text-gray-300">Up to 350 guests</span>
+            <CardContent class="p-5 flex flex-col items-center">
+        <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
+          <User size="48" class="text-orange-500 dark:text-white" />
+        </div>
+        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+          Large
+        </CardDescription>
+        <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+          Up to 350 guests
+        </p>
+      </CardContent>              
 
             </button>
             <button 
@@ -78,9 +117,18 @@ console.log(props.venueListing);
               :class="{ 'shadow-orange-500': selectedCapacity == 500, 'shadow-lg': selectedCapacity != 500 }"
               @click="selectCapacity(500)"
             >
-              <img src="/placeholder.svg" alt="Private room" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">X-Large</span>
-              <span class="text-sm dark:text-gray-300">Up to 500 guests</span>
+            <CardContent class="p-5 flex flex-col items-center">
+        <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
+          <User size="48" class="text-orange-500 dark:text-white" />
+        </div>
+        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+          X-Large
+        </CardDescription>
+        <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+          Up to 500 guests
+        </p>
+      </CardContent>
+
 
             </button>
             <button 
@@ -88,9 +136,18 @@ console.log(props.venueListing);
               :class="{ 'shadow-orange-500': selectedCapacity == 999, 'shadow-lg': selectedCapacity != 999 }"
               @click="selectCapacity(999)"
             >
-              <img src="/placeholder.svg" alt="Auditorium" class="w-20 h-20 mb-2">
-              <span class="text-sm font-semibold">Huge</span>
-              <span class="text-sm dark:text-gray-300">500 and more</span>
+            <CardContent class="p-5 flex flex-col items-center">
+        <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
+          <User size="48" class="text-orange-500 dark:text-white" />
+        </div>
+        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+          Huge
+        </CardDescription>
+        <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+          Up to 999 guests
+        </p>
+      </CardContent>
+
 
             </button>
             
