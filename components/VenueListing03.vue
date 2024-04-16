@@ -44,7 +44,7 @@ console.log(props.venueListing);
         <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
           <User size="48" class="text-orange-500 dark:text-white" />
         </div>
-        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+        <CardDescription class="mt-4 text-xl font-semibold text-orange-500 dark:text-white">
           X-Small
         </CardDescription>
         <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
@@ -65,7 +65,7 @@ console.log(props.venueListing);
         <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
           <User size="48" class="text-orange-500 dark:text-white" />
         </div>
-        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+        <CardDescription class="mt-4 text-xl font-semibold text-orange-500 dark:text-white">
           Small
         </CardDescription>
         <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
@@ -84,7 +84,7 @@ console.log(props.venueListing);
         <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
           <User size="48" class="text-orange-500 dark:text-white" />
         </div>
-        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+        <CardDescription class="mt-4 text-xl font-semibold text-orange-500 dark:text-white">
           Medium
         </CardDescription>
         <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
@@ -103,7 +103,7 @@ console.log(props.venueListing);
         <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
           <User size="48" class="text-orange-500 dark:text-white" />
         </div>
-        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+        <CardDescription class="mt-4 text-xl font-semibold text-orange-500 dark:text-white">
           Large
         </CardDescription>
         <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
@@ -121,7 +121,7 @@ console.log(props.venueListing);
         <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
           <User size="48" class="text-orange-500 dark:text-white" />
         </div>
-        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+        <CardDescription class="mt-4 text-xl font-semibold text-orange-500 dark:text-white">
           X-Large
         </CardDescription>
         <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
@@ -140,7 +140,7 @@ console.log(props.venueListing);
         <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
           <User size="48" class="text-orange-500 dark:text-white" />
         </div>
-        <CardDescription class="mt-4 text-2xl font-semibold text-orange-500 dark:text-white">
+        <CardDescription class="mt-4 text-xl font-semibold text-orange-500 dark:text-white">
           Huge
         </CardDescription>
         <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">

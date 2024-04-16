@@ -38,7 +38,7 @@ console.log(props.venueListing);
               @click="selectType('Office')"
             >
             <div class="m-3 cursor-pointer">
-              <store class="w-12 h-12 text-orange-500 hover:text-orange-300 " />
+              <store class="w-10 h-10 text-orange-500 hover:text-orange-300 " />
             </div>
                           <span class="text-sm font-semibold">Office space</span>
               <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -50,7 +50,7 @@ console.log(props.venueListing);
               @click="selectType('Meeting room')"
             >
             <div class="m-3 cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-orange-500 hover:text-orange-300 " width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-orange-500 hover:text-orange-300 " width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
             </div>
                           <span class="text-sm font-semibold">Meeting room</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -62,7 +62,7 @@ console.log(props.venueListing);
               @click="selectType('Gallery')"
             >
             <div class="m-3 cursor-pointer">
-              <Palette class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Palette class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Gallery</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -74,7 +74,7 @@ console.log(props.venueListing);
               @click="selectType('Co-Working space')"
             >
             <div class="m-3 cursor-pointer">
-              <Building class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Building class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>             
              <span class="text-sm font-semibold">Co-Working space</span>
              <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -86,7 +86,7 @@ console.log(props.venueListing);
               @click="selectType('Private room')"
             >
             <div class="m-3 cursor-pointer">
-              <Home class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Home class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Private room</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -98,7 +98,7 @@ console.log(props.venueListing);
               @click="selectType('Auditorium')"
             >
             <div class="m-3 cursor-pointer">
-              <Search class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Search class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Auditorium</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -110,7 +110,7 @@ console.log(props.venueListing);
               @click="selectType('Conference center')"
             >
             <div class="m-3 cursor-pointer">
-              <Users class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Users class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Conference center</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -122,7 +122,7 @@ console.log(props.venueListing);
               @click="selectType('Convention center')"
             >
             <div class="m-3 cursor-pointer">
-              <Briefcase class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Briefcase class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Convention center</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -134,7 +134,7 @@ console.log(props.venueListing);
               @click="selectType('Hotels & banquet halls')"
             >
             <div class="m-3 cursor-pointer">
-              <HotelIcon class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <HotelIcon class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Hotels & banquet halls</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -146,7 +146,7 @@ console.log(props.venueListing);
               @click="selectType('Exhibition hall')"
             >
             <div class="m-3 cursor-pointer">
-              <Globe class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Globe class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Exhibition hall</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -158,7 +158,7 @@ console.log(props.venueListing);
               @click="selectType('Theaters & performance space')"
             >
             <div class="m-3 cursor-pointer">
-              <theater class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <theater class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Theaters & performance space</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -170,7 +170,7 @@ console.log(props.venueListing);
               @click="selectType('Museum')"
             >
             <div class="m-3 cursor-pointer">
-              <Landmark class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <Landmark class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">Museum</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -182,7 +182,7 @@ console.log(props.venueListing);
               @click="selectType('University & college facility')"
             >
             <div class="m-3 cursor-pointer">
-              <graduation-cap class="w-12 h-12 text-orange-500 hover:text-orange-300" />
+              <graduation-cap class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
                           <span class="text-sm font-semibold">University & college facility</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -194,7 +194,7 @@ console.log(props.venueListing);
               @click="selectType('Library')"
             >
             <div class="m-3 cursor-pointer">
-              <BookOpen class="w-12 h-12 text-orange-500 hover:text-orange-300 " />
+              <BookOpen class="w-10 h-10 text-orange-500 hover:text-orange-300 " />
             </div>
                           <span class="text-sm font-semibold">Library</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -206,7 +206,7 @@ console.log(props.venueListing);
               @click="selectType('Historical building')"
             >
             <div class="m-3 cursor-pointer">
-              <Castle class="w-12 h-12 text-orange-500 hover:text-orange-300 "/>
+              <Castle class="w-10 h-10 text-orange-500 hover:text-orange-300 "/>
             </div>
                           <span class="text-sm font-semibold">Historical building</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -218,7 +218,7 @@ console.log(props.venueListing);
               @click="selectType('Restaurant & bar')"
             >
             <div class="m-3 cursor-pointer">
-              <wine class="w-12 h-12 text-orange-500 hover:text-orange-300"/>
+              <wine class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
             </div>
                           <span class="text-sm font-semibold">Restaurant & bar</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -230,7 +230,7 @@ console.log(props.venueListing);
               @click="selectType('Sports arena and facility')"
             >
             <div class="m-3 cursor-pointer">
-              <Medal class="w-12 h-12 text-orange-500 hover:text-orange-300"/>
+              <Medal class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
             </div>
                           <span class="text-sm font-semibold">Sports arena and facility</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
@@ -242,7 +242,7 @@ console.log(props.venueListing);
               @click="selectType('Outdoor event space')"
             >
             <div class="m-3 cursor-pointer">
-              <Sun class="w-12 h-12 text-orange-500 hover:text-orange-300 " />
+              <Sun class="w-10 h-10 text-orange-500 hover:text-orange-300 " />
             </div>
                           <span class="text-sm font-semibold">Outdoor event space</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
