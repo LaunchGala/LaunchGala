@@ -16,7 +16,7 @@ console.log(props.venueListing);
   <div class="bg-white dark:bg-black min-h-screen py-10 flex flex-col items-center">
     <div class="w-full max-w-4xl mx-auto px-4 lg:px-8">
       <AspectRatio :ratio="16 / 9" class="mb-6 rounded-md overflow-hidden shadow-lg">
-        <img src="/placeholder.svg" alt="Venue Image" class="object-cover w-full h-full"/>
+        <img src="/venueBG01.jpeg" alt="Venue Image" class="object-cover w-full h-full"/>
       </AspectRatio>
       <Card>
         <CardHeader>
@@ -74,8 +74,8 @@ console.log(props.venueListing);
               <h4 class="text-lg font-semibold">Next Steps</h4>
               <ol class="list-decimal list-inside space-y-1">
                 <li>Finalize and approve the details of your venue.</li>
-                <li>Add venue availabilities to the calender</li>
-                <li>Confirm & Publish</li>
+                <li>Confirm & Publish.</li>
+                <li>Add venue availabilities to the calender or keep it open upon request.</li>
               </ol>
             </div>
           </div>

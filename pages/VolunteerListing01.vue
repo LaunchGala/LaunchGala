@@ -21,7 +21,7 @@ console.log(props.venueListing);
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
-          <CardTitle>Manage Venue Listings</CardTitle>
+          <CardTitle>Manage Volunteers Listings</CardTitle>
           <CardDescription>
             Create new listing or duplicate and edit an existing one.
           </CardDescription>
@@ -38,7 +38,7 @@ console.log(props.venueListing);
             <TableHeader>
               <TableRow>
                 <TableHead class="text-left">
-                  Venue Name
+                  Category
                 </TableHead>
                 <TableHead class="text-left">
                   Location
@@ -51,7 +51,7 @@ console.log(props.venueListing);
             <TableBody>
               <TableRow>
                 <TableCell>
-                  Placeholder Venue 1
+                  Admin work
                 </TableCell>
                 <TableCell>
                   Some Address, City
@@ -65,7 +65,7 @@ console.log(props.venueListing);
               </TableRow>
               <TableRow>
                 <TableCell>
-                  Placeholder Venue 2
+                  IT support
                 </TableCell>
                 <TableCell>
                   Another Address, Other City
