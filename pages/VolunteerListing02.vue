@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/popover';
 
 const selectedType = ref('');
+const isOpen = ref(false);
 
 // Handlers for handling click events
 function selectType(type: string) {
@@ -23,13 +24,16 @@ function selectType(type: string) {
   console.log(selectedType.value);
 };
 
-
+function openStateChange(state: boolean) {
+  isOpen.value = state;
+}
 
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
 </script>
 
 <template>
+  <div v-if="isOpen" class="fixed w-screen h-screen top-0 bg-black bg-opacity-50 dark:bg-opacity-70" />
   <div class="bg-white dark:bg-red min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
@@ -39,8 +43,8 @@ console.log(props.venueListing);
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Popover class="bg-transparent ">
-      <PopoverTrigger as-child>
+            <Popover :open="isOpen" @update:open="openStateChange">
+      <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
               class="flex flex-col items-center p-4 border rounded-lg shadow-lg "
@@ -58,49 +62,53 @@ console.log(props.venueListing);
           </PopoverTrigger>
           
       <PopoverContent 
-        class="w-96 justify-items-center items-center place-items-center rounded-xl shadow-2xl bg-gradient-to-br from-white to-gray-100 text-gray-800 dark:from-gray-800 dark:to-gray-900 dark:text-white overflow-hidden"
+        class="w-96 justify-items-center items-center place-items-center rounded-xl shadow-2xl bg-gradient-to-br from-white to-gray-100 text-gray-800 dark:from-gray-800 dark:to-gray-900 dark:text-white"
         align="start"
         justify="center"
       >
-      <ul class="p-8 space-y-8">
-          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
-            <label  class="flex-1 cursor-pointer text-sm">
-              Event Planning and Scheduling
- <Check class="w-4 h-4 text-orange-500" />
-            </label>
-          </li>
-          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
-            <label  class="flex-1 cursor-pointer text-sm">
-              On-Site Event Coordination
-<Check class="w-4 h-4 text-orange-500" />
-            </label>
-          </li>
-          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
-            <label  class="flex-1 cursor-pointer text-sm">
-              Speaker & Participant Coordination
-<Check class="w-4 h-4 text-orange-500" />
-            </label>
-          </li>
-          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
-            <label  class="flex-1 cursor-pointer text-sm">
-              Vendor Coordination
- <Check class="w-4 h-4 text-orange-500" />
-            </label>
-          </li>
-          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
-            <label  class="flex-1 cursor-pointer text-sm">
-              VIP and Special Guests Services
- <Check class="w-4 h-4 text-orange-500" />
-            </label>
-          </li>
-          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
-            <label  class="flex-1 cursor-pointer text-sm">
-              Event Wrap-Up and Debriefing
- <Check class="w-4 h-4 text-orange-500" />
-            </label>
-          </li>
-        </ul>
-      </PopoverContent>
+
+      <div>
+        <ul class="p-8 space-y-8">
+            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+              <label  class="flex-1 cursor-pointer text-sm">
+                Event Planning and Scheduling
+         <Check class="w-4 h-4 text-orange-500" />
+              </label>
+            </li>
+            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+              <label  class="flex-1 cursor-pointer text-sm">
+                On-Site Event Coordination
+        <Check class="w-4 h-4 text-orange-500" />
+              </label>
+            </li>
+            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+              <label  class="flex-1 cursor-pointer text-sm">
+                Speaker & Participant Coordination
+        <Check class="w-4 h-4 text-orange-500" />
+              </label>
+            </li>
+            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+              <label  class="flex-1 cursor-pointer text-sm">
+                Vendor Coordination
+         <Check class="w-4 h-4 text-orange-500" />
+              </label>
+            </li>
+            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+              <label  class="flex-1 cursor-pointer text-sm">
+                VIP and Special Guests Services
+         <Check class="w-4 h-4 text-orange-500" />
+              </label>
+            </li>
+            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+              <label  class="flex-1 cursor-pointer text-sm">
+                Event Wrap-Up and Debriefing
+         <Check class="w-4 h-4 text-orange-500" />
+              </label>
+            </li>
+          </ul>
+      </div>
+    </PopoverContent>
+
     </Popover>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
