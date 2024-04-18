@@ -342,14 +342,14 @@ console.log(props.venueListing);
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
-                <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
+                <!-- <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
                     Signage and Directions Setup
             <Check class="w-4 h-4 text-orange-500" />
                   </label>
-                </li>
+                </li> -->
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
     
@@ -596,14 +596,7 @@ console.log(props.venueListing);
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
-                <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
-                  <Plus class="w-5 h-5 text-orange-500 " />
-    
-                  <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    VIP and Special Guests Services
-             <Check class="w-4 h-4 text-orange-500" />
-                  </label>
-                </li>
+
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
     
@@ -655,7 +648,7 @@ console.log(props.venueListing);
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Simultaneous Interpretation Services
+                    Simultaneous Interpretation
             <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
@@ -680,7 +673,7 @@ console.log(props.venueListing);
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Bilingual or Multilingual Information Assistance
+                    Bilingual or Multilingual Assistance
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
@@ -793,14 +786,7 @@ console.log(props.venueListing);
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
               <div class="text-l font-semibold text-gray-600">Educational and Speakers:</div>
     
-                <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
-                  <Plus class="w-5 h-5 text-orange-500 " />
-    
-                  <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Event Planning and Scheduling
-             <Check class="w-4 h-4 text-orange-500" />
-                  </label>
-                </li>
+
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
     
