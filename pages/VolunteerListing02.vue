@@ -34,12 +34,12 @@ console.log(props.venueListing);
 
 <template>
   <div v-if="isOpen" class="fixed w-screen h-screen top-0 bg-black bg-opacity-50 dark:bg-opacity-70" />
-  <div class="bg-white dark:bg-red min-h-screen py-10">
+  <div class="bg-white  min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
 
-          <CardTitle>Select Volunteers Categories: (Select all applicable)</CardTitle>
+          <CardTitle>Select Volunteers Categories: (Select all categories you want to volunteer for)</CardTitle>
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
