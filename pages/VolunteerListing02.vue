@@ -30,7 +30,6 @@ console.log(props.venueListing);
 </script>
 
 <template>
-  <DeemBg/>
   <div class="bg-white dark:bg-red min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
