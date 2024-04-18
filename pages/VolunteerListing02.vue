@@ -43,7 +43,7 @@ console.log(props.venueListing);
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -136,7 +136,7 @@ console.log(props.venueListing);
 
     </Popover>
 
-    <Popover :open="isOpen" @update:open="openStateChange">
+    <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -222,7 +222,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -309,7 +309,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -395,7 +395,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -467,7 +467,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -546,7 +546,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -632,7 +632,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -704,7 +704,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -775,7 +775,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -854,7 +854,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -925,7 +925,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -1004,7 +1004,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -1090,7 +1090,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
@@ -1161,7 +1161,7 @@ console.log(props.venueListing);
     
         </Popover>
 
-            <Popover :open="isOpen" @update:open="openStateChange">
+            <Popover @update:open="openStateChange">
       <PopoverTrigger as-child :data-state="isOpen">
 
             <button 
