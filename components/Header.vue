@@ -45,12 +45,12 @@ const isLoggedIn = computed(() => user.value !== null)
         </NuxtLink>
         <NuxtLink to="AllSpeakers">
           <a class="text-m font-medium  hover:underline">
-            Speakers
+            Leaders/Experts
           </a>
         </NuxtLink>
         <NuxtLink to="AllMedia">
           <a class="text-m font-medium  hover:underline">
-            Media/PR
+            Media/Influencers
           </a>
         </NuxtLink>
         <NuxtLink to="AllVendors">

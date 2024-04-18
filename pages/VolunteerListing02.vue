@@ -114,22 +114,15 @@ console.log(props.venueListing);
          <Check class="w-4 h-4 text-orange-500" />
               </label>
             </li>
-            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
-              <Plus class="w-5 h-5 text-orange-500 " />
 
-              <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                VIP and Special Guests Services
-         <Check class="w-4 h-4 text-orange-500" />
-              </label>
-            </li>
-            <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
+            <!-- <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
               <Plus class="w-5 h-5 text-orange-500 " />
 
               <label  class="flex-1 cursor-pointer text-sm font-semibold">
                 Event Wrap-Up and Debriefing
          <Check class="w-4 h-4 text-orange-500" />
               </label>
-            </li>
+            </li> -->
           </ul>
       </div>
     </PopoverContent>
@@ -523,19 +516,12 @@ console.log(props.venueListing);
             <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
+
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Health Screening and Precautions
-             <Check class="w-4 h-4 text-orange-500" />
-                  </label>
-                </li>
-                <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
-                  <Plus class="w-5 h-5 text-orange-500 " />
-    
-                  <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Hygiene and Sanitation Stations
+                    Hygiene and Sanitation services
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
@@ -961,7 +947,7 @@ console.log(props.venueListing);
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Query Resolution and Assistance
+                    General Customer Service
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
@@ -977,8 +963,8 @@ console.log(props.venueListing);
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Speaker & Participant Coordination
-            <Check class="w-4 h-4 text-orange-500" />
+                    VIP and Special Guests Services
+                                <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
@@ -989,14 +975,7 @@ console.log(props.venueListing);
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
-                <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
-                  <Plus class="w-5 h-5 text-orange-500 " />
-    
-                  <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    General Customer Support
-             <Check class="w-4 h-4 text-orange-500" />
-                  </label>
-                </li>
+
 
               </ul>
           </div>
@@ -1060,14 +1039,7 @@ console.log(props.venueListing);
             <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
-                <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
-                  <Plus class="w-5 h-5 text-orange-500 " />
-    
-                  <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Vendor Coordination
-             <Check class="w-4 h-4 text-orange-500" />
-                  </label>
-                </li>
+
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
     
@@ -1080,7 +1052,7 @@ console.log(props.venueListing);
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Social Media services
+                    Social Media marketing
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
