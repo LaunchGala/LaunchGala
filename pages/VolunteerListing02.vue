@@ -6,6 +6,13 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight, Home, Building, Image, BookOpen, Globe, Search, Users, GraduationCap, Camera, HotelIcon, Palette, Castle, Landmark, Theater, Wine, Sun, Medal, Briefcase, Store } from 'lucide-vue-next';
 import { Hotel } from 'lucide-vue-next';
+import { ChevronRight } from 'lucide-vue-next';
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 const selectedType = ref('');
 
@@ -23,14 +30,19 @@ console.log(props.venueListing);
 </script>
 
 <template>
+  <DeemBg/>
   <div class="bg-white dark:bg-red min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
+
           <CardTitle>Select Volunteers Main Category: (Select only one, you can create new listings for another categories)</CardTitle>
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Popover class="bg-transparent ">
+      <PopoverTrigger as-child>
+
             <button 
               class="flex flex-col items-center p-4 border rounded-lg shadow-lg "
               :class="{ 'shadow-orange-500': selectedType == 'Office', 'shadow-lg': selectedType != 'Office' }"
@@ -44,6 +56,53 @@ console.log(props.venueListing);
               <!-- <span class="text-sm dark:text-gray-300">Organizing and facilitating event activities</span> -->
 
             </button>
+          </PopoverTrigger>
+          
+      <PopoverContent 
+        class="w-96 justify-items-center items-center place-items-center rounded-xl shadow-2xl bg-gradient-to-br from-white to-gray-100 text-gray-800 dark:from-gray-800 dark:to-gray-900 dark:text-white overflow-hidden"
+        align="start"
+        justify="center"
+      >
+      <ul class="p-8 space-y-8">
+          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+            <label  class="flex-1 cursor-pointer text-sm">
+              Event Planning and Scheduling
+ <Check class="w-4 h-4 text-orange-500" />
+            </label>
+          </li>
+          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+            <label  class="flex-1 cursor-pointer text-sm">
+              On-Site Event Coordination
+<Check class="w-4 h-4 text-orange-500" />
+            </label>
+          </li>
+          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+            <label  class="flex-1 cursor-pointer text-sm">
+              Speaker & Participant Coordination
+<Check class="w-4 h-4 text-orange-500" />
+            </label>
+          </li>
+          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+            <label  class="flex-1 cursor-pointer text-sm">
+              Vendor Coordination
+ <Check class="w-4 h-4 text-orange-500" />
+            </label>
+          </li>
+          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+            <label  class="flex-1 cursor-pointer text-sm">
+              VIP and Special Guests Services
+ <Check class="w-4 h-4 text-orange-500" />
+            </label>
+          </li>
+          <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200 ">
+            <label  class="flex-1 cursor-pointer text-sm">
+              Event Wrap-Up and Debriefing
+ <Check class="w-4 h-4 text-orange-500" />
+            </label>
+          </li>
+        </ul>
+      </PopoverContent>
+    </Popover>
             <button 
               class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
               :class="{ 'shadow-orange-500': selectedType == 'Meeting room', 'shadow-lg': selectedType != 'Meeting room' }"
