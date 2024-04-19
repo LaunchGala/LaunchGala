@@ -4,6 +4,9 @@ const user = useSupabaseUser()
 
 const isLoggedIn = computed(() => user.value !== null)
 
+import { Badge } from '@/components/ui/badge'
+
+
 </script>
 
 
@@ -54,6 +57,9 @@ const isLoggedIn = computed(() => user.value !== null)
           </a>
         </NuxtLink>
         <NuxtLink to="AllVendors">
+          <Badge class="transform rotate-45 text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
+            Coming Soon!
+          </Badge>
           <a class="text-m font-medium  hover:underline">
             Vendors
           </a>
@@ -67,16 +73,25 @@ const isLoggedIn = computed(() => user.value !== null)
           <a class="text-m font-medium  hover:underline">
             Talents 
           </a>
+          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
+            Coming Soon!
+          </Badge>
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             Fundraising
           </a>
+          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
+            Coming Soon!
+          </Badge>
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             Communities
           </a>
+          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
+            Coming Soon!
+          </Badge>
         </NuxtLink>
         <NuxtLink to="AllResources">
           <a class="text-m  font-medium hover:underline">
