@@ -57,9 +57,7 @@ import { Badge } from '@/components/ui/badge'
           </a>
         </NuxtLink>
         <NuxtLink to="AllVendors">
-          <Badge class="transform absolute rotate-45 text-xs py-0.5 px-2 bg-orange-500  text-white dark:bg-black">
-            Coming Soon!
-          </Badge>
+
           <a class="text-m font-medium  hover:underline">
             Vendors
           </a>
@@ -94,6 +92,9 @@ import { Badge } from '@/components/ui/badge'
           </Badge>
         </NuxtLink>
         <NuxtLink to="AllResources">
+          <Badge class="transform absolute rotate-45 text-xs py-0.5 px-2 bg-orange-500  text-white dark:bg-black">
+            Coming Soon!
+          </Badge>
           <a class="text-m  font-medium hover:underline">
             Resources
           </a>
