@@ -24,7 +24,7 @@ import { Home, ArrowRight } from 'lucide-vue-next';
           <AccordionContent class="px-5 py-3 bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
             We have 2 kind of pools :
               1. Monthly & yearly pool where users can win it by votes and we contribute with 5-10% from subscription revenue to the pot.
-              2. a weekly communities Pools where founders put in cereten amount of money every week (10% goes toward the "Monthly/Yearly Voting pool")  and every week one founder will take the pot "but they still need to keep making the weekly/monthly payments until they pay off (like a loan between friends)"
+              2. a weekly communities Pools (each community can create their own pools and rules, pool admin will set the rules and accept participants on their own risk) where founders put in cereten amount of money every week (10% goes toward the "Monthly/Yearly Voting pool")  and every week one founder will take the pot "but they still need to keep making the weekly/monthly payments until they pay off (like a loan between friends)"
           </AccordionContent>
         </AccordionItem>
 
