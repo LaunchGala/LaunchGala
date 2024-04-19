@@ -70,9 +70,9 @@ console.log(props.venueListing);
       <div>
         <ul class="p-8 space-y-8">
           
+          <div class="text-l font-semibold text-orange-500">Event Management & Coordination:</div>
           <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
           <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-          <div class="text-l font-semibold text-gray-600">Event Management & Coordination:</div>
 
             <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
               <Plus class="w-5 h-5 text-orange-500 " />
@@ -157,9 +157,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Technical Support and IT:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Technical Support and IT:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -244,9 +244,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Hospitality and Guest Services:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Hospitality and Guest Services:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -330,9 +330,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Logistics and Setup:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Logistics and Setup:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -416,9 +416,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Security and Safety:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Security and Safety:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -488,9 +488,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Health and Medical Services:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Health and Medical Services:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -560,9 +560,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Media and Communication:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Media and Communication:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -639,9 +639,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Language Interpretation and Translation:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Language Interpretation and Translation:</div>
     
 
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
@@ -711,9 +711,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Entertainment and Performers:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Entertainment and Performers:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -782,9 +782,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Educational and Speakers:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Educational and Speakers:</div>
     
 
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
@@ -854,9 +854,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Special Needs Assistance:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Special Needs Assistance:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -925,9 +925,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Customer Service and Information:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Customer Service and Information:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -997,9 +997,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Marketing and Promotion:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Marketing and Promotion:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -1076,9 +1076,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Fundraising and Sponsorship:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Fundraising and Sponsorship:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
@@ -1146,9 +1146,9 @@ console.log(props.venueListing);
           <div>
             <ul class="p-8 space-y-8">
               
+              <div class="text-l font-semibold text-orange-500">Legal and Compliance:</div>
               <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
               <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-              <div class="text-l font-semibold text-gray-600">Legal and Compliance:</div>
     
                 <li  class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  ">
                   <Plus class="w-5 h-5 text-orange-500 " />
