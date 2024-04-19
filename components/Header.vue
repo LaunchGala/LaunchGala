@@ -77,7 +77,7 @@ import { Badge } from '@/components/ui/badge'
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
-            Fundraising
+            FundingPool
           </a>
           <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
             Coming Soon!
