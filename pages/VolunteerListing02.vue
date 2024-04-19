@@ -68,9 +68,9 @@ console.log(props.venueListing);
       >
 
       <div>
-        <ul class="p-8 space-y-8">
+        <ul class="p-6 space-y-8">
           
-          <div class="text-l font-semibold text-orange-500">Event Management & Coordination:</div>
+          <div class="text-l font-bold text-orange-500">Event Management & Coordination:</div>
           <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
           <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
 
@@ -123,13 +123,13 @@ console.log(props.venueListing);
          <Check class="w-4 h-4 text-orange-500" />
               </label>
             </li> -->
+            <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold items-center justify-items-center align-item-center content-center ">
+              <div  class="flex items-center">
+                Next
+                <ArrowRight class="w-4 h-4 ml-2" />
+              </div>
+            </Button>
           </ul>
-          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold items-center justify-items-center align-item-center content-center ">
-            <div  class="flex items-center">
-              Save
-              <ArrowRight class="w-4 h-4 ml-2" />
-            </div>
-          </Button>
       </div>
     </PopoverContent>
 
