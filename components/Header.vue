@@ -80,7 +80,7 @@ import { Badge } from '@/components/ui/badge'
             FundingPool
           </a>
           <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
-            Coming Soon!
+            $104,202.00
           </Badge>
         </NuxtLink>
         <NuxtLink to="AllCommunities">
