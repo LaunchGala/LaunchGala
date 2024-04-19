@@ -124,6 +124,12 @@ console.log(props.venueListing);
               </label>
             </li> -->
           </ul>
+          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold items-center justify-items-center align-item-center content-center ">
+            <div  class="flex items-center">
+              Save
+              <ArrowRight class="w-4 h-4 ml-2" />
+            </div>
+          </Button>
       </div>
     </PopoverContent>
 
