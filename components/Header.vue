@@ -65,17 +65,17 @@ const isLoggedIn = computed(() => user.value !== null)
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
-            Communities
-          </a>
-        </NuxtLink>
-        <NuxtLink to="AllCommunities">
-          <a class="text-m font-medium  hover:underline">
             Talents 
           </a>
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             Fundraising
+          </a>
+        </NuxtLink>
+        <NuxtLink to="AllCommunities">
+          <a class="text-m font-medium  hover:underline">
+            Communities
           </a>
         </NuxtLink>
         <NuxtLink to="AllResources">
