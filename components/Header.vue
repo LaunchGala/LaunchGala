@@ -70,7 +70,7 @@ const isLoggedIn = computed(() => user.value !== null)
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
-            Talent 
+            Talents 
           </a>
         </NuxtLink>
         <NuxtLink to="AllCommunities">
