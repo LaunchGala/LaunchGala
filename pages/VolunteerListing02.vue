@@ -197,7 +197,7 @@ console.log(props.venueListing);
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Software and Application Assistance
+                    Software & Application Assistance
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>
@@ -205,7 +205,7 @@ console.log(props.venueListing);
                   <Plus class="w-5 h-5 text-orange-500 " />
     
                   <label  class="flex-1 cursor-pointer text-sm font-semibold">
-                    Photography and Videography Support
+                    Photography and Videography
              <Check class="w-4 h-4 text-orange-500" />
                   </label>
                 </li>

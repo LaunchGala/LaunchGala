@@ -45,12 +45,12 @@ const isLoggedIn = computed(() => user.value !== null)
         </NuxtLink>
         <NuxtLink to="AllSpeakers">
           <a class="text-m font-medium  hover:underline">
-            Leaders/Experts
+            Experts
           </a>
         </NuxtLink>
         <NuxtLink to="AllMedia">
           <a class="text-m font-medium  hover:underline">
-            Media/Influencers
+            Media
           </a>
         </NuxtLink>
         <NuxtLink to="AllVendors">
@@ -66,6 +66,16 @@ const isLoggedIn = computed(() => user.value !== null)
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             Communities
+          </a>
+        </NuxtLink>
+        <NuxtLink to="AllCommunities">
+          <a class="text-m font-medium  hover:underline">
+            Talent 
+          </a>
+        </NuxtLink>
+        <NuxtLink to="AllCommunities">
+          <a class="text-m font-medium  hover:underline">
+            Fundraising
           </a>
         </NuxtLink>
         <NuxtLink to="AllResources">
