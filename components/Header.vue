@@ -79,7 +79,7 @@ const isLoggedIn = computed(() => user.value !== null)
           </a>
         </NuxtLink>
         <NuxtLink to="AllResources">
-          <a class="text-m  font-bold hover:underline">
+          <a class="text-m  font-medium hover:underline">
             Resources
           </a>
         </NuxtLink>
