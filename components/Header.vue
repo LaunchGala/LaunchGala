@@ -71,9 +71,7 @@ import { Badge } from '@/components/ui/badge'
           <a class="text-m font-medium  hover:underline">
             Talents 
           </a>
-          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
-            Coming Soon!
-          </Badge>
+
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
