@@ -18,6 +18,12 @@ const selectedType = ref('');
 const isOpen = ref(false);
 const volunteerTags = ref([])
 
+const supabase = useSupabaseClient()
+
+const user = useSupabaseUser()
+
+
+
 function addVolunteerTag(volunteerTag: string) {
   if (volunteerTags.value.includes(volunteerTag)) {
     volunteerTags.value = volunteerTags.value.filter((item) => item !== volunteerTag);
@@ -25,6 +31,21 @@ function addVolunteerTag(volunteerTag: string) {
     volunteerTags.value.push(volunteerTag);
   }
   console.log(volunteerTags.value);
+
+
+}
+
+function saveDbVolunteers() {
+  supabase.from('AllVolunteers').insert([
+    {
+      volunteerTags: volunteerTags.value,
+      createdBy: user.value?.id
+    }
+  ]).then(response => {
+    console.log(response)
+  }).catch(error => {
+    console.log(error)
+  })
 }
 
 // Handlers for handling click events
@@ -43,6 +64,8 @@ console.log(props.venueListing);
 </script>
 
 <template>
+    <Button @click="saveDbVolunteers" class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" >Save</Button>
+
   <div v-if="isOpen" class="fixed w-screen h-screen top-0 bg-black bg-opacity-50 dark:bg-opacity-70" />
   <div class="bg-white  min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-8">
