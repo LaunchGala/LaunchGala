@@ -88,7 +88,7 @@ console.log(props.venueListing);
             <div class="m-3 cursor-pointer">
               <Home class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
-                          <span class="text-sm font-semibold">Private room</span>
+                          <span class="text-sm font-semibold">Warehouse</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
 
             </button>
