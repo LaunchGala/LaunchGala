@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, ArrowRight, Home, Building, Image, BookOpen, Globe, Search, Users, GraduationCap, Camera, HotelIcon, Palette, Castle, Landmark, Theater, Wine, Sun, Medal, Briefcase, Store, Plus } from 'lucide-vue-next';
+import { ArrowLeft, ArrowRight, Home, Scale, SwitchCamera, BadgeDollarSign, Smile, Accessibility, Mic2, PartyPopper, HeartPulseIcon, Speech, Building, Image, Milestone, ShieldCheckIcon, BookOpen, Globe, Search, Users, GraduationCap, Camera, HotelIcon, Palette, Castle, Landmark, Theater, Wine, Sun, Medal, Briefcase, Store, Plus, Router, LucideHeartHandshake } from 'lucide-vue-next';
 import { Hotel } from 'lucide-vue-next';
 import { ChevronRight } from 'lucide-vue-next';
 
@@ -13,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Tv } from 'lucide-vue-next';
 
 const isOpen = ref(false);
 const volunteerTags = ref([])
@@ -41,7 +42,7 @@ console.log(props.volunteerListing);
 const mainSubSelectors = [
   {
     main: 'Event Management and Coordination',
-    icon: Building,
+    icon: Theater,
     subs: [
       'Event Planning and Scheduling',
       'On-Site Event Coordination',
@@ -53,7 +54,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Technical Support and IT',
-    icon: Building,
+    icon: Router,
     subs: [
       'Audio/Visual Equipment Operation',
       'IT Support and Troubleshooting',
@@ -65,7 +66,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Hospitality and Guest Services',
-    icon: Building,
+    icon: LucideHeartHandshake,
     subs: [
       'Welcome & Information Desk',
       'Mixologist & Barista',
@@ -77,7 +78,7 @@ const mainSubSelectors = [
   },  
   {
     main: 'Logistics and Setup',
-    icon: Building,
+    icon: Milestone,
     subs: [
       'Venue Layout and Design',
       'Staging and Decoration',
@@ -88,7 +89,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Security and Safety',
-    icon: Building,
+    icon: ShieldCheckIcon,
     subs: [
       'Entrance and Exit Supervision',
       'Bag and Luggage Checks',
@@ -99,7 +100,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Health and Medical Services',
-    icon: Building,
+    icon: HeartPulseIcon,
     subs: [
       'First Aid and Basic Health Care',
       'Medical Emergency Response',
@@ -110,7 +111,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Media and Communication',
-    icon: Building,
+    icon: Tv,
     subs: [
       'Social Media Coordination',
       'Content Creation and Blogging',
@@ -120,7 +121,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Language Interpretation and Translation',
-    icon: Building,
+    icon: Speech,
     subs: [
       'Simultaneous Interpretation',
       'Sign Language Interpretation',
@@ -131,7 +132,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Entertainment and Performers',
-    icon: Building,
+    icon: PartyPopper,
     subs: [
       'Stage Performers and Artists',
       'Composers & DJs',
@@ -142,7 +143,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Workshop and Speakers',
-    icon: Building,
+    icon: Mic2,
     subs: [
       'Workshop Assistants',
       'Guest Speaker Support',
@@ -153,7 +154,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Special Needs Assistance',
-    icon: Building,
+    icon: Accessibility,
     subs: [
       'Disabled Attendees Assistance',
       'Accessibility Services',
@@ -163,7 +164,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Customer Service and Information',
-    icon: Building,
+    icon: Smile,
     subs: [
       'General Customer Service',
       'Lost and Found Services',
@@ -174,7 +175,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Marketing and Promotion',
-    icon: Building,
+    icon: SwitchCamera,
     subs: [
       'Social Media marketing',
       'Promotional Material Distribution',
@@ -186,7 +187,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Fundraising and Sponsorship',
-    icon: Building,
+    icon: BadgeDollarSign,
     subs: [
       'Donation Collection and Management',
       'Sponsor Liaison and Support',
@@ -197,7 +198,7 @@ const mainSubSelectors = [
   },
   {
     main: 'Legal and Compliance',
-    icon: Building,
+    icon: Scale,
     subs: [
       'Contract Review and Management',
       'Risk Management and Compliance',
