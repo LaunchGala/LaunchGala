@@ -12,8 +12,8 @@ import {
 } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-const props = defineProps(['venueListing']);
-console.log(props.venueListing);
+const props = defineProps(['volunteerListing']);
+console.log(props.volunteerListing);
 </script>
 
 <template>

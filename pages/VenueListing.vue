@@ -48,14 +48,7 @@ const newVenueListing = ref({
 });
 
 
-// Handlers for handling click events
-const selectStyle = style => {
-  selectedStyle.value = style;
-};
 
-const isSelected = style => {
-  return selectedStyle.value === style;
-};
 
 function addVenueListing() {
   console.log(newVenueListing.value)
