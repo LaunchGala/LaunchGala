@@ -19,12 +19,12 @@ import { Home, ArrowRight } from 'lucide-vue-next';
       <Accordion type="single" collapsible class="divide-y divide-gray-200 dark:divide-gray-700">
         <AccordionItem value="item-1">
           <AccordionTrigger class="flex justify-between p-5 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-800 dark:focus:bg-gray-800">
-            What is the Funding Pool and how can you participate and win the pool?
+            What is the Funding Pool and how can you participate and win the pool? (take it out until we launch this service)
           </AccordionTrigger>
           <AccordionContent class="px-5 py-3 bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
             We have 2 kind of pools :
-              1. Monthly & yearly pool where users can win it by votes and we contribute with 5-10% from subscription revenue to the pot, users and companies can sponsor the voting events.
-              2. a weekly communities Pools (each community can create their own pools and rules, pool admin will set the rules and accept participants on their own risk) where founders put in cereten amount of money every week (10% goes toward the "Monthly/Yearly Voting pool")  and every week one founder will take the pot "but they still need to keep making the weekly/monthly payments until they pay off (like a loan between friends)"
+              <!-- 1. Monthly & yearly pool where users can win it by votes and we contribute with 5-10% from subscription revenue to the pot, users and companies can sponsor the voting events.
+              2. a weekly communities Pools (each community can create their own pools and rules, pool admin will set the rules and accept participants on their own risk) where founders put in cereten amount of money every week (10% goes toward the "Monthly/Yearly Voting pool")  and every week one founder will take the pot "but they still need to keep making the weekly/monthly payments until they pay off (like a loan between friends)" -->
           </AccordionContent>
         </AccordionItem>
 
