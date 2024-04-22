@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
       <CardHeader class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white">
         <button>
         <Avatar class="mb-4 w-24 h-24 ring-4 ring-white">
-          <AvatarImage src="/PinkPavatar Background Removed.png" alt="Volunteer Name" />
+          <AvatarImage src="/PinkPavatar Background Removed Background Removed.png" alt="Volunteer Name" />
           <AvatarFallback>VC</AvatarFallback>
         </Avatar>
         <CardTitle class="text-2xl font-bold">Volunteer Name</CardTitle>
