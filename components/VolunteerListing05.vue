@@ -33,7 +33,7 @@ import { Button } from '@/components/ui/button'
           <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Mentorship</span>
           <span class="bg-pink-100 dark:bg-pink-800 text-pink-800 dark:text-pink-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Development</span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex justify-between">
           <div class="flex items-center text-gray-700 dark:text-gray-300">
             <GlobeIcon class="w-5 h-5"/>
             <a href="https://portfolio.example.com" class="ml-2 hover:underline">portfolio.example.com</a>
