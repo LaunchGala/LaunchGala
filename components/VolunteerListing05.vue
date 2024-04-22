@@ -9,18 +9,20 @@ import { Button } from '@/components/ui/button'
 <template>
   <div class="min-h-screen bg-gray-200 dark:bg-black flex items-center justify-center p-4">
     <Card class="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden">
-      <CardHeader class="bg-gradient-to-r from-orange-500 to-orange-600 p-6 flex flex-col items-center text-white">
+      <CardHeader class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white">
+        <button>
         <Avatar class="mb-4 w-24 h-24 ring-4 ring-white">
           <AvatarImage src="/placeholder.svg" alt="Volunteer Name" />
           <AvatarFallback>VC</AvatarFallback>
         </Avatar>
         <CardTitle class="text-2xl font-bold">Volunteer Name</CardTitle>
-        <span class="text-sm opacity-90">Software Engineer</span>
+        <span class="text-m opacity-90">Software Engineer</span>
+    </button>
         <div class="flex items-center mt-2">
           <MapPinIcon class="w-5 h-5" />
-          <span class="ml-2">San Francisco, CA</span>
+          <span class="ml-2 font-semibold">San Francisco, CA</span>
         </div>
-        <Button variant="light" class="mt-3 px-4 py-1 rounded text-white text-xs bg-opacity-20">Available for Travel</Button>
+        <div variant="light" class="mt-3 px-4 py-1 rounded text-white text-s font-normal bg-opacity-20">Available for Travel</div>
       </CardHeader>
       <CardContent class="p-6">
         <p class="text-gray-700 dark:text-gray-300 mb-6">
@@ -41,13 +43,11 @@ import { Button } from '@/components/ui/button'
             <a href="https://linkedin.com/in/volunteername" class="ml-2 hover:underline">linkedin.com/in/volunteername</a>
           </div>
         </div>
-        <div class="flex justify-center mt-8">
+        <div class="flex justify-between mt-8">
           <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
-            <UserIcon class="w-5 h-5 mr-2"/>
             Edit
           </Button>
           <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
-            <UserIcon class="w-5 h-5 mr-2"/>
             Publish
           </Button>
         </div>

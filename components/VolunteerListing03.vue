@@ -7,10 +7,20 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
+
+
+function setTravelOption(toggleState: boolean) {
+  props.volunteerListing.maskRequired = toggleState
+}
+
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Toggle } from '@/components/ui/toggle';
 import { Button } from '@/components/ui/button';
 import { Home, Heart, Users, Archive, Globe } from 'lucide-vue-next';
+
+const props = defineProps(['volunteerListing']);
+console.log(props.volunteerListing);
 </script>
 
 <template>
@@ -29,27 +39,34 @@ import { Home, Heart, Users, Archive, Globe } from 'lucide-vue-next';
             <SelectGroup>
               <SelectLabel>Cities</SelectLabel>
               <SelectItem value="new_york">
-                <Globe class="w-4 h-4 mr-2"/> New York
+               San Francisco
               </SelectItem>
               <SelectItem value="paris">
-                <Globe class="w-4 h-4 mr-2"/> Paris
+               Paris
               </SelectItem>
               <SelectItem value="tokyo">
-                <Globe class="w-4 h-4 mr-2"/> Tokyo
+               Tokyo
               </SelectItem>
               <SelectItem value="london">
-                <Globe class="w-4 h-4 mr-2"/> London
+               London
               </SelectItem>
               <SelectItem value="sydney">
-                <Globe class="w-4 h-4 mr-2"/> Sydney
+               New York
+              </SelectItem>
+              <SelectItem value="sydney">
+               Sydney
+              </SelectItem>
+              <SelectItem value="sydney">
+               Other
               </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
-        <div class="flex items-center">
-          <span class="text-sm font-medium dark:text-gray-300 mr-3">Willing to travel</span>
-          <Toggle aria-label="Toggle willing to travel"/>
-        </div>
+        <div class="flex items-center justify-between p-2 pt-6 pb-4 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Are you willing to travel?</span>
+              <Switch :default-checked="props.volunteerListing.travelOption" @update:checked="setTravelOption" id="displayPrice" />
+
+            </div>
       </CardContent>
       <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
