@@ -213,7 +213,6 @@ const mainSubSelectors = [
 
 <template>
 
-  <div v-if="isOpen" class="fixed w-screen h-screen top-0 bg-black bg-opacity-50 dark:bg-opacity-70" />
   <div class="bg-white  min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <Card>
