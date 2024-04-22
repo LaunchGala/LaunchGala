@@ -35,59 +35,70 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
+const supabase = useSupabaseClient()
+
+const allVolunteers = ref([]);
+
+async function getAllVolunteers() {
+  const { data: AllVolunteers, error } = await supabase.from('AllVolunteers').select()
+  console.log(error)
+  allVolunteers.value = AllVolunteers;
+}
+
+onMounted(() => {
+  getAllVolunteers()
+  console.log(allVolunteers.value)
+})
 
 const isOpen = ref(false)
 const date = ref<Date>()
 
-const allExperts = ref([
-  {
-    img: "/Bootstrapping.png",
-    name: "Sundar Pichai",
-    profession: "Engineer",
-    company: "Google",
-    volunteerTags: "IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing ",
-    description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
-    avatar: "https://conferences.law.stanford.edu/directorscollege2022/wp-content/uploads/sites/112/2022/05/Sundar-Pichai-Headshot-212x212.png",
-    likeExpert: false
-  },
-  {
-    img: "/Bootstrapping.png",
-    name: "Tim Cook",
-    position: "CEO",
-    company: "Apple",
-    industry: "Technology",
-    description: "Leading the world in innovation and consumer electronics.",
-    location: "Cupertino, CA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
-    likeExpert: true
-  },
+// const allVolunteers = ref([
+//   {
+//     name: "Sundar Pichai",
+//     profession: "Engineer",
+//     volunteerTags: "IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing ",
+//     location: "SF, CA",
+//     avatar: "https://conferences.law.stanford.edu/directorscollege2022/wp-content/uploads/sites/112/2022/05/Sundar-Pichai-Headshot-212x212.png",
+//     likevolunteer: false
+//   },
+//   {
+//     img: "/Bootstrapping.png",
+//     name: "Tim Cook",
+//     position: "CEO",
+//     company: "Apple",
+//     industry: "Technology",
+//     description: "Leading the world in innovation and consumer electronics.",
+//     location: "Cupertino, CA",
+//     avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
+//     likevolunteer: true
+//   },
 
-  {
-    img: "/Bootstrapping.png",
-    name: "Mary Barra",
-    position: "CEO",
-    company: "General Motors",
-    industry: "Automotive",
-    description: "Driving towards a greener future with electric vehicles.",
-    location: "Detroit, MI",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
-    likeExpert: true
-  },
+//   {
+//     img: "/Bootstrapping.png",
+//     name: "Mary Barra",
+//     position: "CEO",
+//     company: "General Motors",
+//     industry: "Automotive",
+//     description: "Driving towards a greener future with electric vehicles.",
+//     location: "Detroit, MI",
+//     avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
+//     likevolunteer: true
+//   },
 
-  {
-    img: "/Bootstrapping.png",
-    name: "Jeff Bezos",
-    position: "Founder & Former CEO",
-    company: "Amazon",
-    industry: "E-commerce",
-    description: "Transforming the way we shop online and beyond.",
-    location: "Seattle, WA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
-    likeExpert: false
-  }
+//   {
+//     img: "/Bootstrapping.png",
+//     name: "Jeff Bezos",
+//     position: "Founder & Former CEO",
+//     company: "Amazon",
+//     industry: "E-commerce",
+//     description: "Transforming the way we shop online and beyond.",
+//     location: "Seattle, WA",
+//     avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
+//     likevolunteer: false
+//   }
 
-])
+// ])
 </script>
 
 <template>
@@ -171,25 +182,29 @@ const allExperts = ref([
     </Collapsible>
     <div class="px-6 py-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <Card v-for="volunteer in allVolunteers"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
         <!-- <div class="relative">
-          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
+          <img class="w-full h-64 object-cover" :src="volunteer.img" alt="Apartment image" />
         </div> -->
         <!-- user will have a banner image on their profile and we will use it -->
         <CardContent class="p-4">
           <div class="flex justify-between ">
             <div class="ml-2 mt-4 mb-2">
-            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.profession}}</p>
+            <h3 class="text-lg font-semibold dark:text-white">{{volunteer.name}}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{volunteer.profession}}</p>
           </div>
             <Avatar class="m-4 w-24 h-24">
-              <AvatarImage :src="expert.avatar" alt="Profile" />
+              <AvatarImage :src="volunteer.avatar" alt="Profile" />
               <AvatarFallback>XX</AvatarFallback>
             </Avatar>
         </div> 
-            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{expert.industry}}</p> -->
-            <p class=" text-sm text-gray-600 dark:text-gray-400"> Location: {{expert.location}}</p>
-            <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> Categories: {{expert.volunteerTags}}</p>
+            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
+            <p class=" text-sm text-gray-600 dark:text-gray-400"> Location: {{volunteer.location}}</p>
+            <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
+              
+              Categories: <span v-for="tag in volunteer.volunteerTags"> {{ tag }} </span> 
+            
+            </p>
 
             <div class="flex items-center justify-between mt-4">
               <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
@@ -197,7 +212,7 @@ const allExperts = ref([
                 <ArrowRight class="w-4 h-4  ml-4" /> 
               </Button>
               <Toggle aria-label="Like">
-                <Heart :fill="expert.likeExpert ? 'red': 'none'" class="w-5 h-5" />
+                <Heart :fill="volunteer.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
               </Toggle>
             </div>
           </CardContent>

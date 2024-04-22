@@ -14,6 +14,9 @@ const isOpen = ref(false);
 
 function addVolunteerTag(volunteerTag: string) {
   if (props.volunteerListing.volunteerTags.includes(volunteerTag)) {
+    if (volunteerTag === props.mainSubSelector.main && props.volunteerListing.volunteerTags.some(item => props.mainSubSelector.subs.includes(item))) {
+      return
+    }
     props.volunteerListing.volunteerTags = props.volunteerListing.volunteerTags.filter((item) => item !== volunteerTag);
   } else {
     props.volunteerListing.volunteerTags.push(volunteerTag);
@@ -63,7 +66,7 @@ console.log(props.mainSubSelector);
             <div class="text-l font-bold text-orange-500">{{ props.mainSubSelector.main }}:</div>
             <div class="font-semibold text-l  mb-0">Services you want to volunteer for</div>
             <span class="text-sm text-gray-500 mt-0">Choose all applicable</span>
-                <li v-for="sub in props.mainSubSelector.subs" @click="addVolunteerTag(sub)" class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 hover:bg-orange-200  "  
+                <li v-for="sub in props.mainSubSelector.subs" @click="addVolunteerTag(sub)" class="flex items-center space-x-2 p-2 rounded-md transition-colors duration-150 border hover:border-orange-500  "  
                 :class="{ 'bg-orange-200': props.volunteerListing.volunteerTags.includes(sub), 'bg-lg': !props.volunteerListing.volunteerTags.includes(sub) }" 
                 >
                 <Plus class="w-5 h-5 text-orange-500 " />

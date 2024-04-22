@@ -51,6 +51,10 @@ function previousStep() {
   <div>
     <VolunteerListing01 :volunteer-listing="newVolunteerListing" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
     <VolunteerListing02 :volunteer-listing="newVolunteerListing" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
+    <VolunteerListing03 :volunteer-listing="newVolunteerListing" v-show="currentStep === 3" @next-step="nextStep" @previous-step="previousStep"/>
+    <VolunteerListing04 :volunteer-listing="newVolunteerListing" v-show="currentStep === 4" @next-step="nextStep" @previous-step="previousStep"/>
+    <VolunteerListing05 :volunteer-listing="newVolunteerListing" v-show="currentStep === 5" @next-step="nextStep" @previous-step="previousStep"/>
+
   </div>
 
 
