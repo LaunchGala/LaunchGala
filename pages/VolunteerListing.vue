@@ -18,7 +18,8 @@ const newVolunteerListing = ref({
   volunteerTags: [],
   location: "",
   travelOption: false,
-  available: true
+  available: true,
+  volunteerDescription: ""
 
 });
 

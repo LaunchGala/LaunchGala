@@ -10,7 +10,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
 
 
-const props = defineProps(['volunteerListing']);
+const props = defineProps(['volunteerDescription']);
 console.log(props.volunteerListing);
 </script>
 

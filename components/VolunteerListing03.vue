@@ -11,7 +11,7 @@ import { Switch } from '@/components/ui/switch';
 
 
 function setTravelOption(toggleState: boolean) {
-  props.volunteerListing.maskRequired = toggleState
+  props.volunteerListing.travelOption = toggleState
 }
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
