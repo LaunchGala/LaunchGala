@@ -96,7 +96,7 @@ import { Tiktoken } from 'js-tiktoken';
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Terms of Service</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">EU & Other Compliance</a>
+              <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">EU & Global Compliance</a>
             </li>
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cookies & Other Policies</a>
