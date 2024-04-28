@@ -51,6 +51,13 @@ import { Badge } from '@/components/ui/badge'
             Experts
           </a>
         </NuxtLink>
+        <NuxtLink to="AllVendors">
+
+<a class="text-m font-medium  hover:underline">
+  Vendors
+</a>
+
+</NuxtLink>
         <NuxtLink to="AllEvents">
           <a class="text-m font-medium  hover:underline">
             Events
@@ -64,15 +71,7 @@ import { Badge } from '@/components/ui/badge'
             Coming Soon!
           </Badge>
         </NuxtLink>
-        <NuxtLink to="AllVendors">
 
-          <a class="text-m font-medium  hover:underline">
-            Vendors
-          </a>
-          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
-            Coming Soon!
-          </Badge>
-        </NuxtLink>
 
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
@@ -101,7 +100,15 @@ import { Badge } from '@/components/ui/badge'
         </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
-            FundingPool
+            EventAI
+          </a>
+          <!-- <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
+            Coming soon
+          </Badge> -->
+        </NuxtLink>
+        <NuxtLink to="AllCommunities">
+          <a class="text-m font-medium  hover:underline">
+            AngleAI
           </a>
           <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
             $104,202.00

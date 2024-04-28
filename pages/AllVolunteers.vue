@@ -34,6 +34,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { volunteerTagColors } from '@/utils/volunteerTagColors';
+import VolunteerListing from './VolunteerListing.vue';
 
 const supabase = useSupabaseClient()
 
@@ -52,6 +54,8 @@ onMounted(() => {
 
 const isOpen = ref(false)
 const date = ref<Date>()
+
+
 
 // const allVolunteers = ref([
 //   {
@@ -105,7 +109,10 @@ const date = ref<Date>()
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Find volunteers</h1>
-      <Button @click="console.log(allVolunteers)" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become a volunteer</Button>
+      <NuxtLink to="VolunteerListing">
+
+      <Button @click="console.log(VolunteerListing)" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become a volunteer</Button>
+      </NuxtLink>
 
     </div>
     
@@ -201,9 +208,9 @@ const date = ref<Date>()
             <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
             <p class=" text-sm text-gray-600 dark:text-gray-400"> Location: {{volunteer.location}}</p>
             <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
-              
-              Categories: <span v-for="tag in volunteer.volunteerTags"> {{ tag }} </span> 
-            
+              <div class="flex flex-wrap h-14 overflow-hidden">
+               <div v-for="tag in volunteer.volunteerTags" :class="volunteerTagColors[tag]" class="text-sm font-medium mr-2 px-2.5 py-0.5 rounded h-6 mb-1" > {{ tag }} </div> 
+              </div>
             </p>
 
             <div class="flex items-center justify-between mt-4">
