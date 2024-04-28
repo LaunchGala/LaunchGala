@@ -206,10 +206,10 @@ const date = ref<Date>()
             </Avatar>
         </div> 
             <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
-            <p class=" text-sm font-semibold text-gray-600"> Location: {{volunteer.location}}</p>
+            <p class=" text-m font-semibold text-gray-500"> Location: {{volunteer.location}}</p>
             <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
               <div class="flex flex-wrap h-14 overflow-hidden">
-               <div v-for="tag in volunteer.volunteerTags" :class="volunteerTagColors[tag]" class="text-sm font-medium mr-2 px-2.5 py-0.5 rounded h-6 mb-1" > {{ tag }} </div> 
+               <div v-for="tag in volunteer.volunteerTags" :class="volunteerTagColors[tag]" class="text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
               </div>
             </p>
 
