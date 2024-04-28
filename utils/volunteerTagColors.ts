@@ -1,9 +1,9 @@
 export const volunteerTagColors = {
     "Event Management and Coordination": "bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100",
-    "Event Planning and Scheduling": "bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100",
+    "Event Planning and Scheduling": "bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100",
     "On-Site Event Coordination": "bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-100",
-    "Speaker & Participant Coordination": "bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-100",
-    "Vendor Coordination": "bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-100",
+    "Speaker & Participant Coordination": "bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100",
+    "Vendor Coordination": "bg-violet-100 dark:bg-violet-800 text-violet-800 dark:text-violet-100",
     "Accounting and Bookkeeping": "bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-100",
     "Event Wrap-Up and Debriefing": "bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-100",
     "Technical Support and IT": "bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-100",
