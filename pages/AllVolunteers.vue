@@ -111,7 +111,7 @@ const date = ref<Date>()
       <h1 class="text-2xl font-bold dark:text-white">Find volunteers</h1>
       <NuxtLink to="VolunteerListing">
 
-      <Button @click="console.log(VolunteerListing)" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become a volunteer</Button>
+      <Button @click="console.log(VolunteerListing)" class="bg-orange-500 text-white dark:text-white">Become a volunteer</Button>
       </NuxtLink>
 
     </div>
@@ -197,8 +197,8 @@ const date = ref<Date>()
         <CardContent class="p-4">
           <div class="flex justify-between ">
             <div class="ml-2 mt-4 mb-2">
-            <h3 class="text-lg font-semibold dark:text-white">{{volunteer.name}}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{volunteer.profession}}</p>
+            <h3 class="text-lg font-semibold dark:black-white">{{volunteer.name}}</h3>
+            <p class="text-sm text-gray-600">{{volunteer.profession}}</p>
           </div>
             <Avatar class="m-4 w-24 h-24">
               <AvatarImage :src="volunteer.avatar" alt="Profile" />
@@ -206,7 +206,7 @@ const date = ref<Date>()
             </Avatar>
         </div> 
             <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
-            <p class=" text-sm text-gray-600 dark:text-gray-400"> Location: {{volunteer.location}}</p>
+            <p class=" text-sm font-semibold text-gray-600"> Location: {{volunteer.location}}</p>
             <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
               <div class="flex flex-wrap h-14 overflow-hidden">
                <div v-for="tag in volunteer.volunteerTags" :class="volunteerTagColors[tag]" class="text-sm font-medium mr-2 px-2.5 py-0.5 rounded h-6 mb-1" > {{ tag }} </div> 

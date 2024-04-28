@@ -31,32 +31,32 @@ console.log(props.volunteerListing);
         <CardDescription>Select the city and decide if you're willing to travel for volunteering.</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4 p-6">
-        <Select>
+        <Select v-model="props.volunteerListing.location">
           <SelectTrigger>
             <SelectValue placeholder="Select a city" class="text-left"/>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Cities</SelectLabel>
-              <SelectItem value="new_york">
+              <SelectItem value="San Francisco">
                San Francisco
               </SelectItem>
-              <SelectItem value="paris">
+              <SelectItem value="Paris">
                Paris
               </SelectItem>
-              <SelectItem value="tokyo">
+              <SelectItem value="Tokyo">
                Tokyo
               </SelectItem>
-              <SelectItem value="london">
+              <SelectItem value="London">
                London
               </SelectItem>
-              <SelectItem value="sydney">
+              <SelectItem value="New York">
                New York
               </SelectItem>
-              <SelectItem value="sydney">
+              <SelectItem value="Sydney">
                Sydney
               </SelectItem>
-              <SelectItem value="sydney">
+              <SelectItem value="Other">
                Other
               </SelectItem>
             </SelectGroup>

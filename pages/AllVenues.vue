@@ -50,7 +50,7 @@ onMounted(() => {
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Explore all Venues</h1>
       <NuxtLink to="VenueListing">
-      <Button @click="console.log(allVenues)" class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide your Venue</Button>
+      <Button @click="console.log(allVenues)" class="bg-orange-500 text-white dark:bg-orange-600 dark:text-white">Provide your Venue</Button>
     </NuxtLink>
     </div>
     
