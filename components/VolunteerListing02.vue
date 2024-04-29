@@ -236,7 +236,7 @@ const mainSubSelectors = [
               Back
             </div>
           </Button>
-          <Progress :model-value="10"  />
+          <Progress :model-value="33"  />
           <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next

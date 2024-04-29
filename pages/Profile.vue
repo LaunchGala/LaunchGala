@@ -1,21 +1,10 @@
 <script setup lang="ts">
-
-const supabase = useSupabaseClient()
-
 const user = useSupabaseUser()
-
-const signOut = () => {
-    supabase.auth.signOut()
-}
-
 </script>
 
 <template>
-    <div>
-        <h1>Profile</h1>
-        <p>Email: {{ user?.email }}</p>
-        <p>Id: {{ user?.id }}</p>
-
-        <button @click="signOut">Sign Out</button>
-    </div>
+  <div class="container" style="padding: 50px 0 100px 0">
+    <Account v-if="user" />
+    <Auth v-else />
+  </div>
 </template>

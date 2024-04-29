@@ -20,6 +20,14 @@ const signInWithEmail = async () => {
   if (data) console.log(data)
 }
 
+const signInWithGoogle = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+  })
+  if (error) console.log(error)
+  if (data) console.log(data)
+}
+
 </script>
 
 <template>
@@ -47,6 +55,9 @@ const signInWithEmail = async () => {
 
           <Button @click="signInWithEmail" class="flex items-center justify-center w-full px-4 py-2 space-x-2 text-white transition duration-200 ease-in bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span>Continue</span> <Mail class="w-4 h-4"/>
+          </Button>
+          <Button @click="signInWithGoogle" class="flex items-center justify-center w-full px-4 py-2 space-x-2 text-white transition duration-200 ease-in bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <span>GOOOOOOOOOOOOOOOGLE!!!!!!!!!!!!!!!!</span> <Mail class="w-4 h-4"/>
           </Button>
         </div>
       </div>
