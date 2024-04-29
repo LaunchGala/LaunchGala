@@ -67,12 +67,10 @@ import { Badge } from '@/components/ui/badge'
           <a class="text-m font-medium  hover:underline">
             Media
           </a>
-          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
-            Coming Soon!
-          </Badge>
-        </NuxtLink>
 
+        </NuxtLink>
 <!-- 
+
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             Talents 
@@ -89,16 +87,16 @@ import { Badge } from '@/components/ui/badge'
           <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
             Coming Soon!
           </Badge>
-        </NuxtLink>
+        </NuxtLink> -->
         <NuxtLink to="AllResources">
-          <Badge class="transform absolute rotate-45 text-xs py-0.5 px-2 bg-orange-500  text-white dark:bg-black">
+          <!-- <Badge class="transform absolute rotate-45 text-xs py-0.5 px-2 bg-orange-500  text-white dark:bg-black">
             Coming Soon!
-          </Badge>
+          </Badge> -->
           <a class="text-m  font-medium hover:underline">
             Resources
           </a>
         </NuxtLink>
-        <NuxtLink to="AllCommunities">
+        <!-- <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             EventAI
           </a>
