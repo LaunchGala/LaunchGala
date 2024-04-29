@@ -181,11 +181,11 @@ function toggleEditDisabled() {
           <Input type="text" :disabled="editDisabled" placeholder="LinkedIn URL" v-model="user_linkedin" class="flex-1 border-0 focus:ring-2 focus:ring-blue-500" />
         </div>
         <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
-          <Twitter class="w-6 h-6 ml-3 text-blue-500"/>
+          <Twitter class="w-6 h-6 ml-3 text-black-500"/>
           <Input type="text" :disabled="editDisabled" placeholder="Twitter URL" v-model="user_twitter" class="flex-1 border-0 focus:ring-2 focus:ring-blue-500" />
         </div>
         <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
-          <Youtube class="w-6 h-6 ml-3 text-pink-500"/>
+          <Youtube class="w-6 h-6 ml-3 text-red-500"/>
           <Input type="text" :disabled="editDisabled" placeholder="YouTube URL" v-model="user_youtube" class="flex-1 border-0 focus:ring-2 focus:ring-pink-500" />
         </div>
         <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
