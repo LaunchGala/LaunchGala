@@ -187,7 +187,7 @@ import { Badge } from '@/components/ui/badge';
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Event Image" class="w-20 h-20 rounded-full" />
+                <img src="/placeholder.svg" alt="Event Image" class="w-20 h-20 rounded-lg" />
                 <div>
                   <p class="font-semibold text-lg">Event A</p>
                   <p class="text-sm text-gray-500 dark:text-gray-400">Oct 24, 2023</p>
@@ -195,7 +195,7 @@ import { Badge } from '@/components/ui/badge';
                 <Badge variant="primary" class="ml-auto">New</Badge>
               </div>
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Event Image" class="w-20 h-20 rounded-full" />
+                <img src="/placeholder.svg" alt="Event Image" class="w-20 h-20 rounded-lg" />
                 <div>
                   <p class="font-semibold text-lg">Event B</p>
                   <p class="text-sm text-gray-500 dark:text-gray-400">Nov 11, 2023</p>
@@ -211,11 +211,11 @@ import { Badge } from '@/components/ui/badge';
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Conference Room A</p>
               </div>
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Hall B</p>
               </div>
             </CardContent>
