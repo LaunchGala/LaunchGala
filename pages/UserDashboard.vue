@@ -14,7 +14,9 @@ import {
   Award,
   List,
   Power,
-  User
+  User,
+  Heart
+  
 } from 'lucide-vue-next';
 import {
   Card,
@@ -73,7 +75,7 @@ import { Badge } from '@/components/ui/badge';
               <span>Venues</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
-              <Inbox class="w-5 h-5 mr-2 text-orange-500" />
+              <List class="w-5 h-5 mr-2 text-orange-500" />
               <span>Volunteers</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
