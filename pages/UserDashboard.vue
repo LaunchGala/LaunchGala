@@ -122,7 +122,7 @@ import { Badge } from '@/components/ui/badge';
       <section class="mb-8">
         <Card class="bg-white dark:bg-gray-800 shadow rounded-lg p-5 mb-6">
           <CardHeader class="border-b pb-4">
-            <CardTitle class="text-2xl font-bold leading-tight">Your Latest Updates</CardTitle>
+            <CardTitle class="text-2xl font-bold leading-tight">New Updates</CardTitle>
           </CardHeader>
           <CardContent>
             <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-4 text-md mt-4">
