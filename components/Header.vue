@@ -72,7 +72,7 @@ import { Badge } from '@/components/ui/badge'
           </Badge>
         </NuxtLink>
 
-
+<!-- 
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             Talents 
@@ -102,10 +102,10 @@ import { Badge } from '@/components/ui/badge'
           <a class="text-m font-medium  hover:underline">
             EventAI
           </a>
-          <!-- <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
+          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
             Coming soon
-          </Badge> -->
-        </NuxtLink>
+          </Badge>
+        </NuxtLink> -->
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             AngleAI
@@ -126,9 +126,9 @@ import { Badge } from '@/components/ui/badge'
         Login
       </button>
     </NuxtLink>
-      <NuxtLink v-else to="Profile">
+      <NuxtLink v-else to="UserDashboard">
       <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
-        Profile 
+        Dashboard 
       </button>
     </NuxtLink>
   </div>

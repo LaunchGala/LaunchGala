@@ -1,5 +1,6 @@
 <template>
   <div>
+    
   <VenueSearchLanding/>
   <VenueSliderLanding/>
   <VolunteersLanding/>

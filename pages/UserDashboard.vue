@@ -50,9 +50,12 @@ import { Badge } from '@/components/ui/badge';
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger as="template">
+                <NuxtLink to="Profile">
+
               <Button variant="outline" class="flex items-center border border-orange-500 dark:border-orange-400 text-orange-500 dark:text-orange-400 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-400 dark:hover:text-gray-900 font-semibold py-1.5 px-3 rounded-md focus:outline-none focus:ring focus:ring-orange-300 dark:focus:ring-orange-400 dark:ring-offset-gray-800">
                 <User class="w-4 h-4 mr-1.5" /> Profile
               </Button>
+              </NuxtLink>
             </TooltipTrigger>
             <!-- <TooltipContent>
               <p class="text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 p-2 rounded-md">View Profile</p>

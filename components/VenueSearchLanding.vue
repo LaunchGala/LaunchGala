@@ -125,6 +125,16 @@ const eventSize = ref('')
       </div>
     </div>
   <img src="/venueBG01.jpeg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl">
+  <div class="absolute top-0 right-6 z-20 m-8">
+      <Button variant="default" class="mt-16  text-md text-white bg-orange-500 rounded-md hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
+        Signup for Free
+      </Button>
+
+
+    </div>
+    <div class="w-1/2 font-bold text-5xl absolute top-0 right-24 z-20 m-8 mt-72  text-center text-white">
+      Find Venues, Volunteers, <div>Speakers & Sponsors.</div> <div class="mt-6"> Launch your Event </div><div>for Free.</div>
+    </div>
 </div>
 
 </template>
