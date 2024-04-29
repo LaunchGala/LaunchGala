@@ -125,11 +125,11 @@ import { Badge } from '@/components/ui/badge';
             <CardTitle class="text-2xl font-bold leading-tight">Your Latest Updates</CardTitle>
           </CardHeader>
           <CardContent>
-            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 text-sm mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-4 text-md mt-4">
               <!-- Existing items -->
               <div class="flex items-center">
                 <Calendar class="w-5 h-5 mr-2 text-blue-500" />
-                <div>You have <Badge>2 event invites</Badge></div>
+                <div>You have <Badge variant="success">2 event invites</Badge></div>
               </div>
               <div class="flex items-center">
                 <Check class="w-5 h-5 mr-2 text-green-500" />
@@ -174,7 +174,19 @@ import { Badge } from '@/components/ui/badge';
               </div>
               <div class="flex items-center">
                 <Volume2 class="w-5 h-5 mr-2 text-pink-500" />
-                <div>One media request <Badge variant="pink">approved</Badge></div>
+                <div>Media request <Badge variant="pink">2 approved</Badge></div>
+              </div>
+              <div class="flex items-center">
+                <Mail class="w-5 h-5 mr-2 text-yellow-500" />
+                <div>your event has <Badge variant="yellow">15 new invite request</Badge></div>
+              </div>
+              <div class="flex items-center">
+                <Volume2 class="w-5 h-5 mr-2 text-pink-500" />
+                <div>your speaker request<Badge variant="pink">3 approved</Badge></div>
+              </div>
+              <div class="flex items-center">
+                <Volume2 class="w-5 h-5 mr-2 text-pink-500" />
+                <div>New Notifications<Badge variant="pink">3 new</Badge></div>
               </div>
             </div>
           </CardContent>
@@ -257,7 +269,7 @@ import { Badge } from '@/components/ui/badge';
         <!-- New Service Request -->
         <Card class="transform hover:scale-105 transition bg-white dark:bg-gray-900 shadow rounded-lg p-6">
           <CardHeader>
-            <CardTitle>New Service Request</CardTitle>
+            <CardTitle>New Requests</CardTitle>
           </CardHeader>
           <CardContent class="flex items-center space-x-4">
             <div class="flex -space-x-1 overflow-hidden">
