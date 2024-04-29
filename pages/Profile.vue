@@ -5,6 +5,9 @@ const user = useSupabaseUser()
 <template>
   <div class="container" style="padding: 50px 0 100px 0">
     <Account v-if="user" />
-    <Auth v-else />
+    <div v-else>
+      <h1 class="title">You need to be logged in to view this page</h1>
+      <NuxtLink to="/login">Login</NuxtLink>
+    </div>
   </div>
 </template>

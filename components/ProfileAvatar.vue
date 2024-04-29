@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Camera } from "lucide-vue-next";
+import { Button } from "@/components/ui/button";
 
-const props = defineProps(['path'])
+
+const props = defineProps(['path', 'hideUpload'])
 const { path } = toRefs(props)
 
 const emit = defineEmits(['update:path', 'upload'])
@@ -63,7 +66,7 @@ watch(path, () => {
 </script>
 
 <template>
-  <div>
+  <div class="relative">
     <Avatar class="w-28 h-28 rounded-full shadow-lg">
           <AvatarImage :src="src" alt="Profile picture" />
           <AvatarFallback>No Avatar</AvatarFallback>
@@ -78,18 +81,24 @@ watch(path, () => {
     />
     <div v-else class="avatar no-image" :style="{ height: size, width: size }" /> -->
 
-    <div style="width: 10em; position: relative;">
-      <label class="button primary block" for="single">
+    
+      <!-- <label class="button primary block" for="single">
         {{ uploading ? 'Uploading ...' : 'Upload' }}
-      </label>
-      <input
-        style="position: absolute; visibility: hidden;"
-        type="file"
-        id="single"
-        accept="image/*"
-        @change="uploadAvatar"
-        :disabled="uploading"
-      />
+      </label> -->
+      <Button v-if="!hideUpload" class="absolute bottom-0 left-0 transform translate-y-1/3 rounded-half bg-orange-500  hover:bg-orange-400 focus:ring-orange-400">
+        <label class="cursor-pointer flex items-center justify-center p-2 text-white">
+          <Camera class="w-6 h-6 text-white"/>
+          <input
+            style="position: absolute; visibility: hidden;"
+            type="file"
+            id="single"
+            accept="image/*"
+            @change="uploadAvatar"
+            :disabled="uploading"
+          />             
+          </label>
+      </Button>
+          
+
     </div>
-  </div>
 </template>
