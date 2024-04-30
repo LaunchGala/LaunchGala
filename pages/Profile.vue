@@ -3,7 +3,7 @@ const user = useSupabaseUser()
 </script>
 
 <template>
-  <div class="bg-gray-800">
+  <div >
   <div class="container" style="padding: 50px 0 100px 0">
     <Account v-if="user" />
     <div v-else>

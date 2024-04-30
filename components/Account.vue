@@ -149,9 +149,15 @@ function toggleEditDisabled() {
             <Input id="company" :disabled="editDisabled" v-model="user_company" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="location">Location</label>
-            <Input id="location" :disabled="editDisabled" v-model="user_location" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="industry">Industry</label>
+            <Input id="industry" :disabled="editDisabled" v-model="user_location" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="businessStage">Business Stage</label>
+            <Input id="businessStage" :disabled="editDisabled" v-model="user_location" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+          </div>
+
+
         </div>
       </div>
       <div>
@@ -167,6 +173,10 @@ function toggleEditDisabled() {
           <div>
             <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="phone">Phone</label>
             <Input id="phone" :disabled="editDisabled"  v-model="user_phone" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="location">Location</label>
+            <Input id="location" :disabled="editDisabled" v-model="user_location" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="website">Website</label>
