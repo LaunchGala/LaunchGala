@@ -57,7 +57,7 @@ import { Check } from 'lucide-vue-next';
   <img src="/eventLanding02.jpg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl overflow-hidden w-3/4 h-5/6">
   <div class="absolute top-2 right-6 z-20 m-8">
       <Button variant="default" class="mt-16  text-md text-white bg-orange-500 rounded-md hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
-        Signup for Free
+        Sign Up for Free
       </Button>
 
 

@@ -20,6 +20,8 @@ const user_linkedin = ref('')
 const user_youtube = ref('')
 const user_facebook = ref('')
 const user_twitter = ref('')
+const industry = ref('')
+const business_stage = ref('')
 
 
 
@@ -29,7 +31,7 @@ const user = useSupabaseUser()
 
 const { data } = await supabase
   .from('profiles')
-  .select(`full_name, website, avatar_url, user_phone, job_title, user_company, user_location, user_about, user_linkedin, user_youtube, user_facebook, user_twitter`)
+  .select(`full_name, website, avatar_url, user_phone, job_title, user_company, user_location, user_about, user_linkedin, user_youtube, user_facebook, user_twitter, industry, business_stage`)
   .eq('id', user.value.id)
   .single()
 
@@ -46,6 +48,8 @@ if (data) {
   user_youtube.value = data.user_youtube
   user_facebook.value = data.user_facebook
   user_twitter.value = data.user_twitter
+  industry.value = data.industry
+  business_stage.value = data.business_stage
 
   
   
@@ -72,6 +76,8 @@ async function updateProfile() {
         user_youtube: user_youtube.value,
         user_facebook: user_facebook.value,
         user_twitter: user_twitter.value,
+        industry: industry.value,
+        business_stage: business_stage.value,
 
         updated_at: new Date(),
     }
@@ -150,11 +156,11 @@ function toggleEditDisabled() {
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="industry">Industry</label>
-            <Input id="industry" :disabled="editDisabled" v-model="user_location" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+            <Input id="industry" :disabled="editDisabled" v-model="industry" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="businessStage">Business Stage</label>
-            <Input id="businessStage" :disabled="editDisabled" v-model="user_location" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+            <Input id="businessStage" :disabled="editDisabled" v-model="business_stage" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
 
 
