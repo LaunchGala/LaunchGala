@@ -106,26 +106,26 @@ import { Badge } from '@/components/ui/badge'
         </NuxtLink> -->
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
-            AngelAI
+            Angel AI
           </a>
           <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
             $104,202.00
           </Badge>
         </NuxtLink>
       </nav>
-      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-m font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:underline h-10 px-4 py-2 ml-auto mr-8 ">
         + Create Event
       </button>
-      <span class="absolute top-4 right-4 -mt-1 -mr-1 colorOrangeBg text-white rounded-full text-xs px-1">
+      <span class="absolute top-4 right-4 -mt-1 -mr-1 bg-white text-orange-500 rounded-full text-xs px-1">
                         69
                     </span>
     <NuxtLink v-if="!isLoggedIn" to="logIn">
-      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-m font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-orange-500 text-primary-foreground hover:bg-orange-400 h-10 px-4 py-2 ml-auto">
         Login
       </button>
     </NuxtLink>
       <NuxtLink v-else to="UserDashboard">
-      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-orange-500 text-primary-foreground hover:bg-orange-400 h-10 px-4 py-2 ml-auto">
         Dashboard 
       </button>
     </NuxtLink>
@@ -134,8 +134,8 @@ import { Badge } from '@/components/ui/badge'
 
 <style>
     .headerMain {
-        background-color: rgb(28, 28, 28);
-        color: #fff;
+        background-color: white;
+        color: black;
         font-weight: 600;
     }
     .colorOrange {
