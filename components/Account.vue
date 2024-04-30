@@ -31,7 +31,7 @@ const user = useSupabaseUser()
 
 const { data } = await supabase
   .from('profiles')
-  .select(`full_name, website, avatar_url, user_phone, job_title, user_company, user_location, user_about, user_linkedin, user_youtube, user_facebook, user_twitter, industry, business_stage`)
+  .select()
   .eq('id', user.value.id)
   .single()
 
