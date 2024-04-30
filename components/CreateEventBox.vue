@@ -12,17 +12,17 @@ import { Check } from 'lucide-vue-next';
 
         <div class="flex dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
     <Card class=" dark:bg-gray-800 w-full max-w-md rounded-lg shadow-lg overflow-hidden ">
-      <CardHeader class="px-6 py-4 bg-orange-500">
+      <CardHeader class="px-6 py-8 bg-orange-500 mb-2">
 
-        <CardTitle class="text-xl font-bold text-white mt-5 ml-2 mb-1 ">Create your Event</CardTitle>
-        <CardDescription class="text-sm text-gray-100 ml-2 mb-2 ">
-          Tell us about your dream event and we will help you make it happen. Its Free.
+        <CardTitle class="text-xl font-bold text-white  ml-2 mb-1 ">Create your Event</CardTitle>
+        <CardDescription class="text-sm font-semibold text-gray-100 ml-2 mb-2 ">
+          Tell us about your dream event and we will help you make it happen. It's Free.
         </CardDescription>
       </CardHeader>
       <CardContent class="px-6 py-4 p-6">
-        <div>It takes 6 easy steps:</div>
+        <div class="text-md font-semibold text-gray-700">It takes 6 easy steps:</div>
 
-        <div class="flex items-center mt-4 mb-6">
+        <div class="flex items-center mt-7 mb-7">
           <div class="flex-none rounded-full bg-orange-500 text-white w-5 h-5 flex items-center justify-center text-xs">1</div>
           <div class="flex-grow mx-1 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
           <div class="flex-none rounded-full bg-gray-300 dark:bg-gray-700 w-5 h-5"></div>
@@ -35,12 +35,13 @@ import { Check } from 'lucide-vue-next';
           <div class="flex-grow mx-1 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
           <div class="flex-none rounded-full bg-gray-300 dark:bg-gray-700 w-5 h-5"></div>
         </div>
-        <div class="space-y-6">
-            <div class="text-md font-semibold text-gray-700">What is the name of your event?</div>
-          <Input type="text" placeholder="Event Name" class="w-full bg-gray-200 rounded-md border-transparent focus:border-orange-500 focus:bg-white focus:ring-0 " />
+        <div class="space-y-8">
+
+            <div class="text-md font-semibold text-gray-700">What do you want to call your event?</div>
+          <Input type="text" placeholder="Event Name" class="w-full bg-gray-200 rounded-md border-transparent focus:border-orange-500 focus:bg-white focus:ring-0" />
           <!-- <Input type="text" placeholder="Location" class="w-full bg-gray-200 dark:bg-gray-700 rounded-md border-transparent focus:border-orange-500 focus:bg-white focus:ring-0 dark:focus:bg-gray-600" /> -->
           <Button class="w-full flex justify-center items-center bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg px-4 py-2 transition duration-150 ease-in-out ">
-            <span>Create Event</span>
+            <span>Let's Go</span>
             <Check class="w-4 h-4 ml-2" />
           </Button>
         </div>
