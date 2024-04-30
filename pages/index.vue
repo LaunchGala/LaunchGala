@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CreateEventBox/>
+  <CreateEventBox/>
   <VenueSliderLanding/>
   <VolunteersLanding/>
   <SponsorsLanding/>

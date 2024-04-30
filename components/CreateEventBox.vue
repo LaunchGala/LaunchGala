@@ -7,8 +7,8 @@ import { Check } from 'lucide-vue-next';
 </script>
 
 <template>
-      <div class="flex items-left justify-left  bg-gray-100 dark:bg-black p-4 ">
-        <div class="space-y-4 w-1/4 z-20 mx-10 mb-8">
+      <div class="flex items-left justify-left  bg-gray-100 dark:bg-black p-6  ">
+        <div class="space-y-4 w-1/4 z-20 mx-10 mb-6 ">
 
         <div class="flex dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
     <Card class=" dark:bg-gray-800 w-full max-w-md rounded-lg shadow-lg overflow-hidden ">
@@ -54,8 +54,8 @@ import { Check } from 'lucide-vue-next';
   </div>
 </div>
 
-  <img src="/venueBG01.jpeg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl">
-  <div class="absolute top-0 right-6 z-20 m-8">
+  <img src="/eventLanding02.jpg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl overflow-hidden w-3/4 h-5/6">
+  <div class="absolute top-2 right-6 z-20 m-8">
       <Button variant="default" class="mt-16  text-md text-white bg-orange-500 rounded-md hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
         Signup for Free
       </Button>
