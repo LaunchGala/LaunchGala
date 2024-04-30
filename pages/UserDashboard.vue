@@ -15,7 +15,8 @@ import {
   List,
   Power,
   User,
-  Heart
+  Heart,
+  Cog
   
 } from 'lucide-vue-next';
 import {
@@ -66,10 +67,11 @@ import { Badge } from '@/components/ui/badge';
     </div>
   </div>
   <div class="flex min-h-screen bg-gray-50 dark:bg-black text-gray-800 dark:text-white">
-    <aside class="w-64 p-8 bg-gray-200 dark:bg-gray-900">
-      <Card class="bg-white dark:bg-gray-800 shadow rounded-lg p-5 mb-6">
-        <CardHeader class="border-b pb-4">
-          <CardTitle class="text-2xl font-bold leading-tight">Offers & inquiries</CardTitle>
+    <aside class="w-80  p-8 bg-white dark:bg-gray-900 shadow-xl">
+      <Card class="rounded-xl overflow-hidden border dark:border-transparent h-1/2 " >
+
+        <CardHeader class="bg-orange-500 dark:bg-orange-500 p-6">
+          <CardTitle class="text-xl font-semibold text-center text-white">Offers & Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
           <ul>
@@ -78,11 +80,11 @@ import { Badge } from '@/components/ui/badge';
               <span>Venues</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
-              <List class="w-5 h-5 mr-2 text-orange-500" />
+              <List class="w-5 h-5 mr-2 text-blue-300" />
               <span>Volunteers</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
-              <Volume2 class="w-5 h-5 mr-2 text-red-500" />
+              <Volume2 class="w-5 h-5 mr-2 text-orange-500" />
               <span>Events</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
@@ -90,7 +92,7 @@ import { Badge } from '@/components/ui/badge';
               <span>Sponsors</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
-              <Award class="w-5 h-5 mr-2 text-yellow-500" />
+              <Award class="w-5 h-5 mr-2 text-purple-500" />
               <span>Experts</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
@@ -100,6 +102,14 @@ import { Badge } from '@/components/ui/badge';
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
               <Volume2 class="w-5 h-5 mr-2 text-red-500" />
               <span>Media</span>
+            </li>
+            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+              <Mail class="w-5 h-5 mr-2 text-red-500" />
+              <span>Notifications</span>
+            </li>
+            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+              <Cog class="w-5 h-5 mr-2 text-gray-500" />
+              <span>Settings</span>
             </li>
           </ul>
 
