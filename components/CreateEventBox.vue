@@ -8,7 +8,7 @@ import { Check } from 'lucide-vue-next';
 
 <template>
       <div class="flex items-left justify-left  bg-gray-100 dark:bg-black p-4 ">
-        <div class="space-y-4 w-1/4 z-20 mx-10 mb-28">
+        <div class="space-y-4 w-1/4 z-20 mx-10 mb-8">
 
         <div class="flex dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
     <Card class=" dark:bg-gray-800 w-full max-w-md rounded-lg shadow-lg overflow-hidden ">
