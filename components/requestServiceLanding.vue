@@ -24,7 +24,7 @@ const email = ref('');
 
  <section class="relative flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black">
   <div >
-      <img src="/bootstrapping.png" alt="">
+      <img src="/Bootstrapping.png" alt="">
     </div>
     <div class="absolute z-30 p-6 bg-white rounded-lg shadow-lg dark:bg-gray-900">
       <div class="space-y-4">
