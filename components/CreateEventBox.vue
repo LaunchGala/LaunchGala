@@ -63,7 +63,7 @@ import { Check } from 'lucide-vue-next';
 
     </div>
     <div class="w-1/2 font-bold text-5xl absolute top-0 right-32  z-20 m-8 mt-60  text-center text-white">
-      <div>Your event should be</div><div class="text-orange-500"> 'The Event'</div>Find your Venue, Volunteers, <div>Speakers & Sponsors.</div> <div class="mt-6"> Launch your Event </div><div class="underline ">For Free</div>
+      <div>Your event should be</div><div class="text-orange-500"> 'The Event'</div>Find your Venue, Volunteers, <div>Speakers & Sponsors.</div> <div class="mt-6"> Launch your Event </div><div>For Free</div>
     </div>
 </div>
 </template>
