@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge'
 <template>
         <div class=" w-full h-16 flex items-center justify-between px-4 headerMain shadow-md">
       <a class="flex items-center gap-2 font-semibold text-lg" href="/" rel="ugc">
-        <svg
+        <!-- <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -27,8 +27,9 @@ import { Badge } from '@/components/ui/badge'
         >
           <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
           <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
-        <span class="mr-10 colorOrange">Launch Gala</span>
+        </svg> -->
+        <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-1/6">
+        <span class=" colorOrange">Launch Gala</span>
       </a>
       <nav class="hidden lg:flex gap-6">
         <NuxtLink to="AllVenues">
@@ -96,14 +97,14 @@ import { Badge } from '@/components/ui/badge'
             Resources
           </a>
         </NuxtLink>
-        <!-- <NuxtLink to="AllCommunities">
+        <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
-            EventAI
+            Event AI
           </a>
-          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
+          <!-- <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
             Coming soon
-          </Badge>
-        </NuxtLink> -->
+          </Badge> -->
+        </NuxtLink>
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline ml-8 mr-2">
             Angel AI
