@@ -147,16 +147,24 @@ import {
           <div class="flex flex-col space-y-4 bg-white p-4 rounded-md shadow-xl transition-all ease-in-out duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-4">
-                <Avatar>
+                <div class="mr-6">
+                <Avatar class="w-32 h-32">
                   <AvatarImage src="/placeholder.svg" alt="User's Name" />
                   <AvatarFallback>UN</AvatarFallback>
                 </Avatar>
+                <h3 class="font-semibold text-lg">User/Organizer</h3>
+            </div>
                 <div>
-                  <h3 class="font-semibold text-lg">User's Name</h3>
+                  <h3 class="font-semibold text-lg">Event's Name</h3>
                   <Badge class="text-xs bg-orange-100 text-orange-800">Networking Event</Badge>
-                  <p class="text-sm mt-1">Number of guests: 150</p>
-                  
-                  <p class="text-sm">Event date: Aug 25, 2023</p>
+
+                  <div class="flex mt-1"><p class="text-sm font-semibold mr-1 text-gray-700">Number of guests: </p><p class="text-sm"> 150</p></div>
+                  <div class="flex mt-1"><p class="text-sm font-semibold mr-1 text-gray-700">Tickets: </p><p class="text-sm"> Free</p></div>
+
+                  <div class="flex mt-1"><p class="text-sm font-semibold mr-1 text-gray-700">Event date: </p><p class="text-sm"> Aug 25, 2023</p></div>
+                  <div class="flex mt-1 mb-1"><p class="text-sm font-semibold mr-1 text-gray-700">Event time: </p><p class="text-sm"> 17:00 - 20:00</p></div>
+
+
                   <Badge class="text-xs bg-orange-100 text-orange-800 mr-2">Sponsor request</Badge>
                   <Badge class="text-xs bg-orange-100 text-orange-800">Paid request</Badge>
 
