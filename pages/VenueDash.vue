@@ -138,8 +138,8 @@ import {
       <Tabs default-value="requested-from-me" class="w-full">
         <TabsList class="flex w-full justify-around border-b-2 border-orange-300">
           <TabsTrigger value="requested-from-me" class="py-2">Venues requested from me</TabsTrigger>
-          <TabsTrigger value="requested" class="py-2">Venues I requested</TabsTrigger>
-          <TabsTrigger value="offered-to-me" class="py-2">Venues offered to me</TabsTrigger>
+          <TabsTrigger value="requested" class="py-2">Venues I requested or offered to me</TabsTrigger>
+          <TabsTrigger value="offered-to-me" class="py-2">Add & Manage my Venues</TabsTrigger>
         </TabsList>
 
         <TabsContent value="requested-from-me" class="space-y-6">
