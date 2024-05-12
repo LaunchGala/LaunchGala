@@ -5,6 +5,7 @@
   <VolunteersLanding/>
   <SponsorsLanding/>
   <OtherServicesLanding/>
+  <CompanyFundingLanding/>
   <UpcomingEventLanding/>
   <CreateEventLanding/>
   <RequestServiceLanding/>
