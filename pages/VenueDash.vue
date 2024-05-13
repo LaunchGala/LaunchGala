@@ -187,7 +187,7 @@ function formatDate(date: string) {
                 <h3 class="font-semibold text-center text-md mt-1">{{ item.activity_content.full_name }}</h3>
             </div>
                 <div >
-                  <h3 class="font-semibold text-lg">{{ item.activity_content.eventName }}</h3>
+                  <h3 class="font-semibold text-2xl">{{ item.activity_content.eventName }}</h3>
                   <div class="mb-2 mt-2">
                     <TooltipProvider>
                 <Tooltip>
