@@ -116,7 +116,7 @@ import { Badge } from '@/components/ui/badge'
         + Create Event
       </button>
       <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs mr-4 hover:bg-orange-500 hover:text-white">
-          Pro
+          Go Pro
         </Badge>
       <span class="absolute top-5 right-24 -mt-3 mr-6 bg-white text-orange-500 rounded-full text-xs px-1">
                         11
