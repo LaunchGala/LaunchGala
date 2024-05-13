@@ -105,7 +105,7 @@ import { Badge } from '@/components/ui/badge'
         </NuxtLink> -->
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline ml-8 mr-2">
-            AngelAI
+            LaunchAI
           </a>
           <Badge class="  text-xs border-orange-500 bg-white text-orange-500 ">
             $13,777
