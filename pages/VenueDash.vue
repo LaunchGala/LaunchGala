@@ -194,10 +194,11 @@ function formatDate(date: string) {
                   <TooltipTrigger as-child>
                   <Badge v-for="badge in item.activity_content.badges" in class="text-sm bg-orange-100 text-orange-700">{{ badge }}</Badge>
                 </TooltipTrigger>
-                  <TooltipContent class="bg-orange-100 text-orange-700 font-semibold text-sm">
-                    Venue Request Options: Sponsorship (Free Venue as main sponsor),
-                    Paid (Full price Rent Venue),
-                    Partnership (Discounted Price/Providing extra service as sponsor Partner)
+                  <TooltipContent class="bg-orange-100 text-orange-700 font-semibold text-sm w-1/4 ml-20">
+                    Venue Request Options, Organizers can request the venue in 3 options: 
+                    Sponsorship (Organizer are asking for Free Venue and as a Venue provider you will be featured as main sponsor upon your approval),
+                    Paid (Organizer are offering Full price Rent Venue),
+                    Partnership (Organizer are asking for a Discounted Price or/and extra service as sponsor Partner upon your approval).
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
