@@ -17,6 +17,77 @@ const endTime = ref('14:00');
 const eventStyle = ref('');
 const note = ref('');
 const numberOfGuests = ref('');
+const supabase = useSupabaseClient()
+
+const user = useSupabaseUser()
+
+
+const loading = ref(true)
+const full_name = ref('')
+const avatar_url = ref('')
+
+
+
+loading.value = true
+
+const { data } = await supabase
+  .from('profiles')
+  .select()
+  .eq('id', user.value.id)
+  .single()
+
+if (data) {
+  full_name.value = data.full_name
+  avatar_url.value = data.avatar_url
+}
+
+async function bookingActivity() {
+
+  const activity = {
+    created_by: user.value?.id,
+    object_owner: '5fc99cad-b05e-439b-8c24-9197251e9e6c',
+    activity_content: {
+      eventName: 'Mini Kitty',
+      eventType: 'Product Launch',
+      numberOfGuests: '350',
+      tickets: 'Free',
+      eventDate: '07/01/2024',
+      eventTime: '17:00 - 23:00',
+      eventDescription: 'Mini Kitty launch',
+      eventMessages: [
+        { userName: full_name.value, content: 'Love your venue and want to book it for this event' },
+        { userName: full_name.value, content: 'Please confirm availability'}
+      ],
+      userAvatar: avatar_url.value,
+      full_name: full_name.value,
+      venuePayment: 'Paid',
+      badges: ['Sponsor request', 'Paid request']
+    },
+    activity_object: {
+      startDate: startDate.value,
+      endDate: endDate.value,
+      startTime: startTime.value,
+      endTime: endTime.value,
+      eventStyle: eventStyle.value,
+      note: note.value,
+      numberOfGuests: numberOfGuests.value,
+    }
+
+  }
+  const { data, error } = await supabase
+    .from('activity_feed') // Specify the table name
+    .insert([
+      activity // Object representing the new row
+    ])
+    .select(); // Return the newly inserted row
+
+  if (error) {
+    console.error('Error inserting data:', error);
+  } else {
+    console.log('New row inserted:', data);
+  }
+}
+
 </script>
 
 <template>
@@ -88,7 +159,7 @@ const numberOfGuests = ref('');
 
       <Textarea v-model="note" placeholder="Additional notes" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize-none" />
 
-      <Button  class="w-full OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
+      <Button @click="bookingActivity" class="w-full OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
         Booking Request
       </Button>
 

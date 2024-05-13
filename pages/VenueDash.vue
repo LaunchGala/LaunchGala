@@ -34,6 +34,35 @@ import {
   CardTitle,
   CardDescription
 } from '@/components/ui/card';
+
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
+
+const feedItems = ref([]);
+
+// Fetch feed items from the activity_feed table
+async function fetchFeedItems() {
+  const response = await supabase
+    .from('activity_feed')
+    .select('*')
+    .eq('object_owner', user.value.id)
+  
+  if (response.error) {
+    console.error(response.error);
+    return;
+  }
+  
+  feedItems.value = response.data;
+}
+
+onMounted(() => {
+  fetchFeedItems();
+});
+
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString();
+}
+
 </script>
 
 <template>
@@ -133,6 +162,9 @@ import {
         </p>
       </div>
     </aside> -->
+
+ 
+
   <div class="flex min-h-screen bg-[#FFFAF0] dark:bg-black text-gray-900">
     <main class="flex-1 p-8">
       <Tabs default-value="requested-from-me" class="w-full">
@@ -144,29 +176,44 @@ import {
 
         <TabsContent value="requested-from-me" class="space-y-6">
           <!-- Repeat this section for each post with different venue details -->
-          <div class="flex flex-col space-y-4 bg-white p-4 rounded-md shadow-xl transition-all ease-in-out duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
+          <div v-for="item in feedItems" class="flex flex-col space-y-4 bg-white p-4 rounded-md shadow-xl transition-all ease-in-out duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-4">
                 <div class="mr-6">
-                <Avatar class="w-32 h-32">
-                  <AvatarImage src="/placeholder.svg" alt="User's Name" />
+                <Avatar class="w-24 h-24">
+                  <AvatarImage :src="item.activity_content.userAvatar" alt="User's Name" />
                   <AvatarFallback>UN</AvatarFallback>
                 </Avatar>
-                <h3 class="font-semibold text-lg">User/Organizer</h3>
+                <h3 class="font-semibold text-center text-md mt-1">{{ item.activity_content.full_name }}</h3>
             </div>
-                <div>
-                  <h3 class="font-semibold text-lg">Event's Name</h3>
-                  <Badge class="text-xs bg-orange-100 text-orange-800">Networking Event</Badge>
+                <div >
+                  <h3 class="font-semibold text-lg">{{ item.activity_content.eventName }}</h3>
+                  <div class="mb-2 mt-1">
+                    <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger as-child>
+                  <Badge v-for="badge in item.activity_content.badges" in class="text-sm bg-orange-100 text-orange-700">{{ badge }}</Badge>
+                </TooltipTrigger>
+                  <TooltipContent>
+                    Venue request options: Sponsorship or Paid
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+                </div>
+                  <!-- <Badge class="text-xs bg-orange-100 text-orange-800">Networking Event</Badge> -->
+                 <div class="flex space-x-16">
+                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event type: </p><p class="text-sm">{{ item.activity_content.eventType }}</p></div>
+                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Number of guests: </p><p class="text-sm"> {{ item.activity_content.numberOfGuests }}</p></div>
+                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Tickets: </p><p class="text-sm"> {{ item.activity_content.tickets }}</p></div>
 
-                  <div class="flex mt-1"><p class="text-sm font-semibold mr-1 text-gray-700">Number of guests: </p><p class="text-sm"> 150</p></div>
-                  <div class="flex mt-1"><p class="text-sm font-semibold mr-1 text-gray-700">Tickets: </p><p class="text-sm"> Free</p></div>
+                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event date: </p><p class="text-sm">  {{ item.activity_content.eventDate }}</p></div>
+                  <div class="flex mt-2 mb-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event time: </p><p class="text-sm"> {{ item.activity_content.eventTime }}</p></div>
+                </div>
+                  <div class="flex mt-2 mb-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event description: </p><p class="text-sm"> {{ item.activity_content.eventDescription }}</p></div>
 
-                  <div class="flex mt-1"><p class="text-sm font-semibold mr-1 text-gray-700">Event date: </p><p class="text-sm"> Aug 25, 2023</p></div>
-                  <div class="flex mt-1 mb-1"><p class="text-sm font-semibold mr-1 text-gray-700">Event time: </p><p class="text-sm"> 17:00 - 20:00</p></div>
-
-
+<!-- 
                   <Badge class="text-xs bg-orange-100 text-orange-800 mr-2">Sponsor request</Badge>
-                  <Badge class="text-xs bg-orange-100 text-orange-800">Paid request</Badge>
+                  <Badge class="text-xs bg-orange-100 text-orange-800">Paid request</Badge> -->
 
                   <!-- <p href="#" class="text-sm text-orange-600 hover:underline">Link to event page</p> -->
                 </div>
@@ -184,8 +231,8 @@ import {
                 </Tooltip>
               </TooltipProvider>
             </div>
-            <blockquote class="p-4 italic border-l-4 border-orange-200 bg-neutral-50 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-300">
-              "User's message goes here, outlining the details and specifics of the request for a venue."
+            <blockquote v-for="message in item.activity_content.eventMessages" class="p-4 italic border-l-4 border-orange-200 bg-neutral-50 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-300">
+              {{ message.userName }}: {{ message.content }}
             </blockquote>
             <div class="flex space-x-2">
               <Button class="bg-green-500" variant="default"><Check class="w-4 h-4 mr-1" /> Accept</Button>
@@ -198,7 +245,7 @@ import {
             </div>
             <div class="flex items-center space-x-2 text-sm text-gray-400">
               <Calendar class="w-4 h-4 text-orange-500" />
-              <span>Received on Jan 20, 2023</span>
+              <span>{{ formatDate(item.created_at) }}</span>
             </div>
           </div>
         </TabsContent>

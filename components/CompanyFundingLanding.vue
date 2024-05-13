@@ -3,6 +3,8 @@
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Search } from 'lucide-vue-next'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+
 
 const venues = ref([
   {
@@ -53,6 +55,8 @@ const venues = ref([
       <div v-for="venue in venues" class="flex-none w-[500px]  max-w-none rounded-lg shadow-lg bg-white dark:bg-gray-800">
        <div class="flex">
         <img :src="venue.img" alt="Venue" class="rounded-t-lg object-cover w-full h-[300px]" />
+        <Badge v-if="venue.sponsorshipOption" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
+
         <Avatar class=" mt-40 w-24 h-24  z-30">
             <AvatarImage :src="venues.avatar" alt="Profile" />
             <AvatarFallback>XX</AvatarFallback>

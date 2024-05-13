@@ -45,9 +45,9 @@ import { Badge } from '@/components/ui/badge';
         </div>
       </div>
       <div class="flex space-x-2 items-center">
-        <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs hover:bg-orange-500 hover:text-white">
+        <!-- <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs hover:bg-orange-500 hover:text-white">
           Pro
-        </Badge>
+        </Badge> -->
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger as="template">
@@ -75,7 +75,7 @@ import { Badge } from '@/components/ui/badge';
         </CardHeader>
         <CardContent>
           <ul>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded mt-6">
               <List class="w-5 h-5 mr-2 text-indigo-500" />
               <span>Venues</span>
             </li>
@@ -102,6 +102,14 @@ import { Badge } from '@/components/ui/badge';
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
               <Volume2 class="w-5 h-5 mr-2 text-red-500" />
               <span>Media</span>
+            </li>
+            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+              <Volume2 class="w-5 h-5 mr-2 text-red-500" />
+              <span>Event AI</span>
+            </li>
+            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+              <Volume2 class="w-5 h-5 mr-2 text-red-500" />
+              <span>Angel AI</span>
             </li>
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
               <Mail class="w-5 h-5 mr-2 text-red-500" />

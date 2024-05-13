@@ -97,17 +97,15 @@ import { Badge } from '@/components/ui/badge'
             Resources
           </a>
         </NuxtLink>
-        <NuxtLink to="AllCommunities">
+        <!-- <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline">
             Event AI
           </a>
-          <!-- <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
-            Coming soon
-          </Badge> -->
-        </NuxtLink>
+
+        </NuxtLink> -->
         <NuxtLink to="AllCommunities">
           <a class="text-m font-medium  hover:underline ml-8 mr-2">
-            Angel AI
+            AngelAI
           </a>
           <Badge class="  text-xs border-orange-500 bg-white text-orange-500 ">
             $13,777
