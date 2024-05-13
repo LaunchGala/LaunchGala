@@ -237,8 +237,8 @@ function formatDate(date: string) {
               {{ message.userName }}: {{ message.content }}
             </blockquote>
             <div class="flex object-center space-x-96">
-              <Button class="bg-green-500" variant="default"><Check class="w-4 h-4 mr-1" /> Accept</Button>
-              <Button variant="destructive"><X class="w-4 h-4 mr-1" /> Reject</Button>
+              <Button class="bg-green-500 hover:bg-green-700" variant="default"><Check class="w-4 h-4 mr-1" /> Accept</Button>
+              <Button class="hover:bg-red-700" variant="destructive"><X class="w-4 h-4 mr-1 " /> Reject</Button>
               <!-- <Button variant="secondary"><Edit2 class="w-4 h-4 mr-1" /> Suggest another date</Button> -->
             </div>
             <Textarea class="mt-2" rows="3" placeholder="Write a reply..."></Textarea>
