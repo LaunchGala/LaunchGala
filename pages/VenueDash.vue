@@ -194,8 +194,10 @@ function formatDate(date: string) {
                   <TooltipTrigger as-child>
                   <Badge v-for="badge in item.activity_content.badges" in class="text-sm bg-orange-100 text-orange-700">{{ badge }}</Badge>
                 </TooltipTrigger>
-                  <TooltipContent>
-                    Venue request options: Sponsorship (Free Venue as main sponsor) or Paid (Full price Rent Venue) or Partnership (Discounted Price as sponsor Partner)
+                  <TooltipContent class="bg-orange-600 text-orange-100 font-semibold flex-row">
+                    Venue request options: Sponsorship (Free Venue as main sponsor),
+                    Paid (Full price Rent Venue),
+                    Partnership (Discounted Price as sponsor Partner)
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -234,7 +236,7 @@ function formatDate(date: string) {
             <blockquote v-for="message in item.activity_content.eventMessages" class="p-4 italic border-l-4 border-orange-200 bg-neutral-50 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-300">
               {{ message.userName }}: {{ message.content }}
             </blockquote>
-            <div class="flex space-x-2">
+            <div class="flex object-center space-x-96">
               <Button class="bg-green-500" variant="default"><Check class="w-4 h-4 mr-1" /> Accept</Button>
               <Button variant="destructive"><X class="w-4 h-4 mr-1" /> Reject</Button>
               <!-- <Button variant="secondary"><Edit2 class="w-4 h-4 mr-1" /> Suggest another date</Button> -->
