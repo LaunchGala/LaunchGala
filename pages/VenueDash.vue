@@ -179,8 +179,12 @@ function formatDate(date: string) {
         </TabsList>
 
         <TabsContent value="requested-from-me" class="space-y-6">
+          <p class="text-orange-600 dark:text-orange-400">
+            View the venues that others have requested from you:
+          </p>
           <!-- Repeat this section for each post with different venue details -->
           <div v-for="item in feedItems" class="flex flex-col space-y-4 bg-white p-4 rounded-md shadow-xl transition-all ease-in-out duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
+            
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-4">
                 <div class="mr-6">
