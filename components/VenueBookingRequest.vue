@@ -61,7 +61,7 @@ async function bookingActivity() {
       userAvatar: avatar_url.value,
       full_name: full_name.value,
       venuePayment: 'Paid',
-      badges: ['Sponsor request', 'Paid request']
+      badges: ['Sponsor request', 'Paid request', 'Partner request']
     },
     activity_object: {
       startDate: startDate.value,

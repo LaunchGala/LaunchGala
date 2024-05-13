@@ -188,28 +188,28 @@ function formatDate(date: string) {
             </div>
                 <div >
                   <h3 class="font-semibold text-lg">{{ item.activity_content.eventName }}</h3>
-                  <div class="mb-2 mt-1">
+                  <div class="mb-2 mt-2">
                     <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger as-child>
                   <Badge v-for="badge in item.activity_content.badges" in class="text-sm bg-orange-100 text-orange-700">{{ badge }}</Badge>
                 </TooltipTrigger>
                   <TooltipContent>
-                    Venue request options: Sponsorship or Paid
+                    Venue request options: Sponsorship (Free Venue as main sponsor) or Paid (Full price Rent Venue) or Partnership (Discounted Price as sponsor Partner)
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
                 </div>
                   <!-- <Badge class="text-xs bg-orange-100 text-orange-800">Networking Event</Badge> -->
-                 <div class="flex space-x-16">
-                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event type: </p><p class="text-sm">{{ item.activity_content.eventType }}</p></div>
-                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Number of guests: </p><p class="text-sm"> {{ item.activity_content.numberOfGuests }}</p></div>
-                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Tickets: </p><p class="text-sm"> {{ item.activity_content.tickets }}</p></div>
+                 <div class="flex space-x-14">
+                  <div class="flex mt-2 "><p class="text-md font-semibold mr-1 text-gray-700">Event type: </p><p class="text-md">{{ item.activity_content.eventType }}</p></div>
+                  <div class="flex mt-2"><p class="text-md font-semibold mr-1 text-gray-700">Number of guests: </p><p class="text-md"> {{ item.activity_content.numberOfGuests }}</p></div>
+                  <div class="flex mt-2"><p class="text-md font-semibold mr-1 text-gray-700">Tickets: </p><p class="text-md"> {{ item.activity_content.tickets }}</p></div>
 
-                  <div class="flex mt-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event date: </p><p class="text-sm">  {{ item.activity_content.eventDate }}</p></div>
-                  <div class="flex mt-2 mb-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event time: </p><p class="text-sm"> {{ item.activity_content.eventTime }}</p></div>
+                  <div class="flex mt-2"><p class="text-md font-semibold mr-1 text-gray-700">Event date: </p><p class="text-md">  {{ item.activity_content.eventDate }}</p></div>
+                  <div class="flex mt-2 mb-2"><p class="text-md font-semibold mr-1 text-gray-700">Event time: </p><p class="text-md"> {{ item.activity_content.eventTime }}</p></div>
                 </div>
-                  <div class="flex mt-2 mb-2"><p class="text-sm font-semibold mr-1 text-gray-700">Event description: </p><p class="text-sm"> {{ item.activity_content.eventDescription }}</p></div>
+                  <div class="flex mt-2 mb-2"><p class="text-md font-semibold mr-1 text-gray-700">Event description: </p><p class="text-md"> {{ item.activity_content.eventDescription }}</p></div>
 
 <!-- 
                   <Badge class="text-xs bg-orange-100 text-orange-800 mr-2">Sponsor request</Badge>
@@ -237,7 +237,7 @@ function formatDate(date: string) {
             <div class="flex space-x-2">
               <Button class="bg-green-500" variant="default"><Check class="w-4 h-4 mr-1" /> Accept</Button>
               <Button variant="destructive"><X class="w-4 h-4 mr-1" /> Reject</Button>
-              <Button variant="secondary"><Edit2 class="w-4 h-4 mr-1" /> Suggest another date</Button>
+              <!-- <Button variant="secondary"><Edit2 class="w-4 h-4 mr-1" /> Suggest another date</Button> -->
             </div>
             <Textarea class="mt-2" rows="3" placeholder="Write a reply..."></Textarea>
             <div class="mt-2">
