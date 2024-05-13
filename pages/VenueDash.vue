@@ -179,7 +179,7 @@ function formatDate(date: string) {
         </TabsList>
 
         <TabsContent value="requested-from-me" class="space-y-6 ">
-          <p class="text-orange-600 dark:text-orange-400">
+          <p class="text-gray-800 p-2 font-semibold ">
             View the venues that others have requested from you:
           </p>
           <!-- Repeat this section for each post with different venue details -->
