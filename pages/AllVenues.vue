@@ -153,9 +153,9 @@ onMounted(() => {
             <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">{{ amenity }}</div>
           </div>
 
-          <p class="text-gray-700 text-base mt-4 dark:text-gray-300">
+          <!-- <p class="text-gray-700 text-base mt-4 dark:text-gray-300">
             {{ venue.description }}
-          </p>
+          </p> -->
         </div>
         <div class="px-6 pt-4 pb-2">
           <!-- <div class="flex items-center">

@@ -307,7 +307,7 @@ import { Badge } from '@/components/ui/badge';
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4 ">
                 <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
-                <p class="font-semibold">Angel AI</p>
+                <p class="font-semibold">Launch AI</p>
               </div>
               <div class="flex items-center space-x-4">
                 <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />

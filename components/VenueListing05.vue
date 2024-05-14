@@ -61,7 +61,7 @@ function addEventTypes(eventTypes: string) {
                     :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Hackathon'), 'bg-white': !props.venueListing.eventType.includes('Hackathon') }">
                     <Code class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Hackathon</span>
-                    <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+                    <!-- <span class="text-sm dark:text-gray-300">On-site parking or valet service</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -75,7 +75,7 @@ function addEventTypes(eventTypes: string) {
                     <!-- <Checkbox id="wifi" class="sr-only" /> -->
                     <smile-plus class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Networking Event</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -89,7 +89,7 @@ function addEventTypes(eventTypes: string) {
                     <!-- <Checkbox id="wifi" class="sr-only" /> -->
                     <trending-up class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Pitching event</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -102,7 +102,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Dinner event'), 'bg-white': !props.venueListing.eventType.includes('Dinner event') }">
                     <ChefHat class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Dinner event</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -115,7 +115,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Sales expo'), 'bg-white': !props.venueListing.eventType.includes('Sales expo') }">
                     <Briefcase class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Sales & Trade show</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -139,7 +139,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Conference'), 'bg-white': !props.venueListing.eventType.includes('Conference') }">
                     <MicIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Conference</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -152,7 +152,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Seminar & workshop'), 'bg-white': !props.venueListing.eventType.includes('Seminar & workshop') }">
                     <LightbulbIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Seminar & workshop</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -165,7 +165,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Product launch'), 'bg-white': !props.venueListing.eventType.includes('Product launch') }">
                     <RocketIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Product launch</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -178,7 +178,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Corporate meetings & retreats'), 'bg-white': !props.venueListing.eventType.includes('Corporate meetings & retreats') }">
                     <pie-chart class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Corporate events & retreats</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -203,7 +203,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Panel discussions & roundtables'), 'bg-white': !props.venueListing.eventType.includes('Panel discussions & roundtables') }">
                     <TheaterIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1 ">Panel & roundtables</span>
-                    <span class="text-sm dark:text-gray-300">ramps or elevators</span>
+                    <!-- <span class="text-sm dark:text-gray-300">ramps or elevators</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -216,7 +216,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Award ceremony & Gala'), 'bg-white': !props.venueListing.eventType.includes('Award ceremony & Gala') }">
                     <trophy class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Award ceremony & Gala</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -229,7 +229,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Job fair & career expo'), 'bg-white': !props.venueListing.eventType.includes('Job fair & career expo') }">
                     <square-user class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Job fair & career expo</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -242,7 +242,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Academic conference'), 'bg-white': !props.venueListing.eventType.includes('Academic conference') }">
                     <GraduationCap class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Academic conference</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -255,7 +255,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Investor & funding meetup'), 'bg-white': !props.venueListing.eventType.includes('Investor & funding meetup') }">
                     <DollarSignIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Investor & funding meetup</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -268,7 +268,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Startup accelerator & incubator'), 'bg-white': !props.venueListing.eventType.includes('Startup accelerator & incubator') }">
                     <BarChart3 class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Startup accelerator & incubator</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -292,7 +292,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Industry-specific summit'), 'bg-white': !props.venueListing.eventType.includes('Industry-specific summit') }">
                     <Globe class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Summit & Symposium</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -305,7 +305,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Press conference'), 'bg-white': !props.venueListing.eventType.includes('Press conference') }">
                     <CameraIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Press conference</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -318,7 +318,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Executive & leadership forum'), 'bg-white': !props.venueListing.eventType.includes('Executive & leadership forum') }">
                     <Crown class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Executive & leadership forum</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -342,7 +342,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Publishing & signing event'), 'bg-white': !props.venueListing.eventType.includes('Publishing & signing event') }">
                     <BookCheck class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Publishing & signing event</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -355,7 +355,7 @@ function addEventTypes(eventTypes: string) {
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Art show & exhibition'), 'bg-white': !props.venueListing.eventType.includes('Art show & exhibition') }">
                     <Palette class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Art show & exhibition</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>

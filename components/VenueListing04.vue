@@ -61,7 +61,7 @@ function addAmenity(amenity: string) {
                     :class="{ 'bg-orange-100': props.venueListing.amenities.includes('On-site parking'), 'bg-white': !props.venueListing.amenities.includes('On-site parking') }">
                     <Car class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">On-site parking</span>
-                    <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+                    <!-- <span class="text-sm dark:text-gray-300">On-site parking or valet service</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -75,7 +75,7 @@ function addAmenity(amenity: string) {
                     <!-- <Checkbox id="wifi" class="sr-only" /> -->
                     <Bus class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Public transportation access</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -89,7 +89,7 @@ function addAmenity(amenity: string) {
                     <!-- <Checkbox id="wifi" class="sr-only" /> -->
                     <Wifi class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Wi-Fi</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -102,7 +102,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Audiovisual equipment'), 'bg-white': !props.venueListing.amenities.includes('Audiovisual equipment') }">
                     <AudioLinesIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Audiovisual equipment</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -115,7 +115,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Stage/Speaking platform'), 'bg-white': !props.venueListing.amenities.includes('Stage/Speaking platform') }">
                     <TheaterIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Stage/Speaking platform</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -128,7 +128,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Mic & Sound system'), 'bg-white': !props.venueListing.amenities.includes('Mic & Sound system') }">
                     <Mic class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Mic & Sound system</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -141,7 +141,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Projectors & Screens'), 'bg-white': !props.venueListing.amenities.includes('Projectors & Screens') }">
                     <Tv2 class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Projectors & Screens</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -154,7 +154,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Adjustable lighting'), 'bg-white': !props.venueListing.amenities.includes('Adjustable lighting') }">
                     <LightbulbIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Adjustable lighting</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -167,7 +167,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Tables & chairs'), 'bg-white': !props.venueListing.amenities.includes('Tables & chairs') }">
                     <sofa class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Tables & chairs</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -180,7 +180,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('AC & heating controls'), 'bg-white': !props.venueListing.amenities.includes('AC & heating controls') }">
                     <AirVentIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">AC & heating controls</span>
-                    <span class="text-sm dark:text-gray-300">High-speed internet</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-speed internet</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -194,7 +194,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Restrooms'), 'bg-white': !props.venueListing.amenities.includes('Restrooms') }">
                     <shower-head class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Restrooms</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -207,7 +207,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Disability access'), 'bg-white': !props.venueListing.amenities.includes('Disability access') }">
                     <AccessibilityIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Disability access</span>
-                    <span class="text-sm dark:text-gray-300">ramps or elevators</span>
+                    <!-- <span class="text-sm dark:text-gray-300">ramps or elevators</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -220,7 +220,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Security services'), 'bg-white': !props.venueListing.amenities.includes('Security services') }">
                     <shield class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Security services</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -233,7 +233,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Reception/Registration area'), 'bg-white': !props.venueListing.amenities.includes('Reception/Registration area') }">
                     <book-user class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Reception/Registration area</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -246,7 +246,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Room/space divider'), 'bg-white': !props.venueListing.amenities.includes('Room/space divider') }">
                     <DivideIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Room/space divider options</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -259,7 +259,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Private meeting rooms'), 'bg-white': !props.venueListing.amenities.includes('Private meeting rooms') }">
                     <door-closed class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Private meeting rooms</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -272,7 +272,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('On-site accommodations'), 'bg-white': !props.venueListing.amenities.includes('On-site accommodations') }">
                     <BedIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">On-site accommodations</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -285,7 +285,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Outdoor spaces'), 'bg-white': !props.venueListing.amenities.includes('Outdoor spaces') }">
                     <Sun class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Outdoor spaces</span>
-                    <span class="text-sm dark:text-gray-300">(e.g., gardens, terraces)</span>
+                    <!-- <span class="text-sm dark:text-gray-300">(e.g., gardens, terraces)</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -298,7 +298,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Signage & branding'), 'bg-white': !props.venueListing.amenities.includes('Signage & branding') }">
                     <FlagIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Signage & branding option</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -311,7 +311,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Cloakroom/Coat check'), 'bg-white': !props.venueListing.amenities.includes('Cloakroom/Coat check') }">
                     <Check class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Cloakroom/Coat check</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -324,7 +324,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Green room/VIP area'), 'bg-white': !props.venueListing.amenities.includes('Green room/VIP area') }">
                     <Crown class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Green room/VIP area</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -337,7 +337,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Smoke alarm'), 'bg-white': !props.venueListing.amenities.includes('Smoke alarm') }">
                     <AlarmSmokeIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Smoke alarm</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -350,7 +350,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Refrigerator'), 'bg-white': !props.venueListing.amenities.includes('Refrigerator') }">
                     <refrigerator class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Refrigerator</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -363,7 +363,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Microwave'), 'bg-white': !props.venueListing.amenities.includes('Microwave') }">
                     <microwave class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Microwave</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -376,7 +376,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Private entrance'), 'bg-white': !props.venueListing.amenities.includes('Private entrance') }">
                     <DoorOpenIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Private entrance</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -389,7 +389,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Elevators'), 'bg-white': !props.venueListing.amenities.includes('Elevators') }">
                     <arrow-up-down class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Elevators</span>
-                    <span class="text-sm dark:text-gray-300">Satellite channels</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -402,7 +402,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Bar space'), 'bg-white': !props.venueListing.amenities.includes('Bar space') }">
                     <Martini class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Bar space</span>
-                    <span class="text-sm dark:text-gray-300">HD Projector</span>
+                    <!-- <span class="text-sm dark:text-gray-300">HD Projector</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -416,7 +416,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Kitchen'), 'bg-white': !props.venueListing.amenities.includes('Kitchen') }">
                     <chef-hat class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Kitchen</span>
-                    <span class="text-sm dark:text-gray-300">Adjustable thermostat</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Adjustable thermostat</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -430,7 +430,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Coffee Machine'), 'bg-white': !props.venueListing.amenities.includes('Coffee Machine') }">
                     <Coffee class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Coffee Machine</span>
-                    <span class="text-sm dark:text-gray-300">Complimentary coffee</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Complimentary coffee</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -444,7 +444,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Computer'), 'bg-white': !props.venueListing.amenities.includes('Computer') }">
                     <Monitor class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Computer</span>
-                    <span class="text-sm dark:text-gray-300">PC with internet access</span>
+                    <!-- <span class="text-sm dark:text-gray-300">PC with internet access</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -458,7 +458,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Games'), 'bg-white': !props.venueListing.amenities.includes('Games') }">
                     <GamepadIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Games</span>
-                    <span class="text-sm dark:text-gray-300">High-quality audio</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>
@@ -471,7 +471,7 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Waterfront'), 'bg-white': !props.venueListing.amenities.includes('Waterfront') }">
                     <Fish class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Waterfront</span>
-                    <span class="text-sm dark:text-gray-300">High-quality audio</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
                   </label>
                 </TooltipTrigger>
                 <!-- <TooltipContent>

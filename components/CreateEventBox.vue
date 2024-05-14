@@ -10,7 +10,7 @@ import { Check } from 'lucide-vue-next';
       <div class="flex items-left justify-left  bg-gray-100 dark:bg-black p-6  ">
         <div class="space-y-4 w-1/4 z-20 mx-10 mb-6 ">
 
-        <div class="flex dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-8">
+        <div class="flex dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-3">
     <Card class=" dark:bg-gray-800 w-full max-w-md rounded-lg shadow-lg overflow-hidden ">
       <CardHeader class="px-6 py-8 bg-orange-500 mb-2">
 
@@ -46,7 +46,7 @@ import { Check } from 'lucide-vue-next';
           </Button>
         </div>
         <div class="mt-4 text-sm text-center">
-          <p class="text-gray-600 dark:text-gray-400">You can edit all your inputs anytime</p>
+          <p class="text-gray-600 dark:text-gray-400">You can edit all your inputs, save, publish or delete it at anytime.</p>
           <button class="text-orange-500 hover:underline dark:text-orange-400 mt-1 mb-2">Skip this step</button>
         </div>
       </CardContent>
@@ -62,8 +62,8 @@ import { Check } from 'lucide-vue-next';
 
 
     </div>
-    <div class="w-1/2 font-bold text-5xl absolute top-0 right-32  z-20 m-8 mt-60  text-center text-white">
-      <div>Your event should be</div><div class="text-orange-500"> 'The Event'</div>Find your Venue, Volunteers, <div>Speakers & Sponsors.</div> <div class="mt-6"> Launch your Event </div><div>For Free</div>
+    <div class="w-1/2 font-bold text-5xl absolute top-0 right-32  z-20 m-8 mt-56 text-center text-white">
+      <div>It is that easy!</div>Find your Venue, Volunteers, <div>Speakers & Sponsors.</div> <div class="mt-6"> Launch your Event </div><div>For Free</div>
     </div>
 </div>
 </template>

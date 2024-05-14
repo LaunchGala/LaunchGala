@@ -5,6 +5,7 @@ const user = useSupabaseUser()
 const isLoggedIn = computed(() => user.value !== null)
 
 import { Badge } from '@/components/ui/badge'
+import { CrownIcon } from 'lucide-vue-next';
 
 
 </script>
@@ -28,52 +29,52 @@ import { Badge } from '@/components/ui/badge'
           <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
           <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg> -->
-        <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-1/6">
+        <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-16 h-16">
         <span class=" colorOrange">Launch Gala</span>
       </a>
-      <nav class="hidden lg:flex gap-6">
+      <nav class="hidden lg:flex gap-12 ml-28">
         <NuxtLink to="AllVenues">
-          <a class="text-m font-medium  hover:underline">
+          <a class="text-m font-semibold  hover:underline">
             Venues
           </a>
         </NuxtLink>
         <NuxtLink to="AllVolunteers">
-          <a class="text-m font-medium  hover:underline">
+          <a class="text-m font-semibold  hover:underline">
             Volunteers
           </a>
         </NuxtLink>
-        <NuxtLink to="AllSponsors">
-          <a class="text-m font-medium  hover:underline">
+        <!-- <NuxtLink to="AllSponsors">
+          <a class="text-m font-semibold  hover:underline">
             Sponsors
           </a>
-        </NuxtLink>
+        </NuxtLink> -->
         <NuxtLink to="AllSpeakers">
-          <a class="text-m font-medium  hover:underline">
+          <a class="text-m font-semibold  hover:underline">
             Experts
           </a>
         </NuxtLink>
         <NuxtLink to="AllVendors">
 
-<a class="text-m font-medium  hover:underline">
+<a class="text-m font-semibold  hover:underline">
   Vendors
 </a>
 
 </NuxtLink>
         <NuxtLink to="AllEvents">
-          <a class="text-m font-medium  hover:underline">
+          <a class="text-m font-semibold  hover:underline">
             Events
           </a>
         </NuxtLink>
-        <NuxtLink to="AllMedia">
-          <a class="text-m font-medium  hover:underline">
+        <!-- <NuxtLink to="AllMedia">
+          <a class="text-m font-semibold  hover:underline">
             Media
           </a>
 
-        </NuxtLink>
+        </NuxtLink> -->
 <!-- 
 
         <NuxtLink to="AllCommunities">
-          <a class="text-m font-medium  hover:underline">
+          <a class="text-m font-semibold  hover:underline">
             Talents 
           </a>
           <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
@@ -82,33 +83,31 @@ import { Badge } from '@/components/ui/badge'
         </NuxtLink>
 
         <NuxtLink to="AllCommunities">
-          <a class="text-m font-medium  hover:underline">
+          <a class="text-m font-semibold  hover:underline">
             Communities
           </a>
           <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
             Coming Soon!
           </Badge>
         </NuxtLink> -->
-        <NuxtLink to="AllResources">
-          <!-- <Badge class="transform absolute rotate-45 text-xs py-0.5 px-2 bg-orange-500  text-white dark:bg-black">
-            Coming Soon!
-          </Badge> -->
-          <a class="text-m  font-medium hover:underline">
+        <!-- <NuxtLink to="AllResources">
+
+          <a class="text-m  font-semibold hover:underline">
             Resources
           </a>
-        </NuxtLink>
+        </NuxtLink> -->
         <!-- <NuxtLink to="AllCommunities">
-          <a class="text-m font-medium  hover:underline">
+          <a class="text-m font-semibold  hover:underline">
             Event AI
           </a>
 
         </NuxtLink> -->
         <NuxtLink to="AllCommunities">
-          <a class="text-m font-medium  hover:underline ml-8 mr-2">
+          <a class="text-m font-semibold  hover:underline ml-8 mr-2">
             LaunchAI
           </a>
           <Badge class="  text-xs border-orange-500 bg-white text-orange-500 ">
-            $13,777
+            $ --.--
           </Badge>
         </NuxtLink>
       </nav>
@@ -116,7 +115,9 @@ import { Badge } from '@/components/ui/badge'
         + Create Event
       </button>
       <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs mr-4 hover:bg-orange-500 hover:text-white">
-          Go Pro
+        <CrownIcon class="w-5 h-5 text-orange-500 hover:text-orange-300" />
+  
+        <spam class="text-md ml-1">Pro</spam>
         </Badge>
       <span class="absolute top-5 right-24 -mt-3 mr-6 bg-white text-orange-500 rounded-full text-xs px-1">
                         11

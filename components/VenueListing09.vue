@@ -45,7 +45,7 @@ function sponsorshipOption(toggleState: boolean) {
           <div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 py-4">
             <div class="flex items-center space-x-3">
               <CardTitle>Offer Venue for Sponsorship</CardTitle>
-              <CardDescription>Provide an option to accept free venue requests for selected events as sponsor (you will receive a request and you can review, accept or reject it).</CardDescription>
+              <CardDescription>Provide an option to accept partnership or free venue requests for selected events as sponsor (you will receive a request and you can review, accept or reject it).</CardDescription>
             </div>
             <Switch :default-checked="props.venueListing.sponsorshipOption" @update:checked="sponsorshipOption" id="displaySponsorship" />
           </div>
