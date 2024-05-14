@@ -142,8 +142,24 @@ const date = ref<Date>()
 
 
 <script setup lang="ts">
+
+
 import { Button } from '@/components/ui/button'
-import { Megaphone } from 'lucide-vue-next'
+import { Megaphone, Clock } from 'lucide-vue-next'
+
+const countdown = ref(30 * 24 * 60 * 60 * 1000) // 30 days in milliseconds
+
+const intervalId = setInterval(() => {
+  countdown.value -= 1000;
+  if (countdown.value <= 0) {
+    clearInterval(intervalId);
+  }
+}, 1000);
+
+const days = () => Math.floor(countdown.value / (1000 * 60 * 60 * 24))
+const hours = () => Math.floor((countdown.value % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+const minutes = () => Math.floor((countdown.value % (1000 * 60 * 60)) / (1000 * 60))
+const seconds = () => Math.floor((countdown.value % (1000 * 60)) / 1000)
 </script>
 
 <template>
@@ -160,6 +176,23 @@ import { Megaphone } from 'lucide-vue-next'
         <Megaphone class="h-8 w-8 text-orange-600 dark:text-orange-400"/>
         <p class="text-lg font-semibold text-orange-800 dark:text-orange-400">Request to Get Listed Today!</p>
       </div>
+      <div class="text-center">
+        <Clock class="h-8 w-8 mx-auto text-orange-600 dark:text-orange-400"/>
+        <p class="text-lg font-semibold text-orange-800 dark:text-orange-400 my-4">Marketplace Opens In:</p>
+
+        <div class="flex items-baseline justify-center gap-6">
+        <div class="flex flex-col items-center space-y-2">
+          <span class="text-7xl font-bold text-gray-800 dark:text-white">{{ days() }}</span>
+          <span class="text-base font-medium text-gray-500 dark:text-gray-400">Days</span>
+        </div>
+        <div class="flex flex-col items-center space-y-2">
+          <span class="text-7xl font-bold text-gray-800 dark:text-white">{{ hours() }}</span>
+          <span class="text-base font-medium text-gray-500 dark:text-gray-400">Hours</span>
+        </div>
+      </div>
+
+      </div>
+
       <div class="text-center">
         <p class="text-lg">We provide the stage, you bring your A-game. Increase your visibility and connect with potential clients.</p>
       </div>
