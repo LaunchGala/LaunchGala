@@ -1,4 +1,4 @@
-
+<!-- 
 <script setup lang="ts">
 import { MapPin, Search, ShoppingCart, Tag, Star } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
@@ -134,6 +134,39 @@ const date = ref<Date>()
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</template> -->
+
+
+
+<script setup lang="ts">
+import { Button } from '@/components/ui/button'
+import { Megaphone } from 'lucide-vue-next'
+</script>
+
+<template>
+  <div class="relative min-h-screen bg-gradient-to-br from-orange-300 via-orange-200 to-orange-500 dark:from-gray-900 dark:via-gray-900 dark:to-black py-12 px-4 md:flex md:items-center md:justify-center">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="/placeholder.svg" alt="Vendor Marketplace Coming Soon" class="h-full w-full object-cover opacity-20 dark:opacity-40" />
+    </div>
+    <div class="z-10 max-w-4xl mx-auto space-y-8 rounded-lg bg-white p-8 shadow-xl dark:bg-slate-700">
+      <h1 class="text-4xl font-bold leading-tight text-gray-900 text-center dark:text-white">Join Our Marketplace for Vendors</h1>
+      <p class="text-xl text-gray-700 text-center dark:text-gray-200">A dedicated platform to showcase & connect you with a vast audience seeking your unique products and services for their events.
+
+</p>
+      <div class="flex items-center justify-center space-x-3">
+        <Megaphone class="h-8 w-8 text-orange-600 dark:text-orange-400"/>
+        <p class="text-lg font-semibold text-orange-800 dark:text-orange-400">Request to Get Listed Today!</p>
+      </div>
+      <div class="text-center">
+        <p class="text-lg">We provide the stage, you bring your A-game. Increase your visibility and connect with potential clients.</p>
+      </div>
+      <div class="flex justify-center">
+        <Button class="inline-flex items-center justify-center rounded-md bg-orange-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-500 dark:hover:bg-orange-600">
+          Request to Get Listed
+        </Button>
       </div>
     </div>
   </div>
