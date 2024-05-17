@@ -180,14 +180,22 @@ const seconds = () => Math.floor((countdown.value % (1000 * 60)) / 1000)
         <Clock class="h-8 w-8 mx-auto text-orange-600 dark:text-orange-400"/>
         <p class="text-lg font-semibold text-orange-800 dark:text-orange-400 my-4">Marketplace Opens In:</p>
 
-        <div class="flex items-baseline justify-center gap-6">
-        <div class="flex flex-col items-center space-y-2">
-          <span class="text-7xl font-bold text-gray-800 dark:text-white">{{ days() }}</span>
-          <span class="text-base font-medium text-gray-500 dark:text-gray-400">Days</span>
+        <div class="grid grid-cols-4 gap-2">
+        <div class="flex flex-col items-center justify-center">
+          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ days() }}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">DAYS</div>
         </div>
-        <div class="flex flex-col items-center space-y-2">
-          <span class="text-7xl font-bold text-gray-800 dark:text-white">{{ hours() }}</span>
-          <span class="text-base font-medium text-gray-500 dark:text-gray-400">Hours</span>
+        <div class="flex flex-col items-center justify-center">
+          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ hours() }}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">HOURS</div>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ minutes() }}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">MINS</div>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ seconds() }}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">SECS</div>
         </div>
       </div>
 

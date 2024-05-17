@@ -171,7 +171,7 @@ function formatDate(date: string) {
         <TabsList class="flex w-full justify-around border-b-2 border-orange-300">
           <TabsTrigger value="requested-from-me" class="py-2">Venues requested from me</TabsTrigger>
           <TabsTrigger value="requested" class="py-2">Venues I requested or offered to me</TabsTrigger>
-          <TabsTrigger value="Accepted" class="py-2">Accepted upcoming Events</TabsTrigger>
+          <TabsTrigger value="Accepted" class="py-2">Approved Venue's requests</TabsTrigger>
           <TabsTrigger value="Rejected" class="py-2">Past/Rejected requests and offering</TabsTrigger>
 
           <TabsTrigger value="offered-to-me" class="py-2">Add & Manage my Venues</TabsTrigger>
@@ -202,11 +202,11 @@ function formatDate(date: string) {
                   <TooltipTrigger as-child>
                   <Badge v-for="badge in item.activity_content.badges" in class="text-sm bg-orange-100 text-orange-700">{{ badge }}</Badge>
                 </TooltipTrigger>
-                  <TooltipContent class="bg-orange-100 text-orange-700 font-semibold text-sm w-1/4 ml-20">
-                    Venue Request Options, Organizers can request the venue in 3 options: 
-                    Sponsorship (Organizer are asking for Free Venue and as a Venue provider you will be featured as main sponsor upon your approval),
-                    Paid (Organizer are offering Full price Rent Venue),
-                    Partnership (Organizer are asking for a Discounted Price or/and extra service as sponsor Partner upon your approval).
+                  <TooltipContent class="bg-orange-100 text-orange-700 font-semibold text-sm w-1/2 ml-20 p-4 space-y-3">
+                    <div class="w-full">Organizers can book the venue through three different options:</div> 
+                    <div class="w-full"> <spam class="font-bold">Sponsorship:</spam> <spam>Organizers request the venue for free. If approved, your venue will be highlighted as main sponsor.</spam></div>
+                    <div class="w-full"> <spam class="font-bold">Partnership:</spam> <spam>Organizers request a discounted rate or additional services. If approved, you will be recognized as a sponsor partner.</spam></div>
+                    <div class="w-full"><spam class="font-bold">Paid:</spam> <spam>Organizers agree to pay the full rental price for the venue.</spam></div>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
