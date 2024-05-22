@@ -46,7 +46,7 @@ const selectedCity = ref('')
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <Button class="w-full bg-orange-500 hover:bg-orange-600 text-white dark:hover:bg-orange-700 dark:bg-orange-600">Create Event</Button>
+      <!-- <Button class="w-full bg-orange-500 hover:bg-orange-600 text-white dark:hover:bg-orange-700 dark:bg-orange-600">Create Event</Button> -->
       <Button variant="ghost" class="w-full text-orange-500 hover:underline hover:bg-transparent hover:text-orange-700">Not sure yet? You can add/edit location later. Skip this step</Button>
     </div>
   </div>

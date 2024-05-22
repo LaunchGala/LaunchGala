@@ -30,12 +30,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
       </Button>
       <Button variant="default" class="w-full bg-orange-200 text-white flex justify-center items-center space-x-3 py-4 px-6 transition-transform transform hover:scale-105 z-20 relative -mt-4">
         <UserCheck class="w-6 h-6 text-green-500"/>
-        <span>Free Invite only 
-            Event</span>
+        <span>Free + Invite only Event</span>
       </Button>
       <Button variant="default" class="w-full bg-orange-200 text-white flex justify-center items-center space-x-3 py-4 px-6 transition-transform transform hover:scale-105 z-20 relative -mt-4">
         <Users class="w-6 h-6 text-orange-500"/>
-        <span>Free Public Event</span>
+        <span>Free + Public Event</span>
       </Button>
     </div>
   </div>

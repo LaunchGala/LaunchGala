@@ -24,7 +24,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 
       <div class="grid gap-6">
         <div>
-          <Input type="text" placeholder="Enter event title" class="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-4" />
+          <Input type="text" placeholder="Enter event name" class="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-4" />
         </div>
         <div>
           <Textarea placeholder="Add event description" class="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-4" rows="4" />
