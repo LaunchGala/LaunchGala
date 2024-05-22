@@ -37,7 +37,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
         <span>Free + Public Event</span>
       </Button>
     </div>
+    <CardFooter class="flex justify-center space-x-4 mt-8">
+      <Button variant="ghost" class="text-orange-500 hover:underline hover:bg-transparent hover:text-orange-700">Not sure yet? You can add/edit ticket's option later. Skip this step</Button>
+      <!-- <Button class="bg-orange-500 hover:bg-orange-600 text-white dark:hover:bg-orange-700 dark:bg-orange-600">Create Event</Button> -->
+    </CardFooter>
   </div>
+  
 
   <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
