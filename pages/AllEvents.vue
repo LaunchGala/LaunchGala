@@ -120,7 +120,7 @@ const allEvents = ref([
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Upcoming Events</h1>
       <NuxtLink to="CreateEvent">
-      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Create your Event</Button>
+      <Button class="bg-orange-500 text-white  ">Create your Event</Button>
       </NuxtLink>
     </div>
     
