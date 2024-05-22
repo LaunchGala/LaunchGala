@@ -24,18 +24,28 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 
       <div class="grid gap-6">
         <div>
+            <Label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-gray-300" for="event-title">Event Title</Label>
+
           <Input type="text" placeholder="Enter event name" class="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-4" />
         </div>
         <div>
+            <Label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-gray-300" for="event-description">Description</Label>
+
           <Textarea placeholder="Add event description" class="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-4" rows="4" />
         </div>
         <div>
+            <Label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-gray-300" for="event-agenda">Agenda</Label>
+
           <Textarea placeholder="Add event's agenda" class="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-4" rows="4" />
         </div>
         <div>
+            <Label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-gray-300" for="event-link">Event Link</Label>
+
           <Input type="url" placeholder="Add event link (optional)" class="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 px-4" />
         </div>
         <div>
+            <Label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-gray-300" for="event-link">Event Image</Label>
+
           <div class="flex items-center justify-center w-full">
             <label class="flex w-full flex-col rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 p-12 text-center cursor-pointer hover:border-orange-500 dark:hover:border-orange-400">
               <div class="flex flex-col items-center justify-center">

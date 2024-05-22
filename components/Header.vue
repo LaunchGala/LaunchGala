@@ -111,9 +111,11 @@ import { CrownIcon } from 'lucide-vue-next';
           </Badge>
         </NuxtLink>
       </nav>
+      <NuxtLink to="CreateEvent">
       <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-m font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:underline h-10 px-4 py-2 mr-4 ">
         + Create Event
       </button>
+      </NuxtLink>
       <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs mr-4 hover:bg-orange-500 hover:text-white">
         <CrownIcon class="w-5 h-5 text-orange-500 hover:text-orange-300" />
   

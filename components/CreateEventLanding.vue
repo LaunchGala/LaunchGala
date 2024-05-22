@@ -17,8 +17,9 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     <div class="mb-10 mr-8 ml-8 flex justify-between">
       <h2 class="text-2xl font-semibold mb-4  text-gray-700">Create your event</h2>
       <!-- <p class="text-md mt-3 dark:text-gray-400">Choose the event type that suits your need</p> -->
+      <NuxtLink to="CreateEvent">
       <Button class="ButtonCol  hover:bg-gray-200 transition-colors">Create Event</Button>
-
+      </NuxtLink>
     </div>
     <p class="text-md mb-4 mt-0 ml-8 mr-8 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
 
