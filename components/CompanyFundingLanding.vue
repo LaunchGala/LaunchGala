@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 const venues = ref([
   {
     img: "/Bootstrapping.png",
-    name: "Sundar Pichai",
+    name: "Larry Page",
     company: "Google",
     industry: "IT",
     stage: "Pre-seed",
@@ -19,7 +19,7 @@ const venues = ref([
   },
   {
     img: "/Bootstrapping.png",
-    name: "Sundar Pichai",
+    name: "Sergey Brin",
     company: "Google",
     industry: "IT",
     stage: "Round A",
@@ -29,8 +29,8 @@ const venues = ref([
   },
   {
     img: "/Bootstrapping.png",
-    name: "Sundar Pichai",
-    company: "Google",
+    name: "Steve Jobs",
+    company: "Apple",
     industry: "IT",
     stage: "Round A",
     description: "A stylish venue for modern gatherings.",

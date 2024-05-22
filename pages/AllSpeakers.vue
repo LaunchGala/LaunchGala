@@ -42,8 +42,8 @@ const date = ref<Date>()
 const allExperts = ref([
   {
     img: "/Bootstrapping.png",
-    name: "Sundar Pichai",
-    position: "CEO",
+    name: "Larry Page",
+    position: "Co-Founder",
     company: "Google",
     industry: "IT",
     description: "A stylish venue for modern gatherings.",
