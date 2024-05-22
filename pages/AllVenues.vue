@@ -166,10 +166,14 @@ onMounted(() => {
             <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
             
           </div> -->
+          <NuxtLink to="VenueDetailPage">
+
           <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
+        </NuxtLink>
+
           <div class="flex items-center justify-between mt-3">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
               <Heart :fill="venue.likeVenue ? 'orange' : 'none'" class="w-5 h-5 mr-1" />

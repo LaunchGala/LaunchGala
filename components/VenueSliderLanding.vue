@@ -38,10 +38,14 @@ const venues = ref([
         <div class="p-8">
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
           <p class="text-base text-gray-700 dark:text-gray-300 mt-2">{{ venue.description }}</p>
+          <NuxtLink to="VenueDetailPage">
+
           <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
+        </NuxtLink>
+
         </div>
       </div>
       

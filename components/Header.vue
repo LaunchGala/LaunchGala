@@ -32,7 +32,7 @@ import { CrownIcon } from 'lucide-vue-next';
         <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-16 h-16">
         <span class=" colorOrange">Launch Gala</span>
       </a>
-      <nav class="hidden lg:flex gap-12 ml-28">
+      <nav class="hidden lg:flex gap-8 ml-28">
         <NuxtLink to="AllVenues">
           <a class="text-m font-semibold  hover:underline">
             Venues
@@ -43,11 +43,11 @@ import { CrownIcon } from 'lucide-vue-next';
             Volunteers
           </a>
         </NuxtLink>
-        <!-- <NuxtLink to="AllSponsors">
+        <NuxtLink to="AllSponsors">
           <a class="text-m font-semibold  hover:underline">
             Sponsors
           </a>
-        </NuxtLink> -->
+        </NuxtLink>
         <NuxtLink to="AllSpeakers">
           <a class="text-m font-semibold  hover:underline">
             Experts
@@ -103,7 +103,7 @@ import { CrownIcon } from 'lucide-vue-next';
 
         </NuxtLink> -->
         <NuxtLink to="AllCommunities">
-          <a class="text-m font-semibold  hover:underline ml-4 mr-2">
+          <a class="text-m font-semibold  hover:underline ">
             Launch AI
           </a>
           <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
