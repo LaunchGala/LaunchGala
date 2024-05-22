@@ -103,10 +103,10 @@ import { CrownIcon } from 'lucide-vue-next';
 
         </NuxtLink> -->
         <NuxtLink to="AllCommunities">
-          <a class="text-m font-semibold  hover:underline ml-8 mr-2">
-            LaunchAI
+          <a class="text-m font-semibold  hover:underline ml-4 mr-2">
+            Launch AI
           </a>
-          <Badge class="  text-xs border-orange-500 bg-white text-orange-500 ">
+          <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
             $ --.--
           </Badge>
         </NuxtLink>

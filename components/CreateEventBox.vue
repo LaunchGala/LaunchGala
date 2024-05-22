@@ -40,10 +40,12 @@ import { Check } from 'lucide-vue-next';
             <div class="text-md font-semibold text-gray-700">What do you want to call your event?</div>
           <Input type="text" placeholder="Event Name" class="w-full bg-gray-200 rounded-md border-transparent focus:border-orange-500 focus:bg-white focus:ring-0" />
           <!-- <Input type="text" placeholder="Location" class="w-full bg-gray-200 dark:bg-gray-700 rounded-md border-transparent focus:border-orange-500 focus:bg-white focus:ring-0 dark:focus:bg-gray-600" /> -->
-          <Button class="w-full flex justify-center items-center bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg px-4 py-2 transition duration-150 ease-in-out ">
+          <NuxtLink to="CreateEvent">
+          <Button variant="default" class="w-full flex justify-center items-center bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg px-4 py-2 transition duration-150 ease-in-out mt-6">
             <span>Let's Go</span>
             <Check class="w-4 h-4 ml-2" />
           </Button>
+        </NuxtLink>
         </div>
         <div class="mt-4 text-sm text-center">
           <p class="text-gray-600 dark:text-gray-400">You can edit all your inputs, save, publish or delete it at anytime.</p>
