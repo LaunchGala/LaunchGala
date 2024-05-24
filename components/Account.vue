@@ -164,7 +164,7 @@ const selectedBusinessStage = ref('')
 
 const professions = 
 [
-    'Software Engineer', 'Investor', 'Startup Founder', 'Banker', 
+    'Software Engineer', 'Investor', 'Startup Founder', 'Academic', 
     'Consultant', 'Entrepreneur', 'Marketing Manager', 'Sales Executive', 
     'Product Manager', 'Project Manager', 'Financial Analyst', 'Data Scientist', 
     'Business Analyst', 'Human Resources Manager', 'Operations Manager', 
@@ -191,7 +191,7 @@ const professions =
     'Historian', 'Anthropologist', 'Archaeologist', 'Philosopher', 
     'Theologist', 'Clergy Member', 'Astrologer', 'Yoga Instructor', 
     'Life Coach', 'Career Coach', 'Financial Coach', 'Real Estate Developer', 
-    'Faculty Professor', 'Chief Executive Officer (CEO)', 'Chief Financial Officer (CFO)', 
+    'Banker', 'Chief Executive Officer (CEO)', 'Chief Financial Officer (CFO)', 
     'Chief Operating Officer (COO)', 'Chief Technology Officer (CTO)', 
     'Chief Marketing Officer (CMO)', 'Chief Human Resources Officer (CHRO)', 
     'Chief Information Officer (CIO)', 'Chief Compliance Officer (CCO)'
