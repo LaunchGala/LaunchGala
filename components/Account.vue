@@ -157,11 +157,11 @@ const Industries = [
     'Branding and Design Services', 'Advertising Agencies', 'Public Relations Firms', 'Market Research Firms', 
     'Non-profit Solutions', 'Social Impact Platforms', 'Community Service Tech', 'Charitable Organizations', 
     'Community Foundations', 'Social Service Agencies', 'Space Tech', 'Drone Technology', 'Wearable Tech', 'Urban Tech (Smart Cities)', 
-    'Aerospace', 'Aviation', 'Urban Development'
+    'Aerospace', 'Aviation', 'Urban Development', 'Venture Capital (VC) Firm', 'Private Equity Firm', 'Accelerator & Incubator', 'Family Office', 'Angel Network', 'Sovereign Wealth Fund', 
 ]
 const selectedIndustry = ref('')
 
-const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup (Angel-funded)', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'University or Educational Institution', 'Research Institution', 'Government Organization', 'Venture Capital (VC) Firm', 'Private Equity Firm', 'Accelerator & Incubator', 'Family Office', 'Angel Network', 'Sovereign Wealth Fund', 'Other']
+const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup (Angel-funded)', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'Research Institution', 'Government Organization', 'Other']
 const selectedBusinessStage = ref('')
 
 </script>
