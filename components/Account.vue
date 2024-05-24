@@ -197,11 +197,11 @@ const selectedBusinessStage = ref('')
         </div>
         <div class="mt-4 space-y-4">
           <div>
-            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="jobTitle">Job Title</label>
+            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="jobTitle">Job Title (Student: Major)</label>
             <Input id="jobTitle" :disabled="editDisabled" v-model="job_title" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="company">Company</label>
+            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="company">Company (Student: Collage)</label>
             <Input id="company" :disabled="editDisabled" v-model="user_company" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
           <div>
