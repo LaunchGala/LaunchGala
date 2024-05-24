@@ -127,7 +127,41 @@ function toggleEditDisabled() {
   editDisabled.value = !editDisabled.value
 }
 
-const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup (Angel-funded)', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'University or Educational Institution', 'Research Institution', 'Government Organization', 'Venture Capital (VC) Firm', 'Private Equity Firm', 'Accelerator & Incubator', 'Other']
+const Industries = [
+    'Software Development', 'Artificial Intelligence (AI)', 'Machine Learning (ML)', 'Internet of Things (IoT)', 
+    'Augmented Reality (AR)/Virtual Reality (VR)', 'Cybersecurity', 'Blockchain', 'Cloud Computing', 
+    'Big Data Analytics', 'Quantum Computing', 'Information Technology Services', 'Computer Hardware Manufacturing', 
+    'Telecommunications', 'Consumer Electronics', 'Fintech', 'Insurtech', 'Cryptocurrency and Blockchain Technologies', 
+    'Wealthtech', 'Crowdfunding Platforms', 'Banking', 'Insurance', 'Investment Banking', 'Stock Brokerage', 
+    'Digital Health', 'Telemedicine', 'Biotechnology', 'Medical Devices', 'Healthcare IT', 'Personalized Medicine', 
+    'Health and Wellness Apps', 'Hospitals', 'Pharmaceuticals', 'Clinical Laboratories', 'Medical Practices', 
+    'Renewable Energy (Solar, Wind, etc.)', 'Clean Tech', 'Energy Storage', 'Smart Grids', 'Environmental Services', 
+    'Oil and Gas', 'Coal Mining', 'Nuclear Energy', 'Edtech', 'E-learning Platforms', 'Learning Management Systems (LMS)', 
+    'Corporate Training Solutions', 'Primary and Secondary Schools', 'Higher Education Institutions', 
+    'Vocational Training Centers', 'Agtech', 'Sustainable Agriculture', 'Food Tech (Alternative Proteins, Lab-grown Meat)', 
+    'Precision Farming', 'Crop Production', 'Livestock Farming', 'Agricultural Equipment', 'E-commerce', 
+    'Direct-to-Consumer (DTC)', 'Subscription Boxes', 'Health and Wellness Products', 'Personal Fitness Tech', 
+    'Retail Stores', 'Consumer Product Manufacturing', 'Apparel and Footwear', 'Gaming', 'Digital Media', 
+    'Streaming Services', 'Content Creation Platforms', 'Television Broadcasting', 'Film Production', 'Radio Broadcasting', 
+    'Autonomous Vehicles', 'Electric Vehicles (EV)', 'Ride-sharing Platforms', 'Logistics Tech', 'Supply Chain Innovation', 
+    'Automotive Manufacturing', 'Aerospace', 'Railways', 'Proptech', 'Real Estate Crowdfunding', 'Smart Home Technologies', 
+    'Residential Real Estate', 'Commercial Real Estate', 'Property Management', 'Travel Tech', 'Hotel Management Systems', 
+    'Online Travel Agencies', 'Event Planning Tech', 'Hotels and Resorts', 'Restaurants', 'Travel Agencies', 
+    '3D Printing', 'Robotics', 'Industrial IoT', 'Supply Chain Management', 'Textile Manufacturing', 'Metalworks', 
+    'Chemical Processing', 'Legal Tech', 'Regtech (Regulatory Technology)', 'Compliance Solutions', 
+    'Intellectual Property Management', 'Law Firms', 'Corporate Legal Departments', 'Regulatory Agencies', 
+    'Cybersecurity Services', 'Physical Security Technology', 'Personal Safety Devices', 'Home Automation Security', 
+    'Security Services', 'Alarm Services', 'Private Investigation', 'HR Tech', 'Talent Acquisition Platforms', 
+    'Freelance Marketplaces', 'Remote Work Solutions', 'Staffing Agencies', 'Corporate HR Departments', 'Payroll Services', 
+    'Digital Marketing Platforms', 'Customer Relationship Management (CRM)', 'Social Media Management Tools', 
+    'Branding and Design Services', 'Advertising Agencies', 'Public Relations Firms', 'Market Research Firms', 
+    'Non-profit Solutions', 'Social Impact Platforms', 'Community Service Tech', 'Charitable Organizations', 
+    'Community Foundations', 'Social Service Agencies', 'Space Tech', 'Drone Technology', 'Wearable Tech', 'Urban Tech (Smart Cities)', 
+    'Aerospace', 'Aviation', 'Urban Development'
+]
+const selectedIndustry = ref('')
+
+const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup (Angel-funded)', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'University or Educational Institution', 'Research Institution', 'Government Organization', 'Venture Capital (VC) Firm', 'Private Equity Firm', 'Accelerator & Incubator', 'Family Office', 'Angel Network', 'Sovereign Wealth Fund', 'Other']
 const selectedBusinessStage = ref('')
 
 </script>
@@ -174,7 +208,26 @@ const selectedBusinessStage = ref('')
           </div>
           <div>
             <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="industry">Industry</label>
-            <Input id="industry" :disabled="editDisabled" v-model="industry" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+            <!-- <Input id="industry" :disabled="editDisabled" v-model="industry" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" /> -->
+            <DropdownMenu>
+          <DropdownMenuTrigger class="flex mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2 text-sm text-left">
+            <ChevronDown class="w-5 h-5 mr-2 text-orange-600 dark:text-orange-400" />
+            <span>{{ selectedIndustry || 'Select one' }}</span>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent class=" border rounded-md border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg ">
+            <ScrollArea class="h-80 w-full p-1">
+          <ul class="menu">
+            <DropdownMenuItem v-for="Industry in Industries" :key="Industry" @click="selectedIndustry = Industry">
+              {{ Industry }}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem @click="selectedIndustry = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+              <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />N/A
+            </DropdownMenuItem>
+          </ul>
+        </ScrollArea>
+          </DropdownMenuContent>
+        </DropdownMenu>
           </div>
 
 
