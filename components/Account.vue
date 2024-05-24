@@ -4,6 +4,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { User, Edit2, Mail, MapPin, Phone, Twitter, Facebook, Instagram, Linkedin, Youtube } from 'lucide-vue-next';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  
+} from '@/components/ui/dropdown-menu'
+
+import {
+ScrollArea,
+} from '@/components/ui/scroll-area';
+import { ChevronDown, XCircle } from 'lucide-vue-next'
+
 
 const supabase = useSupabaseClient()
 
@@ -112,6 +126,10 @@ const editDisabled = ref(true)
 function toggleEditDisabled() {
   editDisabled.value = !editDisabled.value
 }
+
+const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup (Angel-funded)', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'University or Educational Institution', 'Research Institution', 'Government Organization', 'Venture Capital (VC) Firm', 'Private Equity Firm', 'Accelerator & Incubator', 'Other']
+const selectedBusinessStage = ref('')
+
 </script>
 
 <template>
@@ -158,11 +176,31 @@ function toggleEditDisabled() {
             <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="industry">Industry</label>
             <Input id="industry" :disabled="editDisabled" v-model="industry" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
           </div>
+
+
           <div>
             <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="businessStage">Business Stage</label>
-            <Input id="businessStage" :disabled="editDisabled" v-model="business_stage" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
-          </div>
 
+        <DropdownMenu>
+          <DropdownMenuTrigger class="flex mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2 text-sm text-left">
+            <ChevronDown class="w-5 h-5 mr-2 text-orange-600 dark:text-orange-400" />
+            <span>{{ selectedBusinessStage || 'Select one' }}</span>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent class=" border rounded-md border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg ">
+            <ScrollArea class="h-80 w-full p-1">
+          <ul class="menu">
+            <DropdownMenuItem v-for="businessStage in businessStages" :key="businessStage" @click="selectedBusinessStage = businessStage">
+              {{ businessStage }}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem @click="selectedBusinessStage = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+              <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />N/A
+            </DropdownMenuItem>
+          </ul>
+        </ScrollArea>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
 
         </div>
       </div>
