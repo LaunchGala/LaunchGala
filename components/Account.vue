@@ -162,6 +162,41 @@ const selectedIndustry = ref('')
 const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup (Angel-funded)', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'Research Institution', 'Government Organization', 'Other']
 const selectedBusinessStage = ref('')
 
+const professions = 
+[
+    'Software Engineer', 'Investor', 'Startup Founder', 'Banker', 
+    'Consultant', 'Entrepreneur', 'Marketing Manager', 'Sales Executive', 
+    'Product Manager', 'Project Manager', 'Financial Analyst', 'Data Scientist', 
+    'Business Analyst', 'Human Resources Manager', 'Operations Manager', 
+    'Accountant', 'Attorney', 'Doctor', 'Nurse', 'Pharmacist', 
+    'Research Scientist', 'Architect', 'Civil Engineer', 'Mechanical Engineer', 
+    'Electrical Engineer', 'Graphic Designer', 'UX/UI Designer', 'Web Developer', 
+    'Mobile App Developer', 'Network Administrator', 'IT Support Specialist', 
+    'Cybersecurity Specialist', 'Public Relations Specialist', 'Journalist', 
+    'Content Writer', 'Copywriter', 'Editor', 'Publisher', 'Photographer', 
+    'Videographer', 'Film Director', 'Actor', 'Musician', 'Artist', 
+    'Interior Designer', 'Real Estate Agent', 'Property Manager', 'Construction Manager', 
+    'Logistics Manager', 'Supply Chain Manager', 'Quality Assurance Specialist', 
+    'Environmental Scientist', 'Health and Safety Officer', 'Nutritionist', 
+    'Personal Trainer', 'Fitness Coach', 'Physical Therapist', 'Occupational Therapist', 
+    'Speech Therapist', 'Veterinarian', 'Animal Trainer', 'Chef', 'Baker', 
+    'Event Planner', 'Wedding Planner', 'Tour Guide', 'Travel Agent', 
+    'Customer Service Representative', 'Retail Manager', 'Store Assistant', 
+    'Bartender', 'Barista', 'Waiter/Waitress', 'Hotel Manager', 
+    'Flight Attendant', 'Pilot', 'Marine Biologist', 'Astronomer', 
+    'Chemist', 'Physicist', 'Mathematician', 'Economist', 
+    'Sociologist', 'Psychologist', 'Therapist/Counselor', 'Social Worker', 
+    'Humanitarian Aid Worker', 'Non-profit Manager', 'Policy Analyst', 
+    'Lobbyist', 'Urban Planner', 'Museum Curator', 'Librarian', 
+    'Historian', 'Anthropologist', 'Archaeologist', 'Philosopher', 
+    'Theologist', 'Clergy Member', 'Astrologer', 'Yoga Instructor', 
+    'Life Coach', 'Career Coach', 'Financial Coach', 'Real Estate Developer', 
+    'Faculty Professor', 'Chief Executive Officer (CEO)', 'Chief Financial Officer (CFO)', 
+    'Chief Operating Officer (COO)', 'Chief Technology Officer (CTO)', 
+    'Chief Marketing Officer (CMO)', 'Chief Human Resources Officer (CHRO)', 
+    'Chief Information Officer (CIO)', 'Chief Compliance Officer (CCO)'
+]
+const selectedProfession = ref('')
 </script>
 
 <template>
@@ -305,7 +340,34 @@ const selectedBusinessStage = ref('')
         <MapPin class="w-6 h-6 text-gray-600 dark:text-gray-400" />
         <h3 class="text-lg font-semibold text-gray-800 dark:text-white">About Me</h3>
       </div>
-      <Textarea :disabled="editDisabled" v-model="user_about" class="mt-4 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" rows="4"></Textarea>
+
+      <div>
+            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400 mt-4" for="profession">Main Profession</label>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger class="flex mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2 text-sm text-left">
+            <ChevronDown class="w-5 h-5 mr-2 text-orange-600 dark:text-orange-400" />
+            <span>{{ selectedProfession || 'Select one' }}</span>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent class=" border rounded-md border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg ">
+            <ScrollArea class="h-80 w-full p-1">
+          <ul class="menu">
+            <DropdownMenuItem v-for="profession in professions" :key="profession" @click="selectedProfession = profession">
+              {{ profession }}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem @click="selectedProfession = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+              <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />N/A
+            </DropdownMenuItem>
+          </ul>
+        </ScrollArea>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400 mt-4" for="user_about">Introduction/Objective</label>
+
+      <Textarea :disabled="editDisabled" v-model="user_about" class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" rows="4"></Textarea>
     </div>
 
   </div>
