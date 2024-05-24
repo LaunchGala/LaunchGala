@@ -48,7 +48,7 @@ const allExperts = ref([
     industry: "IT",
     description: "A stylish venue for modern gatherings.",
     location: "SF, CA",
-    avatar: "https://conferences.law.stanford.edu/directorscollege2022/wp-content/uploads/sites/112/2022/05/Sundar-Pichai-Headshot-212x212.png",
+    avatar: "/LarryPage.jpeg",
     likeExpert: false
   },
   {
