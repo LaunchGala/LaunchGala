@@ -149,15 +149,13 @@ const Industries = [
     'Online Travel Agencies', 'Event Planning Tech', 'Hotels and Resorts', 'Restaurants', 'Travel Agencies', 
     '3D Printing', 'Robotics', 'Industrial IoT', 'Supply Chain Management', 'Textile Manufacturing', 'Metalworks', 
     'Chemical Processing', 'Legal Tech', 'Regtech (Regulatory Technology)', 'Compliance Solutions', 
-    'Intellectual Property Management', 'Law Firms', 'Corporate Legal Departments', 'Regulatory Agencies', 
-    'Cybersecurity Services', 'Physical Security Technology', 'Personal Safety Devices', 'Home Automation Security', 
-    'Security Services', 'Alarm Services', 'Private Investigation', 'HR Tech', 'Talent Acquisition Platforms', 
+    'Intellectual Property Management', 'Law Firms', 'Cybersecurity Services', 'Physical Security Technology', 'Personal Safety Devices', 'Home Automation Security', 'Private Investigation', 'HR Tech', 'Talent Acquisition Platforms', 
     'Freelance Marketplaces', 'Remote Work Solutions', 'Staffing Agencies', 'Corporate HR Departments', 'Payroll Services', 
     'Digital Marketing Platforms', 'Customer Relationship Management (CRM)', 'Social Media Management Tools', 
     'Branding and Design Services', 'Advertising Agencies', 'Public Relations Firms', 'Market Research Firms', 
     'Non-profit Solutions', 'Social Impact Platforms', 'Community Service Tech', 'Charitable Organizations', 
     'Community Foundations', 'Social Service Agencies', 'Space Tech', 'Drone Technology', 'Wearable Tech', 'Urban Tech (Smart Cities)', 
-    'Aerospace', 'Aviation', 'Urban Development', 'Venture Capital (VC) Firm', 'Private Equity Firm', 'Accelerator & Incubator', 'Family Office', 'Angel Network', 'Sovereign Wealth Fund', 
+    'Aerospace', 'Aviation', 'Urban Development', 'Venture Capital (VC) Firm', 'Private Equity Firm', 'Accelerator & Incubator', 'Family Office', 'Angel Network', 'Sovereign Wealth Fund', "Other",
 ]
 const selectedIndustry = ref('')
 
