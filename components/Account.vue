@@ -168,7 +168,7 @@ const professions =
     'Consultant', 'Entrepreneur', 'Marketing Manager', 'Sales Executive', 
     'Product Manager', 'Project Manager', 'Financial Analyst', 'Data Scientist', 
     'Business Analyst', 'Human Resources Manager', 'Operations Manager', 
-    'Accountant', 'Attorney', 'Doctor', 'Nurse', 'Pharmacist', 
+    'Accountant', 'Attorney', 'Doctor', 'Nurse', 'Pharmacist', 'Student',
     'Research Scientist', 'Architect', 'Civil Engineer', 'Mechanical Engineer', 
     'Electrical Engineer', 'Graphic Designer', 'UX/UI Designer', 'Web Developer', 
     'Mobile App Developer', 'Network Administrator', 'IT Support Specialist', 
@@ -265,7 +265,7 @@ const selectedProfession = ref('')
 
 
           <div>
-            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="businessStage">Business Stage</label>
+            <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="businessStage">Stage</label>
 
         <DropdownMenu>
           <DropdownMenuTrigger class="flex mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2 text-sm text-left">
