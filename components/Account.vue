@@ -135,7 +135,7 @@ const Industries = [
     'Wealthtech', 'Crowdfunding Platforms', 'Banking', 'Insurance', 'Investment Banking', 'Stock Brokerage', 
     'Digital Health', 'Telemedicine', 'Biotechnology', 'Medical Devices', 'Healthcare IT', 'Personalized Medicine', 
     'Health and Wellness Apps', 'Hospitals', 'Pharmaceuticals', 'Clinical Laboratories', 'Medical Practices', 
-    'Renewable Energy (Solar, Wind, etc.)', 'Clean Tech', 'Energy Storage', 'Smart Grids', 'Environmental Services', 
+    'Renewable Energy', 'Clean Tech', 'Energy Storage', 'Smart Grids', 'Environmental Services', 
     'Oil and Gas', 'Coal Mining', 'Nuclear Energy', 'Edtech', 'E-learning Platforms', 'Learning Management Systems (LMS)', 
     'Corporate Training Solutions', 'Primary and Secondary Schools', 'Higher Education Institutions', 
     'Vocational Training Centers', 'Agtech', 'Sustainable Agriculture', 'Food Tech (Alternative Proteins, Lab-grown Meat)', 
