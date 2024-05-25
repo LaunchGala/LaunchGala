@@ -131,7 +131,7 @@ const Industries = [
     'Software Development', 'Artificial Intelligence (AI)', 'Machine Learning (ML)', 'Internet of Things (IoT)', 
     'Augmented Reality (AR)/Virtual Reality (VR)', 'Cybersecurity', 'Blockchain', 'Cloud Computing', 
     'Big Data Analytics', 'Quantum Computing', 'Information Technology Services', 'Computer Hardware Manufacturing', 
-    'Telecommunications', 'Consumer Electronics', 'Fintech', 'Insurtech', 'Cryptocurrency and Blockchain Technologies', 
+    'Telecommunications', 'Consumer Electronics', 'Fintech', 'Insurtech', 'Cryptocurrency and NFT', 
     'Wealthtech', 'Crowdfunding Platforms', 'Banking', 'Insurance', 'Investment Banking', 'Stock Brokerage', 
     'Digital Health', 'Telemedicine', 'Biotechnology', 'Medical Devices', 'Healthcare IT', 'Personalized Medicine', 
     'Health and Wellness Apps', 'Hospitals', 'Pharmaceuticals', 'Clinical Laboratories', 'Medical Practices', 
@@ -159,7 +159,7 @@ const Industries = [
 ]
 const selectedIndustry = ref('')
 
-const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup (Angel-funded)', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'Research Institution', 'Government Organization', 'Other']
+const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'Research Institution', 'Government Organization', 'Other']
 const selectedBusinessStage = ref('')
 
 const professions = 
@@ -174,7 +174,7 @@ const professions =
     'Mobile App Developer', 'Network Administrator', 'IT Support Specialist', 
     'Cybersecurity Specialist', 'Public Relations Specialist', 'Journalist', 
     'Content Writer', 'Copywriter', 'Editor', 'Publisher', 'Photographer', 
-    'Videographer', 'Film Director', 'Actor', 'Musician', 'Artist', 
+    'Videographer', 'Film Director', 'Actor', 'Musician', 'Artist', 'Model',
     'Interior Designer', 'Real Estate Agent', 'Property Manager', 'Construction Manager', 
     'Logistics Manager', 'Supply Chain Manager', 'Quality Assurance Specialist', 
     'Environmental Scientist', 'Health and Safety Officer', 'Nutritionist', 
