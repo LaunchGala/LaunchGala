@@ -187,7 +187,7 @@ const professions =
     'Chemist', 'Physicist', 'Mathematician', 'Economist', 
     'Sociologist', 'Psychologist', 'Therapist/Counselor', 'Social Worker', 
     'Humanitarian Aid Worker', 'Non-profit Manager', 'Policy Analyst', 
-    'Lobbyist', 'Urban Planner', 'Museum Curator', 'Librarian', 
+    'Urban Planner', 'Museum Curator', 'Librarian', 
     'Historian', 'Anthropologist', 'Archaeologist', 'Philosopher', 
     'Theologist', 'Clergy Member', 'Astrologer', 'Yoga Instructor', 
     'Life Coach', 'Career Coach', 'Financial Coach', 'Real Estate Developer', 
