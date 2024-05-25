@@ -194,7 +194,7 @@ const professions =
     'Banker', 'Chief Executive Officer (CEO)', 'Chief Financial Officer (CFO)', 
     'Chief Operating Officer (COO)', 'Chief Technology Officer (CTO)', 
     'Chief Marketing Officer (CMO)', 'Chief Human Resources Officer (CHRO)', 
-    'Chief Information Officer (CIO)', 'Chief Compliance Officer (CCO)'
+    'Chief Information Officer (CIO)', 'Chief Compliance Officer (CCO)','Other'
 ]
 const selectedProfession = ref('')
 </script>
