@@ -16,7 +16,7 @@ import { Share } from 'lucide-vue-next';
   <div class="min-h-screen bg-gradient-to-b from-orange-100 via-orange-300 to-orange-500 dark:bg-black">
 
     <div class="pt-12 pb-24 container mx-auto px-4">
-      <Card class="max-w-4xl mx-auto mb-8 bg-white dark:bg-gray-800 shadow-2xl rounded-xl overflow-hidden border-t-8 border-orange-400">
+      <Card class="max-w-4xl mx-auto mb-8 bg-white dark:bg-gray-800 shadow-2xl rounded-xl overflow-hidden ">
         <AspectRatio :ratio="16/9">
           <img src="/Bootstrapping.png" alt="Event Image" class="w-full h-full object-cover" />
         </AspectRatio>
