@@ -47,7 +47,7 @@ const industry =
     'Software Development', 'Artificial Intelligence (AI)', 'Machine Learning (ML)', 'Internet of Things (IoT)', 
     'Augmented Reality (AR)/Virtual Reality (VR)', 'Cybersecurity', 'Blockchain', 'Cloud Computing', 
     'Big Data Analytics', 'Quantum Computing', 'Information Technology Services', 'Computer Hardware', 
-    'Telecommunications', 'Consumer Electronics', 'Fintech', 'Insurtech', 'Cryptocurrency', 
+    'Telecommunications', 'Consumer Electronics', 'Fintech', 'Insurtech', 'Cryptocurrency & NFT', 
     'Wealth Management', 'Crowdfunding', 'Banking', 'Insurance', 'Investment', 'Stock Markets', 
     'Digital Health', 'Telemedicine', 'Biotechnology', 'Medical Devices', 'Healthcare IT', 'Personalized Medicine', 
     'Health and Wellness', 'Hospitals', 'Pharmaceuticals', 'Clinical Laboratories', 'Medical Practices', 

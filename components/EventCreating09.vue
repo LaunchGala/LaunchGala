@@ -18,7 +18,7 @@ import { Share } from 'lucide-vue-next';
     <div class="pt-12 pb-24 container mx-auto px-4">
       <Card class="max-w-4xl mx-auto mb-8 bg-white dark:bg-gray-800 shadow-2xl rounded-xl overflow-hidden border-t-8 border-orange-400">
         <AspectRatio :ratio="16/9">
-          <img src="/placeholder.svg" alt="Event Image" class="w-full h-full object-cover" />
+          <img src="/Bootstrapping.png" alt="Event Image" class="w-full h-full object-cover" />
         </AspectRatio>
 
         <div class="flex flex-col justify-between p-6">
@@ -49,7 +49,7 @@ import { Share } from 'lucide-vue-next';
                   </CardTitle>
                 </CardHeader>
               <Avatar class="w-32 h-32 mb-6 inline-block bg-orange-400">
-                <AvatarImage src="/placeholder.svg" alt="Host Avatar" />
+                <AvatarImage src="/PinkPavatar Background Removed Background Removed.png" alt="Host Avatar" />
               </Avatar>
               <TooltipProvider>
                 <Tooltip>
