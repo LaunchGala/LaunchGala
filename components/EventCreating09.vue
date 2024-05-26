@@ -108,7 +108,7 @@ import { Share } from 'lucide-vue-next';
             </div>
           </CardContent>
 
-          <CardFooter class="pt-4 pb-6 bg-orange-100 dark:bg-gray-700">
+          <CardFooter class="pt-4 pb-6 bg-orange-100 dark:bg-gray-700 rounded-md">
             <div class="text-center">
               <p class="text-lg font-bold text-orange-800 dark:text-orange-200 mb-2">Ready to join us?</p>
               
