@@ -21,21 +21,23 @@ const selectedCity = ref('')
 </script>
 
 <template>
-    <div class="bg-white dark:bg-orange-200 min-h-screen py-10">
+    <div class=" dark:bg-orange-200 min-h-screen py-10 bg-orange-200">
     <TooltipProvider>
       <div class="container mx-auto px-4 lg:px-8 dark:bg-orange-200 ">
         <Card>
+            <h2 class="text-2xl font-bold text-center mb-4  text-black mt-2">Event's Location</h2>
+            <div class="text-md text-center mb-6 text-black ">In which city is your event taking place?</div>
   <div class="dark:bg-black bg-orange-100 text-gray-800 dark:text-white p-8 space-y-4 rounded-lg shadow-lg max-w-lg mx-auto mt-8">
-    <h2 class="text-2xl font-bold text-center mb-4 text-orange-600 dark:text-orange-400 ">Event's Location</h2>
-    <div class="text-md text-center mb-6 text-orange-600 dark:text-orange-400">In which city is your event taking place?</div>
+    <h2 class="text-xl font-bold text-left mb-2  text-black ">City</h2>
+
     <div class="space-y-6">
       <div>
         <DropdownMenu>
-          <DropdownMenuTrigger class="mt-2 mb-4 w-full rounded border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
+          <DropdownMenuTrigger class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
             <span>{{ selectedCity || 'Select your city' }}</span>
             <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent class="rounded border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
+          <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
             <DropdownMenuItem v-for="city in cities" :key="city" @click="selectedCity = city">
               {{ city }}
             </DropdownMenuItem>

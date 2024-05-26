@@ -59,7 +59,7 @@ console.log(props.venueListing);
                 <TableCell class="text-right">
                   <Button class="flex items-center gap-2" variant="ghost">
                     <Copy class="w-4 h-4" />
-                    Duplicate
+                    Edit
                   </Button>
                 </TableCell>
               </TableRow>
@@ -73,7 +73,7 @@ console.log(props.venueListing);
                 <TableCell class="text-right">
                   <Button class="flex items-center gap-2" variant="ghost">
                     <Copy class="w-4 h-4" />
-                    Duplicate
+                    Edit
                   </Button>
                 </TableCell>
               </TableRow>

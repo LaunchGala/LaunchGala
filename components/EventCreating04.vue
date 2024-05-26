@@ -34,19 +34,19 @@ const selectedTimeZone = ref('')
 
 <template>
 
-<div class="bg-white dark:bg-orange-200 min-h-screen py-10">
+<div class="bg-orange-200 min-h-screen py-10">
     <TooltipProvider>
       <div class="container mx-auto px-4 lg:px-8 dark:bg-orange-200 ">
-        <Card>
+          <Card>
+            <h2 class="text-2xl font-bold text-center mb-4 mt-2">When is the Event?</h2>
+            <span class="text-md text-center block">Select the date and time for your event</span>
   <div class="dark:bg-black bg-orange-100 text-gray-800 dark:text-white p-8 space-y-4 rounded-lg shadow-lg max-w-lg mx-auto mt-8">
-    <h2 class="text-2xl font-bold text-center mb-4">When is the Event?</h2>
-    <span class="text-md text-center block">Select the date and time for your event</span>
     <div class="grid gap-4 sm:grid-cols-2">
       <div>
         <span class="text-md font-semibold">Start Date & Time</span>
         <Popover>
           <PopoverTrigger as-child>
-            <Button variant="outline" class="w-full justify-between">
+            <Button variant="outline" class="w-full justify-between bg-white">
               <span>{{ dateRange.start ? format(dateRange.start, "PPP") : "Choose" }}</span>
             </Button>
           </PopoverTrigger>
@@ -54,7 +54,7 @@ const selectedTimeZone = ref('')
             <Calendar v-model="dateRange.start" />
           </PopoverContent>
         </Popover>
-        <div class="mt-2 flex items-center rounded border border-gray-300">
+        <div class="mt-2 flex items-center rounded border border-gray-300 bg-white">
           <Input type="time" v-model="startTime" placeholder="HH:MM" class="w-full border-none bg-transparent pl-3 pr-2 text-gray-800 dark:text-white focus:ring-0" />
         </div>
       </div>
@@ -62,7 +62,7 @@ const selectedTimeZone = ref('')
         <span class="text-md font-semibold">End Date & Time</span>
         <Popover>
           <PopoverTrigger as-child>
-            <Button variant="outline" class="w-full justify-between">
+            <Button variant="outline" class="w-full justify-between bg-white">
               <span>{{ dateRange.end ? format(dateRange.end, "PPP") : "Choose" }}</span>
             </Button>
           </PopoverTrigger>
@@ -70,7 +70,7 @@ const selectedTimeZone = ref('')
             <Calendar v-model="dateRange.end" />
           </PopoverContent>
         </Popover>
-        <div class="mt-2 flex items-center rounded border border-gray-300 ">
+        <div class="mt-2 flex items-center rounded border border-gray-300 bg-white">
           <Input type="time" v-model="endTime" placeholder="HH:MM" class="w-full border-none bg-transparent pl-3 pr-2 text-gray-800 dark:text-white focus:ring-0" />
         </div>
       </div>
