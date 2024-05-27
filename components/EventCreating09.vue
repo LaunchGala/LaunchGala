@@ -110,8 +110,12 @@ import { Share } from 'lucide-vue-next';
 
           <CardFooter class="pt-4 pb-6 bg-orange-100 dark:bg-gray-700 rounded-md">
             <div class="text-center">
+             <div class="mb-4">
               <p class="text-lg font-bold text-orange-800 dark:text-orange-200 mb-2">Ready to join us?</p>
-              
+              <Button variant="filled" class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-700 text-white rounded-lg px-3 py-3 transition-all mr-4 mt-2">
+                <Ticket class="mr-2" /> Register Now
+              </Button>
+            </div>
               <Button variant="filled" class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-700 text-white rounded-lg px-3 py-3 transition-all mr-4 mt-2">
                 <Ticket class="mr-2" /> Offer Venue
               </Button>
@@ -125,8 +129,9 @@ import { Share } from 'lucide-vue-next';
                 <Ticket class="mr-2" /> Offer Expertise
               </Button>
               <Button variant="filled" class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-700 text-white rounded-lg px-3 py-3 transition-all mr-4 mt-2">
-                <Ticket class="mr-2" /> Register Now
+                <Ticket class="mr-2" /> Vendors Offering
               </Button>
+
             </div>
           </CardFooter>
         </div>

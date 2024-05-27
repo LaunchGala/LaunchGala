@@ -46,31 +46,36 @@ console.log(props.venueListing);
     <div class="w-full max-w-4xl mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
-          <CardTitle class="text-2xl font-bold text-gray-900 dark:text-white">Reservation Rules</CardTitle>
-          <CardDescription class="text-sm text-gray-500 dark:text-gray-300">Select the rules that apply to reservations at your venue.</CardDescription>
+          <CardTitle class="text-2xl font-bold text-gray-900 dark:text-white">Offering & Reservation Rules</CardTitle>
+          <CardDescription class="text-sm text-gray-500 dark:text-gray-300">Select the rules that apply to offering and reservations at your event.</CardDescription>
         </CardHeader>
         <CardContent>
           <div class="space-y-6">
-            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow Venue offering</span>
+            <div class=" items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white mr-72 ">Allow Venue offering</span>
               <Switch :default-checked="props.venueListing.nonSmoking" @update:checked="setNonSmoking" id="displayPrice" />
-
+              <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
+              
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow Volunteers offering</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow volunteers offering</span>
               <Switch :default-checked="props.venueListing.maskRequired" @update:checked="setMaskRequired" id="displayPrice" />
 
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow Sponsorship offering</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow sponsorship offering</span>
               <Switch :default-checked="props.venueListing.noPets" @update:checked="setNoPets" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow Expertise offering</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow expertise offering</span>
               <Switch :default-checked="props.venueListing.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow Registration request</span>
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow vendors offering</span>
+              <Switch :default-checked="props.venueListing.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
+            </div>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow registration request</span>
               <Switch :default-checked="props.venueListing.securityCameras" @update:checked="setSecurityCameras" id="displayPrice" />
             </div>
                         <!-- <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
