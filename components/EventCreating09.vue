@@ -85,10 +85,10 @@ import { Share } from 'lucide-vue-next';
               </li>
               <li class="flex items-center justify-center flex-wrap">
                 <Badge variant="outline" class="bg-orange-100 text-orange-700 mr-2">AI (Artificial Intelligence)</Badge>
-                <Badge class="bg-orange-100 text-orange-700 dark:bg-orange-700 dark:text-orange-100">Fintech</Badge>
+                <Badge variant="outline" class="bg-orange-100 text-orange-700 dark:bg-orange-700 dark:text-orange-100">Fintech</Badge>
               </li>
               <li class="flex items-center justify-center">
-                <a href="#" class="text-orange-700 hover:underline dark:text-orange-200">
+                <a href="#" class="text-orange-600 hover:underline dark:text-orange-200">
                   <!-- <ArrowRight class="w-5 h-5 mr-2" /> -->
                   event-link.com
                 </a>
