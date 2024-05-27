@@ -84,7 +84,7 @@ const industry =
       <div class="container mx-auto px-4 lg:px-8">
         <Card>
           <CardHeader>
-            <CardTitle>What best describes your event: (Select all applicable)</CardTitle>
+            <CardTitle>What is your event's industries  focus: (Select all applicable)</CardTitle>
           </CardHeader>
           <CardContent>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
