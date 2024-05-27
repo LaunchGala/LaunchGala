@@ -84,8 +84,8 @@ import { Share } from 'lucide-vue-next';
                 <span class="text-gray-700 dark:text-gray-300">Tickets: Free / Invite only</span>
               </li>
               <li class="flex items-center justify-center flex-wrap">
-                <Badge variant="outline" class="border-orange-500 text-orange-500 dark:border-orange-300 dark:text-orange-300 mr-2">Industry 1</Badge>
-                <Badge class="bg-orange-100 text-orange-700 dark:bg-orange-700 dark:text-orange-100">Industry 2</Badge>
+                <Badge variant="outline" class="bg-orange-100 text-orange-700 mr-2">AI (Artificial Intelligence)</Badge>
+                <Badge class="bg-orange-100 text-orange-700 dark:bg-orange-700 dark:text-orange-100">Fintech</Badge>
               </li>
               <li class="flex items-center justify-center">
                 <a href="#" class="text-orange-700 hover:underline dark:text-orange-200">
