@@ -237,7 +237,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           <!-- Upcoming Events -->
           <Card class="transition hover:shadow-md">
             <CardHeader>
-              <CardTitle>Upcoming Events</CardTitle>
+              <CardTitle>My Upcoming Events</CardTitle>
               <Badge class="shrink-0">3 New</Badge>
 
             </CardHeader>
