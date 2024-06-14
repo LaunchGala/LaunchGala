@@ -75,7 +75,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           <DialogTrigger>
             <Badge class="cursor-pointer bg-orange-100 text-orange-800">
               <Users class="w-4 h-4 mr-1" /> Following you
-              <span class="ml-1">23</span>
+              <span class="ml-1">123</span>
             </Badge>
           </DialogTrigger>
           <DialogContent class="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-lg space-y-4" v-model:open="open">
