@@ -19,7 +19,8 @@ import {
   Bell,
   MessageSquare,
   CalendarIcon,
-  DollarSignIcon
+  DollarSignIcon,
+  Trophy
 
   
 } from 'lucide-vue-next';
@@ -58,8 +59,9 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           <div>
             <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, User!</h1>
             <div class="flex items-baseline space-x-2">
-            <p class="text-2xl font-bold text-orange-500 dark:text-orange-400">5,235</p>
-            <span class="text-base font-medium text-gray-500 dark:text-gray-300">Stars</span>
+              <Trophy class="w-5 h-5 font-bold text-orange-500" />
+            <p class="text-xl font-bold text-orange-500 dark:text-orange-400">2,235</p>
+            <span class="text-lg font-medium text-gray-500 dark:text-gray-300">Kudos</span>
           </div>
           <div class="flex space-x-2">
           <Badge class="bg-orange-100 text-orange-800 dark:bg-orange-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
