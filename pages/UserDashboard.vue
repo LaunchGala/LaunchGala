@@ -325,7 +325,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>My Upcoming Events</CardTitle>
-              <Badge class="mr-auto ">3 New</Badge>
+              <Badge class="mr-auto bg-orange-100 text-orange-700">3 New</Badge>
 
             </CardHeader>
             <CardContent class="space-y-4">
@@ -351,7 +351,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>Venues Reservations</CardTitle>
-              <Badge class="mr-auto">2 Pending</Badge>
+              <Badge class="mr-auto bg-orange-100 text-orange-700">2 Pending</Badge>
 
             </CardHeader>
             <CardContent class="space-y-4">
@@ -368,7 +368,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>Speakers & Volunteers</CardTitle>
-              <Badge class="mr-auto">3 Pending</Badge>
+              <Badge class="mr-auto bg-orange-100 text-orange-700">3 Pending</Badge>
 
             </CardHeader>
             <CardContent class="space-y-4">
@@ -385,7 +385,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>New Messages</CardTitle>
-              <Badge class="mr-auto">5 Unread</Badge>
+              <Badge class="mr-auto bg-orange-100 text-orange-700">5 Unread</Badge>
             </CardHeader>
 
             <CardContent class="space-y-4">
