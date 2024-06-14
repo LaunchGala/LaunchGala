@@ -115,17 +115,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           </div> -->
           <div class="flex space-x-2">
           <Badge class="bg-red-100 text-red-800 dark:bg-red-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
-            <Check class="w-4 h-4 mr-1" /> 12x Volunteering Contribution
+            <Check class="w-4 h-4 mr-1" /> 12 Volunteering Contribution
           </Badge>
           <Badge class="bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
-            <Check class="w-4 h-4 mr-1" /> 8x Venue Contribution
+            <Check class="w-4 h-4 mr-1" /> 8 Venue Contribution
           </Badge>
           <div class="flex space-x-2">
           <Badge class="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 py-1 px-2 rounded-full text-sm flex items-center">
-            <Check class="w-4 h-4 mr-1" /> 5x Expert Contribution
+            <Check class="w-4 h-4 mr-1" /> 5 Expert Contribution
           </Badge>
           <Badge class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 py-1 px-2 rounded-full text-sm">
-            <Check class="w-4 h-4 mr-1" /> 2x Sponsor Contribution
+            <Check class="w-4 h-4 mr-1" /> 2 Sponsor Contribution
           </Badge>
         </div>
         </div>
