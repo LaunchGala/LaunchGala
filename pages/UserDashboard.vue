@@ -22,6 +22,8 @@ import {
   DollarSignIcon,
   Trophy,
   BadgeCheck,
+  Ribbon,
+  HeartHandshake,
   
   
 
@@ -68,9 +70,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             
           </div>
           <div class="flex items-baseline space-x-2">
-              <p class="text-lg font-bold text-orange-500 dark:text-orange-400">2,235</p>
-              <span class="text-md font-bold text-gray-500 dark:text-gray-300">KUDOS</span>
-              <Trophy class="w-4 h-4 font-bold text-orange-500" />
+              <p class="text-sm font-bold text-orange-500 dark:text-orange-400">2,235</p>
+              <span class="text-sm font-bold text-gray-500 dark:text-gray-300">KUDOS</span>
+              <heart-handshake class="w-4 h-4 font-bold text-orange-500" />
           </div>
           <div class="flex justify-left gap-2 mt-2 mb-2">
         <Dialog v-slot="{ }">
@@ -114,17 +116,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
               <Trophy class="w-5 h-5 font-bold text-orange-500" />
           </div> -->
           <div class="flex space-x-2">
-          <Badge class="bg-red-100 text-red-800 dark:bg-red-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
-            <Check class="w-4 h-4 mr-1" /> 12 Volunteering Contribution
+          <Badge class="bg-red-100 text-red-800 dark:bg-red-800 dark:text-orang-100 py-1 px-2 rounded-full text-xs flex items-center">
+            <Check class="w-3 h-3 mr-1" /> 12 Volunteering Contribution
           </Badge>
-          <Badge class="bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
+          <Badge class="bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-orang-100 py-1 px-2 rounded-full text-xs flex items-center">
             <Check class="w-4 h-4 mr-1" /> 8 Venue Contribution
           </Badge>
           <div class="flex space-x-2">
-          <Badge class="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 py-1 px-2 rounded-full text-sm flex items-center">
+          <Badge class="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 py-1 px-2 rounded-full text-xs flex items-center">
             <Check class="w-4 h-4 mr-1" /> 5 Expert Contribution
           </Badge>
-          <Badge class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 py-1 px-2 rounded-full text-sm">
+          <Badge class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 py-1 px-2 rounded-full text-xs flex items-center">
             <Check class="w-4 h-4 mr-1" /> 2 Sponsor Contribution
           </Badge>
         </div>
