@@ -17,7 +17,9 @@ import {
   Heart,
   Cog,
   Bell,
-  MessageSquare
+  MessageSquare,
+  CalendarIcon,
+  DollarSignIcon
 
   
 } from 'lucide-vue-next';
@@ -29,6 +31,7 @@ import {
   CardDescription
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 import { Calendar } from '@/components/ui/calendar'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
@@ -55,7 +58,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           <div>
             <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, User!</h1>
             <div class="flex items-baseline space-x-2">
-            <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">5,235</p>
+            <p class="text-2xl font-bold text-orange-500 dark:text-orange-400">5,235</p>
             <span class="text-base font-medium text-gray-500 dark:text-gray-300">Stars</span>
           </div>
           <div class="flex space-x-2">
@@ -250,9 +253,15 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           </CardContent>
         </Card> -->
         <div class=" lg:grid-cols-3 gap-6 px-4">
+
       <!-- Large Box -->
       <div class="lg:col-span-2 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
-        <p class="text-md font-semibold mb-4 text-gray-600 dark:text-gray-400">Here's what's happening with your events today:</p>
+        <div class="flex space-x-96 mb-2">
+        <p class="text-md font-semibold  text-gray-600 dark:text-gray-400">Here's what's happening with your events today:</p>
+        <Button class="justify-center" variant="outline">
+        <DollarSignIcon class="w-4 h-4 mr-2 font-semibold text-orange-500" />Earning
+      </Button>
+    </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           <!-- Upcoming Events -->
