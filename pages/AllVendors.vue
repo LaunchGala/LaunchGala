@@ -205,9 +205,12 @@ const seconds = () => Math.floor((countdown.value % (1000 * 60)) / 1000)
         <p class="text-lg">We provide the stage, you bring your A-game. Increase your visibility and connect with potential clients.</p>
       </div>
       <div class="flex justify-center">
+        <NuxtLink to="VendorRegs">
+
         <Button class="inline-flex items-center justify-center rounded-md bg-orange-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-500 dark:hover:bg-orange-600">
           Request to Get Listed
         </Button>
+        </NuxtLink>
       </div>
     </div>
   </div>
