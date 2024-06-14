@@ -54,7 +54,26 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           </Avatar>
           <div>
             <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, User!</h1>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Here's what's happening with your events today:</p>
+            <div class="flex items-baseline space-x-2">
+            <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">5,235</p>
+            <span class="text-base font-medium text-gray-500 dark:text-gray-300">Stars</span>
+          </div>
+          <div class="flex space-x-2">
+          <Badge class="bg-orange-100 text-orange-800 dark:bg-orange-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
+            <Check class="w-4 h-4 mr-1" /> 12x Volunteering Contribution
+          </Badge>
+          <Badge class="bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
+            <Check class="w-4 h-4 mr-1" /> 8x Venue Contribution
+          </Badge>
+          <div class="flex space-x-2">
+          <Badge class="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 py-1 px-2 rounded-full text-sm flex items-center">
+            <Check class="w-4 h-4 mr-1" /> 5x Expert Contribution
+          </Badge>
+          <Badge class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 py-1 px-2 rounded-full text-sm">
+            <Check class="w-4 h-4 mr-1" /> 2x Sponsor Contribution
+          </Badge>
+        </div>
+        </div>
           </div>
         </div>
       <div class="flex space-x-2 items-center">
@@ -233,7 +252,9 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
         <div class=" lg:grid-cols-3 gap-6 px-4">
       <!-- Large Box -->
       <div class="lg:col-span-2 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
+        <p class="text-md font-semibold mb-4 text-gray-600 dark:text-gray-400">Here's what's happening with your events today:</p>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
           <!-- Upcoming Events -->
           <Card class="transition hover:shadow-md">
             <CardHeader>
