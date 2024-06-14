@@ -238,7 +238,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>My Upcoming Events</CardTitle>
-              <Badge class="shrink-0">3 New</Badge>
+              <Badge class="mr-auto ">3 New</Badge>
 
             </CardHeader>
             <CardContent class="space-y-4">
@@ -248,7 +248,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
                   <p class="font-semibold text-lg">Event A</p>
                   <p class="text-sm text-gray-500 dark:text-gray-400">Oct 24, 2023</p>
                 </div>
-                <Badge variant="primary" class="ml-auto">New</Badge>
+                <Badge variant="primary" class="ml-auto ">New</Badge>
               </div>
               <div class="flex items-center space-x-4">
                 <img src="/placeholder.svg" alt="Event Image" class="w-20 h-20 rounded-lg" />
@@ -264,7 +264,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>Venues Reservations</CardTitle>
-              <Badge class="shrink-0">2 Pending</Badge>
+              <Badge class="mr-auto">2 Pending</Badge>
 
             </CardHeader>
             <CardContent class="space-y-4">
@@ -281,7 +281,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>Speakers & Volunteers</CardTitle>
-              <Badge class="shrink-0">3 Pending</Badge>
+              <Badge class="mr-auto">3 Pending</Badge>
 
             </CardHeader>
             <CardContent class="space-y-4">
@@ -298,7 +298,7 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>New Messages</CardTitle>
-              <Badge class="shrink-0">5 Unread</Badge>
+              <Badge class="mr-auto">5 Unread</Badge>
             </CardHeader>
 
             <CardContent class="space-y-4">
@@ -365,6 +365,10 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
               <div class="flex items-center space-x-4 ">
                 <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Launch AI</p>
+              </div>
+              <div class="flex items-center space-x-4">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                <p class="font-semibold">AWS: $5000 Cloud storage credit</p>
               </div>
               <div class="flex items-center space-x-4">
                 <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
