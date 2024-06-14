@@ -1,7 +1,6 @@
 
 <script setup lang="ts">
 import {
-  Calendar,
   Check,
   Clock,
   Inbox,
@@ -16,7 +15,10 @@ import {
   Power,
   User,
   Heart,
-  Cog
+  Cog,
+  Bell,
+  MessageSquare
+
   
 } from 'lucide-vue-next';
 import {
@@ -28,13 +30,15 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
-// import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/ui/calendar'
+import { Avatar, AvatarImage } from '@/components/ui/avatar'
+
 </script>
 
 <template>
       <div class="bg-white dark:bg-gray-900 p-6 shadow-lg rounded-lg transition-colors">
     <div class="flex items-center justify-between">
-      <div class="flex items-center space-x-4">
+      <!-- <div class="flex items-center space-x-4">
         <Avatar class="w-12 h-12 border-2 border-orange-500 dark:border-orange-400 rounded-full">
           <AvatarImage src="/placeholder.svg" alt="User avatar" />
           <AvatarFallback>U</AvatarFallback>
@@ -43,8 +47,25 @@ import { Badge } from '@/components/ui/badge';
           <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
           <p class="text-sm text-gray-500 dark:text-gray-400">Welcome, User!</p>
         </div>
-      </div>
+      </div> -->
+      <div class="flex items-center space-x-4">
+          <Avatar class="w-24 h-24 ">
+            <AvatarImage src="/placeholder.svg" alt="Your Name" />
+          </Avatar>
+          <div>
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, User!</h1>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Here's what's happening with your events today:</p>
+          </div>
+        </div>
       <div class="flex space-x-2 items-center">
+        <div class="flex space-x-4">
+            <button class="p-2 bg-gray-200 rounded-full dark:bg-gray-700">
+              <Bell class="h-5 w-5 text-gray-600 dark:text-gray-300" />
+            </button>
+            <button class="p-2 bg-gray-200 rounded-full dark:bg-gray-700">
+              <MessageSquare class="h-5 w-5 text-gray-600 dark:text-gray-300" />
+            </button>
+          </div>
         <!-- <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs hover:bg-orange-500 hover:text-white">
           Pro
         </Badge> -->
@@ -71,7 +92,7 @@ import { Badge } from '@/components/ui/badge';
       <Card class="rounded-xl overflow-hidden border dark:border-transparent h-1/2 " >
 
         <CardHeader class="bg-orange-500 dark:bg-orange-500 p-6">
-          <CardTitle class="text-xl font-semibold text-center text-white">Offers & Inquiries</CardTitle>
+          <CardTitle class="text-xl font-semibold text-left text-white">Offers & Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
           <ul>
@@ -101,7 +122,7 @@ import { Badge } from '@/components/ui/badge';
               <Award class="w-5 h-5 mr-2 text-yellow-500" />
               <span>Vendors</span>
             </li>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <!-- <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
               <Volume2 class="w-5 h-5 mr-2 text-red-500" />
               <span>Media</span>
             </li>
@@ -112,7 +133,7 @@ import { Badge } from '@/components/ui/badge';
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
               <Volume2 class="w-5 h-5 mr-2 text-red-500" />
               <span>Angel AI</span>
-            </li>
+            </li> -->
             <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
               <Mail class="w-5 h-5 mr-2 text-red-500" />
               <span>Notifications</span>
@@ -140,13 +161,12 @@ import { Badge } from '@/components/ui/badge';
     </aside>
     <main class="flex-1 p-8">
       <section class="mb-8">
-        <Card class="bg-white dark:bg-gray-800 shadow rounded-lg p-5 mb-6">
+        <!-- <Card class="bg-white dark:bg-gray-800 shadow rounded-lg p-5 mb-6">
           <CardHeader class="border-b pb-4">
             <CardTitle class="text-2xl font-bold leading-tight">New Updates</CardTitle>
           </CardHeader>
           <CardContent>
             <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-4 text-md mt-4">
-              <!-- Existing items -->
               <div class="flex items-center">
                 <Calendar class="w-5 h-5 mr-2 text-blue-500" />
                 <div>You have <Badge variant="success">2 event invites</Badge></div>
@@ -167,7 +187,6 @@ import { Badge } from '@/components/ui/badge';
                 <Volume2 class="w-5 h-5 mr-2 text-pink-500" />
                 <div>You have <Badge variant="pink">1 media interview request</Badge></div>
               </div>
-              <!-- New items -->
               <div class="flex items-center">
                 <Briefcase class="w-5 h-5 mr-2 text-indigo-500" />
                 <div>You have <Badge variant="indigo">1 venue request</Badge></div>
@@ -210,8 +229,8 @@ import { Badge } from '@/components/ui/badge';
               </div>
             </div>
           </CardContent>
-        </Card>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4">
+        </Card> -->
+        <div class=" lg:grid-cols-3 gap-6 px-4">
       <!-- Large Box -->
       <div class="lg:col-span-2 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -219,6 +238,8 @@ import { Badge } from '@/components/ui/badge';
           <Card class="transition hover:shadow-md">
             <CardHeader>
               <CardTitle>Upcoming Events</CardTitle>
+              <Badge class="shrink-0">3 New</Badge>
+
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
@@ -242,7 +263,9 @@ import { Badge } from '@/components/ui/badge';
           <!-- Upcoming Reservations -->
           <Card class="transition hover:shadow-md">
             <CardHeader>
-              <CardTitle>Upcoming Reservations</CardTitle>
+              <CardTitle>Venues Reservations</CardTitle>
+              <Badge class="shrink-0">2 Pending</Badge>
+
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
@@ -251,6 +274,40 @@ import { Badge } from '@/components/ui/badge';
               </div>
               <div class="flex items-center space-x-4">
                 <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                <p class="font-semibold">Hall B</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card class="transition hover:shadow-md">
+            <CardHeader>
+              <CardTitle>Speakers & Volunteers</CardTitle>
+              <Badge class="shrink-0">3 Pending</Badge>
+
+            </CardHeader>
+            <CardContent class="space-y-4">
+              <div class="flex items-center space-x-4">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <p class="font-semibold">Conference Room A</p>
+              </div>
+              <div class="flex items-center space-x-4">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <p class="font-semibold">Hall B</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card class="transition hover:shadow-md">
+            <CardHeader>
+              <CardTitle>New Messages</CardTitle>
+              <Badge class="shrink-0">5 Unread</Badge>
+            </CardHeader>
+
+            <CardContent class="space-y-4">
+              <div class="flex items-center space-x-4">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full " />
+                <p class="font-semibold">Conference Room A</p>
+              </div>
+              <div class="flex items-center space-x-4">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
                 <p class="font-semibold">Hall B</p>
               </div>
             </CardContent>
@@ -270,8 +327,7 @@ import { Badge } from '@/components/ui/badge';
       </div>
       <!-- Smaller Boxes -->
       <div class="space-y-6">
-        <!-- New Messages -->
-        <Card class="transform hover:scale-105 transition bg-white dark:bg-gray-900 shadow rounded-lg p-6">
+        <!-- <Card class="transform hover:scale-105 transition bg-white dark:bg-gray-900 shadow rounded-lg p-6">
           <CardHeader>
             <CardTitle>New Messages</CardTitle>
           </CardHeader>
@@ -286,10 +342,9 @@ import { Badge } from '@/components/ui/badge';
             <Badge class="shrink-0">5 unread</Badge>
           </CardContent>
         </Card>
-        <!-- New Service Request -->
         <Card class="transform hover:scale-105 transition bg-white dark:bg-gray-900 shadow rounded-lg p-6">
           <CardHeader>
-            <CardTitle>New Requests</CardTitle>
+            <CardTitle>Speakers & Volunteers</CardTitle>
           </CardHeader>
           <CardContent class="flex items-center space-x-4">
             <div class="flex -space-x-1 overflow-hidden">
@@ -301,18 +356,18 @@ import { Badge } from '@/components/ui/badge';
             </div>
             <Badge class="shrink-0">3 pending</Badge>
           </CardContent>
-        </Card>
+        </Card> -->
         <Card class="transition hover:shadow-md p-6">
             <CardHeader >
               <CardTitle>New Resources</CardTitle>
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4 ">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Launch AI</p>
               </div>
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Blog: How to create a grate event</p>
               </div>
             </CardContent>

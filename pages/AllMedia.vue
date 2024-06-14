@@ -48,7 +48,7 @@ const date = ref<Date>()
 <template>
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Media & Influncors Collab</h1>
+      <h1 class="text-2xl font-bold dark:text-white">Media, Influencers & Promoters</h1>
       <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become a Media/PR partner</Button>
 
     </div>

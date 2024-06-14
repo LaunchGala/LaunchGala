@@ -4,10 +4,10 @@
   <VenueSliderLanding/>
   <VolunteersLanding/>
   <SponsorsLanding/>
-  <OtherServicesLanding/>
-  <CompanyFundingLanding/>
+  <!-- <OtherServicesLanding/> -->
+  <!-- <CompanyFundingLanding/> -->
   <UpcomingEventLanding/>
-  <CreateEventLanding/>
+  <!-- <CreateEventLanding/> -->
   <RequestServiceLanding/>
   <FAQlanding/>
 </div>
