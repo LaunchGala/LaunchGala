@@ -56,16 +56,20 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
         </div>
       </div> -->
       <div class="flex items-center space-x-4 ">
-          <Avatar class="w-24 h-24 ">
+          <Avatar class="w-28 h-28 ">
             <AvatarImage src="/placeholder.svg" alt="Your Name" />
           </Avatar>
           <div>
-            <div class="flex">
+            <div class="flex ">
             <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, User!</h1>
             <BadgeCheck class="w-6 h-6 ml-2 font-bold text-orange-500" />
             
           </div>
-
+          <div class="flex items-baseline space-x-2">
+              <p class="text-xl font-bold text-orange-500 dark:text-orange-400">2,235</p>
+              <span class="text-lg font-medium text-gray-500 dark:text-gray-300">Kudos</span>
+              <Trophy class="w-5 h-5 font-bold text-orange-500" />
+          </div>
           <div class="flex justify-left gap-2">
         <Dialog v-slot="{ }">
           <DialogTrigger>
@@ -102,11 +106,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
         </Dialog>
       </div>
 
-            <div class="flex items-baseline space-x-2">
+            <!-- <div class="flex items-baseline space-x-2">
               <p class="text-xl font-bold text-orange-500 dark:text-orange-400">2,235</p>
               <span class="text-lg font-medium text-gray-500 dark:text-gray-300">Kudos</span>
               <Trophy class="w-5 h-5 font-bold text-orange-500" />
-          </div>
+          </div> -->
           <div class="flex space-x-2">
           <Badge class="bg-red-100 text-red-800 dark:bg-red-800 dark:text-orang-100 py-1 px-2 rounded-full text-sm flex items-center">
             <Check class="w-4 h-4 mr-1" /> 12x Volunteering Contribution
@@ -123,6 +127,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           </Badge>
         </div>
         </div>
+        
           </div>
         </div>
       <div class="flex space-x-2 items-center">
