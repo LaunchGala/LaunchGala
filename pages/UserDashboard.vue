@@ -68,9 +68,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             
           </div>
           <div class="flex items-baseline space-x-2">
-              <p class="text-xl font-bold text-orange-500 dark:text-orange-400">2,235</p>
-              <span class="text-lg font-medium text-gray-500 dark:text-gray-300">Kudos</span>
-              <Trophy class="w-5 h-5 font-bold text-orange-500" />
+              <p class="text-lg font-bold text-orange-500 dark:text-orange-400">2,235</p>
+              <span class="text-md font-bold text-gray-500 dark:text-gray-300">KUDOS</span>
+              <Trophy class="w-4 h-4 font-bold text-orange-500" />
           </div>
           <div class="flex justify-left gap-2 mt-2 mb-2">
         <Dialog v-slot="{ }">
