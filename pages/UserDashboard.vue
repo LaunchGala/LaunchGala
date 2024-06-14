@@ -72,7 +72,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
               <span class="text-lg font-medium text-gray-500 dark:text-gray-300">Kudos</span>
               <Trophy class="w-5 h-5 font-bold text-orange-500" />
           </div>
-          <div class="flex justify-left gap-2">
+          <div class="flex justify-left gap-2 mt-2 mb-2">
         <Dialog v-slot="{ }">
           <DialogTrigger>
             <Badge class="cursor-pointer bg-orange-100 text-orange-800">
