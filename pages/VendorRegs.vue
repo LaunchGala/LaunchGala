@@ -24,8 +24,9 @@ const onSubmit = (event) => {
 </script>
 
 <template>
+  <div class="bg-orange-200">
   <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto dark:bg-black">
-    <form @submit="onSubmit" class="space-y-6">
+    <form @submit="onSubmit" class="space-y-6 m-4">
       <h3 class="text-3xl font-bold text-center text-orange-600 dark:text-white">Vendor Registration</h3>
 
       <div>
@@ -88,25 +89,25 @@ const onSubmit = (event) => {
         <Label for="socialLinks" class="block text-sm font-medium text-orange-700 dark:text-gray-300">Social Media Links</Label>
         <!-- <Textarea id="socialLinks" placeholder="Social media links (one per line)" class="mt-1 block w-full rounded-md border-orange-300 focus:border-orange-400 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600"/> -->
       </div>
-      <div class="mt-4 flex space-x-2">
-        <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
-          <Linkedin class="w-6 h-6 ml-3 text-blue-500"/>
+      <div class=" flex space-x-2">
+        <div class="flex items-center flex-1 bg-gray-100  rounded-md">
+          <Linkedin class="w-6 h-6 ml-3 text-blue-500 mr-1"/>
           <Input type="text" :disabled="editDisabled" placeholder="LinkedIn URL" v-model="user_linkedin" class="flex-1 border-0 focus:ring-2 focus:ring-blue-500" />
         </div>
-        <div class="flex items-center flex-1 bg-black-700 rounded-md">
-          <Twitter class="w-6 h-6 ml-3 text-black-500"/>
+        <div class="flex items-center flex-1 bg-gray-100 rounded-md">
+          <Twitter class="w-6 h-6 ml-3 text-black-500 mr-1"/>
           <Input type="text" :disabled="editDisabled" placeholder="Twitter URL" v-model="user_twitter" class="flex-1 border-0 focus:ring-2 focus:ring-blue-500" />
         </div>
-        <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
-          <Youtube class="w-6 h-6 ml-3 text-red-500"/>
+        <div class="flex items-center flex-1 bg-gray-100  rounded-md">
+          <Youtube class="w-6 h-6 ml-3 text-red-500 mr-1"/>
           <Input type="text" :disabled="editDisabled" placeholder="YouTube URL" v-model="user_youtube" class="flex-1 border-0 focus:ring-2 focus:ring-pink-500" />
         </div>
-        <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
-          <Facebook class="w-6 h-6 ml-3 text-blue-600"/>
+        <div class="flex items-center flex-1 bg-gray-100  rounded-md">
+          <Facebook class="w-6 h-6 ml-3 text-blue-600 mr-1"/>
           <Input type="text" :disabled="editDisabled" placeholder="Facebook URL" v-model="user_facebook" class="flex-1 border-0 focus:ring-2 focus:ring-blue-500" />
         </div>
-        <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
-          <Instagram class="w-6 h-6 ml-3 text-orange-600"/>
+        <div class="flex items-center flex-1 bg-gray-100  rounded-md">
+          <Instagram class="w-6 h-6 ml-3 text-orange-600 mr-1"/>
           <Input type="text" :disabled="editDisabled" placeholder="Instagram URL" v-model="user_instagram" class="flex-1 border-0 focus:ring-2 focus:ring-blue-500" />
         </div>
         <!-- <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
@@ -125,4 +126,5 @@ const onSubmit = (event) => {
       <Button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 focus:ring-4 dark:focus:ring-orange-700 focus:ring-orange-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white">Register</Button>
     </form>
   </div>
+</div>
 </template>
