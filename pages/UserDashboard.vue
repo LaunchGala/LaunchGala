@@ -448,7 +448,19 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             <CardHeader >
               <CardTitle>New Resources</CardTitle>
             </CardHeader>
-            <CardContent class="space-y-4">
+            <CardContent class="space-y-4 columns-2 ">
+              <div class="flex items-center space-x-4 ">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                <p class="font-semibold">Launch AI</p>
+              </div>
+              <div class="flex items-center space-x-4">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                <p class="font-semibold">AWS: $5000 Cloud storage credit</p>
+              </div>
+              <div class="flex items-center space-x-4">
+                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                <p class="font-semibold">Blog: How to create a grate event</p>
+              </div>
               <div class="flex items-center space-x-4 ">
                 <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Launch AI</p>
