@@ -85,7 +85,7 @@ const industry = [
   'Chemical Processing', 'Legal Technology (Legal Tech)', 'Regulatory Technology (Regtech)', 'Compliance', 
   'Intellectual Property', 'Law', 'Corporate Law', 'Regulatory Affairs', 
   'Cybersecurity Services', 'Physical Security', 'Personal Safety', 'Home Automation', 
-  'Security Services', 'Private Investigation', 'Human Resources Technology (HR Tech)', 'Talent Acquisition', 
+  'Lead Generation', 'Private Investigation', 'Human Resources Technology (HR Tech)', 'Talent Acquisition', 
   'Freelance Marketplaces', 'Remote Work', 'Staffing', 'Payroll Services', 
   'Digital Marketing', 'Customer Relationship Management (CRM)', 'Social Media Management', 
   'Branding and Design', 'Advertising', 'Public Relations', 'Market Research', 
@@ -321,7 +321,7 @@ function getIcon(industry) {
       return Shield;
     case 'Home Automation':
       return Home;
-    case 'Security Services':
+    case 'Lead Generation':
       return Shield;
     case 'Private Investigation':
       return Search;
