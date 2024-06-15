@@ -1,4 +1,4 @@
-<!-- 
+
 <script setup lang="ts">
 import { MapPin, Search, ShoppingCart, Tag, Star } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
@@ -29,7 +29,10 @@ const date = ref<Date>()
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Find Vendors</h1>
+      <NuxtLink to="VendorListing">
+
       <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become a Vendor</Button>
+      </NuxtLink>
 
     </div>
     
@@ -137,10 +140,10 @@ const date = ref<Date>()
       </div>
     </div>
   </div>
-</template> -->
+</template>
 
 
-
+<!-- 
 <script setup lang="ts">
 
 
@@ -214,4 +217,4 @@ const seconds = () => Math.floor((countdown.value % (1000 * 60)) / 1000)
       </div>
     </div>
   </div>
-</template>
+</template> -->

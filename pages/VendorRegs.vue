@@ -50,8 +50,8 @@ const onSubmit = (event) => {
       </div>
 
       <div>
-        <Label for="servicesOffered" class="block text-sm font-medium text-orange-700 dark:text-gray-300">Services Offered</Label>
-        <Textarea id="servicesOffered" placeholder="What services do you offer?" class="mt-1 block w-full rounded-md border-orange-300 focus:border-orange-400 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600"/>
+        <Label for="servicesOffered" class="block text-sm font-medium text-orange-700 dark:text-gray-300">Services/Products</Label>
+        <Textarea id="servicesOffered" placeholder="What services/products do you offer?" class="mt-1 block w-full rounded-md border-orange-300 focus:border-orange-400 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600"/>
       </div>
 
       <div>

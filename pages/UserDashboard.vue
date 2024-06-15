@@ -317,9 +317,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
       <div class="lg:col-span-2 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
         <div class="flex space-x-96 mb-2">
         <p class="text-md font-semibold  text-gray-600 dark:text-gray-400">Here's what's happening with your events today:</p>
+        <NuxtLink to="EarningDash">
+
         <Button class="justify-center" variant="outline">
         <DollarSignIcon class="w-4 h-4 mr-2 font-semibold text-orange-500" />Earning
       </Button>
+    </NuxtLink>
+
     </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
