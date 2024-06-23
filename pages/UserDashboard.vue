@@ -61,11 +61,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
       </div> -->
       <div class="flex items-center space-x-4 ">
           <Avatar class="w-28 h-28 ">
-            <AvatarImage src="/placeholder.svg" alt="Your Name" />
+            <AvatarImage src="/PinkPavatar Background Removed Background Removed.png" alt="Your Name" />
           </Avatar>
           <div>
             <div class="flex ">
-            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, User!</h1>
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, Pinky!</h1>
             <BadgeCheck class="w-6 h-6 ml-2 font-bold text-orange-500" />
             
           </div>
@@ -88,7 +88,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             </DialogHeader>
             <!-- Placeholder for user list -->
             <p>Here you will be able to see the list of people following you.</p>
-            <button class="w-full p-2 text-center rounded-lg bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600" @click="close">Close</button>
+            <button class="w-full p-2 text-center rounded-lg bg-orange-600 dark:bg-orange-500 text-white hover:bg-orange-700 dark:hover:bg-orange-600" @click="close">Close</button>
           </DialogContent>
         </Dialog>
         
@@ -105,7 +105,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             </DialogHeader>
             <!-- Placeholder for user list -->
             <p>Here you will view all the people you follow.</p>
-            <button class="w-full p-2 text-center rounded-lg bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600" @click="close">Close</button>
+            <button class="w-full p-2 text-center rounded-lg bg-orange-600 dark:bg-orange-500 text-white hover:bg-orange-700 dark:hover:bg-orange-600" @click="close">Close</button>
           </DialogContent>
         </Dialog>
       </div>
@@ -316,7 +316,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
       <!-- Large Box -->
       <div class="lg:col-span-2 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
         <div class="flex space-x-96 mb-2">
-        <p class="text-md font-semibold  text-gray-600 dark:text-gray-400">Here's what's happening with your events today:</p>
+        <p class="text-md font-semibold  text-gray-600 dark:text-gray-400">Here's what's happening with your gala today:</p>
         <NuxtLink to="EarningDash">
 
         <Button class="justify-center" variant="outline">
@@ -336,7 +336,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Event Image" class="w-20 h-20 rounded-lg" />
+                <img src="public/Bootstrapping.png" alt="Event Image" class="w-20 h-20 rounded-lg" />
                 <div>
                   <p class="font-semibold text-lg">Event A</p>
                   <p class="text-sm text-gray-500 dark:text-gray-400">Oct 24, 2023</p>
@@ -344,7 +344,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
                 <Badge variant="primary" class="ml-auto ">New</Badge>
               </div>
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Event Image" class="w-20 h-20 rounded-lg" />
+                <img src="public/Bootstrapping.png" alt="Event Image" class="w-20 h-20 rounded-lg" />
                 <div>
                   <p class="font-semibold text-lg">Event B</p>
                   <p class="text-sm text-gray-500 dark:text-gray-400">Nov 11, 2023</p>
@@ -362,11 +362,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                <img src="public/Bootstrapping.png" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Conference Room A</p>
               </div>
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                <img src="public/Bootstrapping.png" alt="Reservation" class="w-20 h-20 rounded-lg" />
                 <p class="font-semibold">Hall B</p>
               </div>
             </CardContent>
@@ -379,12 +379,18 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
             </CardHeader>
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
-                <p class="font-semibold">Conference Room A</p>
+                <img src="public/LarryPage.jpeg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <div >
+                <div class="font-semibold"> Larry Page</div>
+                <div class="font-semibold"> Google - Founder & CEO</div>
+              </div>
               </div>
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
-                <p class="font-semibold">Hall B</p>
+                <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <div>
+                <div class="font-semibold"> Pinky</div>
+                <div class="font-semibold"> Pinkypedia - Founder & CEO</div>             
+               </div>
               </div>
             </CardContent>
           </Card>
@@ -396,11 +402,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 
             <CardContent class="space-y-4">
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full " />
+                <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation" class="w-20 h-20 rounded-full " />
                 <p class="font-semibold">Conference Room A</p>
               </div>
               <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation" class="w-20 h-20 rounded-full" />
                 <p class="font-semibold">Hall B</p>
               </div>
             </CardContent>
