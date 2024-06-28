@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Button } from '@/components/ui/button';
@@ -8,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { ChevronRight } from 'lucide-vue-next';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
-
 
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
@@ -28,14 +26,14 @@ console.log(props.venueListing);
         </CardContent>
         <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
-            <div  class="flex items-center">
+            <div class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
-          <Progress :model-value="70"  />
+          <Progress :model-value="70" />
           <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
-            <div  class="flex items-center">
+            <div class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />
             </div>

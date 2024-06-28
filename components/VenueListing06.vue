@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
@@ -12,7 +11,7 @@ const props = defineProps(['venueListing']);
 console.log(props.venueListing);
 
 function updateChecked(toggleState: boolean) {
-  props.venueListing.addressExact = toggleState
+  props.venueListing.addressExact = toggleState;
 }
 </script>
 
@@ -53,14 +52,14 @@ function updateChecked(toggleState: boolean) {
         </CardContent>
         <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
-            <div  class="flex items-center">
+            <div class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
-          <Progress :model-value="50"  />
+          <Progress :model-value="50" />
           <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
-            <div  class="flex items-center">
+            <div class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />
             </div>

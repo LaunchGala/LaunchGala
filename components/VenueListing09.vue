@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Switch } from '@/components/ui/switch';
@@ -8,14 +7,12 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
 
-
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
 
 function priceEnabled(toggleState: boolean) {
   props.venueListing.priceEnabled = toggleState
 }
-// if false do not display the price in the venue listing everywhere
 
 function sponsorshipOption(toggleState: boolean) {
   props.venueListing.sponsorshipOption = toggleState
@@ -23,7 +20,6 @@ function sponsorshipOption(toggleState: boolean) {
 </script>
 
 <template>
-  
   <div class="bg-white dark:bg-black min-h-screen py-10 flex justify-center items-center">
     <div class="w-full max-w-4xl mx-auto px-4 lg:px-8">
       <Card>

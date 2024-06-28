@@ -16,7 +16,7 @@
             >
               <CardContent class="p-5 flex flex-col items-center">
                 <div class="p-4 bg-orange-100 dark:bg-orange-600 rounded-full">
-                  <User size="48" class="text-orange-500 dark:text-white" />
+                  <User class="text-orange-500 dark:text-white" />
                 </div>
                 <CardDescription class="mt-4 text-xl font-semibold text-orange-500 dark:text-white">
                   {{ capacity.label }}

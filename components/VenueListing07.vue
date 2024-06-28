@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import { Upload, X } from 'lucide-vue-next';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
 
+const imageCount = 5;
 </script>
 
 <template>
@@ -23,7 +23,7 @@ import { Progress } from '@/components/ui/progress';
             <input type="file" multiple class="hidden" accept="image/*" />
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
-            <div v-for="n in 5" :key="`image-placeholder-${n}`">
+            <div v-for="n in imageCount" :key="`image-placeholder-${n}`">
               <div class="w-full aspect-w-1 aspect-h-1">
                 <img src="/placeholder.svg" alt="Venue placeholder" class="rounded-md object-cover"/>
                 <div class="absolute top-2 right-2">
@@ -37,14 +37,14 @@ import { Progress } from '@/components/ui/progress';
         </CardContent>
         <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
-            <div  class="flex items-center">
+            <div class="flex items-center">
               <ArrowLeft class="w-4 h-4 mr-2" />
               Back
             </div>
           </Button>
-          <Progress :model-value="60"  />
+          <Progress :model-value="60" />
           <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
-            <div  class="flex items-center">
+            <div class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />
             </div>
