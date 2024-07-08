@@ -33,7 +33,7 @@ import { CrownIcon } from 'lucide-vue-next';
         <span class=" colorOrange">Launch Gala</span>
       </a>
       <nav class="hidden lg:flex gap-12 ml-28">
-        <NuxtLink to="AllVenues">
+        <NuxtLink to="/venues">
           <a class="text-sm font-semibold  hover:underline">
             Venues
           </a>
