@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [{ rel: 'icon', type: 'image/svg', href: '/logo.svg' }],
-
     },
   },
   runtimeConfig: {
@@ -33,7 +32,8 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxtseo/module',
     '@nuxt/content',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
+    '@pinia/nuxt' // Add Pinia module
   ],
   extends: ['nuxt-umami'],
   appConfig: {
