@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useSupabaseClient, useSupabaseUser } from '@supabase/supabase-js';
 import Login from '@/components/login/Signup.vue';
