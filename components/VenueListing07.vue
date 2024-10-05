@@ -1,11 +1,50 @@
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Upload, X } from 'lucide-vue-next';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
+
+
+
+const props = defineProps(['venueListing']);
+const name = ref('Vue.js');
+const files = ref([])
+
+class UploadableFile {
+	constructor(file) {
+		this.file = file
+		this.id = `${file.name}-${file.size}-${file.lastModified}-${file.type}`
+		this.url = URL.createObjectURL(file)
+		this.status = null
+	}
+}
+
+function addFiles(newFiles){
+  props.venueListing.images = newFiles;
+  let newUploadableFiles = [...newFiles].map((file) => new UploadableFile(file)).filter((file) => !fileExists(file.id))
+		files.value = files.value.concat(newUploadableFiles)
+  console.log(props.venueListing.images);
+}
+
+function fileExists(otherId) {
+  return files.value.some(({ id }) => id === otherId)
+}
+
+function removeFile(file) {
+		const ind1 = props.venueListing.images.indexOf(file)
+		const ind2 = files.value.indexOf(file)
+
+		if (ind2 > -1) files.value.splice(ind2, 1)
+		if (ind1 > -1) props.venueListing.images.splice(ind1, 1)
+	}
+
+function onInputChange(e) {
+	addFiles(e.target.files)
+	e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
+}
 
 </script>
 
@@ -17,23 +56,7 @@ import { Progress } from '@/components/ui/progress';
           <CardTitle>Upload Venue Images</CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="flex flex-col items-center justify-center p-10 border-2 border-dashed rounded-lg mb-6">
-            <Upload class="w-10 h-10 text-gray-400" />
-            <p class="mt-4 text-sm text-gray-600">Drag and drop your images here, or <span class="text-blue-600 cursor-pointer">browse</span></p>
-            <input type="file" multiple class="hidden" accept="image/*" />
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
-            <div v-for="n in 5" :key="`image-placeholder-${n}`">
-              <div class="w-full aspect-w-1 aspect-h-1">
-                <img src="/placeholder.svg" alt="Venue placeholder" class="rounded-md object-cover"/>
-                <div class="absolute top-2 right-2">
-                  <Button variant="icon" class="p-1 bg-white bg-opacity-75 rounded-full">
-                    <X class="w-4 h-4 text-gray-500" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ImageUploader :image-names="props.venueListing.images"/>
         </CardContent>
         <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
@@ -54,3 +77,26 @@ import { Progress } from '@/components/ui/progress';
     </div>
   </div>
 </template>
+
+<style scoped>
+.drop-area {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 50px;
+	background: #ffffff55;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	transition: .2s ease;
+
+	&[data-active=true] {
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		background: #ffffffcc;
+	}
+}
+.image-list {
+	display: flex;
+	list-style: none;
+	flex-wrap: wrap;
+	padding: 0;
+}
+</style>

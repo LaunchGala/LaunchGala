@@ -16,7 +16,7 @@ console.log(props.venueListing);
   <div class="bg-white dark:bg-black min-h-screen py-10 flex flex-col items-center">
     <div class="w-full max-w-4xl mx-auto px-4 lg:px-8">
       <AspectRatio :ratio="16 / 9" class="mb-6 rounded-md overflow-hidden shadow-lg">
-        <img src="/venueBG01.jpeg" alt="Venue Image" class="object-cover w-full h-full"/>
+        <ImageCarousel :images="props.venueListing.images"/>
       </AspectRatio>
       <Card>
         <CardHeader>

@@ -21,7 +21,7 @@ const supabase = useSupabaseClient()
 
 const user = useSupabaseUser()
 
-
+const props = defineProps(['venue'])
 const loading = ref(true)
 const full_name = ref('')
 const avatar_url = ref('')
@@ -43,41 +43,20 @@ if (data) {
 
 async function bookingActivity() {
 
-  const activity = {
-    created_by: user.value?.id,
-    object_owner: '5fc99cad-b05e-439b-8c24-9197251e9e6c',
-    activity_content: {
-      eventName: 'Mini Kitty',
-      eventType: 'Product Launch',
-      numberOfGuests: '350',
-      tickets: 'Free',
-      eventDate: '07/01/2024',
-      eventTime: '17:00 - 23:00',
-      eventDescription: 'Mini Kitty launch',
-      eventMessages: [
-        { userName: full_name.value, content: 'Love your venue and want to book it for this event' },
-        { userName: full_name.value, content: 'Please confirm availability'}
-      ],
-      userAvatar: avatar_url.value,
-      full_name: full_name.value,
-      venuePayment: 'Paid',
-      badges: ['Sponsor request', 'Paid request', 'Partner request']
-    },
-    activity_object: {
-      startDate: startDate.value,
-      endDate: endDate.value,
-      startTime: startTime.value,
-      endTime: endTime.value,
-      eventStyle: eventStyle.value,
-      note: note.value,
-      numberOfGuests: numberOfGuests.value,
-    }
-
+  const booking = {
+    requesting_user_id: user.value?.id,
+    venue_owner_id: props.venue.user_id,
+    event_start_date: startDate.value,
+    event_end_date: endDate.value,
+    event_start_time: startTime.value,
+    event_end_time: endTime.value,
+    event_type: eventStyle.value,
+    number_of_guests: numberOfGuests.value,
   }
   const { data, error } = await supabase
-    .from('activity_feed') // Specify the table name
+    .from('VenueBookings') // Specify the table name
     .insert([
-      activity // Object representing the new row
+      booking // Object representing the new row
     ])
     .select(); // Return the newly inserted row
 
@@ -141,19 +120,7 @@ async function bookingActivity() {
 
       <!-- <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" /> -->
 
-      <Select v-model="eventStyle" class="border-gray-300 focus:border-indigo-500 rounded-md shadow-sm">
-        <SelectTrigger class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
-          <SelectValue placeholder="Select event type" />
-          <!-- <ChevronDown class="ml-2 h-5 w-5" /> -->
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="wedding">Wedding</SelectItem>
-            <SelectItem value="corporate">Corporate Event</SelectItem>
-            <SelectItem value="birthday">Birthday Party</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <Input v-model="eventStyle" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Event Type" />
 
       <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" />
 

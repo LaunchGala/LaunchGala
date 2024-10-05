@@ -129,7 +129,7 @@ onMounted(() => {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       <div v-for="venue in allVenues" :key="venue.id" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
-          <img class="w-full h-64 object-cover" :src="venue.images" alt="Apartment image" />
+          <ImageCarousel class="w-full h-64 object-cover" :image-names="venue.images" alt="Apartment image" />
           <Badge v-if="venue.sponsorshipOption" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
         </div>
         <div class="px-6 py-4">          
@@ -166,7 +166,7 @@ onMounted(() => {
             <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
             
           </div> -->
-          <NuxtLink to="VenueDetailPage">
+          <NuxtLink :to="{ name: 'VenueDetailPage', query: { id: venue.id } }">
 
           <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore

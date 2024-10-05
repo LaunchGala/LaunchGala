@@ -20,6 +20,7 @@ import { MapPin, Star, User, ArrowRight, Home, Check, Share2, Bookmark, Save, Cl
 import { ref, defineProps } from 'vue'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
+import { useRoute } from 'vue-router'
 
 import {
   Accordion,
@@ -27,6 +28,55 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
+
+const route = useRoute();
+const venueId = route.query.id;
+const supabase = useSupabaseClient()
+const venueListing = ref({
+  createdBy: 0,
+  title: '',
+  address: '',
+  addressExact: true,
+  description: '',
+  capacity: 0,
+  price: 0,
+  priceEnabled: false, 
+  venueType: [],
+  amenities: [],
+  eventType: [],
+  images: [],
+  sponsorshipOption: true,
+  nonSmoking: true,
+  maskRequired: false,
+  noPets: true,
+  noCommercialPhotography: false,
+  securityCameras: true,
+  postEventCleaning: false,
+  mustClimbStairs: false,
+  additionalInsurance: false,
+  openSpace: false,
+
+
+
+});
+const images = ref([])
+const getVenueById = async (id) => {
+  const { data, error } = await supabase
+    .from('AllVenues') // Replace 'users' with your table name
+    .select('*') // Fetch all columns
+    .eq('id', id) // Filter by 'id'
+    .single() // Ensures only one record is returned
+
+  if (error) {
+    console.error('Error fetching data:', error)
+    return null
+  }
+
+  venueListing.value = data;
+}
+onMounted(() => {
+  getVenueById(venueId)
+});
 
 
 const date = ref<Date>()
@@ -50,11 +100,7 @@ const date = ref<Date>()
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 ">
-          <img src="/venueBG01.jpeg" alt="Main place" class="w-full h-120 object-cover col-span-2 rounded-lg dark:bg-gray-700"/>
-          <div class="flex flex-col space-y-2">
-            <img src="/Bootstrapping.png" alt="Place image" class="w-full h-70 object-cover rounded-lg dark:bg-gray-700"/>
-            <img src="/Bootstrapping.png" alt="Place image" class="w-full h-70 object-cover rounded-lg dark:bg-gray-700"/>
-          </div>
+          <ImageCarousel :image-names="venueListing.images" />
         </div>
         <div class="flex justify-between p-2">
           <Button variant="outline" class="border dark:border-gray-500 hover:border-indigo-600 dark:text-indigo-300 dark:hover:text-indigo-500">
@@ -88,27 +134,27 @@ const date = ref<Date>()
         
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Hosted by <strong>Kevin</strong></span>
+          <span>Hosted by <strong>{{venueListing.createdBy.username}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Company <strong>Google</strong></span>
+          <span>Company <strong>{{venueListing.createdBy.user_company}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Price <strong>$100/hr</strong></span>
+          <span>Price <strong>${{price}}/hr</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Sponsor option: <strong>Yes</strong></span>
+          <span>Sponsor option: <strong>{{venueListing.sponsorshipOption}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Venue type: <strong>Office room</strong></span>
+          <span>Venue type: <strong>{{venueListing.venueType}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Total capacity/Venue size: <strong>180</strong></span>
+          <span>Total capacity/Venue size: <strong>{{venueListing.capacity}}</strong></span>
         </div>
         <!-- <div class="flex items-center space-x-2 space-y-2">
           <User class="w-5 h-5" />
@@ -124,156 +170,32 @@ const date = ref<Date>()
         </div> -->
         <div class="flex items-center space-x-2 space-y-4">
           <MapPin class="w-5 h-5" />
-          <span>San Francisco, United States</span>
+          <span>{{venueListing.address}}</span>
         </div>
       </div>
       
         <!-- <VenueSearchLanding/> -->
-      <VenueBookingRequest/>
+      <VenueBookingRequest1 :venue="venueListing"/>
       </div>
       <h3 class="font-semibold text-lg mb-2">Description:</h3>
         <p class="leading-relaxed">
-          Discover the charms of the city in this exclusive apartment with fine finishes, thoughtful design, and a peaceful terrace views. After exploring the city, relax in the serene bedroom or enjoy the local restaurants within walking distance.
+          {{venueListing.description}}
         </p>
         <div>
           <h3 class="font-semibold text-lg mb-2">Venue good for:</h3>
-          <div class="flex flex-wrap gap-2">
+          <div v-for="eventType in venueListing.eventType" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              Conferences
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Seminars and Workshops
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Trade Shows and Expos
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Business Meetings
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Networking Events
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Team Building & Training
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Product Launches
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Board Meetings
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Investor Relations Meetings
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Press Conferences
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Pitch Events
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Hackathons
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Symposiums
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Panel Discussions
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Round Table Discussions
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Lectures and Public Speaking Events
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Dinner Party
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Corporate Anniversaries
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Job Fairs and Career Expos
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Signings and Publishing Events
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Gala Event
+              {{eventType}}
             </span>
           </div>
         </div>
         <div>
           <h3 class="font-semibold text-lg mb-2">Amenities</h3>
-          <div class="flex flex-wrap gap-2">
+          <div v-for="amenity in venueListing.amenities" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              Wi-Fi
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Air Conditioning
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Outdoor Area
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Kitchen
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Bar Area
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Restrooms
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Parking
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Presentation Equipment
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Private entrance
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Accessibility features
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Seating Furniture
-            </span>
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Audiovisual Equipment
+              {{amenity}}
             </span>
           </div>
         </div>
@@ -282,13 +204,6 @@ const date = ref<Date>()
       
       <CardFooter class="flex justify-between pt-4 border-t dark:border-gray-700">
         <div>
-          <div class="flex items-center space-x-2 mb-2">
-            <Home class="w-5 h-5" />
-            <span class="text-sm">Picture may not be of actual place</span>
-          </div>
-          <Button variant="outline" class="border dark:border-gray-500 hover:border-indigo-600 dark:text-indigo-300 dark:hover:text-indigo-500">
-            View on map
-          </Button>
         </div>
         <div class="flex flex-col items-end space-y-2">
           <Button class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white OrangeCol hover:bg-orange-400 rounded-md">
@@ -299,14 +214,7 @@ const date = ref<Date>()
       </CardFooter>
       <div class="px-4 py-2 dark:bg-gray-800">
         <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
-          <iframe 
-            src="https://maps.google.com/maps?q=San%20Francisco,%20USA&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-            frameborder="0" 
-            class="w-full min-h-screen rounded-md" 
-            allowfullscreen 
-            aria-hidden="false" 
-            tabindex="0">
-          </iframe>
+          <MapViewer :address="venueListing.address"/>
         </AspectRatio>
         
         <div class="bg-white dark:bg-black p-6 shadow-lg rounded-lg  mx-auto my-8">
