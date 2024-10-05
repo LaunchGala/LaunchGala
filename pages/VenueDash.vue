@@ -71,6 +71,7 @@ async function fetchVenuesIRequested() {
 
 onMounted(() => {
   fetchVenuesRequestedFromMe();
+  fetchVenuesIRequested();
 });
 
 function formatDate(date: string) {
@@ -284,10 +285,13 @@ function formatDate(date: string) {
                 Link to event page
               </a>
             </div>
-            <p class="text-sm">Number of guests: 200</p>
-            <p class="text-sm">Event date: Sep 15, 2023</p>
+            <p class="text-sm">Number of guests: {{item.number_of_guests}}</p>
+            <p class="text-sm">Event start date: {{item.event_start_date}}</p>
+            <p class="text-sm">Event end date: {{item.event_end_date}}</p>
+            <p class="text-sm">Event start time: {{item.event_start_time}}</p>
+            <p class="text-sm">Event end time: {{item.event_end_time}}</p>
             <blockquote class="p-4 italic border-l-4 border-orange-200 bg-neutral-50 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-300">
-              "Details of the venue I requested."
+              "{{item.event_description}}"
             </blockquote>
             <div class="flex space-x-2">
               <Button variant="secondary"><MessageCircle class="w-4 h-4 mr-1" /> Follow up</Button>
