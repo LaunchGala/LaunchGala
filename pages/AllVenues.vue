@@ -34,11 +34,22 @@ const allVenues = ref<any[] | null>(null);
 
 
 async function getAllVenues() {
-  const { data: AllVenues, error } = await supabase.from('AllVenues').select()
+  const { data: AllVenues, error } = await supabase.from('AllVenues').select('*, venue_owner:profiles!createdBy(*)').eq('is_published', true)
   console.log(error)
-  allVenues.value = AllVenues;
+  Promise.all(AllVenues.map(async (venue) => {
+    venue.venue_owner.avatarSRC = await fetchImage(venue.venue_owner.avatar_url)
+  })).then(() => {
+    allVenues.value = AllVenues;
+    console.log(AllVenues)
+  })
 }
-
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+  }
 onMounted(() => {
   getAllVenues()
 })
@@ -135,10 +146,10 @@ onMounted(() => {
         <div class="px-6 py-4">          
           <div class="flex items-center mt-4 mb-4">
             <Avatar class="bg-gray-200 dark:bg-gray-700">
-              <AvatarImage :src="venue.hostAvatar" alt="@radix-vue" />
+              <AvatarImage :src="venue.venue_owner.avatarSRC" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
-            <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">Host: {{ venue.hostName}}</span>
+            <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">Host: {{ venue.venue_owner.full_name}}</span>
             
           </div>
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>

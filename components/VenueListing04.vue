@@ -488,7 +488,7 @@ function addAmenity(amenity: string) {
             </div>
           </Button>
           <Progress :model-value="30" class=" text-white "  />
-          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
+          <Button @click="$emit('nextStep')" :disabled="!(props.venueListing.amenities?.length > 0)" variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

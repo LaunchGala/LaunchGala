@@ -49,16 +49,16 @@ import { BuildingIcon } from 'lucide-vue-next';
 import { CarTaxiFront } from 'lucide-vue-next';
 import { CarIcon } from 'lucide-vue-next';
 
-const props = defineProps(['venueListing']);
-console.log(props.venueListing);
+const props = defineProps(['event']);
+console.log(props.event);
 
 function addEventTypes(eventTypes: string) {
-  if (props.venueListing.eventType.includes(eventTypes)) {
-    props.venueListing.eventType = props.venueListing.eventType.filter((item) => item !== eventTypes);
+  if (props.event?.industries.includes(eventTypes)) {
+    props.event.industries = props.event?.industries.filter((item) => item !== eventTypes);
   } else {
-    props.venueListing.eventType.push(eventTypes);
+    props.event?.industries.push(eventTypes);
   }
-  console.log(props.venueListing.eventType);
+  console.log(props.event?.industries);
 }
 
 const industry = [
@@ -399,7 +399,7 @@ function getIcon(industry) {
               <Tooltip v-for="item in industry" :key="item">
                 <TooltipTrigger as-child>
                   <label @click="addEventTypes(item)" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md" 
-                    :class="{ 'bg-orange-100': props.venueListing.eventType.includes(item), 'bg-white': !props.venueListing.eventType.includes(item) }">
+                    :class="{ 'bg-orange-100': props.event?.industries.includes(item), 'bg-white': !props.event?.industries.includes(item) }">
                     <component :is="getIcon(item)" class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold text-center mb-1">{{ item }}</span>
                   </label>

@@ -14,33 +14,29 @@ const user = useSupabaseUser()
 const selectedStyle = ref('');
 const currentStep = ref(1);
 
-const newVenueListing = ref({
+const newEvent = ref({
   createdBy: user.value?.id,
   title: '',
-  street: '',
-  city: '',
-  state: '',
-  country: '',
-  zip: '',
-  addressExact: true,
   description: '',
-  capacity: 0,
-  price: 0,
-  priceEnabled: false, 
-  venueType: [],
-  amenities: [],
-  eventType: [],
-  images: "/Bootstrapping.png",
-  sponsorshipOption: true,
+  invite_only: false,
+  ticket_price: 0,
+  event_type: '',
+  industries: [],
+  images: [],
+  event_start_date: '',
+  event_end_date: '',
+  event_start_time: '',
+  event_end_time: '',
+  event_location: '',
+  industry: '',
+  agenda: '',
+  link: '',
   nonSmoking: true,
   maskRequired: false,
   noPets: true,
   noCommercialPhotography: false,
   securityCameras: true,
-  postEventCleaning: false,
-  mustClimbStairs: false,
-  additionalInsurance: false,
-  openSpace: false,
+  is_published: false
 
 
 
@@ -76,17 +72,15 @@ function previousStep() {
 <template>
   <Button class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addVenueListing">Save</Button>
   <div>
-    <EventCreating01 :venue-listing="newVenueListing" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating02 :venue-listing="newVenueListing" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating03 :venue-listing="newVenueListing" v-show="currentStep === 3" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating04 :venue-listing="newVenueListing" v-show="currentStep === 4" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating05 :venue-listing="newVenueListing" v-show="currentStep === 5" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating06 :venue-listing="newVenueListing" v-show="currentStep === 6" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating07 :venue-listing="newVenueListing" v-show="currentStep === 7" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating08 :venue-listing="newVenueListing" v-show="currentStep === 8" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating09 :venue-listing="newVenueListing" v-show="currentStep === 9" @next-step="nextStep" @previous-step="previousStep"/>    
-    <VenueListing10 :venue-listing="newVenueListing" v-show="currentStep === 10" @next-step="nextStep" @previous-step="previousStep"/>    
-    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" @next-step="nextStep" @previous-step="previousStep"/>    
+    <EventCreating01 :event="newEvent" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating02 :event="newEvent" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating03 :event="newEvent" v-show="currentStep === 3" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating04 :event="newEvent" v-show="currentStep === 4" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating05 :event="newEvent" v-show="currentStep === 5" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating06 :event="newEvent" v-show="currentStep === 6" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating07 :event="newEvent" v-show="currentStep === 7" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating08 :event="newEvent" v-show="currentStep === 8" @next-step="nextStep" @previous-step="previousStep"/>
+    <EventCreating09 :event="newEvent" v-show="currentStep === 9" @next-step="nextStep" @previous-step="previousStep"/>     
   </div>
 
 

@@ -13,7 +13,30 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const props = defineProps(['venueListing']);
-console.log(props.venueListing);
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
+const myVenues = ref([])
+const emit = defineEmits(['nextStep']);
+
+async function fetchVenues() {
+  const response = await supabase
+    .from('AllVenues')
+    .select()
+    .eq('createdBy', user.value.id)
+  if (response.error) {
+    console.error(response.error);
+    return;
+  }
+  myVenues.value = response.data;
+}
+
+function editVenue(item){
+  emit('nextStep', item)
+}
+
+onMounted(() => {
+  fetchVenues();
+});
 </script>
 
 <template>
@@ -35,50 +58,28 @@ console.log(props.venueListing);
 
           </div>
           <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead class="text-left">
-                  Venue Name
-                </TableHead>
-                <TableHead class="text-left">
-                  Location
-                </TableHead>
-                <TableHead class="text-left">
-                  Actions
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  Placeholder Venue 1
-                </TableCell>
-                <TableCell>
-                  Some Address, City
-                </TableCell>
-                <TableCell class="text-right">
-                  <Button class="flex items-center gap-2" variant="ghost">
-                    <Copy class="w-4 h-4" />
-                    Edit
-                  </Button>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  Placeholder Venue 2
-                </TableCell>
-                <TableCell>
-                  Another Address, Other City
-                </TableCell>
-                <TableCell class="text-right">
-                  <Button class="flex items-center gap-2" variant="ghost">
-                    <Copy class="w-4 h-4" />
-                    Edit
-                  </Button>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead class="text-left">Venue Name</TableHead>
+        <TableHead class="text-left">Location</TableHead>
+        <TableHead class="text-left">Actions</TableHead>
+      </TableRow>
+    </TableHeader>
+    
+    <TableBody>
+      <!-- Loop through the 'venues' array to create table rows -->
+      <TableRow v-for="(venue, index) in myVenues" :key="index">
+        <TableCell>{{ venue.title }}</TableCell>
+        <TableCell>{{ venue.address }}</TableCell>
+        <TableCell class="text-right">
+          <Button class="flex items-center gap-2" variant="ghost" @click="editVenue(venue)">
+            <Copy class="w-4 h-4"/>
+            Edit
+          </Button>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
         </CardContent>
         <CardFooter>
           <div class="text-center">

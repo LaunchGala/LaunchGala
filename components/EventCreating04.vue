@@ -75,7 +75,7 @@ const selectedTimeZone = ref('')
         </div>
       </div>
     </div>
-    <div class="mt-6">
+    <!--<div class="mt-6">
       <span class="text-md font-semibold">Time Zone</span>
       <Select v-model="selectedTimeZone" class="mt-2 mb-4">
         <SelectTrigger class="w-full justify-between rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
@@ -92,7 +92,7 @@ const selectedTimeZone = ref('')
           </template>
         </SelectContent>
       </Select>
-    </div>
+    </div>-->
     <div class="grid grid-cols-1 gap-4">
       <!-- <Button class="w-full text-white bg-orange-500 hover:bg-orange-600">Confirm</Button> -->
       <Button variant="link" class="text-orange-600 hover:text-orange-700 dark:text-orange-500 dark:hover:text-orange-400">Not sure yet? You can add/edit date later. 

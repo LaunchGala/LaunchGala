@@ -6,8 +6,10 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight, Home, Building, Image, BookOpen, Globe, Search, Users, GraduationCap, Camera, HotelIcon, Palette, Castle, Landmark, Theater, Wine, Sun, Medal, Briefcase, Store } from 'lucide-vue-next';
 import { Hotel } from 'lucide-vue-next';
+import VenueListing from '~/pages/VenueListing.vue';
 
 const selectedType = ref('');
+const props = defineProps(['venueListing']);
 
 // Handlers for handling click events
 function selectType(type: string) {
@@ -16,10 +18,13 @@ function selectType(type: string) {
   console.log(selectedType.value);
 };
 
-
-
-const props = defineProps(['venueListing']);
-console.log(props.venueListing);
+// Watcher for 'props.venueListing.venueType'
+watch(() => props.venueListing.venueType, (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    selectedType.value = newValue; // Set 'selectedType' to the new value
+    console.log(`Venue type changed to: ${selectedType.value}`);
+  }
+});
 </script>
 
 <template>
@@ -259,7 +264,7 @@ console.log(props.venueListing);
             </div>
           </Button>
           <Progress :model-value="10"  />
-          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
+          <Button @click="$emit('nextStep')" :disabled="selectedType === null || selectedType === ''" variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

@@ -33,16 +33,24 @@ const internalAddress = ref(props.address)
 
   const mapContainer = ref(null);
   const geocoder = ref(null);
-  const address = ref('')
   const map = ref(null);
+  const address = ref('')
   const placesService = ref(null);
   const apiKey = 'AIzaSyAjEbY_aGf3wrqxd89UPX1zzCDUw1cyPEc'; // Replace with your API key
 
 // Emit an event to update the parent when input changes
 const emitAddressUpdate = () => {
-  emit('update-address', address.value)
+  emit('update-address', address)
 }
-watch(address, emitAddressUpdate)
+
+
+watch(() => props.address, (newValue) => {
+  if (newValue !== address.value) {
+    address.value = props.address
+    onAddressInput()
+    emitAddressUpdate()
+  }
+})
   const initializeMap = () => {
     const loader = new Loader({
       apiKey,

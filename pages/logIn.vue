@@ -27,6 +27,20 @@ const signInWithGoogle = async () => {
   if (error) console.log(error)
   if (data) console.log(data)
 }
+const signInWithApple= async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'apple',
+  })
+  if (error) console.log(error)
+  if (data) console.log(data)
+}
+const signInWithLinkedIn = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'linkedin',
+  })
+  if (error) console.log(error)
+  if (data) console.log(data)
+}
 
 </script>
 
@@ -39,13 +53,13 @@ const signInWithGoogle = async () => {
         <h2 class="font-bold text-3xl text-gray-900 dark:text-white">Sign in to your account</h2>
       </div>
       <div class="mt-8 space-y-6 animate-fade-in-up">
-        <Button class="flex items-center justify-center w-full px-4 py-2 space-x-2 transition duration-200 ease-in bg-white border border-transparent rounded-md shadow-sm text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-black dark:text-white dark:hover:bg-gray-700">
+        <Button @click="signInWithGoogle" class="flex items-center justify-center w-full px-4 py-2 space-x-2 transition duration-200 ease-in bg-white border border-transparent rounded-md shadow-sm text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-black dark:text-white dark:hover:bg-gray-700">
           <Google class="w-4 h-4" /> <span>Sign-in with Google</span>
         </Button>
-        <Button class="flex items-center justify-center w-full px-4 py-2 space-x-2 transition duration-200 ease-in bg-white border border-transparent rounded-md shadow-sm text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-black dark:text-white dark:hover:bg-gray-700">
+        <Button @click="signInWithApple" class="flex items-center justify-center w-full px-4 py-2 space-x-2 transition duration-200 ease-in bg-white border border-transparent rounded-md shadow-sm text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-black dark:text-white dark:hover:bg-gray-700">
           <Apple /> <span>Sign-in with Apple</span>
         </Button>
-        <Button class="flex items-center justify-center w-full px-4 py-2 space-x-2 transition duration-200 ease-in bg-white border border-transparent rounded-md shadow-sm text-base font-medium text-blue-600 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-black dark:text-blue-400 dark:hover:bg-gray-700">
+        <Button @click="signInWithLinkedIn" class="flex items-center justify-center w-full px-4 py-2 space-x-2 transition duration-200 ease-in bg-white border border-transparent rounded-md shadow-sm text-base font-medium text-blue-600 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-black dark:text-blue-400 dark:hover:bg-gray-700">
           <Linkedin class="w-4 h-4" /> <span>Sign-in with LinkedIn</span>
         </Button>
         <div class="my-6 border-t border-gray-300 dark:border-gray-700"></div>
@@ -56,13 +70,10 @@ const signInWithGoogle = async () => {
           <Button @click="signInWithEmail" class="flex items-center justify-center w-full px-4 py-2 space-x-2 text-white transition duration-200 ease-in bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span>Continue</span> <Mail class="w-4 h-4"/>
           </Button>
-          <Button @click="signInWithGoogle" class="flex items-center justify-center w-full px-4 py-2 space-x-2 text-white transition duration-200 ease-in bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span>GOOOOOOOOOOOOOOOGLE!!!!!!!!!!!!!!!!</span> <Mail class="w-4 h-4"/>
-          </Button>
         </div>
       </div>
       <div class="text-center">
-        <a href="#signup" class="font-medium text-indigo-600 dark:text-indigo-300 hover:text-indigo-500">Or create a new account</a>
+        <SignUpDialog></SignUpDialog>
       </div>
     </div>
   </div>

@@ -55,6 +55,13 @@ const venueListing = ref({
   mustClimbStairs: false,
   additionalInsurance: false,
   openSpace: false,
+  venue_owner: {
+    full_name: '',
+    user_company: '',
+    avatar_url: '',
+    avatarSRC: ''
+  },
+  cancellation_policy: ''
 
 
 
@@ -63,7 +70,7 @@ const images = ref([])
 const getVenueById = async (id) => {
   const { data, error } = await supabase
     .from('AllVenues') // Replace 'users' with your table name
-    .select('*') // Fetch all columns
+    .select('*, venue_owner:profiles!createdBy(*)') // Fetch all columns
     .eq('id', id) // Filter by 'id'
     .single() // Ensures only one record is returned
 
@@ -134,15 +141,15 @@ const date = ref<Date>()
         
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Hosted by <strong>{{venueListing.createdBy.username}}</strong></span>
+          <span>Hosted by <strong>{{venueListing.venue_owner.full_name}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Company <strong>{{venueListing.createdBy.user_company}}</strong></span>
+          <span>Company <strong>{{venueListing.venue_owner.user_company}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Price <strong>${{price}}/hr</strong></span>
+          <span>Price <strong>${{venueListing.price}}/hr</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
@@ -221,21 +228,21 @@ const date = ref<Date>()
     <h2 class="text-2xl font-semibold mb-4">Reservation Rules</h2>
 
     <Accordion type="single" collapsible class="space-y-2">
-      <AccordionItem value="operating-hours">
+      <!--<AccordionItem value="operating-hours">
         <AccordionTrigger class="flex items-center justify-between">
           <span class="font-medium">Operating Hours</span>
-          <!-- <Clock class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
+           <Clock class="w-5 h-5 text-gray-500 dark:text-gray-400" /> 
         </AccordionTrigger>
         <AccordionContent>
           <p class="mt-2">Mon-Fri: 9am to 10pm</p>
           <p>Sat-Sun: 10am to 11pm</p>
         </AccordionContent>
-      </AccordionItem>
+      </AccordionItem>-->
 
-      <AccordionItem value="safety-rules">
+      <!--<AccordionItem value="safety-rules">
         <AccordionTrigger class="flex items-center justify-between">
           <span class="font-medium">Safety Rules</span>
-          <!-- <Shield class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
+           <Shield class="w-5 h-5 text-gray-500 dark:text-gray-400" /> 
         </AccordionTrigger>
         <AccordionContent>
           <ul class="list-disc ml-5 mt-2">
@@ -244,15 +251,62 @@ const date = ref<Date>()
             <li>Outdoor seating available</li>
           </ul>
           </AccordionContent>
-      </AccordionItem>
+      </AccordionItem>-->
 
       <AccordionItem value="reservation-rules">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Reservation Rules</span>
+          <span class="font-medium">Reservation Rules and Details</span>
           <!-- <Info class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
         </AccordionTrigger>
         <AccordionContent>
-          <p class="mt-2">Please arrive 10 minutes before your reservation. No outside food or drinks allowed.</p>
+          <div v-show="venueListing.nonSmoking" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              No Smoking
+            </span>
+          </div>
+          <div v-show="venueListing.maskRequired" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Masks Required
+            </span>
+          </div>
+          <div v-show="venueListing.noPets" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              No Pets
+            </span>
+          </div>
+          <div v-show="venueListing.noCommercialPhotography" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              No Commercial Photography
+            </span>
+          </div>
+          <div v-show="venueListing.securityCameras" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Has Security Cameras
+            </span>
+          </div>
+          <div v-show="venueListing.postEventCleaning" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Has Post Event Cleaning
+            </span>
+          </div>
+          <div v-show="venueListing.mustClimbStairs" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Must Climb Stairs
+            </span>
+          </div>
+          <div v-show="venueListing.openSpace" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Has Open Space
+            </span>
+          </div>
         </AccordionContent>
       </AccordionItem>
 
@@ -262,7 +316,7 @@ const date = ref<Date>()
           <!-- <XCircle class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
         </AccordionTrigger>
         <AccordionContent>
-          <p class="mt-2">Free cancellation within 24 hours. Late cancellations incur a fee.</p>
+          <p class="mt-2">{{ venueListing.cancellation_policy }}</p>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

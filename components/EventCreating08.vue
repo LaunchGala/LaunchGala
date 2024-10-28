@@ -9,36 +9,37 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
 
  
+const props = defineProps(['event']);
+
 function setNonSmoking(toggleState: boolean) {
-  props.venueListing.nonSmoking = toggleState
+  props.event.nonSmoking = toggleState
 }
 function setMaskRequired(toggleState: boolean) {
-  props.venueListing.maskRequired = toggleState
+  props.event.maskRequired = toggleState
 }
 function setNoPets(toggleState: boolean) {
-  props.venueListing.noPets = toggleState
+  props.event.noPets = toggleState
 }
 function setNoCommercialPhotography(toggleState: boolean) {
-  props.venueListing.noCommercialPhotography = toggleState
+  props.event.noCommercialPhotography = toggleState
 }
 function setSecurityCameras(toggleState: boolean) {
-  props.venueListing.securityCameras = toggleState
+  props.event.securityCameras = toggleState
 }
 function setPostEventCleaning(toggleState: boolean) {
-  props.venueListing.postEventCleaning = toggleState
+  props.event.postEventCleaning = toggleState
 }
 function setMustClimbStairs(toggleState: boolean) {
-  props.venueListing.mustClimbStairs = toggleState
+  props.event.mustClimbStairs = toggleState
 }
 function setOpenSpace(toggleState: boolean) {
-  props.venueListing.openSpace = toggleState
+  props.event.openSpace = toggleState
 }
 function setAdditionalInsurance(toggleState: boolean) {
-  props.venueListing.additionalInsurance = toggleState
+  props.event.additionalInsurance = toggleState
 }
 
-const props = defineProps(['venueListing']);
-console.log(props.venueListing);
+console.log(props.event);
 </script>
 
 <template>
@@ -53,34 +54,34 @@ console.log(props.venueListing);
           <div class="space-y-6">
             <div class=" items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white mr-72 ">Allow Venue offering</span>
-              <Switch :default-checked="props.venueListing.nonSmoking" @update:checked="setNonSmoking" id="displayPrice" />
+              <Switch :default-checked="props.event.nonSmoking" @update:checked="setNonSmoking" id="displayPrice" />
               <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
               
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow volunteers offering</span>
-              <Switch :default-checked="props.venueListing.maskRequired" @update:checked="setMaskRequired" id="displayPrice" />
+              <Switch :default-checked="props.event.maskRequired" @update:checked="setMaskRequired" id="displayPrice" />
 
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow sponsorship offering</span>
-              <Switch :default-checked="props.venueListing.noPets" @update:checked="setNoPets" id="displayPrice" />
+              <Switch :default-checked="props.event.noPets" @update:checked="setNoPets" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow expertise offering</span>
-              <Switch :default-checked="props.venueListing.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
+              <Switch :default-checked="props.event.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow vendors offering</span>
-              <Switch :default-checked="props.venueListing.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
+              <Switch :default-checked="props.event.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow registration request</span>
-              <Switch :default-checked="props.venueListing.securityCameras" @update:checked="setSecurityCameras" id="displayPrice" />
+              <Switch :default-checked="props.event.securityCameras" @update:checked="setSecurityCameras" id="displayPrice" />
             </div>
                         <!-- <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Others (Check with the host)</span>
-              <Switch :default-checked="props.venueListing.priceEnabled" @update:checked="priceEnabled" id="displayPrice" />
+              <Switch :default-checked="props.event.priceEnabled" @update:checked="priceEnabled" id="displayPrice" />
             </div> -->
             <!-- Current switch sections omitted for brevity -->
           </div>

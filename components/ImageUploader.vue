@@ -36,11 +36,11 @@
       </div>
     </Button>
     <!-- Second container for already uploaded files -->
-    <div class="uploaded-files" v-show="images?.length">
+    <div class="uploaded-files" v-show="uploadedImages?.length">
       <h3>Atached Images</h3>
       <div class="preview-container">
-        <div v-for="(file, index) in images" :key="file.id" class="image-wrapper">
-          <img :src="file.url" class="preview-image" />
+        <div v-for="(file, index) in uploadedImages" :key="file.id" class="image-wrapper">
+          <img :src="file" class="preview-image" />
           <Badge
             @click="confirmDelete(file.id, index)"
             class="remove-button text-lg text-orange-500 hover:border-orange-500 hover:bg-orange-100 font-extrabold ml-2"
@@ -63,6 +63,7 @@ const props = defineProps(['imageNames']);
 
 const fileInput = ref(null);
 const images = ref([]);
+const uploadedImages = ref([]);
 
 const handleDragOver = (event) => {
   event.preventDefault();
@@ -71,11 +72,6 @@ const handleDragOver = (event) => {
 
 const handleDrop = (event) => {
   const files = event.dataTransfer.files;
-  handleFileSelection(files);
-};
-
-const handleFiles = (event) => {
-  const files = event.target.files;
   handleFileSelection(files);
 };
 
@@ -91,6 +87,10 @@ const handleFileSelection = (files) => {
   }
 };
 
+const handleFiles = (event) => {
+  const files = event.target.files;
+  handleFileSelection(files);
+};
 const removeImage = (index) => {
   const image = images.value[index];
   URL.revokeObjectURL(image.url); // Clean up the object URL
@@ -103,12 +103,23 @@ const triggerFileInput = () => {
   }
 };
 
+const fetchImages = async () => {
+    if(!!props.imageNames && props.imageNames.length > 0)
+    {
+        Promise.all(props.imageNames?.map(async (fileName) => {
+            const urlData = await supabase.storage.from('images').createSignedUrl(fileName,60)
+            return urlData.data.signedUrl
+        })).then(results => 
+        uploadedImages.value = results)
+    }
+  }
+
 const uploadImages = async () => {
   if (images.value.length === 0) {
     alert('No images to upload.');
     return;
   }
-
+  const imageNames = []
   for (const image of images.value) {
     const { file } = image;
     const fileName = `${Date.now()}_${file.name}`;
@@ -124,11 +135,12 @@ const uploadImages = async () => {
         continue;
       }
 
-      props.imageNames.push(data.path); // Use the file's path
+      imageNames.push(data.path); // Use the file's path
     } catch (err) {
       console.error('Unexpected error:', err);
     }
   }
+  props.imageNames.push(imageNames)
   // Clear the image previews after upload
   images.value = [];
 };
@@ -159,6 +171,12 @@ const deleteFileFromBucket = async (fileId, index) => {
     console.error('Unexpected error:', err);
   }
 };
+
+watch(() => props.imageNames, (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    fetchImages()
+  }
+});
 </script>
 
 <style scoped>

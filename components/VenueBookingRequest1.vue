@@ -9,6 +9,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectI
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { format } from 'date-fns';
+import { useToast } from 'vue-toastification';
 
 const startDate = ref<Date | null>(new Date());
 const endDate = ref<Date | null>(new Date());
@@ -41,18 +42,82 @@ if (data) {
   avatar_url.value = data.avatar_url
 }
 
+const disabled = ref(true)
+const message = ref("Request Booking")
+
+async function checkDisable(){
+    try {
+    // Query the table for rows where the property is true
+    const { data, error, count } = await supabase
+      .from("VenueBookings")
+      .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
+      .eq("requesting_user_id", user.value.id);          // Match the property set to true
+    if(count > 5){
+        disabled.value = true
+        message.value = "Exceeded Booking Request Limit"
+        return
+    }
+    // Handle errors
+    if (error) throw error;
+
+    } catch (error) {
+        console.error('Error checking true property count:', error.message);
+    }
+    try {
+    // Query the table for rows where the property is true
+    const { data, error, count } = await supabase
+      .from("VenueBookings")
+      .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
+      .eq("venue_id", props.venue.id);          // Match the property set to true
+    if(count > 5){
+        disabled.value = true
+        message.value = "Venue Requests Disabled"
+        return
+    }
+    // Handle errors
+    if (error) throw error;
+
+    } catch (error) {
+        console.error('Error checking true property count:', error.message);
+    }
+    try {
+    // Query the table for rows where the property is true
+    const { data, error, count } = await supabase
+      .from("VenueBookings")
+      .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
+      .eq("venue_id", props.venue.id)
+      .eq("requesting_user_id", user.value.id);  ;          // Match the property set to true
+    if(count > 0){
+        disabled.value = true
+        message.value = "Booking Requested"
+        return
+    }
+    // Handle errors
+    if (error) throw error;
+
+    } catch (error) {
+        console.error('Error checking true property count:', error.message);
+    }
+    disabled.value = false;
+    message.value = "Request Booking"
+}
+
 async function bookingActivity() {
 
   const booking = {
     requesting_user_id: user.value?.id,
-    venue_owner_id: props.venue.user_id,
+    venue_owner_id: props.venue.createdBy,
     event_start_date: startDate.value,
     event_end_date: endDate.value,
     event_start_time: startTime.value,
     event_end_time: endTime.value,
     event_type: eventStyle.value,
     number_of_guests: numberOfGuests.value,
+    venue_id: props.venue.id
   }
+
+  const toast = useToast();
+
   const { data, error } = await supabase
     .from('VenueBookings') // Specify the table name
     .insert([
@@ -63,26 +128,21 @@ async function bookingActivity() {
   if (error) {
     console.error('Error inserting data:', error);
   } else {
+    toast.success("Booking Request Sent", {
+        timeout: 5000,
+      });
     console.log('New row inserted:', data);
+    checkDisable();
   }
 }
-
+onMounted(async () => {
+    await checkDisable();
+})
 </script>
 
 <template>
   <div class="bg-white dark:bg-black p-6 rounded-md shadow-lg w-1/3  ">
     <div class="space-y-4">
-
-      <!-- <div class="grid grid-cols-2 gap-4 font-medium text-gray-700 dark:text-gray-200">
-        <div class="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-2 rounded-md">
-          <span>Start:</span>
-          <span>{{ startDate.value ? format(startDate.value, 'PP') : '-' }}</span>
-        </div>
-        <div class="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-2 rounded-md">
-          <span>End:</span>
-          <span>{{ endDate.value ? format(endDate.value, 'PP') : '-' }}</span>
-        </div>
-      </div> -->
 
       <div class="grid grid-cols-1 gap-4">
         <h3 class="font-semibold text-lg mb-2">Book this venue: </h3>
@@ -118,16 +178,14 @@ async function bookingActivity() {
         <Input v-model="endTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
       </div>
 
-      <!-- <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" /> -->
-
       <Input v-model="eventStyle" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Event Type" />
 
       <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" />
 
       <Textarea v-model="note" placeholder="Additional notes" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize-none" />
 
-      <Button @click="bookingActivity" class="w-full OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
-        Booking Request
+      <Button @click="bookingActivity" :disabled="disabled" class="w-full OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
+        {{ message }}
       </Button>
 
     </div>

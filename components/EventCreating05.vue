@@ -16,6 +16,7 @@ import { Progress } from '@/components/ui/progress';
 import { Ticket, UserCheck, Users } from 'lucide-vue-next'
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 
+const props = defineProps(['event']);
 const cities = ['San Francisco', 'New York', 'Los Angeles', 'Chicago', 'Houston', 'Austin']
 const selectedCity = ref('')
 </script>
@@ -38,7 +39,7 @@ const selectedCity = ref('')
             <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
           </DropdownMenuTrigger>
           <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
-            <DropdownMenuItem v-for="city in cities" :key="city" @click="selectedCity = city">
+            <DropdownMenuItem v-for="city in cities" :key="city" @click="props.event.location = city">
               {{ city }}
             </DropdownMenuItem>
             <DropdownMenuSeparator />

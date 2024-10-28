@@ -69,4 +69,7 @@ export default defineNuxtConfig({
     description: 'Host events',
     defaultLocale: 'en',
   },
+  plugins: [
+    { src: '~/plugins/toast.client.js', mode: 'client' }  // Register the plugin only on the client side
+  ]
 })

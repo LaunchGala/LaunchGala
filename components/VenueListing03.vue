@@ -23,6 +23,13 @@ function selectCapacity(capacity: number) {
 
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
+// Watcher for 'props.venueListing.venueType'
+watch(() => props.venueListing.capacity, (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    selectedCapacity.value = newValue; // Set 'selectedCapacity' to the new value
+    console.log(`Capacity changed to: ${selectedCapacity.value}`);
+  }
+});
 </script>
 
 <template>
@@ -162,7 +169,7 @@ console.log(props.venueListing);
             </div>
           </Button>
           <Progress :model-value="10"  />
-          <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
+          <Button @click="$emit('nextStep')" :disabled="selectedCapacity == 0" variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

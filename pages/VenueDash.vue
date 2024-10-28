@@ -41,26 +41,25 @@ const user = useSupabaseUser();
 const venuesRequestedFromMe = ref([]);
 const venuesIRequested = ref([]);
 
-// Fetch feed items from the activity_feed table
 async function fetchVenuesRequestedFromMe() {
   const response = await supabase
     .from('VenueBookings')
-    .select('*, requesting_user:profiles!requesting_user_id(*)')
+    .select('*, requesting_user:profiles!requesting_user_id(*), venue:AllVenues!venue_id(*)')
     .eq('venue_owner_id', user.value.id)
-  
+    .eq('is_request', true)
   if (response.error) {
     console.error(response.error);
     return;
   }
   
   venuesRequestedFromMe.value = response.data;
+  fetchImage(venuesRequestedFromMe.value[0].requesting_user.avatar_url)
 }
 async function fetchVenuesIRequested() {
   const response = await supabase
     .from('VenueBookings')
-    .select('*, venue_owner:profiles!venue_owner_id(*)')
+    .select('*, venue_owner:profiles!venue_owner_id(*), venue:AllVenues!venue_id(*)')
     .eq('requesting_user_id', user.value.id)
-  
   if (response.error) {
     console.error(response.error);
     return;
@@ -68,6 +67,14 @@ async function fetchVenuesIRequested() {
   
   venuesIRequested.value = response.data;
 }
+const avatarSRC = ref("");
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            avatarSRC.value = urlData?.data?.signedUrl ?? "";
+    }
+  }
 
 onMounted(() => {
   fetchVenuesRequestedFromMe();
@@ -76,6 +83,33 @@ onMounted(() => {
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString();
+}
+
+async function acceptRequest(request){
+  const { data, error } = await supabase
+    .from('VenueBookings')               // Specify the table name
+    .update({ is_request: false, is_approved: true }) // Specify the field to update
+    .eq('id', request.id);            // Find the specific row by id
+
+  if (error) {
+    console.error('Error updating request status:', error);
+  } else {
+    console.log('Order status updated:', data);
+    fetchVenuesRequestedFromMe()
+  }
+}
+async function rejectRequest(request){
+  const { data, error } = await supabase
+    .from('VenueBookings')               // Specify the table name
+    .update({ is_request: false, is_approved: false }) // Specify the field to update
+    .eq('id', request.id);            // Find the specific row by id
+
+  if (error) {
+    console.error('Error updating request status:', error);
+  } else {
+    console.log('Order status updated:', data);
+    fetchVenuesRequestedFromMe
+  }
 }
 
 </script>
@@ -193,122 +227,116 @@ function formatDate(date: string) {
 
         </TabsList>
 
-        <TabsContent value="requested-from-me" class="space-y-6 ">
-          <p class="text-gray-800 p-2 font-semibold ">
-            View the venues that others have requested from you:
-          </p>
-          <!-- Repeat this section for each post with different venue details -->
-          <div v-for="item in venuesRequestedFromMe" class="flex flex-col space-y-4 bg-white p-4 rounded-md shadow-xl transition-all ease-in-out duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A] p-8">
-            
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-4">
-                <div class="mr-6">
-                <Avatar class="w-24 h-24">
-                  <AvatarImage :src="item.requesting_user.userAvatar" alt="User's Name" />
-                  <AvatarFallback>UN</AvatarFallback>
-                </Avatar>
-                <h3 class="font-semibold text-center text-md mt-1">{{ item.requesting_user.full_name }}</h3>
+        <TabsContent value="requested-from-me" class="space-y-6">
+  <p class="text-gray-800 p-2 font-semibold">
+    View the venues that others have requested from you:
+  </p>
+  <div v-for="item in venuesRequestedFromMe" class="flex flex-col space-y-4 bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-6">
+        <div class="flex flex-col items-center">
+          <Avatar class="w-24 h-24">
+            <AvatarImage :src="avatarSRC" alt="User's Name" />
+            <AvatarFallback>UN</AvatarFallback>
+          </Avatar>
+          <h3 class="font-semibold text-center text-md mt-2">{{ item.requesting_user.full_name }}</h3>
+        </div>
+        <div>
+          <h3 class="font-semibold text-2xl">{{ item.event_name }}</h3>
+          <h4 class="font-semibold text-2xl">Venue: {{ item.venue.title }}</h4>
+          <div class="mt-4 space-y-2">
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Event type:</p>
+              <p class="text-md">{{ item.event_type }}</p>
             </div>
-                <div >
-                  <h3 class="font-semibold text-2xl">{{ item.event_name }}</h3>
-                  <div class="mb-2 mt-2">
-                    <!-- <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger as-child>
-                  <Badge v-for="badge in item.activity_content.badges" in class="text-sm bg-orange-100 text-orange-700">{{ badge }}</Badge>
-                </TooltipTrigger>
-                  <TooltipContent class="bg-orange-100 text-orange-700 font-semibold text-sm w-1/2 ml-20 p-4 space-y-3">
-                    <div class="w-full">Organizers can book the venue through three different options:</div> 
-                    <div class="w-full"> <spam class="font-bold">Sponsorship:</spam> <spam>Organizers request the venue for free. If approved, your venue will be highlighted as main sponsor.</spam></div>
-                    <div class="w-full"> <spam class="font-bold">Partnership:</spam> <spam>Organizers request a discounted rate or additional services. If approved, you will be recognized as a sponsor partner.</spam></div>
-                    <div class="w-full"><spam class="font-bold">Paid:</spam> <spam>Organizers agree to pay the full rental price for the venue.</spam></div>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider> -->
-                </div>
-                  <!-- <Badge class="text-xs bg-orange-100 text-orange-800">Networking Event</Badge> -->
-                 <div class="flex space-x-14">
-                  <div class="flex mt-2 "><p class="text-md font-semibold mr-1 text-gray-700">Event type: </p><p class="text-md">{{ item.event_type }}</p></div>
-                  <div class="flex mt-2"><p class="text-md font-semibold mr-1 text-gray-700">Number of guests: </p><p class="text-md"> {{ item.number_of_guests }}</p></div>
-                  <div class="flex mt-2"><p class="text-md font-semibold mr-1 text-gray-700">Tickets: </p><p class="text-md"> {{ 0 }}</p></div>
-
-                  <div class="flex mt-2"><p class="text-md font-semibold mr-1 text-gray-700">Event date: </p><p class="text-md">  {{ item.event_start_date }}</p></div>
-                  <div class="flex mt-2 mb-2"><p class="text-md font-semibold mr-1 text-gray-700">Event time: </p><p class="text-md"> {{ item.event_start_time }}</p></div>
-                </div>
-                  <div class="flex mt-2 mb-2"><p class="text-md font-semibold mr-1 text-gray-700">Event description: </p><p class="text-md"> {{ item.event_description }}</p></div>
-
-<!-- 
-                  <Badge class="text-xs bg-orange-100 text-orange-800 mr-2">Sponsor request</Badge>
-                  <Badge class="text-xs bg-orange-100 text-orange-800">Paid request</Badge> -->
-
-                  <!-- <p href="#" class="text-sm text-orange-600 hover:underline">Link to event page</p> -->
-                </div>
-              </div>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger as-child>
-                    <Button size="icon" variant="ghost">
-                      <Link2 class="w-5 h-5 text-orange-500" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    Go to event page
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Number of guests:</p>
+              <p class="text-md">{{ item.number_of_guests }}</p>
             </div>
-            <!-- <blockquote v-for="message in item.activity_content.eventMessages" class="p-4 italic border-l-4 border-orange-200 bg-neutral-50 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-300">
-              {{ message.userName }}: {{ message.content }}
-            </blockquote>
-            <div class="flex object-center space-x-96">
-              <Button class="bg-green-500 hover:bg-green-700" variant="default"><Check class="w-4 h-4 mr-1" /> Accept</Button>
-              <Button class="hover:bg-red-700" variant="destructive"><X class="w-4 h-4 mr-1 " /> Reject</Button>
-              <Button class="hover:bg-gray-700 bg-gray-500 text-white" variant="secondary"><Edit2 class="w-4 h-4 mr-1 text-white" /> Suggest another date</Button>
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Tickets:</p>
+              <p class="text-md">{{ 0 }}</p>
             </div>
-            <Textarea class="mt-2" rows="3" placeholder="Write a reply..."></Textarea>
-            <div class="mt-2">
-              <Button class="bg-orange-500 text-white hover:bg-orange-600">Submit reply</Button>
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Event date:</p>
+              <p class="text-md">{{ item.event_start_date }}</p>
             </div>
-            <div class="flex items-center space-x-2 text-sm text-gray-400">
-              <Calendar class="w-4 h-4 text-orange-500" />
-              <span>{{ formatDate(item.created_at) }}</span>
-            </div> -->
-          </div>
-        </TabsContent>
-
-        <TabsContent value="requested" class="space-y-6">
-          <!-- Repeat for each venue requested by user -->
-          <div v-for="item in venuesIRequested" class="flex flex-col space-y-4 bg-white p-4 rounded-md shadow-xl transition-all ease-in-out duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
-            <div class="flex justify-between">
-              <h3 class="font-semibold text-lg">My Request</h3>
-              <a href="#" class="text-sm text-orange-600 hover:underline">
-                Link to event page
-              </a>
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Event end date:</p>
+              <p class="text-md">{{ item.event_end_date }}</p>
             </div>
-            <p class="text-sm">Number of guests: {{item.number_of_guests}}</p>
-            <p class="text-sm">Event start date: {{item.event_start_date}}</p>
-            <p class="text-sm">Event end date: {{item.event_end_date}}</p>
-            <p class="text-sm">Event start time: {{item.event_start_time}}</p>
-            <p class="text-sm">Event end time: {{item.event_end_time}}</p>
-            <blockquote class="p-4 italic border-l-4 border-orange-200 bg-neutral-50 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-300">
-              "{{item.event_description}}"
-            </blockquote>
-            <div class="flex space-x-2">
-              <Button variant="secondary"><MessageCircle class="w-4 h-4 mr-1" /> Follow up</Button>
-              <Button variant="destructive"><X class="w-4 h-4 mr-1" /> Cancel request</Button>
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Event time:</p>
+              <p class="text-md">{{ item.event_start_time }}</p>
             </div>
-            <Textarea class="mt-2" rows="2" placeholder="Write a follow-up message..."></Textarea>
-            <div class="mt-2">
-              <Button class="bg-orange-500 text-white hover:bg-orange-600">Submit follow-up</Button>
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Event time:</p>
+              <p class="text-md">{{ item.event_end_time }}</p>
             </div>
-            <div class="flex items-center space-x-2 text-sm text-gray-400">
-              <Calendar class="w-4 h-4 text-orange-500" />
-              <span>Requested on Jan 12, 2023</span>
+            <div class="flex items-center">
+              <p class="text-md font-semibold text-gray-700 mr-2">Event description:</p>
+              <p class="text-md">{{ item.event_description }}</p>
             </div>
           </div>
-        </TabsContent>
+        </div>
+      </div>
+      <div class="flex flex-col items-center justify-between h-full">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <Button size="icon" variant="ghost">
+              <Link2 class="w-5 h-5 text-orange-500" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            Go to event page
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <div class="flex items-center justify-between">
+        <MessagingDialog :currentUser="item.venue.createdBy" :otherUser="item.requesting_user.id" />
+        <Button @click="acceptRequest(item)" class="bg-green-500 text-white">Accept</Button>
+        <Button @click="rejectRequest(item)" class="bg-red-500 text-white">Reject</Button>
+      </div>
+      </div>
+    </div>
+  </div>
+</TabsContent>
 
-        <TabsContent value="offered-to-me" class="space-y-6">
+<TabsContent value="requested" class="space-y-6">
+  <div v-for="item in venuesIRequested" class="flex flex-col space-y-4 bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
+    <div class="flex justify-between items-center">
+      <h3 class="font-semibold text-lg">{{item.event_name}}</h3>
+      <h4 class="font-semibold text-2xl">Venue: {{ item.venue.title }}</h4>
+      <a href="#" class="text-sm text-orange-600 hover:underline">
+        Link to event page
+      </a>
+    </div>
+    <div class="space-y-2">
+      <p class="text-sm">Number of guests: {{ item.number_of_guests }}</p>
+      <p class="text-sm">Event start date: {{ item.event_start_date }}</p>
+      <p class="text-sm">Event end date: {{ item.event_end_date }}</p>
+      <p class="text-sm">Event start time: {{ item.event_start_time }}</p>
+      <p class="text-sm">Event end time: {{ item.event_end_time }}</p>
+    </div>
+    <blockquote v-show="!!item.event_description" class="p-4 italic border-l-4 border-orange-200 bg-neutral-50 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-300">
+      "{{ item.event_description }}"
+    </blockquote>
+    <div class="flex space-x-2">
+      <Button variant="destructive">
+        <X class="w-4 h-4 mr-1" /> Cancel request
+      </Button>
+    </div>
+    
+    <MessagingDialog :currentUser="item.requesting_user_id" :otherUser="item.venue.createdBy" />
+    <div class="flex items-center space-x-2 text-sm text-gray-400">
+      <Calendar class="w-4 h-4 text-orange-500" />
+      <span>Requested on Jan 12, 2023</span>
+    </div>
+  </div>
+</TabsContent>
+
+        <TabsContent value="ooffered-to-me" class="space-y-6">
           <!-- Repeat for each venue offered to the user -->
           <div class="flex flex-col space-y-4 bg-white p-4 rounded-md shadow-xl transition-all ease-in-out duration-300 hover:-translate-y-1 hover:shadow-2xl dark:bg-[#1A1A1A]">
             <div class="flex items-center justify-between">

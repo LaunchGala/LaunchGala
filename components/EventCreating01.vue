@@ -12,8 +12,31 @@ import {
 } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-const props = defineProps(['venueListing']);
-console.log(props.venueListing);
+const props = defineProps(['event']);
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
+const myEvents = ref([])
+const emit = defineEmits(['nextStep']);
+
+async function fetchVenues() {
+  const response = await supabase
+    .from('AllEvents')
+    .select()
+    .eq('createdBy', user.value.id)
+  if (response.error) {
+    console.error(response.error);
+    return;
+  }
+  myEvents.value = response.data;
+}
+
+function editEvent(item){
+  emit('nextStep', item)
+}
+
+onMounted(() => {
+  fetchVenues();
+});
 </script>
 
 <template>
@@ -35,55 +58,33 @@ console.log(props.venueListing);
 
           </div>
           <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead class="text-left">
-                  Event Name
-                </TableHead>
-                <TableHead class="text-left">
-                  Location
-                </TableHead>
-                <TableHead class="text-left">
-                  Actions
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  Placeholder Event 1
-                </TableCell>
-                <TableCell>
-                  Some Address, City
-                </TableCell>
-                <TableCell class="text-right">
-                  <Button class="flex items-center gap-2" variant="ghost">
-                    <Copy class="w-4 h-4" />
-                    Edit
-                  </Button>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  Placeholder Event 2
-                </TableCell>
-                <TableCell>
-                  Another Address, Other City
-                </TableCell>
-                <TableCell class="text-right">
-                  <Button class="flex items-center gap-2" variant="ghost">
-                    <Copy class="w-4 h-4" />
-                    Edit
-                  </Button>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead class="text-left">Event Name</TableHead>
+        <TableHead class="text-left">Location</TableHead>
+        <TableHead class="text-left">Actions</TableHead>
+      </TableRow>
+    </TableHeader>
+    
+    <TableBody>
+      <!-- Loop through the 'venues' array to create table rows -->
+      <TableRow v-for="(event, index) in myEvents" :key="index">
+        <TableCell>{{ event.title }}</TableCell>
+        <TableCell>{{ event }}</TableCell>
+        <TableCell class="text-right">
+          <Button class="flex items-center gap-2" variant="ghost" @click="editEvent(event)">
+            <Copy class="w-4 h-4"/>
+            Edit
+          </Button>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
         </CardContent>
         <CardFooter>
           <div class="text-center">
             <Button variant="link">
-              View All Listings
+              View All Events
             </Button>
           </div>
         </CardFooter>

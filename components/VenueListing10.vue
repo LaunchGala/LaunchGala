@@ -7,6 +7,7 @@ import { ChevronRight } from 'lucide-vue-next';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
+import { Textarea } from '@/components/ui/textarea';
 
  
 function setNonSmoking(toggleState: boolean) {
@@ -36,6 +37,20 @@ function setOpenSpace(toggleState: boolean) {
 function setAdditionalInsurance(toggleState: boolean) {
   props.venueListing.additionalInsurance = toggleState
 }
+
+// Reactive variable for new rule input
+const newRule = ref('');
+
+// Reactive array to hold the list of rules
+const rules = ref<string[]>([]);
+
+// Function to add new rule to the list
+const addRule = () => {
+  if (newRule.value.trim()) {
+    rules.value.push(newRule.value.trim());  // Add new rule to the list
+    newRule.value = '';  // Clear the input
+  }
+};
 
 const props = defineProps(['venueListing']);
 console.log(props.venueListing);
@@ -96,7 +111,7 @@ console.log(props.venueListing);
             <!-- Current switch sections omitted for brevity -->
           </div>
           <!-- Operating Days Section -->
-          <!-- <div class="mt-8 border-t pt-6">
+          <!--<div class="mt-8 border-t pt-6">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Operating Days and Hours</h3>
             <p> This is your business operating hours NOT the Venue availability</p>
             <div class="space-y-4">
@@ -148,8 +163,38 @@ console.log(props.venueListing);
                 <input type="time" class="ml-auto border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="From">
                 <span class="mx-2 text-sm text-gray-500 dark:text-gray-400">to</span>
                 <input type="time" class="border-gray-300 rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="To">
-              </div> -->
+              </div>
+              </div>
+              </div>-->
+
+              <div class="p-4">
+              <h2 class="text-xl font-semibold mb-4">Cancellation Policy</h2>
+          <Textarea v-model="props.venueListing.cancellation_policy" placeholder="Cancellation Policy" rows="4" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500"></Textarea>
               <!-- Other days omitted for brevity -->
+    <h2 class="text-xl font-semibold mb-4">Additional Rules</h2>
+    
+    <!-- Input area to add new rule -->
+    <div class="flex items-center gap-2 mb-4">
+      <Textarea
+        v-model="newRule"
+        class="border rounded p-2 w-full"
+        placeholder="Enter a new rule"
+        @keydown.enter.prevent="addRule"
+      ></Textarea>
+      <Button
+        @click="addRule"
+        class="OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
+        Add Rule
+      </Button>
+    </div>
+
+    <!-- Display list of rules -->
+    <ul class="list-disc ml-5">
+      <li v-for="(rule, index) in rules" :key="index" class="text-md text-gray-900 dark:text-white">
+        {{ rule }}
+      </li>
+    </ul>
+  </div>
 
         </CardContent>
         <!-- <div class="flex items-center justify-end gap-4 p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
@@ -178,3 +223,9 @@ console.log(props.venueListing);
     </div>
   </div>
 </template>
+<style>
+
+.OrangeCol {   
+  background-color: #ff6a00;
+ }
+</style>

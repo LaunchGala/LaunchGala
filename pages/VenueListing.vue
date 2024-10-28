@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+import { useToast } from 'vue-toastification';
 
 const supabase = useSupabaseClient()
 
@@ -37,27 +38,52 @@ const newVenueListing = ref({
   mustClimbStairs: false,
   additionalInsurance: false,
   openSpace: false,
-
-
-
-
+  is_published: true
 });
 
 
+const toast = useToast();
 
-
-function addVenueListing() {
+function publishVenueListing(isPublished: boolean){
+  newVenueListing.value.is_published = isPublished;
+  var toastText = isPublished ? "Venue Published" : "Venue Unpublished";
   console.log(newVenueListing.value)
-  supabase.from('AllVenues').insert([
+  supabase.from('AllVenues').upsert([
     newVenueListing.value
   ]).then(response => {
     console.log(response)
+    toast.success(toastText, {
+        timeout: 5000,
+      });
   }).catch(error => {
     console.log(error)
+    toast.error("Error: Venue Not Updated", {
+        timeout: 5000,
+      });
   })
 }
 
-function nextStep() {
+function addVenueListing() {
+  console.log(newVenueListing.value)
+  supabase.from('AllVenues').upsert([
+    newVenueListing.value
+  ]).then(response => {
+    console.log(response)
+    toast.success("Venue Saved", {
+        timeout: 5000,
+      });
+  }).catch(error => {
+    console.log(error)
+    toast.error("Error: Venue Not Saved", {
+        timeout: 5000,
+      });
+  })
+}
+
+function nextStep(item) {
+  if(!!item){
+    newVenueListing.value = item;
+  }
   currentStep.value += 1;
   window.scrollTo(0, 0);
 }
@@ -70,7 +96,13 @@ function previousStep() {
 </script>
 
 <template>
-  <Button class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addVenueListing">Save</Button>
+  <Button v-show="currentStep > 1" class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addVenueListing">Save</Button>
+          <Button v-show="currentStep > 1 && !newVenueListing.is_published" @click="publishVenueListing(true)">
+            Publish
+          </Button>
+          <Button v-show="currentStep > 1 && newVenueListing.is_published" @click="publishVenueListing(false)">
+            Unpublish
+          </Button>
   <div>
     <VenueListing01 :venue-listing="newVenueListing" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
     <VenueListing02 :venue-listing="newVenueListing" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
