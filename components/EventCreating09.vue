@@ -10,6 +10,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Share1Icon } from '@radix-icons/vue';
 import { Share2Icon } from 'lucide-vue-next';
 import { Share } from 'lucide-vue-next';
+
+
+const props = defineProps(['event']);
+const user = useSupabaseUser();
 </script>
 
 <template>
@@ -27,7 +31,7 @@ import { Share } from 'lucide-vue-next';
                 <CardHeader>
                   <div class="flex justify-center text-center content-center">
                   <CardTitle class="text-3xl text-center content-center font-extrabold text-orange-800 dark:text-white mb-2 mr-2">
-                    Your Event Name Here
+                    {{ props.event.title }}
                   </CardTitle>
 
                   <TooltipProvider>
@@ -45,7 +49,7 @@ import { Share } from 'lucide-vue-next';
 
                 </div>
                   <CardTitle class="text-md font-extrabold text-orange-800 dark:text-white mb-2">
-                    Event Style: Networking Event
+                    {{props.event.eventType}}
                   </CardTitle>
                 </CardHeader>
               <Avatar class="w-32 h-32 mb-6 inline-block bg-orange-400">
@@ -56,7 +60,7 @@ import { Share } from 'lucide-vue-next';
                   <TooltipTrigger as-child>
                     <p class="text-sm text-orange-600 dark:text-orange-200">
                       <User class="w-4 h-4 inline mr-1 align-text-bottom" />
-                      Hosted by Host Name
+                      Hosted by {{user.fullName}}
                     </p>
                   </TooltipTrigger>
                   <TooltipContent class="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-300">
@@ -69,41 +73,38 @@ import { Share } from 'lucide-vue-next';
             <ul class="space-y-4">
               <li class="flex items-center justify-center">
                 <MapPin class="w-5 h-5 text-orange-600 dark:text-orange-300 mr-2" />
-                <span class="text-gray-700 dark:text-gray-300">Location Name, City, Country</span>
+                <span class="text-gray-700 dark:text-gray-300">{{props.event.location}}</span>
               </li>
               <li class="flex items-center justify-center">
                 <Calendar class="w-5 h-5 text-orange-600 dark:text-orange-300 mr-2" />
-                <span class="text-gray-700 dark:text-gray-300">Date</span>
+                <span class="text-gray-700 dark:text-gray-300">{{props.event.event_start_date}} - {{ props.event.event_end_date }}</span>
               </li>
               <li class="flex items-center justify-center">
                 <Clock class="w-5 h-5 text-orange-600 dark:text-orange-300 mr-2" />
-                <span class="text-gray-700 dark:text-gray-300">Time</span>
+                <span class="text-gray-700 dark:text-gray-300">{{props.event.event_start_time}} - {{ props.event.event_end_time }}</span>
               </li>
               <li class="flex items-center justify-center">
                 <Tag class="w-5 h-5 text-orange-600 dark:text-orange-300 mr-1 align-text-bottom" />
-                <span class="text-gray-700 dark:text-gray-300">Tickets: Free / Invite only</span>
+                <span class="text-gray-700 dark:text-gray-300">Tickets: {{props.event.ticket_price == 0 ? 'Free' : '$' + props.event.ticket_price}} / {{props.event.inviteOnly ? 'Invite only' : 'Open to all'}}</span>
               </li>
               <li class="flex items-center justify-center flex-wrap">
-                <Badge variant="outline" class="bg-orange-100 text-orange-700 mr-2">AI (Artificial Intelligence)</Badge>
-                <Badge variant="outline" class="bg-orange-100 text-orange-700 dark:bg-orange-700 dark:text-orange-100">Fintech</Badge>
+                <Badge v-for="industry in props.event.industries" variant="outline" class="bg-orange-100 text-orange-700 mr-2">{{industry}}</Badge>
               </li>
               <li class="flex items-center justify-center">
                 <a href="#" class="text-orange-600 hover:underline dark:text-orange-200">
                   <!-- <ArrowRight class="w-5 h-5 mr-2" /> -->
-                  event-link.com
+                  {{props.event.link}}
                 </a>
               </li>
             </ul>
             
             <div class="mt-8 text-center text-gray-600 dark:text-gray-300">
-              <p>This is your event description. Make sure it captures your audience's attention and gives them a reason to attend!</p>
+              <p>{{props.event.description}}</p>
               <div class="mt-4">
                 <h3 class="font-semibold text-orange-800 dark:text-orange-200">Agenda:</h3>
-                <ul class="list-disc pl-5 space-y-1">
-                  <li>Welcome and Introductions</li>
-                  <li>Keynote Speech</li>
-                  <li>Workshops and Breakout Sessions</li>
-                </ul>
+                <p>
+                  {{ props.event.agenda }}
+                </p>              
               </div>
             </div>
           </CardContent>
