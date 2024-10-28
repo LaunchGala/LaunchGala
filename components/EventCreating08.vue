@@ -12,19 +12,19 @@ import { Progress } from '@/components/ui/progress';
 const props = defineProps(['event']);
 
 function setNonSmoking(toggleState: boolean) {
-  props.event.nonSmoking = toggleState
+  props.event.non_smoking = toggleState
 }
 function setMaskRequired(toggleState: boolean) {
-  props.event.maskRequired = toggleState
+  props.event.mask_required = toggleState
 }
 function setNoPets(toggleState: boolean) {
-  props.event.noPets = toggleState
+  props.event.no_pets = toggleState
 }
 function setNoCommercialPhotography(toggleState: boolean) {
-  props.event.noCommercialPhotography = toggleState
+  props.event.no_commercial_photography = toggleState
 }
 function setSecurityCameras(toggleState: boolean) {
-  props.event.securityCameras = toggleState
+  props.event.security_cameras = toggleState
 }
 function setPostEventCleaning(toggleState: boolean) {
   props.event.postEventCleaning = toggleState

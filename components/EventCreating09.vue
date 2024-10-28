@@ -49,7 +49,7 @@ const user = useSupabaseUser();
 
                 </div>
                   <CardTitle class="text-md font-extrabold text-orange-800 dark:text-white mb-2">
-                    {{props.event.eventType}}
+                    {{props.event.event_type}}
                   </CardTitle>
                 </CardHeader>
               <Avatar class="w-32 h-32 mb-6 inline-block bg-orange-400">

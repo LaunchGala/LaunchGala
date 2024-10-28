@@ -15,7 +15,7 @@ const selectedStyle = ref('');
 const currentStep = ref(1);
 
 const newEvent = ref({
-  createdBy: user.value?.id,
+  created_by: user.value?.id,
   title: '',
   description: '',
   invite_only: false,
@@ -27,15 +27,14 @@ const newEvent = ref({
   event_end_date: '',
   event_start_time: '',
   event_end_time: '',
-  event_location: '',
-  industry: '',
+  location: '',
   agenda: '',
   link: '',
-  nonSmoking: true,
-  maskRequired: false,
-  noPets: true,
-  noCommercialPhotography: false,
-  securityCameras: true,
+  non_smoking: true,
+  mask_required: false,
+  no_pets: true,
+  no_commercial_photography: false,
+  security_cameras: true,
   is_published: false
 
 
@@ -46,16 +45,16 @@ const newEvent = ref({
 
 
 
-// function addVenueListing() {
-//   console.log(newVenueListing.value)
-//   supabase.from('AllVenues').insert([
-//     newVenueListing.value
-//   ]).then(response => {
-//     console.log(response)
-//   }).catch(error => {
-//     console.log(error)
-//   })
-// }
+ function addEvent() {
+   console.log(newEvent.value)
+ supabase.from('AllEvents').insert([
+ newEvent.value
+   ]).then(response => {
+     console.log(response)
+   }).catch(error => {
+     console.log(error)
+   })
+ }
 
 function nextStep() {
   currentStep.value += 1;
@@ -70,7 +69,7 @@ function previousStep() {
 </script>
 
 <template>
-  <Button class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addVenueListing">Save</Button>
+  <Button class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addEvent">Save</Button>
   <div>
     <EventCreating01 :event="newEvent" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
     <EventCreating02 :event="newEvent" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
