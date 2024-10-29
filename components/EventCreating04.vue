@@ -18,9 +18,7 @@ import { Progress } from '@/components/ui/progress';
 import { Ticket, UserCheck, Users } from 'lucide-vue-next'
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 
-const dateRange = ref({ start: null, end: null })
-const startTime = ref('')
-const endTime = ref('')
+const props = defineProps(['event'])
 const timeZones = [
     { value: 'UTC', label: 'UTC - Coordinated Universal Time' },
     { value: 'EST', label: 'EST - Eastern Standard Time (New York)' },
@@ -47,15 +45,15 @@ const selectedTimeZone = ref('')
         <Popover>
           <PopoverTrigger as-child>
             <Button variant="outline" class="w-full justify-between bg-white">
-              <span>{{ dateRange.start ? format(dateRange.start, "PPP") : "Choose" }}</span>
+              <span>{{ props.event.event_start_date ? format(props.event.event_start_date, "PPP") : "Choose" }}</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent class="w-auto p-0">
-            <Calendar v-model="dateRange.start" />
+            <Calendar v-model="props.event.event_start_date" />
           </PopoverContent>
         </Popover>
         <div class="mt-2 flex items-center rounded border border-gray-300 bg-white">
-          <Input type="time" v-model="startTime" placeholder="HH:MM" class="w-full border-none bg-transparent pl-3 pr-2 text-gray-800 dark:text-white focus:ring-0" />
+          <Input type="time" v-model="props.event.event_start_time" placeholder="HH:MM" class="w-full border-none bg-transparent pl-3 pr-2 text-gray-800 dark:text-white focus:ring-0" />
         </div>
       </div>
       <div>
@@ -63,15 +61,15 @@ const selectedTimeZone = ref('')
         <Popover>
           <PopoverTrigger as-child>
             <Button variant="outline" class="w-full justify-between bg-white">
-              <span>{{ dateRange.end ? format(dateRange.end, "PPP") : "Choose" }}</span>
+              <span>{{ props.event.event_end_date ? format(props.event.event_end_date, "PPP") : "Choose" }}</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent class="w-auto p-0">
-            <Calendar v-model="dateRange.end" />
+            <Calendar v-model="props.event.event_start_date" />
           </PopoverContent>
         </Popover>
         <div class="mt-2 flex items-center rounded border border-gray-300 bg-white">
-          <Input type="time" v-model="endTime" placeholder="HH:MM" class="w-full border-none bg-transparent pl-3 pr-2 text-gray-800 dark:text-white focus:ring-0" />
+          <Input type="time" v-model="props.event.event_end_time" placeholder="HH:MM" class="w-full border-none bg-transparent pl-3 pr-2 text-gray-800 dark:text-white focus:ring-0" />
         </div>
       </div>
     </div>
@@ -93,11 +91,6 @@ const selectedTimeZone = ref('')
         </SelectContent>
       </Select>
     </div>-->
-    <div class="grid grid-cols-1 gap-4">
-      <!-- <Button class="w-full text-white bg-orange-500 hover:bg-orange-600">Confirm</Button> -->
-      <Button variant="link" class="text-orange-600 hover:text-orange-700 dark:text-orange-500 dark:hover:text-orange-400">Not sure yet? You can add/edit date later. 
-        <div >Skip this step</div></Button>
-    </div>
   </div>
 
   <div class="flex justify-between items-center p-4">

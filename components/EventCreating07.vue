@@ -15,7 +15,7 @@ const props = defineProps(['event']);
 </script>
 
 <template>
-    <div class="bg-white dark:bg-orange-200 min-h-screen py-10">
+    <div class="bg-orange-200 dark:bg-orange-200 min-h-screen py-10">
     <TooltipProvider>
       <div class="container mx-auto px-4 lg:px-8 dark:bg-orange-200 ">
         <Card>
@@ -53,10 +53,6 @@ const props = defineProps(['event']);
         </div>
       </div>
     </CardContent>
-    <CardFooter class="flex justify-center space-x-4">
-      <Button variant="ghost" class="text-orange-500 hover:underline hover:bg-transparent hover:text-orange-700">Not sure yet? You can add/edit all information later. Skip this step</Button>
-      <!-- <Button class="bg-orange-500 hover:bg-orange-600 text-white dark:hover:bg-orange-700 dark:bg-orange-600">Create Event</Button> -->
-    </CardFooter>
   </Card>
 
 

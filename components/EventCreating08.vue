@@ -11,39 +11,30 @@ import { Progress } from '@/components/ui/progress';
  
 const props = defineProps(['event']);
 
-function setNonSmoking(toggleState: boolean) {
-  props.event.non_smoking = toggleState
+function setVenueOffering(toggleState: boolean) {
+  props.event.allow_venue_offering = toggleState
 }
-function setMaskRequired(toggleState: boolean) {
-  props.event.mask_required = toggleState
+function setVolunteersOffering(toggleState: boolean) {
+  props.event.allow_volunteers_offering = toggleState
 }
-function setNoPets(toggleState: boolean) {
-  props.event.no_pets = toggleState
+function setSponsorshipOffering(toggleState: boolean) {
+  props.event.allow_sponsorship_offering = toggleState
 }
-function setNoCommercialPhotography(toggleState: boolean) {
-  props.event.no_commercial_photography = toggleState
+function setExpertiseOffering(toggleState: boolean) {
+  props.event.allow_expertise_offering = toggleState
 }
-function setSecurityCameras(toggleState: boolean) {
-  props.event.security_cameras = toggleState
+function setVendorsOffering(toggleState: boolean) {
+  props.event.allow_vendors_offering = toggleState
 }
-function setPostEventCleaning(toggleState: boolean) {
-  props.event.postEventCleaning = toggleState
-}
-function setMustClimbStairs(toggleState: boolean) {
-  props.event.mustClimbStairs = toggleState
-}
-function setOpenSpace(toggleState: boolean) {
-  props.event.openSpace = toggleState
-}
-function setAdditionalInsurance(toggleState: boolean) {
-  props.event.additionalInsurance = toggleState
+function setRegistrationRequest(toggleState: boolean) {
+  props.event.allow_registration_request = toggleState
 }
 
 console.log(props.event);
 </script>
 
 <template>
-  <div class="bg-gray-100 dark:bg-black min-h-screen py-10 flex justify-center items-center">
+  <div class="bg-orange-200 dark:bg-black min-h-screen py-10 flex justify-center items-center">
     <div class="w-full max-w-4xl mx-auto px-4 lg:px-8">
       <Card>
         <CardHeader>
@@ -54,30 +45,30 @@ console.log(props.event);
           <div class="space-y-6">
             <div class=" items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white mr-72 ">Allow Venue offering</span>
-              <Switch :default-checked="props.event.nonSmoking" @update:checked="setNonSmoking" id="displayPrice" />
+              <Switch :default-checked="props.event.allow_venue_offering" @update:checked="setVenueOffering" id="displayPrice" />
               <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
               
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow volunteers offering</span>
-              <Switch :default-checked="props.event.maskRequired" @update:checked="setMaskRequired" id="displayPrice" />
+              <Switch :default-checked="props.event.allow_volunteers_offering" @update:checked="setVolunteersOffering" id="displayPrice" />
 
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow sponsorship offering</span>
-              <Switch :default-checked="props.event.noPets" @update:checked="setNoPets" id="displayPrice" />
+              <Switch :default-checked="props.event.allow_sponsorship_offering" @update:checked="setSponsorshipOffering" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow expertise offering</span>
-              <Switch :default-checked="props.event.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
+              <Switch :default-checked="props.event.allow_expertise_offering" @update:checked="setExpertiseOffering" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow vendors offering</span>
-              <Switch :default-checked="props.event.noCommercialPhotography" @update:checked="setNoCommercialPhotography" id="displayPrice" />
+              <Switch :default-checked="props.event.allow_vendors_offering" @update:checked="setVendorsOffering" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow registration request</span>
-              <Switch :default-checked="props.event.securityCameras" @update:checked="setSecurityCameras" id="displayPrice" />
+              <Switch :default-checked="props.event.allow_registration_request" @update:checked="setRegistrationRequest" id="displayPrice" />
             </div>
                         <!-- <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Others (Check with the host)</span>

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
+import { useToast } from 'vue-toastification';
 
 const supabase = useSupabaseClient()
 
@@ -23,18 +24,19 @@ const newEvent = ref({
   event_type: '',
   industries: [],
   images: [],
-  event_start_date: '',
-  event_end_date: '',
-  event_start_time: '',
-  event_end_time: '',
+  event_start_date: new Date(),
+  event_end_date: new Date(),
+  event_start_time: '12:00',
+  event_end_time: '14:00',
   location: '',
   agenda: '',
   link: '',
-  non_smoking: true,
-  mask_required: false,
-  no_pets: true,
-  no_commercial_photography: false,
-  security_cameras: true,
+  allow_venue_offering: true,
+  allow_volunteers_offering: true,
+  allow_sponsorship_offering: true,
+  allow_expertise_offering: true,
+  allow_vendors_offering: true,
+  allow_registration_request: true,
   is_published: false
 
 
@@ -43,20 +45,50 @@ const newEvent = ref({
 });
 
 
+const toast = useToast();
 
+function publishEvent(isPublished: boolean){
+  newEvent.value.is_published = isPublished;
+  var toastText = isPublished ? "Event Published" : "Event Unpublished";
+  console.log(newEvent.value)
+  supabase.from('AllEvents').upsert([
+  newEvent.value
+  ]).then(response => {
+    console.log(response)
+    toast.success(toastText, {
+        timeout: 5000,
+      });
+  }).catch(error => {
+    console.log(error)
+    toast.error("Error: Event Not Updated", {
+        timeout: 5000,
+      });
+  })
+}
 
- function addEvent() {
-   console.log(newEvent.value)
- supabase.from('AllEvents').insert([
- newEvent.value
-   ]).then(response => {
-     console.log(response)
-   }).catch(error => {
-     console.log(error)
-   })
- }
+function addEvent() {
+  console.log(newEvent.value)
+  supabase.from('AllEvents').upsert([
+  newEvent.value
+  ]).then(response => {
+    console.log(response)
+    toast.success("Event Saved", {
+        timeout: 5000,
+      });
+  }).catch(error => {
+    console.log(error)
+    toast.error("Error: Venue Not Saved", {
+        timeout: 5000,
+      });
+  })
+}
 
-function nextStep() {
+function nextStep(item) {
+  if(!!item){
+    newEvent.value = item;
+    newEvent.value.event_start_date = new Date(item.event_start_date + 'T00:00:00');
+    newEvent.value.event_end_date = new Date(item.event_end_date + 'T00:00:00');
+  }
   currentStep.value += 1;
   window.scrollTo(0, 0);
 }
@@ -70,6 +102,12 @@ function previousStep() {
 
 <template>
   <Button class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addEvent">Save</Button>
+  <Button v-show="currentStep > 1 && !newEvent.is_published" @click="publishEvent(true)">
+    Publish
+  </Button>
+  <Button v-show="currentStep > 1 && newEvent.is_published" @click="publishEvent(false)">
+    Unpublish
+  </Button>
   <div>
     <EventCreating01 :event="newEvent" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
     <EventCreating02 :event="newEvent" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>

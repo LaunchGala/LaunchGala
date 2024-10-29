@@ -388,7 +388,7 @@ function getIcon(industry) {
   <div class="bg-white dark:bg-black min-h-screen py-10">
     <TooltipProvider>
       <div class="container mx-auto px-4 lg:px-8">
-        <Card>
+        <Card class="bg-orange-200 ">
           <CardHeader>
             <CardTitle>What is your event's industries focus: (Select all applicable)</CardTitle>
           </CardHeader>
@@ -406,9 +406,6 @@ function getIcon(industry) {
                 </TooltipTrigger>
               </Tooltip>
             </div>
-            <CardFooter class="flex justify-center space-x-4 mt-8">
-              <Button variant="ghost" class="text-orange-500 hover:underline hover:bg-transparent hover:text-orange-700">Not sure yet? You can add/edit all information later. Skip this step</Button>
-            </CardFooter>
           </CardContent>
           <div class="flex justify-between items-center p-4">
             <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">

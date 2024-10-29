@@ -1,20 +1,11 @@
 
 <script setup lang="ts">
-// import {
-//   AspectRatio,
-//   Button,
-//   Card,
-//   CardContent,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-//   Calendar as CalendarIcon
-// } from '@/components/ui'
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger
-// } from '@/components/ui/popover'
+
+ import {
+   Popover,
+   PopoverContent,
+   PopoverTrigger
+ } from '@/components/ui/popover'
 // import { Calendar } from '@/components/ui/calendar'
 import { MapPin, Star, User, ArrowRight, Home, Check, Share2, Bookmark, Save, Clock, Info, Shield, XCircle } from 'lucide-vue-next'
 import { ref, defineProps } from 'vue'
@@ -32,61 +23,55 @@ import {
 
 const route = useRoute();
 const venueId = route.query.id;
-const supabase = useSupabaseClient()
-const venueListing = ref({
-  createdBy: 0,
+const event = ref({
+  created_by: 1,
   title: '',
-  address: '',
-  addressExact: true,
   description: '',
-  capacity: 0,
-  price: 0,
-  priceEnabled: false, 
-  venueType: [],
-  amenities: [],
-  eventType: [],
+  invite_only: false,
+  ticket_price: 0,
+  event_type: '',
+  industries: [],
   images: [],
-  sponsorshipOption: true,
-  nonSmoking: true,
-  maskRequired: false,
-  noPets: true,
-  noCommercialPhotography: false,
-  securityCameras: true,
-  postEventCleaning: false,
-  mustClimbStairs: false,
-  additionalInsurance: false,
-  openSpace: false,
-  venue_owner: {
-    full_name: '',
-    user_company: '',
-    avatar_url: '',
-    avatarSRC: ''
-  },
-  cancellation_policy: ''
+  event_start_date: new Date(),
+  event_end_date: new Date(),
+  event_start_time: '12:00',
+  event_end_time: '14:00',
+  location: '',
+  agenda: '',
+  link: '',
+  allow_venue_offering: true,
+  allow_volunteers_offering: true,
+  allow_sponsorship_offering: true,
+  allow_expertise_offering: true,
+  allow_vendors_offering: true,
+  allow_registration_request: true,
+  is_published: false
+
 
 
 
 });
-const images = ref([])
-const getVenueById = async (id) => {
-  const { data, error } = await supabase
-    .from('AllVenues') // Replace 'users' with your table name
-    .select('*, venue_owner:profiles!createdBy(*)') // Fetch all columns
-    .eq('id', id) // Filter by 'id'
-    .single() // Ensures only one record is returned
-
-  if (error) {
-    console.error('Error fetching data:', error)
-    return null
-  }
-
-  venueListing.value = data;
+async function getEvent() {
+  const { data: AllEvents, error } = await supabase.from('AllEvents').select('*, event_owner:profiles!created_by(*)').eq('id', venueId)
+  console.log(error)
+  Promise.all(AllEvents.map(async (event) => {
+    event.event_owner.avatarSRC = await fetchImage(event.event_owner.avatar_url)
+  })).then(() => {
+    event.value = AllEvents[0];
+    console.log(AllEvents)
+  })
 }
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+    return "";
+  }
 onMounted(() => {
-  getVenueById(venueId)
+  getEvent()
 });
-
-
 const date = ref<Date>()
 </script>
 
@@ -108,25 +93,7 @@ const date = ref<Date>()
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 ">
-          <ImageCarousel :image-names="venueListing.images" />
-        </div>
-        <div class="flex justify-between p-2">
-          <Button variant="outline" class="border dark:border-gray-500 hover:border-indigo-600 dark:text-indigo-300 dark:hover:text-indigo-500">
-            Show more images
-          </Button>
-          <!-- <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                variant="outline"
-                class="flex items-center space-x-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-300 px-4 py-2 rounded">
-                <CalendarIcon class="w-5 h-5"/>
-                <span>{{ date ? format(date, "PPP") : "Select date & time" }}</span>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar v-model="date" class="p-4" />
-            </PopoverContent>
-          </Popover> -->
+          <ImageCarousel :image-names="event.images" />
         </div>
       </CardHeader>
       
@@ -142,27 +109,19 @@ const date = ref<Date>()
         
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Hosted by <strong>{{venueListing.venue_owner.full_name}}</strong></span>
+          <span>Hosted by <strong>{{event.event_owner?.full_name}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Company <strong>{{venueListing.venue_owner.user_company}}</strong></span>
+          <span>Company <strong>{{event.event_owner?.user_company}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Price <strong>${{venueListing.price}}/hr</strong></span>
+          <span>Tickets: <strong>${{event.ticket_price == 0 ? 'Free' : '$' + event.ticket_price}} / {{event.invite_only ? 'Invite only' : 'Open to all'}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Sponsor option: <strong>{{venueListing.sponsorshipOption}}</strong></span>
-        </div>
-        <div class="flex items-center space-x-2 space-y-4">
-          <User class="w-5 h-5" />
-          <span>Venue type: <strong>{{venueListing.venueType}}</strong></span>
-        </div>
-        <div class="flex items-center space-x-2 space-y-4">
-          <User class="w-5 h-5" />
-          <span>Total capacity/Venue size: <strong>{{venueListing.capacity}}</strong></span>
+          <span>Event type: <strong>{{event.event_type}}</strong></span>
         </div>
         <!-- <div class="flex items-center space-x-2 space-y-2">
           <User class="w-5 h-5" />
@@ -178,32 +137,20 @@ const date = ref<Date>()
         </div> -->
         <div class="flex items-center space-x-2 space-y-4">
           <MapPin class="w-5 h-5" />
-          <span>{{venueListing.address}}</span>
+          <span>{{event.location}}</span>
         </div>
       </div>
-      
-        <!-- <VenueSearchLanding/> -->
-      <VenueBookingRequest1 :venue="venueListing"/>
       </div>
       <h3 class="font-semibold text-lg mb-2">Description:</h3>
         <p class="leading-relaxed">
-          {{venueListing.description}}
+          {{event.description}}
         </p>
         <div>
-          <h3 class="font-semibold text-lg mb-2">Venue good for:</h3>
-          <div v-for="eventType in venueListing.eventType" class="flex flex-wrap gap-2">
+          <h3 class="font-semibold text-lg mb-2">Industries:</h3>
+          <div v-for="eventType in event.industries" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
               {{eventType}}
-            </span>
-          </div>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg mb-2">Amenities</h3>
-          <div v-for="amenity in venueListing.amenities" class="flex flex-wrap gap-2">
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              {{amenity}}
             </span>
           </div>
         </div>
@@ -221,9 +168,6 @@ const date = ref<Date>()
         </div>
       </CardFooter>
       <div class="px-4 py-2 dark:bg-gray-800">
-        <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
-          <MapViewer :address="venueListing.address"/>
-        </AspectRatio>
         
         <div class="bg-white dark:bg-black p-6 shadow-lg rounded-lg  mx-auto my-8">
     <h2 class="text-2xl font-semibold mb-4">Reservation Rules</h2>
@@ -260,79 +204,56 @@ const date = ref<Date>()
           <!-- <Info class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
         </AccordionTrigger>
         <AccordionContent>
-          <div v-show="venueListing.nonSmoking" class="flex flex-wrap gap-2">
+          <div v-show="event.allow_venue_offering" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              No Smoking
+              Allow Venue Offering
             </span>
           </div>
-          <div v-show="venueListing.maskRequired" class="flex flex-wrap gap-2">
+          <div v-show="event.allow_sponsorship_offering" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              Masks Required
+              Allow Sponsorship Offering
             </span>
           </div>
-          <div v-show="venueListing.noPets" class="flex flex-wrap gap-2">
+          <div v-show="event.allow_volunteers_offering" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              No Pets
+              Allow Volunteers Offering
             </span>
           </div>
-          <div v-show="venueListing.noCommercialPhotography" class="flex flex-wrap gap-2">
+          <div v-show="event.allow_expertise_offering" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              No Commercial Photography
+              Allow Expertise Offering
             </span>
           </div>
-          <div v-show="venueListing.securityCameras" class="flex flex-wrap gap-2">
+          <div v-show="event.allow_vendors_offering" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              Has Security Cameras
+              Allow Vendors Offering
             </span>
           </div>
-          <div v-show="venueListing.postEventCleaning" class="flex flex-wrap gap-2">
+          <div v-show="event.allow_registration_request" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              Has Post Event Cleaning
+              Registration Requests Allowed
             </span>
           </div>
-          <div v-show="venueListing.mustClimbStairs" class="flex flex-wrap gap-2">
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Must Climb Stairs
-            </span>
-          </div>
-          <div v-show="venueListing.openSpace" class="flex flex-wrap gap-2">
-            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
-              <Check class="w-4 h-4 text-green-500" />
-              Has Open Space
-            </span>
-          </div>
-        </AccordionContent>
-      </AccordionItem>
-
-      <AccordionItem value="cancelation-policy">
-        <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Cancellation Policy</span>
-          <!-- <XCircle class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
-        </AccordionTrigger>
-        <AccordionContent>
-          <p class="mt-2">{{ venueListing.cancellation_policy }}</p>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
   </div>
 
         <div class="px-4 py-4 dark:bg-gray-800">
-      <h3 class="text-lg font-semibold mb-4 text-black">Venues you might like</h3>
+      <h3 class="text-lg font-semibold mb-4 text-black">Events you might like</h3>
       <div class="flex space-x-4 overflow-x-auto pb-4">
         <div v-for="index in 20" :key="`item-${index}`" class="min-w-80 inline-block rounded-md shadow-lg bg-white dark:bg-gray-700">
           <img src="/placeholder.svg" alt="Venue image" class="h-60 w-full object-cover rounded-t-md">
           <div class="p-4">
-            <h4 class="text-lg font-bold mb-2 dark:text-white">Venue Name</h4>
+            <h4 class="text-lg font-bold mb-2 dark:text-white">Event Name</h4>
             <p class="text-sm text-gray-500 dark:text-gray-300">Location</p>
-            <p class="text-sm text-gray-500 dark:text-gray-300">Size: Large</p>
-            <p class="text-sm font-semibold dark:text-white">$500 / event</p>
+            <p class="text-sm font-semibold dark:text-white">$500 / Ticket</p>
             <p class="text-sm text-gray-500 mb-2 dark:text-gray-300">Sponsored</p>
             <!-- <Button class="w-full bg-white rounded-md shadow-lg hover:bg-gray-400 text-orange-500 border-orange-500 font-semibold" variant="default">
               View

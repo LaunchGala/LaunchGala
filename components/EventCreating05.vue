@@ -35,7 +35,7 @@ const selectedCity = ref('')
       <div>
         <DropdownMenu>
           <DropdownMenuTrigger class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
-            <span>{{ selectedCity || 'Select your city' }}</span>
+            <span>{{ props.event.location || 'Select your city' }}</span>
             <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
           </DropdownMenuTrigger>
           <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
@@ -43,14 +43,13 @@ const selectedCity = ref('')
               {{ city }}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem @click="selectedCity = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+            <DropdownMenuItem @click="props.event.location = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
               <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />Other
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
       <!-- <Button class="w-full bg-orange-500 hover:bg-orange-600 text-white dark:hover:bg-orange-700 dark:bg-orange-600">Create Event</Button> -->
-      <Button variant="ghost" class="w-full text-orange-500 hover:underline hover:bg-transparent hover:text-orange-700">Not sure yet? You can add/edit location later. Skip this step</Button>
     </div>
   </div>
 

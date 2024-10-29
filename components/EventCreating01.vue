@@ -18,11 +18,11 @@ const user = useSupabaseUser();
 const myEvents = ref([])
 const emit = defineEmits(['nextStep']);
 
-async function fetchVenues() {
+async function fetchEvents() {
   const response = await supabase
     .from('AllEvents')
     .select()
-    .eq('createdBy', user.value.id)
+    .eq('created_by', user.value.id)
   if (response.error) {
     console.error(response.error);
     return;
@@ -35,7 +35,7 @@ function editEvent(item){
 }
 
 onMounted(() => {
-  fetchVenues();
+  fetchEvents();
 });
 </script>
 
@@ -70,7 +70,7 @@ onMounted(() => {
       <!-- Loop through the 'venues' array to create table rows -->
       <TableRow v-for="(event, index) in myEvents" :key="index">
         <TableCell>{{ event.title }}</TableCell>
-        <TableCell>{{ event }}</TableCell>
+        <TableCell>{{ event.location }}</TableCell>
         <TableCell class="text-right">
           <Button class="flex items-center gap-2" variant="ghost" @click="editEvent(event)">
             <Copy class="w-4 h-4"/>

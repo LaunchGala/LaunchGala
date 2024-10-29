@@ -35,84 +35,29 @@ import {
 const isOpen = ref(false)
 const date = ref<Date>()
 
-const allEvents = ref([
-  {
-    img: "/Bootstrapping.png",
-    eventName: "House Party",
-    organizerName: "Mr. X",
-    organizerAvatar: "https://github.com/radix-vue.png",
-    eventType: "Networking",
-    industry: "AI",
-    eventDate: "04/21/2024",
-    description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
-    likeEvent: true
-  },
-  {
-    img: "/Bootstrapping.png",
-    eventName: "Tech Expo",
-    organizerName: "Ms. Y",
-    organizerAvatar: "https://github.com/radix-vue.png",
-    eventType: "Exhibition",
-    industry: "Technology",
-    eventDate: "09/15/2024",
-    description: "Showcasing the latest tech innovations and products.",
-    location: "San Francisco, CA",
-    likeEvent: false
-  },
+const allEvents = ref([])
 
-  {
-    img: "/Bootstrapping.png",
-    eventName: "Startup Summit",
-    organizerName: "Mr. Z",
-    organizerAvatar: "https://github.com/radix-vue.png",
-    eventType: "Conference",
-    industry: "Entrepreneurship",
-    eventDate: "11/02/2024",
-    description: "Bringing together aspiring and experienced entrepreneurs.",
-    location: "New York City, NY",
-    likeEvent: false
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    eventName: "AI Symposium",
-    organizerName: "Dr. A",
-    organizerAvatar: "https://github.com/radix-vue.png",
-    eventType: "Symposium",
-    industry: "Artificial Intelligence",
-    eventDate: "06/30/2024",
-    description: "Exploring the future of AI technology and applications.",
-    location: "Los Angeles, CA",
-    likeEvent: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    eventName: "Fashion Week",
-    organizerName: "Ms. B",
-    organizerAvatar: "https://github.com/radix-vue.png",
-    eventType: "Fashion Show",
-    industry: "Fashion",
-    eventDate: "02/12/2024",
-    description: "A showcase of the latest trends and designs in fashion.",
-    location: "Paris, France",
-    likeEvent: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    eventName: "Food Festival",
-    organizerName: "Mr. C",
-    organizerAvatar: "https://github.com/radix-vue.png",
-    eventType: "Culinary Event",
-    industry: "Food & Beverage",
-    eventDate: "08/08/2024",
-    description: "Celebrating the diversity of world cuisine with delicious food and drinks.",
-    location: "Miami, FL",
-    likeEvent: true
+async function getAllEvents() {
+  const { data: AllEvents, error } = await supabase.from('AllEvents').select('*, event_owner:profiles!created_by(*)').eq('is_published', true)
+  console.log(error)
+  Promise.all(AllEvents.map(async (event) => {
+    event.event_owner.avatarSRC = await fetchImage(event.event_owner.avatar_url)
+  })).then(() => {
+    allEvents.value = AllEvents;
+    console.log(AllEvents)
+  })
+}
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+    return "";
   }
-])
+onMounted(() => {
+  getAllEvents()
+});
 </script>
 
 <template>
@@ -198,31 +143,31 @@ const allEvents = ref([
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div v-for="event in allEvents" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
         <div class="relative">
-          <img class="w-full h-64 object-cover" :src="event.img" alt="Event image" />
+          <ImageCarousel class="w-full h-64 object-cover" :image-names="event.images" alt="Apartment image" />
         </div>
         <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2 dark:text-white">{{event.eventName}}</div>
+          <div class="font-bold text-xl mb-2 dark:text-white">{{event.title}}</div>
           <div class="text-gray-700 text-base dark:text-gray-300">
             <div class="flex items-center mb-1">
               <Avatar class="bg-gray-200 dark:bg-gray-700 mr-4">
-              <AvatarImage :src="event.organizerAvatar" alt="@radix-vue" />
+              <AvatarImage :src="event?.event_owner?.avatarSRC" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
-              {{event.organizerName}}
+              {{event.event_owner?.full_name}}
             </div>
-            <div class="flex items-center mb-1">
+            <div class="flex items-center mt-2 mb-2">
               <Tag class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
-              {{event.eventType}}
+              {{event.event_type}}
             </div>
-            <div class="flex items-center mb-1">
+            <!--<div class="flex items-center mb-1">
               <Tag class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
               {{event.industry}}
-            </div>
-            <div class="flex items-center mb-1">
+            </div>-->
+            <div class="flex items-center mt-2 mb-2">
               <Calendar class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
-              {{event.eventDate}}
+              {{event.event_start_date}}
             </div>
-            <div class="flex items-center mb-1">
+            <div class="flex items-center mt-2 mb-2">
               <MapPin class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
               {{event.location}}
             </div>
@@ -233,9 +178,13 @@ const allEvents = ref([
         </div>
         <div class="px-6 pt-4 pb-2">
           <div class="flex items-center justify-between mb-4">
-            <Button variant="outline" class="dark:text-white dark:border-gray-600">
-              Check it out
-            </Button>
+            <NuxtLink :to="{ name: 'EventDetailPage', query: { id: event.id } }">
+
+              <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
+                Check it out
+                <ArrowRight class="w-5 h-5 ml-2" />
+              </Button>
+            </NuxtLink>
           </div>
           <div class="flex items-center justify-between">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">

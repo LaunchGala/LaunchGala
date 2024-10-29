@@ -9,11 +9,38 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Share1Icon } from '@radix-icons/vue';
 import { Share2Icon } from 'lucide-vue-next';
-import { Share } from 'lucide-vue-next';
+import { Share, Check } from 'lucide-vue-next';
 
 
 const props = defineProps(['event']);
 const user = useSupabaseUser();
+const avatarUrl = ref('');
+console.log(user)
+async function fetchUserAvatarURl(){
+  const response = await supabase
+    .from('profiles')
+    .select()
+    .eq('id', user.value.id)
+  if (response.error) {
+    console.error(response.error);
+    return;
+  }
+  fetchImage(response.data[0].avatar_url);
+}
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            avatarUrl.value = urlData?.data?.signedUrl ?? "";
+    }
+  }
+function formatDate(date) {
+  if (!date) return '';
+  return new Date(date).toDateString();
+}
+onMounted(() => {
+  fetchUserAvatarURl();
+});
 </script>
 
 <template>
@@ -21,9 +48,9 @@ const user = useSupabaseUser();
 
     <div class="pt-12 pb-24 container mx-auto px-4">
       <Card class="max-w-4xl mx-auto mb-8 bg-white dark:bg-gray-800 shadow-2xl rounded-xl overflow-hidden ">
-        <AspectRatio :ratio="16/9">
-          <img src="/Bootstrapping.png" alt="Event Image" class="w-full h-full object-cover" />
-        </AspectRatio>
+        <AspectRatio :ratio="16 / 9" class="mb-6 rounded-md overflow-hidden shadow-lg">
+        <ImageCarousel :image-names="props.event?.images"/>
+      </AspectRatio>
 
         <div class="flex flex-col justify-between p-6">
           <CardContent>
@@ -53,14 +80,14 @@ const user = useSupabaseUser();
                   </CardTitle>
                 </CardHeader>
               <Avatar class="w-32 h-32 mb-6 inline-block bg-orange-400">
-                <AvatarImage src="/PinkPavatar Background Removed Background Removed.png" alt="Host Avatar" />
+                <AvatarImage :src="avatarUrl" alt="Host Avatar" />
               </Avatar>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger as-child>
                     <p class="text-sm text-orange-600 dark:text-orange-200">
                       <User class="w-4 h-4 inline mr-1 align-text-bottom" />
-                      Hosted by {{user.fullName}}
+                      Hosted by {{user?.user_metadata.full_name}}
                     </p>
                   </TooltipTrigger>
                   <TooltipContent class="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-300">
@@ -77,7 +104,7 @@ const user = useSupabaseUser();
               </li>
               <li class="flex items-center justify-center">
                 <Calendar class="w-5 h-5 text-orange-600 dark:text-orange-300 mr-2" />
-                <span class="text-gray-700 dark:text-gray-300">{{props.event.event_start_date}} - {{ props.event.event_end_date }}</span>
+                <span class="text-gray-700 dark:text-gray-300">{{formatDate(props.event.event_start_date)}} - {{ formatDate(props.event.event_end_date) }}</span>
               </li>
               <li class="flex items-center justify-center">
                 <Clock class="w-5 h-5 text-orange-600 dark:text-orange-300 mr-2" />
@@ -85,7 +112,7 @@ const user = useSupabaseUser();
               </li>
               <li class="flex items-center justify-center">
                 <Tag class="w-5 h-5 text-orange-600 dark:text-orange-300 mr-1 align-text-bottom" />
-                <span class="text-gray-700 dark:text-gray-300">Tickets: {{props.event.ticket_price == 0 ? 'Free' : '$' + props.event.ticket_price}} / {{props.event.inviteOnly ? 'Invite only' : 'Open to all'}}</span>
+                <span class="text-gray-700 dark:text-gray-300">Tickets: {{props.event.ticket_price == 0 ? 'Free' : '$' + props.event.ticket_price}} / {{props.event.invite_only ? 'Invite only' : 'Open to all'}}</span>
               </li>
               <li class="flex items-center justify-center flex-wrap">
                 <Badge v-for="industry in props.event.industries" variant="outline" class="bg-orange-100 text-orange-700 mr-2">{{industry}}</Badge>
@@ -107,6 +134,77 @@ const user = useSupabaseUser();
                 </p>              
               </div>
             </div>
+            <Accordion type="single" collapsible class="space-y-2">
+      <!--<AccordionItem value="operating-hours">
+        <AccordionTrigger class="flex items-center justify-between">
+          <span class="font-medium">Operating Hours</span>
+           <Clock class="w-5 h-5 text-gray-500 dark:text-gray-400" /> 
+        </AccordionTrigger>
+        <AccordionContent>
+          <p class="mt-2">Mon-Fri: 9am to 10pm</p>
+          <p>Sat-Sun: 10am to 11pm</p>
+        </AccordionContent>
+      </AccordionItem>-->
+
+      <!--<AccordionItem value="safety-rules">
+        <AccordionTrigger class="flex items-center justify-between">
+          <span class="font-medium">Safety Rules</span>
+           <Shield class="w-5 h-5 text-gray-500 dark:text-gray-400" /> 
+        </AccordionTrigger>
+        <AccordionContent>
+          <ul class="list-disc ml-5 mt-2">
+            <li>Face masks required</li>
+            <li>Hand sanitizer provided</li>
+            <li>Outdoor seating available</li>
+          </ul>
+          </AccordionContent>
+      </AccordionItem>-->
+
+      <AccordionItem value="reservation-rules">
+        <AccordionTrigger class="flex items-center justify-between">
+          <span class="font-medium">Reservation Rules and Details</span>
+          <!-- <Info class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
+        </AccordionTrigger>
+        <AccordionContent>
+          <div v-show="event.allow_venue_offering" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Allow Venue Offering
+            </span>
+          </div>
+          <div v-show="event.allow_sponsorship_offering" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Allow Sponsorship Offering
+            </span>
+          </div>
+          <div v-show="event.allow_volunteers_offering" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Allow Volunteers Offering
+            </span>
+          </div>
+          <div v-show="event.allow_expertise_offering" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Allow Expertise Offering
+            </span>
+          </div>
+          <div v-show="event.allow_vendors_offering" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Allow Vendors Offering
+            </span>
+          </div>
+          <div v-show="event.allow_registration_request" class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Registration Requests Allowed
+            </span>
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
           </CardContent>
 
           <CardFooter class="pt-4 pb-6 bg-orange-100 dark:bg-gray-700 rounded-md">
