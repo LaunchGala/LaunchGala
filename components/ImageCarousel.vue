@@ -44,7 +44,7 @@ const supabase = useSupabaseClient()
         })).then(results => images.value = results)
     }
   }
-  watch(() => props.imageNames, () => fetchImages())
+  watch(() => props.imageNames, () => fetchImages(), {deep: true})
   onMounted(() => {
     fetchImages();
   });

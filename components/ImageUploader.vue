@@ -140,9 +140,11 @@ const uploadImages = async () => {
       console.error('Unexpected error:', err);
     }
   }
-  props.imageNames.push(imageNames)
+  props.imageNames.push(...imageNames)
+  
   // Clear the image previews after upload
   images.value = [];
+  fetchImages()
 };
 
 // Confirm delete with the user before removing from Supabase bucket

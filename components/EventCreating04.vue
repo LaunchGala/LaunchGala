@@ -65,7 +65,7 @@ const selectedTimeZone = ref('')
             </Button>
           </PopoverTrigger>
           <PopoverContent class="w-auto p-0">
-            <Calendar v-model="props.event.event_start_date" />
+            <Calendar v-model="props.event.event_end_date" />
           </PopoverContent>
         </Popover>
         <div class="mt-2 flex items-center rounded border border-gray-300 bg-white">

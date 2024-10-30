@@ -117,7 +117,7 @@ const date = ref<Date>()
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Tickets: <strong>${{event.ticket_price == 0 ? 'Free' : '$' + event.ticket_price}} / {{event.invite_only ? 'Invite only' : 'Open to all'}}</strong></span>
+          <span>Tickets: <strong>{{event.ticket_price == 0 ? 'Free' : '$' + event.ticket_price}} / {{event.invite_only ? 'Invite only' : 'Open to all'}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />

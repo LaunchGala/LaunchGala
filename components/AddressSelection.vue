@@ -81,6 +81,7 @@ watch(() => props.address, (newValue) => {
                 position: place.geometry.location,
               });
               address.value = place.formatted_address;
+              emitAddressUpdate()
             }
           });
         }
@@ -100,6 +101,7 @@ watch(() => props.address, (newValue) => {
             position: results[0].geometry.location,
           });
           address.value = place.formatted_address;
+          emitAddressUpdate()
         } else {
           console.error('Geocode was not successful for the following reason: ' + status);
         }

@@ -38,7 +38,7 @@ const newVenueListing = ref({
   mustClimbStairs: false,
   additionalInsurance: false,
   openSpace: false,
-  is_published: true
+  is_published: false
 });
 
 
