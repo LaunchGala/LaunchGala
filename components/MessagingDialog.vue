@@ -6,7 +6,7 @@
       <!-- Button to open the message dialog -->
       <DialogTrigger asChild>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Open Messages
+          {{ title }}
         </button>
       </DialogTrigger>
       <DialogContent>
@@ -67,6 +67,10 @@ const props = defineProps({
   otherUser: {
     type: String,
     required: true
+  },
+  title: {
+    type: String,
+    default: 'Open Messages'
   }
 });
 

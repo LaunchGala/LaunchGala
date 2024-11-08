@@ -291,7 +291,7 @@ function addEventTypes(eventTypes: string) {
                   <label @click="addEventTypes('Industry-specific summit')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
                   :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Industry-specific summit'), 'bg-white': !props.venueListing.eventType.includes('Industry-specific summit') }">
                     <Globe class="w-6 h-6 mb-2 text-orange-500" />
-                    <span class="text-lg font-semibold mb-1">Summit & Symposium</span>
+                    <span class="text-lg font-semibold mb-1">Industry-specific summit</span>
                     <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
                   </label>
                 </TooltipTrigger>

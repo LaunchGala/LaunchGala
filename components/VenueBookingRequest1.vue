@@ -10,6 +10,13 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { format } from 'date-fns';
 import { useToast } from 'vue-toastification';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 const startDate = ref<Date | null>(new Date());
 const endDate = ref<Date | null>(new Date());
@@ -26,6 +33,8 @@ const props = defineProps(['venue'])
 const loading = ref(true)
 const full_name = ref('')
 const avatar_url = ref('')
+const events = ref([])
+const selectedEvent = ref(null)
 
 
 
@@ -45,13 +54,51 @@ if (data) {
 const disabled = ref(true)
 const message = ref("Request Booking")
 
+async function getEvents() {
+  const { data, error } = await supabase
+    .from('AllEvents')
+    .select('*')
+    .eq('created_by', user.value.id)
+  if (data) {
+    loading.value = false
+    events.value = data
+  }
+}
+
 async function checkDisable(){
+    try {
+    const eventId = selectedEvent?.value?.id ?? null;
+    // Query the table for rows where the property is true
+    let query = supabase
+      .from("VenueBookings")
+      .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
+      .eq("venue_id", props.venue.id)
+      .eq("requesting_user_id", user.value.id);
+      if (eventId === null) {
+        query = query.is('event_id', null);
+      } else {
+        query = query.eq('event_id', eventId);
+      }
+    const { data, error, count } = await query;
+    if(count > 0){
+        disabled.value = true
+        message.value = "Booking Requested"
+        return
+    }
+    // Handle errors
+    if (error) throw error;
+
+    } catch (error) {
+        console.error('Error checking true property count:', error.message);
+    }
     try {
     // Query the table for rows where the property is true
     const { data, error, count } = await supabase
       .from("VenueBookings")
       .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
-      .eq("requesting_user_id", user.value.id);          // Match the property set to true
+      .eq("requesting_user_id", user.value.id)
+      .eq("is_cancelled", false)
+      .eq("is_request", true);          // Match the property set to true
     if(count > 5){
         disabled.value = true
         message.value = "Exceeded Booking Request Limit"
@@ -80,24 +127,6 @@ async function checkDisable(){
     } catch (error) {
         console.error('Error checking true property count:', error.message);
     }
-    try {
-    // Query the table for rows where the property is true
-    const { data, error, count } = await supabase
-      .from("VenueBookings")
-      .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
-      .eq("venue_id", props.venue.id)
-      .eq("requesting_user_id", user.value.id);  ;          // Match the property set to true
-    if(count > 0){
-        disabled.value = true
-        message.value = "Booking Requested"
-        return
-    }
-    // Handle errors
-    if (error) throw error;
-
-    } catch (error) {
-        console.error('Error checking true property count:', error.message);
-    }
     disabled.value = false;
     message.value = "Request Booking"
 }
@@ -113,7 +142,8 @@ async function bookingActivity() {
     event_end_time: endTime.value,
     event_type: eventStyle.value,
     number_of_guests: numberOfGuests.value,
-    venue_id: props.venue.id
+    venue_id: props.venue.id,
+    event_id: selectedEvent?.value?.id,
   }
 
   const toast = useToast();
@@ -135,8 +165,21 @@ async function bookingActivity() {
     checkDisable();
   }
 }
+
+function selectEvent(event) {
+  selectedEvent.value = event
+  startDate.value = new Date(event.event_start_date)
+  endDate.value = new Date(event.event_end_date)
+  startTime.value = event.event_start_time
+  endTime.value = event.event_end_time
+  eventStyle.value = event.event_type
+  numberOfGuests.value = event.number_of_guests
+  checkDisable()
+}
+
 onMounted(async () => {
     await checkDisable();
+    await getEvents();
 })
 </script>
 
@@ -147,9 +190,25 @@ onMounted(async () => {
       <div class="grid grid-cols-1 gap-4">
         <h3 class="font-semibold text-lg mb-2">Book this venue: </h3>
 
+        <DropdownMenu>
+          <DropdownMenuTrigger class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
+            <span>{{ selectedEvent?.title || 'Select your event' }}</span>
+            <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
+            <DropdownMenuItem v-for="event in events" :key="event.id" @click="selectEvent(event)">
+              {{ event.title }}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem @click="selectedEvent = null" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+              <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />No event created yet.
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <Popover>
           <PopoverTrigger as-child>
-            <Button variant="outline" class="w-full flex justify-between items-center">
+            <Button :disabled="!!selectedEvent" variant="outline" class="w-full flex justify-between items-center">
               <CalendarIcon class="mr-2 h-5 w-5" />
               <span class="flex-1">{{ startDate ? format(startDate, 'PPP') : 'Start Date' }}</span>
               <ChevronDown class="ml-2 h-5 w-5" />
@@ -161,7 +220,7 @@ onMounted(async () => {
         </Popover>
         <Popover>
           <PopoverTrigger as-child>
-            <Button variant="outline" class="w-full flex justify-between items-center">
+            <Button :disabled="!!selectedEvent" variant="outline" class="w-full flex justify-between items-center">
               <CalendarIcon class="mr-2 h-5 w-5" />
               <span class="flex-1">{{ endDate ? format(endDate, 'PPP') : 'End Date' }}</span>
               <ChevronDown class="ml-2 h-5 w-5" />
@@ -174,13 +233,13 @@ onMounted(async () => {
       </div>
 
       <div class="grid grid-cols-2 gap-4">
-        <Input v-model="startTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
-        <Input v-model="endTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
+        <Input :disabled="!!selectedEvent" v-model="startTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
+        <Input :disabled="!!selectedEvent" v-model="endTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
       </div>
 
-      <Input v-model="eventStyle" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Event Type" />
+      <Input :disabled="!!selectedEvent" v-model="eventStyle" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Event Type" />
 
-      <Input v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" />
+      <Input :disabled="!!selectedEvent" v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" />
 
       <Textarea v-model="note" placeholder="Additional notes" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize-none" />
 
