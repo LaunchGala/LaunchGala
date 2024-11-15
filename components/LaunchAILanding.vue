@@ -16,8 +16,8 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     
     <!-- Header and Description -->
     <div class=" mx-8 mb-16 text-left">
-      <h2 class="text-2xl font-semibold mb-4  text-gray-700">We also help you with</h2>
-      <p class="text-md mt-3 dark:text-gray-400">Finding Speakers, Investors, Advisers, Talents, Media, Influencers, Vendors & more</p>
+      <h2 class="text-2xl font-semibold mb-4  text-gray-700">AI Agents Marketplace</h2>
+      <p class="text-md mt-3 dark:text-gray-400">Find the best AI agents to help your startup</p>
     </div>
 
     <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -30,11 +30,11 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
           </AspectRatio>
           <CardHeader>
             <!-- <Home class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Speakers, Investors & Advisers</CardTitle>
+            <CardTitle class="text-lg dark:text-white">Pitch deck creator & evaluator</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
-            Create an intimate event at your home.
-          </CardContent>
+            Create or evolute your pitch deck with our advanced AI agent
+                  </CardContent>
           
         </a>
         <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
@@ -53,10 +53,10 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
           </AspectRatio>
           <CardHeader>
             <!-- <Check class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Media & influencers</CardTitle>
+            <CardTitle class="text-lg dark:text-white">Grants AI</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
-            Organize your business conferences.
+            AI to match and negotiate the best grants and loan for your startup
           </CardContent>
         </a>
         <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
@@ -110,9 +110,14 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
       </NuxtLink>
       </Card>
     </div>
-    <!-- <div class="mt-8 flex justify-center">
-      <Button class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Explore events</Button>
-    </div> -->
+    <div class="pl-8">
+      <NuxtLink to="AllEvents">
+        <Button class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-200 transition-colors">
+        View All
+        <ArrowRight class="w-5 h-5 ml-2" />
+          </Button>
+        </NuxtLink>
+    </div>
   </section>
 </template>
 

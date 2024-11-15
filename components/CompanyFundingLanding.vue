@@ -81,7 +81,7 @@ const venues = ref([
 
     </div>
     <div class="py-8">
-      <NuxtLink to="AllVenues">
+      <NuxtLink to="FoundersAndStartups">
       <Button class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-200 transition-colors">
         View All
         <ArrowRight class="w-5 h-5 ml-2" />

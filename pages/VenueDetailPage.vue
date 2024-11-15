@@ -107,8 +107,8 @@ const date = ref<Date>()
             </Button>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 ">
-          <ImageCarousel :image-names="venueListing.images" />
+        <div class="   gap-2 p-2  ">
+          <ImageCarousel :image-names="venueListing.images" class="rounded-md w-full max-h-96 "/>
         </div>
         <div class="flex justify-between p-2">
           <Button variant="outline" class="border dark:border-gray-500 hover:border-indigo-600 dark:text-indigo-300 dark:hover:text-indigo-500">
@@ -185,13 +185,16 @@ const date = ref<Date>()
         <!-- <VenueSearchLanding/> -->
       <VenueBookingRequest1 :venue="venueListing"/>
       </div>
+      <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
+          <MapViewer :address="venueListing.address"/>
+        </AspectRatio>
       <h3 class="font-semibold text-lg mb-2">Description:</h3>
         <p class="leading-relaxed">
           {{venueListing.description}}
         </p>
         <div>
           <h3 class="font-semibold text-lg mb-2">Venue good for:</h3>
-          <div v-for="eventType in venueListing.eventType" class="flex flex-wrap gap-2">
+          <div v-for="eventType in venueListing.eventType" class="flex flex-col-4   mt-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
               {{eventType}}
@@ -200,7 +203,7 @@ const date = ref<Date>()
         </div>
         <div>
           <h3 class="font-semibold text-lg mb-2">Amenities</h3>
-          <div v-for="amenity in venueListing.amenities" class="flex flex-wrap gap-2">
+          <div v-for="amenity in venueListing.amenities" class="flex flex-wrap gap-2 mt-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
               {{amenity}}
@@ -221,9 +224,9 @@ const date = ref<Date>()
         </div>
       </CardFooter>
       <div class="px-4 py-2 dark:bg-gray-800">
-        <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
+        <!-- <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
           <MapViewer :address="venueListing.address"/>
-        </AspectRatio>
+        </AspectRatio> -->
         
         <div class="bg-white dark:bg-black p-6 shadow-lg rounded-lg  mx-auto my-8">
     <h2 class="text-2xl font-semibold mb-4">Reservation Rules</h2>
@@ -256,7 +259,7 @@ const date = ref<Date>()
 
       <AccordionItem value="reservation-rules">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Reservation Rules and Details</span>
+          <span class="font-medium">Reservation Rules and Venue Details</span>
           <!-- <Info class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
         </AccordionTrigger>
         <AccordionContent>

@@ -111,13 +111,13 @@ const date = ref<Date>()
     </Collapsible>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-      <Card class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+      <Card class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform transform hover:-translate-y-1 dark:hover:shadow-2xl">
         <CardHeader class="p-4 flex items-center justify-between bg-gray-100 dark:bg-gray-800">
           <div>
             <CardTitle class="text-lg font-semibold text-gray-900 dark:text-white">AWS Credit</CardTitle>
             <CardDescription class="text-sm text-gray-700 dark:text-gray-300">Amazon</CardDescription>
           </div>
-          <img src="/placeholder.svg" alt="Amazon" class="w-16 h-16">
+          <img src="/placeholder.svg" alt="Amazon" class="w-32 h-32">
         </CardHeader>
         <CardContent class="p-4">
           <p class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Free $100,000 Credit</p>

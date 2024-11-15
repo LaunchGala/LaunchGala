@@ -32,7 +32,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
           </AspectRatio>
           <CardHeader>
             <!-- <Home class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Home Party</CardTitle>
+            <CardTitle class="text-lg dark:text-white">House Party</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
             Create an intimate event at your home.

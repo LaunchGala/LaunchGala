@@ -366,6 +366,40 @@ function addEventTypes(eventTypes: string) {
                   High-quality sound system for entertainment or presentations.
                 </TooltipContent> -->
               </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addEventTypes('Pop-up Shop')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Pop-up Shop'), 'bg-white': !props.venueListing.eventType.includes('Pop-up Shop') }">
+                    <Palette class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Pop-up Shop</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  Flat-screen TV with satellite channels.
+                </TooltipContent> -->
+             
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addEventTypes('Private Gathering')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.eventType.includes('Private Gathering'), 'bg-white': !props.venueListing.eventType.includes('Private Gathering') }">
+                    <Palette class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Private Gathering</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  Flat-screen TV with satellite channels.
+                </TooltipContent> -->
+             
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
             </div>
           </CardContent>
           <div class="flex justify-between items-center p-4">

@@ -231,6 +231,42 @@ watch(() => props.venueListing.venueType, (newValue, oldValue) => {
             </button>
             <button 
             class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'Gallery', 'shadow-lg': selectedType != 'Gallery' }"
+              @click="selectType('Gallery')"
+            >
+            <div class="m-3 cursor-pointer">
+              <wine class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
+            </div>
+                          <span class="text-sm font-semibold">Gallery</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+            class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'Store', 'shadow-lg': selectedType != 'Store' }"
+              @click="selectType('Store')"
+            >
+            <div class="m-3 cursor-pointer">
+              <wine class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
+            </div>
+                          <span class="text-sm font-semibold">Store</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+            class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'House & Villa', 'shadow-lg': selectedType != 'House & Villa' }"
+              @click="selectType('House & Villa')"
+            >
+            <div class="m-3 cursor-pointer">
+              <wine class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
+            </div>
+                          <span class="text-sm font-semibold">House & Villa</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+            class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
               :class="{ 'shadow-orange-500': selectedType == 'Sports arena and facility', 'shadow-lg': selectedType != 'Sports arena and facility' }"
               @click="selectType('Sports arena and facility')"
             >

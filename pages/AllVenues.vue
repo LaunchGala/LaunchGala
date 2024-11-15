@@ -297,7 +297,7 @@ onMounted(() => {
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Explore all Venues</h1>
       <NuxtLink to="VenueListing">
-      <Button @click="console.log(allVenues)" class="bg-orange-500 text-white dark:bg-orange-600 dark:text-white">Provide your Venue</Button>
+      <Button @click="console.log(allVenues)" class="bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500">Provide your Venue</Button>
     </NuxtLink>
     </div>
     
@@ -384,7 +384,7 @@ onMounted(() => {
               <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
             </SelectContent>
           </Select>
-          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md" @click="fetchFilteredVenueListings">
+          <Button class="flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-md" @click="fetchFilteredVenueListings">
             <Search class="w-5 h-5 mr-2" />
             Search
           </Button>
@@ -435,7 +435,7 @@ onMounted(() => {
           </div> -->
           <NuxtLink :to="{ name: 'VenueDetailPage', query: { id: venue.id } }">
 
-          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
+          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
