@@ -331,19 +331,7 @@ function addAmenity(amenity: string) {
                   Flat-screen TV with satellite channels.
                 </TooltipContent> -->
               </Tooltip>
-              <Tooltip>
-                <TooltipTrigger as-child>
-                  <label @click="addAmenity('Smoke alarm')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
-                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Smoke alarm'), 'bg-white': !props.venueListing.amenities.includes('Smoke alarm') }">
-                    <AlarmSmokeIcon class="w-6 h-6 mb-2 text-orange-500" />
-                    <span class="text-lg font-semibold mb-1">Smoke alarm</span>
-                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
-                  </label>
-                </TooltipTrigger>
-                <!-- <TooltipContent>
-                  Flat-screen TV with satellite channels.
-                </TooltipContent> -->
-              </Tooltip>
+
               <Tooltip>
                 <TooltipTrigger as-child>
                   <label @click="addAmenity('Refrigerator')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
@@ -458,6 +446,175 @@ function addAmenity(amenity: string) {
                   :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Games'), 'bg-white': !props.venueListing.amenities.includes('Games') }">
                     <GamepadIcon class="w-6 h-6 mb-2 text-orange-500" />
                     <span class="text-lg font-semibold mb-1">Games</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Fitness Equipment')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Fitness Equipment'), 'bg-white': !props.venueListing.amenities.includes('Fitness Equipment') }">
+                    <AlarmSmokeIcon class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Fitness Equipment</span>
+                    <!-- <span class="text-sm dark:text-gray-300">Satellite channels</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  Flat-screen TV with satellite channels.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Sauna')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Sauna'), 'bg-white': !props.venueListing.amenities.includes('Sauna') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Sauna</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Steam Room')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Steam Room'), 'bg-white': !props.venueListing.amenities.includes('Steam Room') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Steam Room</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Bath')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Bath'), 'bg-white': !props.venueListing.amenities.includes('Bath') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Bath</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Massage Space')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Massage Space'), 'bg-white': !props.venueListing.amenities.includes('Massage Space') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Massage Space</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+                            <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Hot Tub')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Hot Tub'), 'bg-white': !props.venueListing.amenities.includes('Hot Tub') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Hot Tub</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Swimming Pool')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Swimming Pool'), 'bg-white': !props.venueListing.amenities.includes('Swimming Pool') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Swimming Pool</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Tennis Court')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Tennis Court'), 'bg-white': !props.venueListing.amenities.includes('Tennis Court') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Tennis Court</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Basketball Court')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Basketball Court'), 'bg-white': !props.venueListing.amenities.includes('Basketball Court') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Basketball Court</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Pickleball Court')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Pickleball Court'), 'bg-white': !props.venueListing.amenities.includes('Pickleball Court') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Pickleball Court</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Mini Golf')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Mini Golf'), 'bg-white': !props.venueListing.amenities.includes('Mini Golf') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Mini Golf</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Pool Table')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Pool Table'), 'bg-white': !props.venueListing.amenities.includes('Pool Table') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Pool Table</span>
+                    <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
+                  </label>
+                </TooltipTrigger>
+                <!-- <TooltipContent>
+                  High-quality sound system for entertainment or presentations.
+                </TooltipContent> -->
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
+                  <label @click="addAmenity('Ping Pong Table')" class="flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer  hover:shadow-md focus-within:shadow-md focus-within:border-orange-500"
+                  :class="{ 'bg-orange-100': props.venueListing.amenities.includes('Ping Pong Table'), 'bg-white': !props.venueListing.amenities.includes('Ping Pong Table') }">
+                    <Fish class="w-6 h-6 mb-2 text-orange-500" />
+                    <span class="text-lg font-semibold mb-1">Ping Pong Table</span>
                     <!-- <span class="text-sm dark:text-gray-300">High-quality audio</span> -->
                   </label>
                 </TooltipTrigger>

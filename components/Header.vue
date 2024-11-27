@@ -69,7 +69,7 @@ import { CrownIcon } from 'lucide-vue-next';
         </NuxtLink>
         <NuxtLink to="AllMedia">
           <a class="text-sm font-semibold  hover:underline">
-            Media
+            Media/Influencer 
           </a>
 
         </NuxtLink>
