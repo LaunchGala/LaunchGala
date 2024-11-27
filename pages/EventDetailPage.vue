@@ -72,6 +72,35 @@ const fetchImage = async (id) => {
 onMounted(() => {
   getEvent()
 });
+
+// Function to handle the "Share" button click
+const sharePage = () => {
+  const url = window.location.href;
+  const title = event.value.title;
+
+  if (navigator.share) {
+    // Use Web Share API if available
+    navigator.share({
+      title: title,
+      text: `Check out this event: ${title}`,
+      url: url,
+    })
+    .then(() => console.log('Successfully shared'))
+    .catch((error) => console.error('Error sharing', error));
+  } else {
+    // Fallback: Copy URL to clipboard
+    copyToClipboard(url);
+    alert('Page link copied to clipboard!');
+  }
+};
+
+// Function to copy a URL to clipboard
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text).then(
+    () => console.log('Text copied to clipboard'),
+    (error) => console.error('Could not copy text: ', error)
+  );
+};
 const date = ref<Date>()
 </script>
 
@@ -88,7 +117,7 @@ const date = ref<Date>()
               <Save class="w-5 h-5" /> Save
             </Button>
             <Button variant="ghost" class="OrangeText">
-              <Share2 class="w-5 h-5" /> Share
+              <Share2 @click="sharePage" class="w-5 h-5" /> Share
             </Button>
           </div>
         </div>

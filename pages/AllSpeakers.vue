@@ -94,7 +94,9 @@ const allExperts = ref([
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold dark:text-white">Find Experts</h1>
+      <NuxtLink to="CreateExpert">
       <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Provide Your Expertise</Button>
+    </NuxtLink>
 
     </div>
     

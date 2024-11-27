@@ -22,6 +22,7 @@ import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useRoute } from 'vue-router'
+import ShareButton from '@/components/ShareButton.vue'
 
 import {
   Accordion,
@@ -86,6 +87,34 @@ onMounted(() => {
   getVenueById(venueId)
 });
 
+// Function to handle the "Share" button click
+const sharePage = () => {
+  const url = window.location.href;
+  const title = venueListing.value.title;
+
+  if (navigator.share) {
+    // Use Web Share API if available
+    navigator.share({
+      title: title,
+      text: `Check out this venue: ${title}`,
+      url: url,
+    })
+    .then(() => console.log('Successfully shared'))
+    .catch((error) => console.error('Error sharing', error));
+  } else {
+    // Fallback: Copy URL to clipboard
+    copyToClipboard(url);
+    alert('Page link copied to clipboard!');
+  }
+};
+
+// Function to copy a URL to clipboard
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text).then(
+    () => console.log('Text copied to clipboard'),
+    (error) => console.error('Could not copy text: ', error)
+  );
+};
 
 const date = ref<Date>()
 </script>
@@ -103,30 +132,12 @@ const date = ref<Date>()
               <Save class="w-5 h-5" /> Save
             </Button>
             <Button variant="ghost" class="OrangeText">
-              <Share2 class="w-5 h-5" /> Share
+              <ShareButton @click="sharePage" class="w-5 h-5" /> Share
             </Button>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 ">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-2 p-2 images">
           <ImageCarousel :image-names="venueListing.images" />
-        </div>
-        <div class="flex justify-between p-2">
-          <Button variant="outline" class="border dark:border-gray-500 hover:border-indigo-600 dark:text-indigo-300 dark:hover:text-indigo-500">
-            Show more images
-          </Button>
-          <!-- <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                variant="outline"
-                class="flex items-center space-x-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-300 px-4 py-2 rounded">
-                <CalendarIcon class="w-5 h-5"/>
-                <span>{{ date ? format(date, "PPP") : "Select date & time" }}</span>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar v-model="date" class="p-4" />
-            </PopoverContent>
-          </Popover> -->
         </div>
       </CardHeader>
       
@@ -222,7 +233,7 @@ const date = ref<Date>()
       </CardFooter>
       <div class="px-4 py-2 dark:bg-gray-800">
         <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
-          <MapViewer :address="venueListing.address"/>
+          <MapViewer v-if="venueListing.address" :address="venueListing.address"/>
         </AspectRatio>
         
         <div class="bg-white dark:bg-black p-6 shadow-lg rounded-lg  mx-auto my-8">
@@ -359,6 +370,8 @@ const date = ref<Date>()
 
  .OrangeText {
   color: #ff6900;
+ }
+ .images{
  }
 </style>
 

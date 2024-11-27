@@ -1,24 +1,31 @@
 
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Search } from 'lucide-vue-next'
-const upcomingEvents = ref([
-  {
-    img: "/Bootstrapping.png",
-    title: "Chic Urban office",
-    description: "A stylish venue for modern gatherings."
-  },
-  {
-    img: "/Bootstrapping.png",
-    title: "Elegant Ballroom",
-    description: "A stylish venue ..........."
-  },
-  {
-    img: "/Bootstrapping.png",
-    title: "Cozy Conference Room",
-    description: "A stylish venue for modern .........."
+import { Heart, Share2, ArrowRight, Search } from 'lucide-vue-next'
+
+const allEvents = ref([])
+
+async function getAllEvents() {
+  const { data: AllEvents, error } = await supabase.from('AllEvents').select('*, event_owner:profiles!created_by(*)').eq('is_published', true).limit(3)
+  console.log(error)
+  Promise.all(AllEvents.map(async (event) => {
+    event.event_owner.avatarSRC = await fetchImage(event.event_owner.avatar_url)
+  })).then(() => {
+    allEvents.value = AllEvents;
+    console.log(AllEvents)
+  })
+}
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+    return "";
   }
-])
+onMounted(() => {
+  getAllEvents()
+});
 </script>
 
 <template>
@@ -31,15 +38,61 @@ const upcomingEvents = ref([
 
     <div class="carousel flex space-x-6 overflow-x-auto py-6">
       
-      <div v-for="event in upcomingEvents" class="flex-none w-[500px] h-[540px] max-w-none rounded-lg shadow-lg bg-white dark:bg-gray-800">
-        <img :src="event.img" alt="Venue" class="rounded-t-lg object-cover w-full h-[360px]" />
-        <div class="p-8">
-          <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ event.title }}</h5>
-          <p class="text-base text-gray-700 dark:text-gray-300 mt-2">{{ event.description }}</p>
-          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
-            Explore
-            <ArrowRight class="w-5 h-5 ml-2" />
-          </Button>
+      <div v-for="event in allEvents" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
+        <div class="relative">
+          <ImageCarousel class="w-full h-64 object-cover" :image-names="event.images" alt="Apartment image" />
+        </div>
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2 dark:text-white">{{event.title}}</div>
+          <div class="text-gray-700 text-base dark:text-gray-300">
+            <div class="flex items-center mb-1">
+              <Avatar class="bg-gray-200 dark:bg-gray-700 mr-4">
+              <AvatarImage :src="event?.event_owner?.avatarSRC" alt="@radix-vue" />
+              <AvatarFallback class="dark:text-white">CN</AvatarFallback>
+            </Avatar>
+              {{event.event_owner?.full_name}}
+            </div>
+            <div class="flex items-center mt-2 mb-2">
+              <Tag class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
+              {{event.event_type}}
+            </div>
+            <!--<div class="flex items-center mb-1">
+              <Tag class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
+              {{event.industry}}
+            </div>-->
+            <div class="flex items-center mt-2 mb-2">
+              <Calendar class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
+              {{event.event_start_date}}
+            </div>
+            <div class="flex items-center mt-2 mb-2">
+              <MapPin class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
+              {{event.location}}
+            </div>
+            <p class="mt-2">
+              {{event.description}}
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+          <div class="flex items-center justify-between mb-4">
+            <NuxtLink :to="{ name: 'EventDetailPage', query: { id: event.id } }">
+
+              <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
+                Check it out
+                <ArrowRight class="w-5 h-5 ml-2" />
+              </Button>
+            </NuxtLink>
+          </div>
+          <div class="flex items-center justify-between">
+            <Button variant="ghost" class="flex items-center justify-center dark:text-white">
+              <Heart :fill="event.likeEvent ? 'red': 'none'" class="w-5 h-5 mr-1" />
+              Like
+            </Button>
+            <Button variant="ghost" class="flex items-center justify-center dark:text-white">
+              <Share2 class="w-5 h-5 mr-1" />
+              Share
+            </Button>
+          </div>
         </div>
       </div>
 

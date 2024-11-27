@@ -3,6 +3,9 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Apple, Linkedin, Mail } from 'lucide-vue-next';
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const supabase = useSupabaseClient()
 const email = ref('')
@@ -11,13 +14,13 @@ const password = ref('')
 const signInWithEmail = async () => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
-    password: password.value,
-    options: {
-      emailRedirectTo: 'http://localhost:3000/confirm',
-    }
+    password: password.value
   })
   if (error) console.log(error)
-  if (data) console.log(data)
+  if (data){
+    console.log(data)
+    router.push('/')
+  }
 }
 
 const signInWithGoogle = async () => {
@@ -25,21 +28,30 @@ const signInWithGoogle = async () => {
     provider: 'google',
   })
   if (error) console.log(error)
-  if (data) console.log(data)
+  if (data) {
+    console.log(data)
+    router.push('/')
+  }
 }
 const signInWithApple= async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'apple',
   })
   if (error) console.log(error)
-  if (data) console.log(data)
+  if (data) {
+    console.log(data)
+    router.push('/')
+  }
 }
 const signInWithLinkedIn = async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'linkedin',
+    provider: 'linkedin_oidc',
   })
   if (error) console.log(error)
-  if (data) console.log(data)
+  if (data) {
+    console.log(data)
+    router.push('/')
+  }
 }
 
 </script>
