@@ -63,7 +63,7 @@ const Industries = [
   'Augmented Reality (AR)', 'Virtual Reality (VR)', 'Cybersecurity', 'Blockchain', 'Cloud Computing', 
   'Big Data Analytics', 'Quantum Computing', 'Information Technology Services', 'Computer Hardware', 
   'Telecommunications', 'Consumer Electronics', 'Fintech', 'Insurtech', 'Cryptocurrency & NFT', 
-  'Wealth Management', 'Crowdfunding', 'Banking', 'Insurance', 'Investment', 'Stock Markets', 
+  'Wealth Management', 'Crowdfunding', 'Banking', 'Insurance', 'Investment', 'Private Equity', 'Venture Capital', 'Stock Markets', 
   'Digital Health', 'Telemedicine', 'Biotechnology', 'Medical Devices', 'Healthcare IT', 'Personalized Medicine', 
   'Health and Wellness', 'Hospitals', 'Pharmaceuticals', 'Clinical Laboratories', 'Medical Practices', 
   'Renewable Energy', 'Clean Tech', 'Energy Storage', 'Smart Grids', 'Environmental Services', 
@@ -90,6 +90,42 @@ const Industries = [
   'Community Foundations', 'Social Services', 'Space Technology', 'Drone Technology', 'Wearable Technology', 
   'Urban Technology', 'Aviation', 'Urban Development', 'Other'
 ];
+const businessStages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'Research Institution', 'Government Organization', 'Other']
+
+const professions = 
+[
+    'Software Engineer', 'Investor', 'Startup Founder', 'Academic', 
+    'Consultant', 'Entrepreneur', 'Marketing Manager', 'Sales Executive', 
+    'Product Manager', 'Project Manager', 'Financial Analyst', 'Data Scientist', 
+    'Business Analyst', 'Human Resources Manager', 'Operations Manager', 
+    'Accountant', 'Attorney', 'Doctor', 'Nurse', 'Pharmacist', 'Student',
+    'Research Scientist', 'Architect', 'Civil Engineer', 'Mechanical Engineer', 
+    'Electrical Engineer', 'Graphic Designer', 'UX/UI Designer', 'Web Developer', 
+    'Mobile App Developer', 'Network Administrator', 'IT Support Specialist', 
+    'Cybersecurity Specialist', 'Public Relations Specialist', 'Journalist', 
+    'Content Writer', 'Copywriter', 'Editor', 'Publisher', 'Photographer', 
+    'Videographer', 'Film Director', 'Actor', 'Musician', 'Artist', 'Model',
+    'Interior Designer', 'Real Estate Agent', 'Property Manager', 'Construction Manager', 
+    'Logistics Manager', 'Supply Chain Manager', 'Quality Assurance Specialist', 
+    'Environmental Scientist', 'Health and Safety Officer', 'Nutritionist', 
+    'Personal Trainer', 'Fitness Coach', 'Physical Therapist', 'Occupational Therapist', 
+    'Speech Therapist', 'Veterinarian', 'Animal Trainer', 'Chef', 'Baker', 
+    'Event Planner', 'Wedding Planner', 'Tour Guide', 'Travel Agent', 
+    'Customer Service Representative', 'Retail Manager', 'Store Assistant', 
+    'Bartender', 'Barista', 'Waiter/Waitress', 'Hotel Manager', 
+    'Flight Attendant', 'Pilot', 'Marine Biologist', 'Astronomer', 
+    'Chemist', 'Physicist', 'Mathematician', 'Economist', 
+    'Sociologist', 'Psychologist', 'Therapist/Counselor', 'Social Worker', 
+    'Humanitarian Aid Worker', 'Non-profit Manager', 'Policy Analyst', 
+    'Urban Planner', 'Museum Curator', 'Librarian', 
+    'Historian', 'Anthropologist', 'Archaeologist', 'Philosopher', 
+    'Theologist', 'Clergy Member', 'Astrologer', 'Yoga Instructor', 
+    'Life Coach', 'Career Coach', 'Financial Coach', 'Real Estate Developer', 
+    'Banker', 'Chief Executive Officer (CEO)', 'Chief Financial Officer (CFO)', 
+    'Chief Operating Officer (COO)', 'Chief Technology Officer (CTO)', 
+    'Chief Marketing Officer (CMO)', 'Chief Human Resources Officer (CHRO)', 
+    'Chief Information Officer (CIO)', 'Chief Compliance Officer (CCO)','Other'
+]
 const Expert_categories = ['Speaker', 'Mentor', 'Advisor', 'Panelist']
 const Volunteer_categories = ['Setup', 'Clean Up', 'Tech Services', 'Security']
 const Influencer_categories = ['Brand Ambassador', 'Speaker', 'Investor']
