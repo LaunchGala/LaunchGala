@@ -121,8 +121,8 @@ const date = ref<Date>()
             </Button>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 ">
-          <ImageCarousel :image-names="event.images" />
+        <div class="gap-2 p-2 ">
+          <ImageCarousel :image-names="event.images" class="rounded-md"/>
         </div>
       </CardHeader>
       

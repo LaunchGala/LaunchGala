@@ -12,8 +12,8 @@ import { CrownIcon } from 'lucide-vue-next';
 
 
 <template>
-        <div class=" w-full h-16 flex items-center justify-between px-4 headerMain shadow-md">
-      <a class="flex items-center gap-2 font-semibold text-md" href="/" rel="ugc">
+        <div class=" w-full h-16 flex items-center justify-between px-2 headerMain shadow-md">
+      <a class="flex items-center gap-1 font-semibold text-sm" href="/" rel="ugc">
         <!-- <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -32,7 +32,7 @@ import { CrownIcon } from 'lucide-vue-next';
         <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-16 h-16">
         <span class=" colorOrange">Launch Gala</span>
       </a>
-      <nav class="hidden lg:flex gap-12 ml-28">
+      <nav class="hidden lg:flex gap-8 ml-24">
         <NuxtLink to="AllVenues">
           <a class="text-sm font-semibold  hover:underline">
             Venues
@@ -43,14 +43,16 @@ import { CrownIcon } from 'lucide-vue-next';
             Volunteers
           </a>
         </NuxtLink>
-        <NuxtLink to="AllSponsors">
+        <NuxtLink to="FoundersAndStartups">
           <a class="text-sm font-semibold  hover:underline">
-            Sponsors
+            Founders/Startups
+
           </a>
         </NuxtLink>
+
         <NuxtLink to="AllSpeakers">
           <a class="text-sm font-semibold  hover:underline">
-            Experts
+            Experts/Investors
           </a>
         </NuxtLink>
         <NuxtLink to="AllVendors">
@@ -65,12 +67,35 @@ import { CrownIcon } from 'lucide-vue-next';
             Events
           </a>
         </NuxtLink>
-        <!-- <NuxtLink to="AllMedia">
-          <a class="text-m font-semibold  hover:underline">
-            Media
+        <NuxtLink to="AllMedia">
+          <a class="text-sm font-semibold  hover:underline">
+            Media/Influencer 
           </a>
 
-        </NuxtLink> -->
+        </NuxtLink>
+        <NuxtLink to="AllCommunities">
+          <a class="text-sm font-semibold  hover:underline">
+            Talents
+          </a>
+
+        </NuxtLink>
+        <NuxtLink to="AllSponsors">
+          <a class="text-sm font-semibold  hover:underline">
+            Sponsors
+          </a>
+        </NuxtLink>
+        <NuxtLink to="AllCommunities">
+          <a class="text-sm font-semibold  hover:underline">
+            Communities
+          </a>
+
+        </NuxtLink>
+        <NuxtLink to="AllResources">
+          <a class="text-sm font-semibold  hover:underline">
+            Resources
+          </a>
+
+        </NuxtLink>
 <!-- 
 
         <NuxtLink to="AllCommunities">
@@ -96,19 +121,19 @@ import { CrownIcon } from 'lucide-vue-next';
             Resources
           </a>
         </NuxtLink> -->
-        <!-- <NuxtLink to="AllCommunities">
+        <NuxtLink to="LaunchAI">
           <a class="text-m font-semibold  hover:underline">
-            Event AI
-          </a>
-
-        </NuxtLink> -->
-        <NuxtLink to="AllCommunities">
-          <a class="text-sm font-semibold  hover:underline ">
             Launch AI
           </a>
-          <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
+
+        </NuxtLink>
+        <NuxtLink to="AllCommunities">
+          <a class="text-sm font-semibold  hover:underline ">
+            Founders Coin 
+          </a>
+          <!-- <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
             $ --.--
-          </Badge>
+          </Badge> -->
         </NuxtLink>
       </nav>
       <NuxtLink to="CreateEvent">

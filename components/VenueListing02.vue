@@ -231,6 +231,42 @@ watch(() => props.venueListing.venueType, (newValue, oldValue) => {
             </button>
             <button 
             class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'Booth & Stand', 'shadow-lg': selectedType != 'Booth & Stand' }"
+              @click="selectType('Booth & Stand')"
+            >
+            <div class="m-3 cursor-pointer">
+              <wine class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
+            </div>
+                          <span class="text-sm font-semibold">Booth & Stand</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+            class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'Retail Store', 'shadow-lg': selectedType != 'Retail Store' }"
+              @click="selectType('Retail Store')"
+            >
+            <div class="m-3 cursor-pointer">
+              <wine class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
+            </div>
+                          <span class="text-sm font-semibold">Retail Store</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+            class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'House & Villa', 'shadow-lg': selectedType != 'House & Villa' }"
+              @click="selectType('House & Villa')"
+            >
+            <div class="m-3 cursor-pointer">
+              <wine class="w-10 h-10 text-orange-500 hover:text-orange-300"/>
+            </div>
+                          <span class="text-sm font-semibold">House & Villa</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+            class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
               :class="{ 'shadow-orange-500': selectedType == 'Sports arena and facility', 'shadow-lg': selectedType != 'Sports arena and facility' }"
               @click="selectType('Sports arena and facility')"
             >
@@ -250,6 +286,42 @@ watch(() => props.venueListing.venueType, (newValue, oldValue) => {
               <Sun class="w-10 h-10 text-orange-500 hover:text-orange-300 " />
             </div>
                           <span class="text-sm font-semibold">Outdoor event space</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'Spa', 'shadow-lg': selectedType != 'Spa' }"
+              @click="selectType('Spa')"
+            >
+            <div class="m-3 cursor-pointer">
+              <Sun class="w-10 h-10 text-orange-500 hover:text-orange-300 " />
+            </div>
+                          <span class="text-sm font-semibold">Spa</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'Gym', 'shadow-lg': selectedType != 'Gym' }"
+              @click="selectType('Gym')"
+            >
+            <div class="m-3 cursor-pointer">
+              <Sun class="w-10 h-10 text-orange-500 hover:text-orange-300 " />
+            </div>
+                          <span class="text-sm font-semibold">Gym</span>
+                          <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
+
+            </button>
+            <button 
+              class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
+              :class="{ 'shadow-orange-500': selectedType == 'Bathhouse and Sauna', 'shadow-lg': selectedType != 'Bathhouse and Sauna' }"
+              @click="selectType('Bathhouse and Sauna')"
+            >
+            <div class="m-3 cursor-pointer">
+              <Sun class="w-10 h-10 text-orange-500 hover:text-orange-300 " />
+            </div>
+                          <span class="text-sm font-semibold">Bathhouse and Sauna</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
 
             </button>

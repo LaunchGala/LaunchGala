@@ -14,9 +14,9 @@ console.log(props.venueListing);
 
 <template>
   <div class="bg-white dark:bg-black min-h-screen py-10 flex flex-col items-center">
-    <div class="w-full max-w-4xl mx-auto px-4 lg:px-8">
-      <AspectRatio :ratio="16 / 9" class="mb-6 rounded-md overflow-hidden shadow-lg">
-        <ImageCarousel :image-names="props.venueListing.images"/>
+    <div class="w-full max-w-6xl  px-4 lg:px-8">
+      <AspectRatio :ratio="16 / 9" class=" rounded-md overflow-hidden shadow-lg">
+        <ImageCarousel :image-names="props.venueListing.images" class="rounded-md w-full"/>
       </AspectRatio>
       <Card>
         <CardHeader>
@@ -86,7 +86,7 @@ console.log(props.venueListing);
 
       <AccordionItem value="reservation-rules">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Reservation Rules and Details</span>
+          <span class="font-medium">Reservation Rules and Venue Details</span>
           <!-- <Info class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
         </AccordionTrigger>
         <AccordionContent>
@@ -123,7 +123,7 @@ console.log(props.venueListing);
           <div v-show="venueListing.postEventCleaning" class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
               <Check class="w-4 h-4 text-green-500" />
-              Has Post Event Cleaning
+              Require Post Event Cleaning
             </span>
           </div>
           <div v-show="venueListing.mustClimbStairs" class="flex flex-wrap gap-2">
