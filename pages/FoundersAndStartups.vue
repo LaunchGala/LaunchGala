@@ -192,9 +192,11 @@ const allExperts = ref([
             <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
 
             <div class="flex items-center justify-between mt-4">
-              <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
-                <MessageCircle class="w-4 h-4 mr-2" /> Learn More
-              </Button>
+              <NuxtLink :to="{ name: 'StartupPage' }">
+                <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
+                  <MessageCircle class="w-4 h-4 mr-2" /> Learn More
+                </Button>
+              </NuxtLink>
               <Toggle aria-label="Like">
                 <Heart :fill="expert.likeExpert ? 'orange': 'none'" class="w-5 h-5" />
               </Toggle>
