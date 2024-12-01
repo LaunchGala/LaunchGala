@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
 import { Heart, Share2, ArrowRight, Search } from 'lucide-vue-next'
+import Badge from './ui/badge/Badge.vue';
 const allVenues = ref([])
 
 async function getAllVenues(query) {

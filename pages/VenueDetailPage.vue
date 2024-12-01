@@ -136,8 +136,8 @@ const date = ref<Date>()
             </Button>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 ">
-          <ImageCarousel :image-names="venueListing.images" />
+        <div class=" rounded-md  gap-2 p-2 ">
+          <ImageCarousel :image-names="venueListing.images" class="rounded-md " />
         </div>
       </CardHeader>
       
@@ -196,9 +196,9 @@ const date = ref<Date>()
         <!-- <VenueSearchLanding/> -->
       <VenueBookingRequest1 :venue="venueListing"/>
       </div>
-      <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
+      <!-- <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
           <MapViewer :address="venueListing.address"/>
-        </AspectRatio>
+        </AspectRatio> -->
       <h3 class="font-semibold text-lg mb-2">Description:</h3>
         <p class="leading-relaxed">
           {{venueListing.description}}
@@ -235,8 +235,8 @@ const date = ref<Date>()
         </div>
       </CardFooter>
       <div class="px-4 py-2 dark:bg-gray-800">
-        <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
-          <MapViewer v-if="venueListing.address" :address="venueListing.address"/>
+        <AspectRatio class="rounded-md overflow-hidden shadow-sm ">
+          <MapViewer v-if="venueListing.address" :address="venueListing.address" class="rounded-md "/>
         </AspectRatio>
         
         <div class="bg-white dark:bg-black p-6 shadow-lg rounded-lg  mx-auto my-8">

@@ -33,7 +33,7 @@ import MessagesButton from './MessagesButton.vue';
         <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-16 h-16">
         <span class=" colorOrange">Launch Gala</span>
       </a>
-      <nav class="hidden lg:flex gap-8 ml-24">
+      <nav class="hidden lg:flex gap-7 ml-18">
         <NuxtLink to="AllVenues">
           <a class="text-sm font-semibold  hover:underline">
             Venues
@@ -46,7 +46,7 @@ import MessagesButton from './MessagesButton.vue';
         </NuxtLink>
         <NuxtLink to="FoundersAndStartups">
           <a class="text-sm font-semibold  hover:underline">
-            Founders/Startups
+            Startups
 
           </a>
         </NuxtLink>
@@ -56,21 +56,17 @@ import MessagesButton from './MessagesButton.vue';
             Experts/Investors
           </a>
         </NuxtLink>
-        <NuxtLink to="AllVendors">
+        <NuxtLink to="VendorRegs">
 
 <a class="text-sm font-semibold  hover:underline">
   Vendors
 </a>
 
 </NuxtLink>
-        <NuxtLink to="AllEvents">
-          <a class="text-sm font-semibold  hover:underline">
-            Events
-          </a>
-        </NuxtLink>
+
         <NuxtLink to="AllMedia">
           <a class="text-sm font-semibold  hover:underline">
-            Media/Influencer 
+            Influencers 
           </a>
 
         </NuxtLink>
@@ -80,23 +76,23 @@ import MessagesButton from './MessagesButton.vue';
           </a>
 
         </NuxtLink>
-        <NuxtLink to="AllSponsors">
+        <!-- <NuxtLink to="AllSponsors">
           <a class="text-sm font-semibold  hover:underline">
             Sponsors
           </a>
-        </NuxtLink>
-        <NuxtLink to="AllCommunities">
+        </NuxtLink> -->
+        <!-- <NuxtLink to="AllCommunities">
           <a class="text-sm font-semibold  hover:underline">
             Communities
           </a>
 
-        </NuxtLink>
-        <NuxtLink to="AllResources">
+        </NuxtLink> -->
+        <!-- <NuxtLink to="AllResources">
           <a class="text-sm font-semibold  hover:underline">
             Resources
           </a>
 
-        </NuxtLink>
+        </NuxtLink> -->
 <!-- 
 
         <NuxtLink to="AllCommunities">
@@ -123,19 +119,24 @@ import MessagesButton from './MessagesButton.vue';
           </a>
         </NuxtLink> -->
         <NuxtLink to="LaunchAI">
-          <a class="text-m font-semibold  hover:underline">
+          <a class="text-sm font-semibold  hover:underline">
             Launch AI
           </a>
 
         </NuxtLink>
-        <NuxtLink to="AllCommunities">
+        <NuxtLink to="AllEvents">
+          <a class="text-sm font-semibold  hover:underline">
+            Events
+          </a>
+        </NuxtLink>
+        <!-- <NuxtLink to="AllCommunities">
           <a class="text-sm font-semibold  hover:underline ">
             Founders Coin 
           </a>
-          <!-- <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
+          <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
             $ --.--
-          </Badge> -->
-        </NuxtLink>
+          </Badge>
+        </NuxtLink> -->
       </nav>
       <NuxtLink to="CreateEvent">
       <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:underline h-10 px-4 py-2 mr-4 ">
