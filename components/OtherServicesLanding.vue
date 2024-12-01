@@ -97,10 +97,10 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
           </AspectRatio>
           <CardHeader>
             <!-- <ArrowRight class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Resources</CardTitle>
+            <CardTitle class="text-lg dark:text-white">Talents</CardTitle>
           </CardHeader>
           <CardContent class="dark:text-gray-400">
-            Design and conduct workshops....................
+            Match with Co-founders and find you dream team
           </CardContent>
         </a>
         <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">

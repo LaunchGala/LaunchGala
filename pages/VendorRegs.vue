@@ -24,7 +24,7 @@ const onSubmit = (event) => {
 </script>
 
 <template>
-  <div class="bg-orange-200">
+  <div class="bg-orange-200 p-8">
   <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto dark:bg-black">
     <form @submit="onSubmit" class="space-y-6 m-4">
       <h3 class="text-3xl font-bold text-center text-orange-600 dark:text-white">Vendor Registration</h3>
