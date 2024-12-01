@@ -7,7 +7,7 @@
   >
     <input
       type="file"
-      multiple
+      :multiple="allowMultiple"
       accept="image/*"
       ref="fileInput"
       @change="handleFiles"
@@ -17,149 +17,159 @@
       <p>Drag & Drop Images Here or Click to Select</p>
     </div>
 
-    <!-- Preview for images yet to be uploaded -->
+    <!-- Preview for already uploaded and newly uploaded images -->
     <div class="preview-container">
-      <div v-for="(image, index) in images" :key="index" class="image-wrapper">
+      <div v-for="(image, index) in uploadedImages" :key="index" class="image-wrapper">
         <img :src="image.url" class="preview-image" />
-        <Badge @click="removeImage(index)" class="remove-button text-lg text-orange-500 hover:border-orange-500 hover:bg-orange-100 font-extrabold ml-2">
-          <div class="flex items-center">
-              X
-            </div>
+        <Badge
+          @click="confirmDelete(image.id, index)"
+          class="remove-button text-lg text-orange-500 hover:border-orange-500 hover:bg-orange-100 font-extrabold ml-2"
+        >
+          <div class="flex items-center">X</div>
         </Badge>
       </div>
     </div>
   </div>
-    <Button @click="uploadImages" v-show="images?.length" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
-      <div  class="flex items-center">
-        Upload and Attach to Listing
-        <ArrowRight class="w-4 h-4 ml-2" />
-      </div>
-    </Button>
-    <!-- Second container for already uploaded files -->
-    <div class="uploaded-files" v-show="uploadedImages?.length">
-      <h3>Atached Images</h3>
-      <div class="preview-container">
-        <div v-for="(file, index) in uploadedImages" :key="file.id" class="image-wrapper">
-          <img :src="file" class="preview-image" />
-          <Badge
-            @click="confirmDelete(file.id, index)"
-            class="remove-button text-lg text-orange-500 hover:border-orange-500 hover:bg-orange-100 font-extrabold ml-2"
-          >
-            <div class="flex items-center">X</div>
-          </Badge>
-        </div>
-      </div>
-    </div>
 </template>
 
+
 <script setup>
-import { ref } from 'vue';
-import { Button } from '@/components/ui/button';
+import { ref, onMounted, watch } from 'vue';
 import { Badge } from '@/components/ui/badge';
 
 const supabase = useSupabaseClient();
+const emit = defineEmits(['update:images']);
 
-const props = defineProps(['imageNames']);
+const props = defineProps({
+  allowMultiple: {
+    type: Boolean,
+    default: true,
+  },
+  imageNames: {
+    type: Array,
+    default: () => [],
+  },
+});
 
 const fileInput = ref(null);
-const images = ref([]);
 const uploadedImages = ref([]);
 
+// Fetch existing images passed through props
+const fetchImages = async () => {
+  if (props.imageNames?.length > 0) {
+    const results = await Promise.all(
+      props.imageNames.map(async (fileName) => {
+        const { data, error } = await supabase.storage
+          .from('images') // Replace with your bucket name
+          .createSignedUrl(fileName, 60);
+
+        if (error) {
+          console.error('Error fetching image URL:', error);
+          return null;
+        }
+
+        return {
+          id: fileName, // Use the file name as the ID
+          url: data.signedUrl, // Signed URL for preview
+        };
+      })
+    );
+
+    // Filter out any null results in case of errors
+    uploadedImages.value = results.filter((image) => image !== null);
+
+    // Emit the initial images
+    emit('update:images', uploadedImages.value.map((image) => image.id));
+  }
+};
+
+// Handle file drag-and-drop
 const handleDragOver = (event) => {
   event.preventDefault();
   event.stopPropagation();
 };
 
-const handleDrop = (event) => {
+const handleDrop = async (event) => {
   const files = event.dataTransfer.files;
-  handleFileSelection(files);
+  await handleFileSelection(files);
 };
 
-const handleFileSelection = (files) => {
+// Handle file selection
+const handleFileSelection = async (files) => {
   if (files) {
-    const newImages = Array.from(files).map(file => {
-      return {
-        url: URL.createObjectURL(file),
-        file
-      };
-    });
-    images.value.push(...newImages);
+    const selectedFiles = Array.from(files);
+
+    if (!props.allowMultiple && selectedFiles.length > 1) {
+      alert('Only one image can be uploaded.');
+      return;
+    }
+
+    if (!props.allowMultiple) {
+      uploadedImages.value = []; // Clear previous images for single upload mode
+    }
+
+    for (const file of selectedFiles) {
+      await uploadImage(file);
+    }
+
+    // Emit the updated images
+    emit('update:images', uploadedImages.value.map((image) => image.id));
   }
 };
 
-const handleFiles = (event) => {
+const handleFiles = async (event) => {
   const files = event.target.files;
-  handleFileSelection(files);
-};
-const removeImage = (index) => {
-  const image = images.value[index];
-  URL.revokeObjectURL(image.url); // Clean up the object URL
-  images.value.splice(index, 1); // Remove the image from the array
+  await handleFileSelection(files);
 };
 
+// Upload a single image to Supabase storage
+const uploadImage = async (file) => {
+  const fileName = `${Date.now()}_${file.name}`;
+  const url = URL.createObjectURL(file); // Generate preview URL
+
+  try {
+    const { data, error } = await supabase.storage
+      .from('images') // Replace with your bucket name
+      .upload(fileName, file);
+
+    if (error) {
+      console.error('Upload error:', error);
+      alert('Failed to upload image.');
+      return;
+    }
+
+    // Add the uploaded image to the list
+    uploadedImages.value.push({
+      id: data.path,
+      url,
+    });
+  } catch (err) {
+    console.error('Unexpected error:', err);
+  }
+};
+
+// Trigger file input click
 const triggerFileInput = () => {
   if (fileInput.value) {
     fileInput.value.click();
   }
 };
 
-const fetchImages = async () => {
-    if(!!props.imageNames && props.imageNames.length > 0)
-    {
-        Promise.all(props.imageNames?.map(async (fileName) => {
-            const urlData = await supabase.storage.from('images').createSignedUrl(fileName,60)
-            return urlData.data.signedUrl
-        })).then(results => 
-        uploadedImages.value = results)
-    }
-  }
-
-const uploadImages = async () => {
-  if (images.value.length === 0) {
-    alert('No images to upload.');
-    return;
-  }
-  const imageNames = []
-  for (const image of images.value) {
-    const { file } = image;
-    const fileName = `${Date.now()}_${file.name}`;
-
-    try {
-      const { data, error } = await supabase
-        .storage
-        .from('images') // Replace with your bucket name
-        .upload(fileName, file);
-
-      if (error) {
-        console.error('Upload error:', error);
-        continue;
-      }
-
-      imageNames.push(data.path); // Use the file's path
-    } catch (err) {
-      console.error('Unexpected error:', err);
-    }
-  }
-  props.imageNames.push(...imageNames)
-  
-  // Clear the image previews after upload
-  images.value = [];
-  fetchImages()
-};
-
-// Confirm delete with the user before removing from Supabase bucket
-const confirmDelete = (fileId, index) => {
+// Confirm and delete an image
+const confirmDelete = async (fileId, index) => {
   if (confirm('Are you sure you want to delete this file?')) {
-    deleteFileFromBucket(fileId, index);
+    await deleteFileFromBucket(fileId, index);
+
+    // Emit the updated images
+    emit('update:images', uploadedImages.value.map((image) => image.id));
   }
 };
 
-// Delete the file from Supabase bucket
+// Delete the file from Supabase storage
 const deleteFileFromBucket = async (fileId, index) => {
   try {
-    const { error } = await supabase
-      .storage
-      .from('your-bucket-name') // Replace with your bucket name
+    const { error } = await supabase.storage
+      .from('images') // Replace with your bucket name
       .remove([fileId]);
 
     if (error) {
@@ -167,19 +177,45 @@ const deleteFileFromBucket = async (fileId, index) => {
       return;
     }
 
-    // Remove the file from the uploadedFiles list
-    props.images.value.splice(index, 1);
+    // Remove the image from the list
+    uploadedImages.value.splice(index, 1);
   } catch (err) {
     console.error('Unexpected error:', err);
   }
 };
 
-watch(() => props.imageNames, (newValue, oldValue) => {
-  if (newValue !== oldValue) {
-    fetchImages()
-  }
+// Fetch existing images when component is mounted
+onMounted(() => {
+  fetchImages();
 });
+function arraysAreEqual(arr1, arr2) {
+  // Check if the lengths are different
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  // Iterate over the elements and compare them
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  // If all elements are equal, return true
+  return true;
+}
+// Watch for changes in `imageNames` prop to update the image list
+watch(
+  () => props.imageNames,
+  (newValue, oldValue) => {
+    if (!arraysAreEqual(newValue, oldValue)) {
+      fetchImages();
+    }
+  }
+);
 </script>
+
+
 
 <style scoped>
 .image-uploader {

@@ -6,6 +6,7 @@ const isLoggedIn = computed(() => user.value !== null)
 
 import { Badge } from '@/components/ui/badge'
 import { CrownIcon } from 'lucide-vue-next';
+import MessagesButton from './MessagesButton.vue';
 
 
 </script>
@@ -159,6 +160,7 @@ import { CrownIcon } from 'lucide-vue-next';
         Dashboard 
       </button>
     </NuxtLink>
+    <MessagesButton></MessagesButton>
   </div>
 </template>
 

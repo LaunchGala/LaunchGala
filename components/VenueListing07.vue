@@ -7,43 +7,10 @@ import { Upload, X } from 'lucide-vue-next';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
 
-
-
 const props = defineProps(['venueListing']);
-const name = ref('Vue.js');
-const files = ref([])
 
-class UploadableFile {
-	constructor(file) {
-		this.file = file
-		this.id = `${file.name}-${file.size}-${file.lastModified}-${file.type}`
-		this.url = URL.createObjectURL(file)
-		this.status = null
-	}
-}
-
-function addFiles(newFiles){
-  props.venueListing.images = newFiles;
-  let newUploadableFiles = [...newFiles].map((file) => new UploadableFile(file)).filter((file) => !fileExists(file.id))
-		files.value = files.value.concat(newUploadableFiles)
-  console.log(props.venueListing.images);
-}
-
-function fileExists(otherId) {
-  return files.value.some(({ id }) => id === otherId)
-}
-
-function removeFile(file) {
-		const ind1 = props.venueListing.images.indexOf(file)
-		const ind2 = files.value.indexOf(file)
-
-		if (ind2 > -1) files.value.splice(ind2, 1)
-		if (ind1 > -1) props.venueListing.images.splice(ind1, 1)
-	}
-
-function onInputChange(e) {
-	addFiles(e.target.files)
-	e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
+function handleImageUpdates(images) {
+  props.venueListing.images = images;
 }
 
 </script>
@@ -56,7 +23,7 @@ function onInputChange(e) {
           <CardTitle>Upload Venue Images</CardTitle>
         </CardHeader>
         <CardContent>
-          <ImageUploader :image-names="props.venueListing.images"/>
+          <ImageUploader :image-names="props.venueListing.images" @update:images="handleImageUpdates"/>
         </CardContent>
         <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
