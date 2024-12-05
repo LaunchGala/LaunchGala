@@ -14,7 +14,8 @@
     "studio": "drizzle-kit studio",
     "download:repo": "cd template && jiti downloadRepo",
     "parse:repo": "jiti template/shadcn-vue/parseMeta",
-    "analyze": "nuxt analyze"
+    "analyze": "nuxt analyze",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@braks/revue-draggable": "^0.5.0",
