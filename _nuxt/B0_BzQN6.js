@@ -1,1 +1,0 @@
-import{e as o,o as t,m as r,w as n,I as p,T as c,U as i,j as l,bK as m}from"./D0hPKPsa.js";const d=o({__name:"AspectRatio",props:{ratio:{},asChild:{type:Boolean},as:{}},setup(a){const e=a;return(s,u)=>(t(),r(l(m),c(i(e)),{default:n(()=>[p(s.$slots,"default")]),_:3},16))}});export{d as _};

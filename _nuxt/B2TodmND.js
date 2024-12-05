@@ -1,0 +1,1 @@
+import{e as r,o as t,m as c,w as l,I as n,Y as p,j as e,cv as m}from"./DC9Rc9iq.js";import{c as f}from"./C780-bQF.js";const d=r({__name:"SelectGroup",props:{asChild:{type:Boolean},as:{},class:{}},setup(a){const s=a;return(o,u)=>(t(),c(e(m),p({class:e(f)("p-1 w-full",s.class)},s),{default:l(()=>[n(o.$slots,"default")]),_:3},16,["class"]))}});export{d as _};
