@@ -1,0 +1,1 @@
+import{e as a,v as t,x as n,o,c as r,y as s}from"./D0hPKPsa.js";const l=a({__name:"confirm",setup(c){const e=t();return n(e,()=>{if(e.value)return s("/")},{immediate:!0}),(i,u)=>(o(),r("div",null,"Waiting for login..."))}});export{l as default};
