@@ -76,13 +76,21 @@
               <!-- Stage input -->
               <div class="mb-4">
                 <label for="stage" class="block text-sm font-medium text-gray-700">Stage</label>
-                <input
-                  v-model="company.stage"
-                  type="text"
-                  id="stage"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  placeholder="Enter company stage"
-                />
+                <DropdownMenu>
+                <DropdownMenuTrigger class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
+                  <span>{{ company.value.stage || 'Select business stage' }}</span>
+                  <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
+                  <DropdownMenuItem v-for="stage in stages" :key="stage" @click="company.value.stage = stage">
+                    {{ stage }}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <div class="hover:bg-orange-200 dark:hover:bg-orange-700">
+                    <CreateCompanyDialog></CreateCompanyDialog>
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
               </div>
   
               <!-- Website input -->
@@ -100,13 +108,21 @@
               <!-- Location input -->
               <div class="mb-4">
                 <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-                <input
-                  v-model="company.location"
-                  type="text"
-                  id="location"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  placeholder="Enter company location"
-                />
+                <DropdownMenu>
+                <DropdownMenuTrigger class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
+                    <span>{{ company.value.location || 'Select your city' }}</span>
+                    <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
+                    <DropdownMenuItem v-for="city in cities" :key="city" @click="company.value.location = city">
+                    {{ city }}
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem @click="company.value.location = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+                    <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />Other
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+                </DropdownMenu>
               </div>
   
               <!-- Seeking Funding checkbox -->
@@ -150,6 +166,13 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import {
   ScrollArea
 } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
@@ -187,6 +210,10 @@ const Industries = [
   'Non-profit Management', 'Social Impact', 'Community Service', 'Charitable Organizations', 
   'Community Foundations', 'Social Services', 'Space Technology', 'Drone Technology', 'Wearable Technology', 
   'Urban Technology', 'Aviation', 'Urban Development', 'Other'];
+
+  const stages = ['Bootstrapped Sole Proprietorship', 'Bootstrapped Small to Medium Enterprise (SME)', 'Angel-funded Startup', 'Seed-Stage Startup', 'Series A Startup (VC-funded)', 'Series B Startup (VC-funded)', 'Series C Startup (VC-funded)', 'Growth-Stage Startup (VC-funded)', 'Late-Stage Startup (VC-funded)', 'VC-funded Small to Medium Enterprise (SME)', 'Private Equity-backed SME', 'Private Equity-backed Large Enterprise', 'Corporate (Privately Held)', 'Corporate (Publicly Traded)', 'Conglomerate (Private Equity-backed)', 'Conglomerate (Publicly Traded)', 'Public Company', 'Non-Profit Organization', 'Research Institution', 'Government Organization', 'Other']
+
+  const cities = ['San Francisco', 'New York', 'Los Angeles', 'Chicago', 'Houston', 'Austin']
   
 const user = useSupabaseUser();
 const open = ref(false)

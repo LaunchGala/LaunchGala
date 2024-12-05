@@ -39,55 +39,33 @@ import {
 const isOpen = ref(false)
 const date = ref<Date>()
 
-const allExperts = ref([
-  {
-    img: "/Bootstrapping.png",
-    name: "Larry Page",
-    position: "Co-Founder",
-    company: "Google",
-    industry: "IT",
-    description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
-    avatar: "/LarryPage.jpeg",
-    likeExpert: false
-  },
-  {
-    img: "/Bootstrapping.png",
-    name: "Tim Cook",
-    position: "CEO",
-    company: "Apple",
-    industry: "Technology",
-    description: "Leading the world in innovation and consumer electronics.",
-    location: "Cupertino, CA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
-    likeExpert: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    name: "Mary Barra",
-    position: "CEO",
-    company: "General Motors",
-    industry: "Automotive",
-    description: "Driving towards a greener future with electric vehicles.",
-    location: "Detroit, MI",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
-    likeExpert: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    name: "Jeff Bezos",
-    position: "Founder & Former CEO",
-    company: "Amazon",
-    industry: "E-commerce",
-    description: "Transforming the way we shop online and beyond.",
-    location: "Seattle, WA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
-    likeExpert: false
+const allExperts = ref([])
+async function getAllExperts(query) {
+  const { data: AllExperts, error } = !!query ? await query : await supabase
+    .from('profiles')
+    .select('*, expert:Experts(*)') // Assuming the table is named 'experts'
+    .eq('is_expert', true);
+  console.log(error)
+  Promise.all(AllExperts.map(async (profile) => {
+    profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
+    profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
+  })).then(() => {
+    allExperts.value = AllExperts;
+    console.log(AllExperts)
+  })
+}
+const fetchImage = async (id, bucket) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
   }
-
-])
+  const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
+onMounted(() => {
+  getAllExperts(null)
+})
+ 
 </script>
 
 <template>
@@ -100,7 +78,7 @@ const allExperts = ref([
 
     </div>
     
-    <Collapsible v-model:open="isOpen" class="px-6 py-4">
+    <Collapsible v-if="false" v-model:open="isOpen" class="px-6 py-4">
         <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
             <span>Search Filters</span>
             <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
@@ -175,18 +153,18 @@ const allExperts = ref([
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
         <div class="relative">
-          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
+          <img class="w-full h-64 object-cover" :src="expert.bannerSRC" alt="Apartment image" />
         </div>
           <Avatar class="m-4 w-24 h-24">
-            <AvatarImage :src="expert.avatar" alt="Profile" />
+            <AvatarImage :src="expert.avatarSRC" alt="Profile" />
             <AvatarFallback>XX</AvatarFallback>
           </Avatar>
           <CardContent class="p-4">
-            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}} at {{expert.company}}</p>
+            <h3 class="text-lg font-semibold dark:text-white">{{expert.full_name}}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.job_title}} at {{expert.company}}</p>
             
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p>
-            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.description}}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{formatArray(expert.industries)}}</p>
+            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{formatArray(expert.expert.categories)}}</p>
             <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
 
             <div class="flex items-center justify-between mt-4">
