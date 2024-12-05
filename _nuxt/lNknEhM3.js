@@ -1,1 +1,0 @@
-import{c as o}from"./C780-bQF.js";import{e as r,o as t,c as a,I as c,n as p,j as l}from"./DC9Rc9iq.js";const u=r({__name:"CardDescription",props:{class:{type:String,default:""}},setup(s){const n=s;return(e,m)=>(t(),a("p",{class:p(("cn"in e?e.cn:l(o))("text-sm text-muted-foreground",n.class))},[c(e.$slots,"default")],2))}});export{u as _};
