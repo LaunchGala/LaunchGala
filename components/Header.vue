@@ -70,7 +70,7 @@ import MessagesButton from './MessagesButton.vue';
           </a>
 
         </NuxtLink>
-        <NuxtLink to="AllCommunities">
+        <NuxtLink to="AllTalents">
           <a class="text-sm font-semibold  hover:underline">
             Talents
           </a>
@@ -129,14 +129,14 @@ import MessagesButton from './MessagesButton.vue';
             Events
           </a>
         </NuxtLink>
-        <!-- <NuxtLink to="AllCommunities">
+        <NuxtLink to="TokenizedSharesCreator">
           <a class="text-sm font-semibold  hover:underline ">
             Founders Coin 
           </a>
-          <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
+          <!-- <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
             $ --.--
-          </Badge>
-        </NuxtLink> -->
+          </Badge> -->
+        </NuxtLink>
       </nav>
       <NuxtLink to="CreateEvent">
       <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:underline h-10 px-4 py-2 mr-4 ">

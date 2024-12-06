@@ -34,69 +34,85 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { volunteerTagColors } from '@/utils/volunteerTagColors';
+import VolunteerListing from './VolunteerListing.vue';
 
+const supabase = useSupabaseClient()
+
+const allVolunteers = ref([]);
+
+async function getAllVolunteers() {
+  const { data: AllVolunteers, error } = await supabase.from('AllVolunteers').select()
+  console.log(error)
+  allVolunteers.value = AllVolunteers;
+}
+
+onMounted(() => {
+  getAllVolunteers()
+  console.log(allVolunteers.value)
+})
 
 const isOpen = ref(false)
 const date = ref<Date>()
 
-const allExperts = ref([
-  {
-    img: "/Bootstrapping.png",
-    name: "Larry Page",
-    position: "Co-Founder",
-    company: "Google",
-    industry: "IT, AI",
-    description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
-    avatar: "/LarryPage.jpeg",
-    likeExpert: false
-  },
-  {
-    img: "/Bootstrapping.png",
-    name: "Tim Cook",
-    position: "CEO",
-    company: "Apple",
-    industry: "Technology",
-    description: "Leading the world in innovation and consumer electronics.",
-    location: "Cupertino, CA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
-    likeExpert: true
-  },
 
-  {
-    img: "/Bootstrapping.png",
-    name: "Mary Barra",
-    position: "CEO",
-    company: "General Motors",
-    industry: "Automotive",
-    description: "Driving towards a greener future with electric vehicles.",
-    location: "Detroit, MI",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
-    likeExpert: true
-  },
 
-  {
-    img: "/Bootstrapping.png",
-    name: "Jeff Bezos",
-    position: "Founder & Former CEO",
-    company: "Amazon",
-    industry: "E-commerce",
-    description: "Transforming the way we shop online and beyond.",
-    location: "Seattle, WA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
-    likeExpert: false
-  }
+// const allVolunteers = ref([
+//   {
+//     name: "Sundar Pichai",
+//     profession: "Engineer",
+//     volunteerTags: "IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing ",
+//     location: "SF, CA",
+//     avatar: "https://conferences.law.stanford.edu/directorscollege2022/wp-content/uploads/sites/112/2022/05/Sundar-Pichai-Headshot-212x212.png",
+//     likevolunteer: false
+//   },
+//   {
+//     img: "/Bootstrapping.png",
+//     name: "Tim Cook",
+//     position: "CEO",
+//     company: "Apple",
+//     industry: "Technology",
+//     description: "Leading the world in innovation and consumer electronics.",
+//     location: "Cupertino, CA",
+//     avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
+//     likevolunteer: true
+//   },
 
-])
+//   {
+//     img: "/Bootstrapping.png",
+//     name: "Mary Barra",
+//     position: "CEO",
+//     company: "General Motors",
+//     industry: "Automotive",
+//     description: "Driving towards a greener future with electric vehicles.",
+//     location: "Detroit, MI",
+//     avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
+//     likevolunteer: true
+//   },
+
+//   {
+//     img: "/Bootstrapping.png",
+//     name: "Jeff Bezos",
+//     position: "Founder & Former CEO",
+//     company: "Amazon",
+//     industry: "E-commerce",
+//     description: "Transforming the way we shop online and beyond.",
+//     location: "Seattle, WA",
+//     avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
+//     likevolunteer: false
+//   }
+
+// ])
 </script>
 
 <template>
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Find Influencers</h1>
-      <NuxtLink to="CreateExpert">
-      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become an Influencer</Button>
-    </NuxtLink>
+      <h1 class="text-2xl font-bold dark:text-white">Find Talents</h1>
+      <NuxtLink to="VolunteerListing">
+
+      <Button @click="console.log(VolunteerListing)" class="bg-orange-500 text-white dark:text-white">Become a volunteer</Button>
+      </NuxtLink>
 
     </div>
     
@@ -173,34 +189,37 @@ const allExperts = ref([
     </Collapsible>
     <div class="px-6 py-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <div class="relative">
-          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
-        </div>
-          <Avatar class="m-4 w-24 h-24">
-            <AvatarImage :src="expert.avatar" alt="Profile" />
-            <AvatarFallback>XX</AvatarFallback>
-          </Avatar>
-          <CardContent class="p-4">
-            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
-            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}}</p>
-            
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p> -->
-            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
-            Main Categories:
-            <div class="mb-6 flex gap-1 flex-wrap">
-          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">AI</span>
-          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Technology</span>
-          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">FinTech</span>
-        </div>            
+        <Card v-for="volunteer in allVolunteers"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <!-- <div class="relative">
+          <img class="w-full h-64 object-cover" :src="volunteer.img" alt="Apartment image" />
+        </div> -->
+        <!-- user will have a banner image on their profile and we will use it -->
+        <CardContent class="p-4">
+          <div class="flex justify-between ">
+            <div class="ml-2 mt-4 mb-2">
+            <h3 class="text-lg font-semibold dark:black-white">{{volunteer.name}}</h3>
+            <p class="text-sm text-gray-600">{{volunteer.profession}}</p>
+          </div>
+            <Avatar class="m-4 w-24 h-24">
+              <AvatarImage :src="volunteer.avatar" alt="Profile" />
+              <AvatarFallback>XX</AvatarFallback>
+            </Avatar>
+        </div> 
+            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
+            <p class=" text-m font-semibold text-gray-500"> Location: {{volunteer.location}}</p>
+            <p class="line-clamp-2 mt-3 text-sm font-semibold text-gray-500 dark:text-gray-400"> Main Skills:
+              <div class="flex flex-wrap h-14 overflow-hidden"> 
+               <div v-for="tag in volunteer.volunteerTags" :class="volunteerTagColors[tag]" class="text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
+              </div>
+            </p>
 
             <div class="flex items-center justify-between mt-4">
-              <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
+              <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
                 View
-                <ArrowRight class="w-4 h-4 ml-2" /> 
+                <ArrowRight class="w-4 h-4  ml-4" /> 
               </Button>
               <Toggle aria-label="Like">
-                <Heart :fill="expert.likeExpert ? 'orange': 'none'" class="w-5 h-5" />
+                <Heart :fill="volunteer.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
               </Toggle>
             </div>
           </CardContent>

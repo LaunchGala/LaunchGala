@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -14,10 +15,8 @@ import { Button } from '@/components/ui/button'
           <AvatarImage src="/PinkPavatar Background Removed Background Removed.png" alt="Volunteer Name" />
           <AvatarFallback>VC</AvatarFallback>
         </Avatar>
-        <CardTitle class="text-2xl font-bold">Expert Name</CardTitle>
-        <span class="text-m opacity-90">Position </span>
-        <span class="text-m opacity-90">at Company</span>
-
+        <CardTitle class="text-2xl font-bold">Volunteer Name</CardTitle>
+        <span class="text-m opacity-90">Software Engineer</span>
     </button>
         <div class="flex items-center mt-2">
           <MapPinIcon class="w-5 h-5" />
@@ -29,17 +28,11 @@ import { Button } from '@/components/ui/button'
         <p class="text-gray-700 dark:text-gray-300 mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, velit semper laoreet dictum, quam diam dictum urna, nec placerat elit nisl in quam.
         </p>
-        <h2 class="font-semibold mb-4">Expert Categories:</h2>
+        <h2 class="font-semibold mb-4">Volunteer Categories:</h2>
         <div class="mb-6 flex gap-2 flex-wrap">
-          <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Speaker</span>
+          <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Community</span>
           <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Mentorship</span>
-          <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Coaching</span>
-        </div>
-        <h2 class="font-semibold mb-4">Industries:</h2>
-        <div class="mb-6 flex gap-2 flex-wrap">
-          <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">AI</span>
-          <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Technology</span>
-          <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">FinTech</span>
+          <span class="bg-pink-100 dark:bg-pink-800 text-pink-800 dark:text-pink-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Development</span>
         </div>
         <h2 class="font-semibold mb-4">Links:</h2>
 
@@ -54,9 +47,7 @@ import { Button } from '@/components/ui/button'
           </div>
         </div>
         <div class="flex justify-between mt-8">
-          <!-- <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
-            Edit
-          </Button> -->
+
           <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
             Contact
           </Button>
