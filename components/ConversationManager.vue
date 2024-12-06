@@ -35,24 +35,26 @@
         </div>
   
         <!-- Messages area -->
-        <div class="flex-1 p-4 w-full overflow-y-auto space-y-4" ref="messagesContainer">
-          <div
-            v-for="(message, index) in messages"
-            :key="index"
-            class="flex"
-            :class="{ 'justify-end': message.sender_id === currentUser.id }"
-          >
-            <div
-              class="rounded-lg p-3 max-w-[70%]"
-              :class="{
-                'bg-orange-500 text-white': message.sender_id === currentUser.id,
-                'bg-gray-100': message.sender_id !== currentUser.id
-              }"
-            >
-              <p class="text-sm break-words">{{ message.content }}</p>
-            </div>
-          </div>
-        </div>
+<div class="flex-1 p-4 w-full overflow-y-auto space-y-4" ref="messagesContainer">
+  <div
+    v-for="(message, index) in messages"
+    :key="index"
+    class="flex"
+    :class="{ 'justify-end': message.sender_id === currentUser.id }"
+  >
+    <div
+      class="rounded-lg p-3 max-w-full md:max-w-[70%] break-words"
+      :class="{
+        'bg-orange-500 text-white': message.sender_id === currentUser.id,
+        'bg-gray-100': message.sender_id !== currentUser.id
+      }"
+      style="word-wrap: break-word; overflow-wrap: break-word;"
+    >
+      <p class="text-sm">{{ message.content }}</p>
+    </div>
+  </div>
+</div>
+
   
         <!-- Input area -->
         <div class="p-4 bg-white border-t">

@@ -86,8 +86,11 @@ const allExperts = ref([
     avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
     likeExpert: false
   }
-
-])
+  const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
+onMounted(() => {
+  getAllExperts(null)
+})
+ 
 </script>
 
 <template>
@@ -100,7 +103,7 @@ const allExperts = ref([
 
     </div>
     
-    <Collapsible v-model:open="isOpen" class="px-6 py-4">
+    <Collapsible v-if="false" v-model:open="isOpen" class="px-6 py-4">
         <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
             <span>Search Filters</span>
             <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
@@ -175,15 +178,15 @@ const allExperts = ref([
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
         <div class="relative">
-          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
+          <img class="w-full h-64 object-cover" :src="expert.bannerSRC" alt="Apartment image" />
         </div>
           <Avatar class="m-4 w-24 h-24">
-            <AvatarImage :src="expert.avatar" alt="Profile" />
+            <AvatarImage :src="expert.avatarSRC" alt="Profile" />
             <AvatarFallback>XX</AvatarFallback>
           </Avatar>
           <CardContent class="p-4">
-            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}} at {{expert.company}}</p>
+            <h3 class="text-lg font-semibold dark:text-white">{{expert.full_name}}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.job_title}} at {{expert.company}}</p>
             
             <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p>
             

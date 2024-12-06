@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
   app: {
+    baseURL: "/LaunchGala/",
     head: {
       link: [{ rel: 'icon', type: 'image/svg', href: '/logo.svg' }],
 
@@ -47,7 +48,8 @@ export default defineNuxtConfig({
   },
   supabase: {
     url: 'https://qqjdnvpfusuvdjwfkijh.supabase.co',
-    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxamRudnBmdXN1dmRqd2ZraWpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3MDQyMjQsImV4cCI6MjAyODI4MDIyNH0.xIaty3OXkYe3sW_8BowpYrG3kncJjnVMudf9JWJ8vRM'
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxamRudnBmdXN1dmRqd2ZraWpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3MDQyMjQsImV4cCI6MjAyODI4MDIyNH0.xIaty3OXkYe3sW_8BowpYrG3kncJjnVMudf9JWJ8vRM',
+    redirect: false
   },
   tailwindcss: {
     viewer: false,
@@ -68,6 +70,7 @@ export default defineNuxtConfig({
     name: 'LaunchGala',
     description: 'Host events',
     defaultLocale: 'en',
+    url: 'https://www.launchgala.com'
   },
   plugins: [
     { src: '~/plugins/toast.client.js', mode: 'client' }  // Register the plugin only on the client side

@@ -17,7 +17,7 @@
             </span>
         </DialogTrigger>
         <DialogContent class="max-w-2xl flex flex-1">
-          <div class="h-[50vh] w-1/2">
+          <div class="h-[50vh] w-full">
   
             <!-- Conversation Manager Component -->
             <ConversationManager />
