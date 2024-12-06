@@ -1,55 +1,102 @@
 
 <script setup lang="ts">
-import { Plus } from 'lucide-vue-next';
-const categories = [
-  { name: 'Admin', description: 'Manage administrative tasks.', image: "/placeholder.svg" },
-  { name: 'Tech support', description: 'Provide technical assistance.', image: "/placeholder.svg" },
-  { name: 'DJ', description: 'Create musical ambiance.', image: "/placeholder.svg" },
-  { name: 'Lighting', description: 'Handle lighting and effects.', image: "/placeholder.svg" },
-  { name: 'Entertainment', description: 'Perform and entertain guests.', image: "/placeholder.svg" },
-  { name: 'Hosting', description: 'Greet and accommodate guests.', image: "/placeholder.svg" },
-  { name: 'Finance', description: 'Manage financial operations.', image: "/placeholder.svg" },
-  { name: 'Legal', description: 'Advise on legal matters.', image: "/placeholder.svg" },
-  { name: 'Cooking', description: 'Prepare and cook meals.', image: "/placeholder.svg" },
-  { name: 'Bartending', description: 'Serve drinks and cocktails.', image: "/placeholder.svg" },
-  { name: 'Marketing', description: 'Promote events and activities.', image: "/placeholder.svg" },
-  { name: 'Building', description: 'Construct and repair structures.', image: "/placeholder.svg" },
-  { name: 'Others', description: 'Various other volunteer opportunities.', image: "/placeholder.svg" },
-];
-
-import { Heart, Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
+import {
+  Heart,
+  MessageCircle,
+  ChevronDown,
+  Filter,
+  Plus
+} from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Toggle } from '@/components/ui/toggle';
+
+import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
+import { Badge } from '@/components/ui/badge';
 import { Calendar } from '@/components/ui/calendar';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { Input } from '@/components/ui/input';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+
 
 const isOpen = ref(false)
 const date = ref<Date>()
+
+const allExperts = ref([
+  {
+    img: "/Bootstrapping.png",
+    name: "Larry Page",
+    position: "Co-Founder",
+    company: "Google",
+    industry: "IT, AI",
+    description: "A stylish venue for modern gatherings.",
+    location: "SF, CA",
+    avatar: "/LarryPage.jpeg",
+    likeExpert: false
+  },
+  {
+    img: "/Bootstrapping.png",
+    name: "Tim Cook",
+    position: "CEO",
+    company: "Apple",
+    industry: "Technology",
+    description: "Leading the world in innovation and consumer electronics.",
+    location: "Cupertino, CA",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
+    likeExpert: true
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    name: "Mary Barra",
+    position: "CEO",
+    company: "General Motors",
+    industry: "Automotive",
+    description: "Driving towards a greener future with electric vehicles.",
+    location: "Detroit, MI",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
+    likeExpert: true
+  },
+
+  {
+    img: "/Bootstrapping.png",
+    name: "Jeff Bezos",
+    position: "Founder & Former CEO",
+    company: "Amazon",
+    industry: "E-commerce",
+    description: "Transforming the way we shop online and beyond.",
+    location: "Seattle, WA",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
+    likeExpert: false
+  }
+
+])
 </script>
 
 <template>
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Media, Influencers & Promoters</h1>
-      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become a Media/PR partner</Button>
+      <h1 class="text-2xl font-bold dark:text-white">Find Influencers</h1>
+      <NuxtLink to="CreateExpert">
+      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become an Influencer</Button>
+    </NuxtLink>
 
     </div>
     
@@ -124,25 +171,41 @@ const date = ref<Date>()
       </CollapsibleContent>
 
     </Collapsible>
-    <div class="px-8 py-10">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <Card v-for="category in categories" :key="category.name" class="border-0 overflow-hidden shadow-xl rounded-2xl dark:shadow-none transition-transform transform hover:-translate-y-1 dark:hover:shadow-2xl">
-          <CardHeader class="p-0">
-            <img :src="category.image" alt="category.name" class="w-full h-44 object-cover rounded-t-2xl transition-opacity duration-200 hover:opacity-80">
-          </CardHeader>
-          <CardContent class="flex flex-col items-start p-6 dark:bg-gray-900">
-            <h3 class="text-xl font-semibold mb-2 dark:text-gray-100">{{ category.name }}</h3>
-            <p class="text-gray-600 dark:text-gray-400 flex-grow">{{ category.description }}</p>
+    <div class="px-6 py-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <div class="relative">
+          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
+        </div>
+          <Avatar class="m-4 w-24 h-24">
+            <AvatarImage :src="expert.avatar" alt="Profile" />
+            <AvatarFallback>XX</AvatarFallback>
+          </Avatar>
+          <CardContent class="p-4">
+            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
+            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}}</p>
+            
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p> -->
+            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
+            Main Categories:
+            <div class="mb-6 flex gap-1 flex-wrap">
+          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">AI</span>
+          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Technology</span>
+          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">FinTech</span>
+        </div>            
+
+            <div class="flex items-center justify-between mt-4">
+              <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
+                View
+                <ArrowRight class="w-4 h-4 ml-2" /> 
+              </Button>
+              <Toggle aria-label="Like">
+                <Heart :fill="expert.likeExpert ? 'orange': 'none'" class="w-5 h-5" />
+              </Toggle>
+            </div>
           </CardContent>
-          <CardFooter class="p-6 dark:bg-gray-900">
-            <Button variant="default" class="w-full text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white rounded-full transition-colors duration-300">
-              Learn More
-            </Button>
-          </CardFooter>
         </Card>
       </div>
     </div>
   </div>
 </template>
-
-

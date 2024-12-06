@@ -29,11 +29,17 @@ import { Button } from '@/components/ui/button'
         <p class="text-gray-700 dark:text-gray-300 mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, velit semper laoreet dictum, quam diam dictum urna, nec placerat elit nisl in quam.
         </p>
-        <h2 class="font-semibold mb-4">Talent Categories:</h2>
+        <h2 class="font-semibold mb-4">Main Skills:</h2>
         <div class="mb-6 flex gap-2 flex-wrap">
-          <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Community</span>
-          <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Mentorship</span>
-          <span class="bg-pink-100 dark:bg-pink-800 text-pink-800 dark:text-pink-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Development</span>
+          <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Software engineer</span>
+          <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Project Management</span>
+          <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">UI</span>
+        </div>
+        <h2 class="font-semibold mb-4">Employment Type:</h2>
+        <div class="mb-6 flex gap-2 flex-wrap">
+          <span class="bg-pink-100 dark:bg-pink-800 text-pink-800 dark:text-pink-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Full Time</span>
+          <span class="bg-pink-100 dark:bg-pink-800 text-pink-800 dark:text-pink-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Co-founder</span>
+          <span class="bg-pink-100 dark:bg-pink-800 text-pink-800 dark:text-pink-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Part Time</span>
         </div>
         <h2 class="font-semibold mb-4">Links:</h2>
 
@@ -55,7 +61,9 @@ import { Button } from '@/components/ui/button'
             Publish
           </Button>
         </div>
-      </CardContent>
+      </CardContent>Employment Type
+
+
     </Card>
   </div>
 </template>

@@ -78,7 +78,7 @@ import { Button } from '@/components/ui/button'
       </div>
       <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
         <Youtube class="w-6 h-6 ml-3 text-red-500" />
-        <Input type="text" :disabled="editDisabled" placeholder="Twitch URL" v-model="user_youtube" class="flex-1 border-0 focus:ring-2 focus:ring-pink-500" />
+        <Input type="text" :disabled="editDisabled" placeholder="Reddit URL" v-model="user_youtube" class="flex-1 border-0 focus:ring-2 focus:ring-pink-500" />
       </div>
       <div class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md">
         <Facebook class="w-6 h-6 ml-3 text-blue-600" />
@@ -87,11 +87,9 @@ import { Button } from '@/components/ui/button'
     </div>
         
         <div class="flex justify-between mt-8">
+
           <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
-            Edit
-          </Button>
-          <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
-            Publish
+            Contact
           </Button>
         </div>
       </CardContent>
