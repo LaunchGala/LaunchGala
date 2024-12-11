@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@braks/revue-draggable": "^0.5.0",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-vue": "^2.2.0",
     "@googlemaps/js-api-loader": "^1.16.8",
     "@libsql/client": "0.4.0-pre.5",
     "@nuxt/content": "^2.10.0",

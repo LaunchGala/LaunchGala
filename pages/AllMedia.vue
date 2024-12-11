@@ -39,55 +39,32 @@ import {
 const isOpen = ref(false)
 const date = ref<Date>()
 
-const allExperts = ref([
-  {
-    img: "/Bootstrapping.png",
-    name: "Larry Page",
-    position: "Co-Founder",
-    company: "Google",
-    industry: "IT, AI",
-    description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
-    avatar: "/LarryPage.jpeg",
-    likeExpert: false
-  },
-  {
-    img: "/Bootstrapping.png",
-    name: "Tim Cook",
-    position: "CEO",
-    company: "Apple",
-    industry: "Technology",
-    description: "Leading the world in innovation and consumer electronics.",
-    location: "Cupertino, CA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
-    likeExpert: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    name: "Mary Barra",
-    position: "CEO",
-    company: "General Motors",
-    industry: "Automotive",
-    description: "Driving towards a greener future with electric vehicles.",
-    location: "Detroit, MI",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
-    likeExpert: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    name: "Jeff Bezos",
-    position: "Founder & Former CEO",
-    company: "Amazon",
-    industry: "E-commerce",
-    description: "Transforming the way we shop online and beyond.",
-    location: "Seattle, WA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
-    likeExpert: false
+const allInfluencers = ref([]);
+const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
+async function getAllInfluencers(query) {
+  const { data: data, error } = !!query ? await query : await supabase
+    .from('profiles')
+    .select('*, influencer:Influencers(*)') // Assuming the table is named 'experts'
+    .eq('is_expert', true);
+  console.log(error)
+  Promise.all(data.map(async (profile) => {
+    profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
+    profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
+  })).then(() => {
+    allInfluencers.value = data;
+    console.log(data)
+  })
+}
+const fetchImage = async (id, bucket) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
   }
-
-])
+onMounted(() => {
+  getAllInfluencers(null)
+})
 </script>
 
 <template>
@@ -173,34 +150,34 @@ const allExperts = ref([
     </Collapsible>
     <div class="px-6 py-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <Card v-for="influencer in allInfluencers"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
         <div class="relative">
-          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
+          <img class="w-full h-64 object-cover" :src="influencer.bannerSRC" alt="Apartment image" />
         </div>
           <Avatar class="m-4 w-24 h-24">
-            <AvatarImage :src="expert.avatar" alt="Profile" />
+            <AvatarImage :src="influencer.avatarSRC" alt="Profile" />
             <AvatarFallback>XX</AvatarFallback>
           </Avatar>
           <CardContent class="p-4">
-            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
+            <h3 class="text-lg font-semibold dark:text-white">{{influencer.full_name}}</h3>
             <!-- <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}}</p>
             
             <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p> -->
-            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
+            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{influencer.location}}</p>
             Main Categories:
-            <div class="mb-6 flex gap-1 flex-wrap">
-          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">AI</span>
-          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Technology</span>
-          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">FinTech</span>
+            <div v-for="category in influencer.influencer.categories" class="mb-2 flex gap-1 flex-wrap">
+          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{ category }}</span>
         </div>            
 
             <div class="flex items-center justify-between mt-4">
+              <NuxtLink :to="{ name: 'InfluencerCard', query: { id: influencer.id } }">
               <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
                 View
                 <ArrowRight class="w-4 h-4 ml-2" /> 
               </Button>
+            </NuxtLink>
               <Toggle aria-label="Like">
-                <Heart :fill="expert.likeExpert ? 'orange': 'none'" class="w-5 h-5" />
+                <Heart :fill="influencer.likeExpert ? 'orange': 'none'" class="w-5 h-5" />
               </Toggle>
             </div>
           </CardContent>
