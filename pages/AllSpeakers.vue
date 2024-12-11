@@ -85,10 +85,10 @@ const allExperts = ref([
     location: "Seattle, WA",
     avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
     likeExpert: false
-  }
+  }])
   const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
 onMounted(() => {
-  getAllExperts(null)
+  // getAllExperts(null)
 })
  
 </script>
