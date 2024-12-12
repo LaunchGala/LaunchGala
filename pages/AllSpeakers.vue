@@ -63,7 +63,7 @@ const fetchImage = async (id, bucket) => {
     }
   }
 onMounted(() => {
-  // getAllExperts(null)
+  getAllExperts(null)
 })
  
 </script>
