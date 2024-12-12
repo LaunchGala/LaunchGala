@@ -17,6 +17,10 @@ const venuesIRequested = ref([]);
 const venuesIRequestedAccepted = ref([]);
 const venuesIRequestedRejected = ref([]);
 
+function getContactInfo(profile){
+  return {other_user_id: profile.id, other_user_name: profile.full_name}
+}
+
 async function fetchVenuesRequestedFromMe() {
   const response = await supabase
     .from('VenueBookings')
@@ -26,7 +30,6 @@ async function fetchVenuesRequestedFromMe() {
     console.error(response.error);
     return;
   }
-  
   venuesRequestedFromMe.value = response.data.filter((venue) => venue.is_request === true && venue.is_cancelled === false);
   venuesAcceptedFromMe.value = response.data.filter((venue) => venue.is_approved === true);
   venuesRejectedFromMe.value = response.data.filter((venue) => (venue.is_request === false && venue.is_approved === false) || venue.is_cancelled === true);
@@ -222,7 +225,7 @@ async function confirmBooking(request){
         </Tooltip>
       </TooltipProvider>
       <div class="flex flex-col gap-2 items-center justify-between">
-        <MessagingDialog :currentUser="item.venue.createdBy" :otherUser="item.requesting_user.id" :title="'Message Event Host'" />
+        <MessagesButton :label="'Contact'" :isIcon="false" :newConversationInfo="getContactInfo(item.requesting_user)"></MessagesButton>
         <Button @click="acceptRequest(item)" class="bg-green-500 text-white">Accept</Button>
         <Button @click="rejectRequest(item)" class="bg-red-500 text-white">Reject</Button>
       </div>
@@ -298,7 +301,7 @@ async function confirmBooking(request){
         </Tooltip>
       </TooltipProvider>
       <div class="flex flex-col gap-2 items-center justify-between">
-        <MessagingDialog :currentUser="item.venue.createdBy" :otherUser="item.requesting_user.id" :title="'Message Event Host'" />
+        <MessagesButton :label="'Contact'" :isIcon="false" :newConversationInfo="getContactInfo(item.requesting_user)"></MessagesButton>
         <Button @click="rejectRequest(item)" class="bg-red-500 text-white">Reject</Button>
       </div>
       </div>
@@ -373,7 +376,7 @@ async function confirmBooking(request){
         </Tooltip>
       </TooltipProvider>
       <div class="flex flex-col gap-2 items-center justify-between">
-        <MessagingDialog :currentUser="item.venue.createdBy" :otherUser="item.requesting_user.id" :title="'Message Event Host'" />
+        <MessagesButton :label="'Contact'" :isIcon="false" :newConversationInfo="getContactInfo(item.requesting_user)"></MessagesButton>
         <h3 class="text-red-500">{{ item.is_cancelled ? "Cancelled" : "Rejected" }}</h3>
         <Button v-if="!item.is_cancelled" @click="acceptRequest(item)" class="bg-green-500 text-white">Accept</Button>
       </div>
@@ -457,7 +460,7 @@ async function confirmBooking(request){
                 </Tooltip>
               </TooltipProvider>
               <div class="flex flex-col gap-2 items-center justify-between">
-                <MessagingDialog :other-user="item.venue.createdBy" :current-user="user.id" :title="'Message Host'" />
+                <MessagesButton :label="'Contact'" :isIcon="false" :newConversationInfo="getContactInfo(item.venue_owner)"></MessagesButton>
                 <Button @click="cancelRequest(item)" class="bg-red-500 text-white">Cancel</Button>
               </div>
               </div>
@@ -529,7 +532,7 @@ async function confirmBooking(request){
                 </Tooltip>
               </TooltipProvider>
               <div class="flex flex-col gap-2 items-center justify-between">
-                <MessagingDialog :other-user="item.venue.createdBy" :current-user="user.id" :title="'Message Host'" />
+                <MessagesButton :label="'Contact'" :isIcon="false" :newConversationInfo="getContactInfo(item.venue_owner)"></MessagesButton>
                 <Dialog>
                   <DialogTrigger :hidden="!item.event_id || item.is_confirmed">
                     <Button class="bg-green-500 text-white">Confirm Booking</Button>
@@ -617,7 +620,7 @@ async function confirmBooking(request){
                 </Tooltip>
               </TooltipProvider>
               <div class="flex flex-col gap-2 items-center justify-between">
-                <MessagingDialog :other-user="item.venue.createdBy" :current-user="user.id" :title="'Message Host'"/>
+                <MessagesButton :label="'Contact'" :isIcon="false" :newConversationInfo="getContactInfo(item.venue_owner)"></MessagesButton>
                 <h3 class="text-red-500">{{ item.is_cancelled ? "Cancelled" : "Rejected" }}</h3>
                 <Button v-if="item.is_cancelled" @click="reopenRequest(item)" class="bg-green-500 text-white">Reopen</Button>
               </div>

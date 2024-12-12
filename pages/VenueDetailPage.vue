@@ -69,6 +69,7 @@ const venueListing = ref({
 
 });
 const images = ref([])
+const contactInfo = ref({})
 const getVenueById = async (id) => {
   const { data, error } = await supabase
     .from('AllVenues') // Replace 'users' with your table name
@@ -82,6 +83,7 @@ const getVenueById = async (id) => {
   }
 
   venueListing.value = data;
+  contactInfo.value = {other_user_id: venueListing.value.venue_owner.id, other_user_name: venueListing.value.venue_owner.full_name}
 }
 onMounted(() => {
   getVenueById(venueId)
@@ -228,10 +230,8 @@ const date = ref<Date>()
         <div>
         </div>
         <div class="flex flex-col items-end space-y-2">
-          <Button class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white OrangeCol hover:bg-orange-400 rounded-md">
-            <span>Contact Host</span>
-            <ArrowRight class="w-4 h-4 ml-2" />
-          </Button>
+          
+          <MessagesButton v-if="Object.keys(contactInfo).length !== 0" :label="'Contact Host'" :isIcon="false" :newConversationInfo="contactInfo"></MessagesButton>
         </div>
       </CardFooter>
       <div class="px-4 py-2 dark:bg-gray-800">

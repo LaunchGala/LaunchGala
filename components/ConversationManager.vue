@@ -42,11 +42,14 @@
       <!-- Chat area -->
       <div class="w-2/3 flex-1 flex flex-col h-full ">
         <!-- Chat header -->
-        <div class="bg-white border-b p-4 flex items-center">
-          <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-semibold">
-            {{ selectedConversation?.otherUserName?.charAt(0) }}
+        <div class="bg-white border-b p-4 flex flex-col items-center">
+          <h4 v-if="selectedConversation?.pending">New Conversation with</h4>
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-semibold">
+              {{ selectedConversation?.otherUserName?.charAt(0) }}
+            </div>
+            <h2 class="ml-3 text-xl font-semibold">{{ selectedConversation?.otherUserName }}</h2>
           </div>
-          <h2 class="ml-3 text-xl font-semibold">{{ selectedConversation?.otherUserName }}</h2>
         </div>
   
         <!-- Messages area -->
@@ -77,11 +80,13 @@
             <input
               v-model="newMessage"
               type="text"
+              :disabled="!selectedConversation"
               placeholder="Type a message..."
               class="flex-1 border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             <button
               type="submit"
+              :disabled="!selectedConversation"
               class="bg-orange-500 text-white rounded-r-lg px-4 py-2 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
             >
               <SendIcon class="h-5 w-5" />
@@ -96,7 +101,7 @@
 import { Circle } from 'lucide-vue-next';
 import { SendIcon } from 'lucide-vue-next';
 import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
-
+const emit = defineEmits(['conversationStarted']);
 const props = defineProps(['newConversationInfo'])
 const currentUser = useSupabaseUser(); // Current authenticated user
 const conversations = ref([]);
@@ -118,7 +123,16 @@ const startConversation = async (otherUserId, otherUserName) => {
     // Check if a conversation already exists in either direction
     const { data: existingConversation, error: fetchError } = await supabase
       .from('Conversations')
-      .select('*')
+      .select(`
+        id,
+        current_user_id,
+        other_user_id,
+        last_message,
+        unread_counts,
+        updated_at,
+        current_user:profiles!current_user_id(full_name),
+        other_user:profiles!other_user_id(full_name)
+      `)
       .or(
         `and(current_user_id.eq.${currentUser.value.id},other_user_id.eq.${otherUserId}),and(current_user_id.eq.${otherUserId},other_user_id.eq.${currentUser.value.id})`
       )
@@ -126,8 +140,19 @@ const startConversation = async (otherUserId, otherUserName) => {
       .single();
       if (existingConversation) {
         // If the conversation exists, select it
-        selectedConversation.value = existingConversation;
-        await selectConversation(existingConversation);
+        selectedConversation.value = {
+          id: existingConversation.id,
+          otherUserId: existingConversation.current_user_id === currentUser.value.id 
+            ? existingConversation.other_user_id 
+            : existingConversation.current_user_id,
+          otherUserName: existingConversation.current_user_id === currentUser.value.id
+            ? existingConversation.other_user?.full_name ?? 'Unknown'
+            : existingConversation.current_user?.full_name ?? 'Unknown',
+          lastMessage: existingConversation.last_message ?? '',
+          unreadCounts: existingConversation.unread_counts ?? 0,
+          updatedAt: existingConversation.updated_at ?? null,
+        };;
+        await selectConversation(selectedConversation.value);
       }else{
         throw fetchError
       }
@@ -140,6 +165,7 @@ const startConversation = async (otherUserId, otherUserName) => {
         pendingConversation.value = {
           otherUserId,
           otherUserName,
+          pending: true
         };
         await selectConversation(pendingConversation.value);
       }
@@ -274,7 +300,18 @@ const sendMessage = async () => {
           return;
         }
 
-        selectedConversation.value = newConversation;
+        selectedConversation.value = {
+          id: newConversation.id,
+          otherUserId: newConversation.current_user_id === currentUser.value.id 
+            ? newConversation.other_user_id 
+            : newConversation.current_user_id,
+          otherUserName: newConversation.current_user_id === currentUser.value.id
+            ? newConversation.other_user?.full_name ?? 'Unknown'
+            : newConversation.current_user?.full_name ?? 'Unknown',
+          lastMessage: newConversation.last_message ?? '',
+          unreadCounts: newConversation.unread_counts ?? 0,
+          updatedAt: newConversation.updated_at ?? null,
+        };
         conversationId = newConversation.id;
 
         pendingConversation.value = null;

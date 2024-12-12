@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="m-2">
       
   
       <!-- Conversation Manager Dialog -->

@@ -180,7 +180,7 @@ onMounted(() => {
           <div class="flex items-center justify-between mb-4">
             <NuxtLink :to="{ name: 'EventDetailPage', query: { id: event.id } }">
 
-              <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
+              <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500 transition-colors ButtonCol">
                 Check it out
                 <ArrowRight class="w-5 h-5 ml-2" />
               </Button>

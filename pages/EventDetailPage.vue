@@ -51,6 +51,7 @@ const event = ref({
 
 
 });
+const contactInfo = ref({})
 async function getEvent() {
   const { data: AllEvents, error } = await supabase.from('AllEvents').select('*, event_owner:profiles!created_by(*)').eq('id', venueId)
   console.log(error)
@@ -58,6 +59,7 @@ async function getEvent() {
     event.event_owner.avatarSRC = await fetchImage(event.event_owner.avatar_url)
   })).then(() => {
     event.value = AllEvents[0];
+    contactInfo.value = {other_user_id: event.value.event_owner.id, other_user_name: event.value.event_owner.full_name}
     console.log(AllEvents)
   })
 }
@@ -110,7 +112,7 @@ const date = ref<Date>()
       <CardHeader class="relative bg-white dark:bg-gray-800">
         <div class="flex justify-between items-center p-4 border-b dark:border-gray-700">
           <CardTitle class="text-lg font-bold dark:text-white">
-            Elegant Venue in the City Center
+            {{event.title}}
           </CardTitle>
           <div class="flex space-x-2">
             <Button variant="ghost" class="OrangeText">
@@ -190,19 +192,17 @@ const date = ref<Date>()
         <div>
         </div>
         <div class="flex flex-col items-end space-y-2">
-          <Button class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white OrangeCol hover:bg-orange-400 rounded-md">
-            <span>Contact Host</span>
-            <ArrowRight class="w-4 h-4 ml-2" />
-          </Button>
+          
+          <MessagesButton v-if="Object.keys(contactInfo).length !== 0" :label="'Contact Host'" :isIcon="false" :newConversationInfo="contactInfo"></MessagesButton>
         </div>
       </CardFooter>
       <div class="px-4 py-2 dark:bg-gray-800">
         
-        <div class="bg-white dark:bg-black p-6 shadow-lg rounded-lg  mx-auto my-8">
+        <!--<div class="bg-white dark:bg-black p-6 shadow-lg rounded-lg  mx-auto my-8">
     <h2 class="text-2xl font-semibold mb-4">Reservation Rules</h2>
 
     <Accordion type="single" collapsible class="space-y-2">
-      <!--<AccordionItem value="operating-hours">
+      <AccordionItem value="operating-hours">
         <AccordionTrigger class="flex items-center justify-between">
           <span class="font-medium">Operating Hours</span>
            <Clock class="w-5 h-5 text-gray-500 dark:text-gray-400" /> 
@@ -227,10 +227,10 @@ const date = ref<Date>()
           </AccordionContent>
       </AccordionItem>-->
 
-      <AccordionItem value="reservation-rules">
+      <!-- <AccordionItem value="reservation-rules">
         <AccordionTrigger class="flex items-center justify-between">
           <span class="font-medium">Reservation Rules and Details</span>
-          <!-- <Info class="w-5 h-5 text-gray-500 dark:text-gray-400" /> -->
+          <Info class="w-5 h-5 text-gray-500 dark:text-gray-400" />
         </AccordionTrigger>
         <AccordionContent>
           <div v-show="event.allow_venue_offering" class="flex flex-wrap gap-2">
@@ -272,7 +272,7 @@ const date = ref<Date>()
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  </div>
+  </div> -->
 
         <div class="px-4 py-4 dark:bg-gray-800">
       <h3 class="text-lg font-semibold mb-4 text-black">Events you might like</h3>

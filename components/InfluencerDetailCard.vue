@@ -9,6 +9,7 @@ import { cibTiktok, cibSnapchat } from '@coreui/icons';
 
 const props = defineProps(['id', 'influencer']);
 const supabase = useSupabaseClient()
+const contactInfo = ref({})
 
 const influencer = ref({});
 const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
@@ -24,6 +25,7 @@ async function getAllInfluencers(query) {
     profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
   })).then(() => {
     influencer.value = data[0];
+    contactInfo.value = {other_user_id: influencer.value.id, other_user_name: influencer.value.full_name}
     console.log(data)
   })
 }
@@ -143,9 +145,7 @@ onMounted(() => {
         
         <div class="flex justify-between mt-8">
 
-          <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
-            Contact
-          </Button>
+            <MessagesButton v-if="Object.keys(contactInfo).length !== 0" :label="'Contact'" :isIcon="false" :newConversationInfo="contactInfo"></MessagesButton>
         </div>
       </CardContent>
     </Card>

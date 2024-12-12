@@ -45,7 +45,7 @@ async function getAllInfluencers(query) {
   const { data: data, error } = !!query ? await query : await supabase
     .from('profiles')
     .select('*, influencer:Influencers(*)') // Assuming the table is named 'experts'
-    .eq('is_expert', true);
+    .eq('is_influencer', true);
   console.log(error)
   Promise.all(data.map(async (profile) => {
     profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
@@ -165,7 +165,7 @@ onMounted(() => {
             <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p> -->
             <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{influencer.location}}</p>
             Main Categories:
-            <div v-for="category in influencer.influencer.categories" class="mb-2 flex gap-1 flex-wrap">
+            <div v-for="category in influencer.influencer?.categories" class="mb-2 flex gap-1 flex-wrap">
           <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{ category }}</span>
         </div>            
 
