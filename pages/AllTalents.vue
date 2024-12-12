@@ -39,70 +39,35 @@ import VolunteerListing from './VolunteerListing.vue';
 
 const supabase = useSupabaseClient()
 
-const allVolunteers = ref([]);
+const talents = ref([]);
 
-async function getAllVolunteers() {
-  const { data: AllVolunteers, error } = await supabase.from('AllVolunteers').select()
+async function getAllTalent(query) {
+  const { data: AllExperts, error } = !!query ? await query : await supabase
+    .from('profiles')
+    .select('*, talent:Talent(*)') // Assuming the table is named 'experts'
+    .eq('is_talent', true);
   console.log(error)
-  allVolunteers.value = AllVolunteers;
+  Promise.all(AllExperts.map(async (profile) => {
+    profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
+    profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
+  })).then(() => {
+    talents.value = AllExperts;
+    console.log(AllExperts)
+  })
 }
-
+const fetchImage = async (id, bucket) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+  }
 onMounted(() => {
-  getAllVolunteers()
-  console.log(allVolunteers.value)
+  getAllTalent(null)
 })
 
 const isOpen = ref(false)
 const date = ref<Date>()
-
-
-
-// const allVolunteers = ref([
-//   {
-//     name: "Sundar Pichai",
-//     profession: "Engineer",
-//     volunteerTags: "IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing, IT, Admin, Social media marketing ",
-//     location: "SF, CA",
-//     avatar: "https://conferences.law.stanford.edu/directorscollege2022/wp-content/uploads/sites/112/2022/05/Sundar-Pichai-Headshot-212x212.png",
-//     likevolunteer: false
-//   },
-//   {
-//     img: "/Bootstrapping.png",
-//     name: "Tim Cook",
-//     position: "CEO",
-//     company: "Apple",
-//     industry: "Technology",
-//     description: "Leading the world in innovation and consumer electronics.",
-//     location: "Cupertino, CA",
-//     avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
-//     likevolunteer: true
-//   },
-
-//   {
-//     img: "/Bootstrapping.png",
-//     name: "Mary Barra",
-//     position: "CEO",
-//     company: "General Motors",
-//     industry: "Automotive",
-//     description: "Driving towards a greener future with electric vehicles.",
-//     location: "Detroit, MI",
-//     avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
-//     likevolunteer: true
-//   },
-
-//   {
-//     img: "/Bootstrapping.png",
-//     name: "Jeff Bezos",
-//     position: "Founder & Former CEO",
-//     company: "Amazon",
-//     industry: "E-commerce",
-//     description: "Transforming the way we shop online and beyond.",
-//     location: "Seattle, WA",
-//     avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
-//     likevolunteer: false
-//   }
-
-// ])
 </script>
 
 <template>
@@ -189,7 +154,7 @@ const date = ref<Date>()
     </Collapsible>
     <div class="px-6 py-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="volunteer in allVolunteers"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <Card v-for="talent in talents"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
         <!-- <div class="relative">
           <img class="w-full h-64 object-cover" :src="volunteer.img" alt="Apartment image" />
         </div> -->
@@ -197,29 +162,30 @@ const date = ref<Date>()
         <CardContent class="p-4">
           <div class="flex justify-between ">
             <div class="ml-2 mt-4 mb-2">
-            <h3 class="text-lg font-semibold dark:black-white">{{volunteer.name}}</h3>
-            <p class="text-sm text-gray-600">{{volunteer.profession}}</p>
+            <h3 class="text-lg font-semibold dark:black-white">{{talent.full_name}}</h3>
           </div>
             <Avatar class="m-4 w-24 h-24">
-              <AvatarImage :src="volunteer.avatar" alt="Profile" />
+              <AvatarImage :src="talent.avatarSRC" alt="Profile" />
               <AvatarFallback>XX</AvatarFallback>
             </Avatar>
         </div> 
             <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
-            <p class=" text-m font-semibold text-gray-500"> Location: {{volunteer.location}}</p>
-            <p class="line-clamp-2 mt-3 text-sm font-semibold text-gray-500 dark:text-gray-400"> Main Skills:
-              <div class="flex flex-wrap h-14 overflow-hidden"> 
-               <div v-for="tag in volunteer.volunteerTags" :class="volunteerTagColors[tag]" class="text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
+            <p class=" text-m font-semibold text-gray-500"> Location: {{talent.location}}</p>
+            <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
+              <div class="flex flex-wrap h-14 overflow-hidden">
+               <div v-for="tag in talent.talent.employment_type" class="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
               </div>
             </p>
 
             <div class="flex items-center justify-between mt-4">
-              <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
-                View
-                <ArrowRight class="w-4 h-4  ml-4" /> 
-              </Button>
+              <NuxtLink :to="{ name: 'TalentCardPage', query: { id: talent.id } }">
+                <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
+                  View
+                  <ArrowRight class="w-4 h-4  ml-4" /> 
+                </Button>
+              </NuxtLink>
               <Toggle aria-label="Like">
-                <Heart :fill="volunteer.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
+                <Heart :fill="talent.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
               </Toggle>
             </div>
           </CardContent>

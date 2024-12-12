@@ -10,6 +10,6 @@ const venueId = route.query.id;
 
 <template>
   <div class="min-h-screen bg-gray-200 dark:bg-black flex items-center justify-center p-4">
-    <InfluencerDetailCard :id="venueId"></InfluencerDetailCard>
+    <ExpertDetailCard :id="venueId"></ExpertDetailCard>
   </div>
 </template>
