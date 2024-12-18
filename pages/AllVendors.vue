@@ -1,13 +1,28 @@
 
 <script setup lang="ts">
-import { MapPin, Search, ShoppingCart, Tag, Star } from 'lucide-vue-next';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-
-import { Heart, Share2, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
+import {
+  Heart,
+  MessageCircle,
+  ChevronDown,
+  Filter,
+  Plus
+} from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Toggle } from '@/components/ui/toggle';
+
+import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
+import { Badge } from '@/components/ui/badge';
 import { Calendar } from '@/components/ui/calendar';
 import {
   Collapsible,
@@ -19,7 +34,35 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { volunteerTagColors } from '@/utils/volunteerTagColors';
+import VolunteerListing from './VolunteerListing.vue';
 
+const supabase = useSupabaseClient()
+
+const vendors = ref([]);
+
+async function getAllVendors(query) {
+  const { data: AllVendors, error } = !!query ? await query : await supabase
+    .from('Vendors')
+    .select('*');
+  console.log(error)
+  Promise.all(AllVendors.map(async (vendor) => {
+    vendor.businessLogo = await fetchImage(vendor.business_logo, 'images')
+  })).then(() => {
+    vendors.value = AllVendors;
+    console.log(AllVendors)
+  })
+}
+const fetchImage = async (id, bucket) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+  }
+onMounted(() => {
+  getAllVendors(null)
+})
 
 const isOpen = ref(false)
 const date = ref<Date>()
@@ -28,10 +71,10 @@ const date = ref<Date>()
 <template>
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Find Vendors</h1>
+      <h1 class="text-2xl font-bold dark:text-white">Find Talents</h1>
       <NuxtLink to="VendorListing">
 
-      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become a Vendor</Button>
+      <Button @click="console.log(VolunteerListing)" class="bg-orange-500 text-white dark:text-white">Add/Edit Vendors</Button>
       </NuxtLink>
 
     </div>
@@ -107,114 +150,49 @@ const date = ref<Date>()
       </CollapsibleContent>
 
     </Collapsible>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      <div v-for="i in 12" :key="'vendor-service-' + i" class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
-        <div class="relative">
-          <img class="w-full h-64 object-cover" src="/placeholder.svg" alt="Vendor Service image" />
-          <div class="absolute top-4 right-4">
-            <Badge v-if="Math.random() < 0.5" variant="secondary" class="text-xs">Offer available</Badge>
+    <div class="px-6 py-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Card v-for="vendor in vendors"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <!-- <div class="relative">
+          <img class="w-full h-64 object-cover" :src="volunteer.img" alt="Apartment image" />
+        </div> -->
+        <!-- user will have a banner image on their profile and we will use it -->
+        <CardContent class="p-4">
+          <div class="relative w-full">
+            <img class="w-full h-32 object-contain" :src="vendor.businessLogo" />
           </div>
-        </div>
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2 dark:text-white">Royal Banners</div>
-          <p class="text-gray-700 text-base dark:text-gray-300">
-            Get all your printing ready for you event 24/7
-          </p>
-        </div>
-        <div class="px-6 pt-4 pb-2">
-          <div class="flex items-center justify-between mt-3">
-            <Button class="dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">
-              <Tag class="w-4 h-4 mr-2"/>
-              Learn More
-            </Button>
-            <div class="flex items-center space-x-4">
-              <span class="flex items-center justify-center dark:text-white">
-                <ShoppingCart class="w-5 h-5 mr-1" />
-              </span>
-              <span class="flex items-center justify-center dark:text-white">
-                <MapPin class="w-5 h-5 mr-1" />
-              </span>
+          <div class="flex justify-between ">
+            <div class="ml-2 mt-4 mb-2">
+            <h3 class="text-lg font-semibold dark:black-white">{{vendor.business_name}}</h3>
+          </div>
+            <!-- <Avatar class="m-4 w-24 h-24">
+              <AvatarImage :src="talent.avatarSRC" alt="Profile" />
+              <AvatarFallback>XX</AvatarFallback>
+            </Avatar> -->
+        </div> 
+            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
+            <h4 class="ml-2 text-m font-semibold text-black-500"> {{vendor.headline}}</h4>
+            <p class="ml-2 text-m font-semibold text-gray-500"> Location: {{vendor.location}}</p>
+            <!-- <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
+              <div class="flex flex-wrap h-14 overflow-hidden">
+               <div v-for="tag in talent.talent.employment_type" class="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
+              </div>
+            </p> -->
+
+            <div class="flex items-center justify-between mt-4">
+              <NuxtLink :to="{ name: 'VendorDetailPage', query: { id: vendor.id } }">
+                <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
+                  View
+                  <ArrowRight class="w-4 h-4  ml-4" /> 
+                </Button>
+              </NuxtLink>
+              <Toggle aria-label="Like">
+                <Heart :fill="vendor.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
+              </Toggle>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   </div>
 </template>
-
-
-<!-- 
-<script setup lang="ts">
-
-
-import { Button } from '@/components/ui/button'
-import { Megaphone, Clock } from 'lucide-vue-next'
-
-const countdown = ref(30 * 24 * 60 * 60 * 1000) // 30 days in milliseconds
-
-const intervalId = setInterval(() => {
-  countdown.value -= 1000;
-  if (countdown.value <= 0) {
-    clearInterval(intervalId);
-  }
-}, 1000);
-
-const days = () => Math.floor(countdown.value / (1000 * 60 * 60 * 24))
-const hours = () => Math.floor((countdown.value % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-const minutes = () => Math.floor((countdown.value % (1000 * 60 * 60)) / (1000 * 60))
-const seconds = () => Math.floor((countdown.value % (1000 * 60)) / 1000)
-</script>
-
-<template>
-  <div class="relative min-h-screen bg-gradient-to-br from-orange-300 via-orange-200 to-orange-500 dark:from-gray-900 dark:via-gray-900 dark:to-black py-12 px-4 md:flex md:items-center md:justify-center">
-    <div class="absolute inset-0 overflow-hidden">
-      <img src="/placeholder.svg" alt="Vendor Marketplace Coming Soon" class="h-full w-full object-cover opacity-20 dark:opacity-40" />
-    </div>
-    <div class="z-10 max-w-4xl mx-auto space-y-8 rounded-lg bg-white p-8 shadow-xl dark:bg-slate-700">
-      <h1 class="text-4xl font-bold leading-tight text-gray-900 text-center dark:text-white">Join Our Marketplace for Vendors</h1>
-      <p class="text-xl text-gray-700 text-center dark:text-gray-200">A dedicated platform to showcase & connect you with a vast audience seeking your unique products and services for their events.
-
-</p>
-      <div class="flex items-center justify-center space-x-3">
-        <Megaphone class="h-8 w-8 text-orange-600 dark:text-orange-400"/>
-        <p class="text-lg font-semibold text-orange-800 dark:text-orange-400">Request to Get Listed Today!</p>
-      </div>
-      <div class="text-center">
-        <Clock class="h-8 w-8 mx-auto text-orange-600 dark:text-orange-400"/>
-        <p class="text-lg font-semibold text-orange-800 dark:text-orange-400 my-4">Marketplace Opens In:</p>
-
-        <div class="grid grid-cols-4 gap-2">
-        <div class="flex flex-col items-center justify-center">
-          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ days() }}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">DAYS</div>
-        </div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ hours() }}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">HOURS</div>
-        </div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ minutes() }}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">MINS</div>
-        </div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="text-6xl font-semibold text-gray-900 dark:text-white">{{ seconds() }}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">SECS</div>
-        </div>
-      </div>
-
-      </div>
-
-      <div class="text-center">
-        <p class="text-lg">We provide the stage, you bring your A-game. Increase your visibility and connect with potential clients.</p>
-      </div>
-      <div class="flex justify-center">
-        <NuxtLink to="VendorRegs">
-
-        <Button class="inline-flex items-center justify-center rounded-md bg-orange-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-500 dark:hover:bg-orange-600">
-          Request to Get Listed
-        </Button>
-        </NuxtLink>
-      </div>
-    </div>
-  </div>
-</template> -->

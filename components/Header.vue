@@ -56,7 +56,7 @@ import MessagesButton from './MessagesButton.vue';
             Experts/Investors
           </a>
         </NuxtLink>
-        <NuxtLink to="VendorRegs">
+        <NuxtLink to="AllVendors">
 
 <a class="text-sm font-semibold  hover:underline">
   Vendors

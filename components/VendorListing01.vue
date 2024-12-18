@@ -12,8 +12,25 @@ import {
 } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-const props = defineProps(['venueListing']);
-console.log(props.venueListing);
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
+const myVendors = ref([])
+
+async function fetchVendors() {
+  const response = await supabase
+    .from('Vendors')
+    .select()
+    .eq('created_by', user.value.id)
+  if (response.error) {
+    console.error(response.error);
+    return;
+  }
+  myVendors.value = response.data;
+}
+
+onMounted(() => {
+  fetchVendors();
+});
 </script>
 
 <template>
@@ -28,10 +45,12 @@ console.log(props.venueListing);
         </CardHeader>
         <CardContent>
           <div class="flex flex-wrap items-center justify-start gap-4 mb-6">
-            <Button @click="$emit('nextStep')" class="flex items-center gap-2 bg-orange-500 hover:bg-orange-300">
-              <Plus class="w-5 h-5" />
-              Create New Listing
-            </Button>
+            <NuxtLink :to="{ name: 'VendorRegs' }">
+              <Button class="flex items-center gap-2 bg-orange-500 hover:bg-orange-300">
+                <Plus class="w-5 h-5" />
+                Create New Listing
+              </Button>
+            </NuxtLink>
 
           </div>
           <Table>
@@ -49,32 +68,20 @@ console.log(props.venueListing);
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
+              <TableRow v-for="(vendor, index) in myVendors" :key="index">
                 <TableCell>
-                  Placeholder Biz 1
+                  {{vendor.business_name}}
                 </TableCell>
                 <TableCell>
-                  Some Address, City
+                  {{ vendor.location }}
                 </TableCell>
                 <TableCell class="text-right">
-                  <Button class="flex items-center gap-2" variant="ghost">
-                    <Copy class="w-4 h-4" />
-                    Edit
-                  </Button>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  Placeholder Biz 2
-                </TableCell>
-                <TableCell>
-                  Another Address, Other City
-                </TableCell>
-                <TableCell class="text-right">
-                  <Button class="flex items-center gap-2" variant="ghost">
-                    <Copy class="w-4 h-4" />
-                    Edit
-                  </Button>
+                  <NuxtLink :to="{ name: 'VendorRegs', query: { id: vendor.id } }">
+                    <Button class="flex items-center gap-2" variant="ghost">
+                      <Copy class="w-4 h-4" />
+                      Edit
+                    </Button>
+                  </NuxtLink>
                 </TableCell>
               </TableRow>
             </TableBody>

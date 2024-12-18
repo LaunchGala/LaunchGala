@@ -127,14 +127,14 @@ const date = ref<Date>()
       <CardHeader class="relative bg-white dark:bg-gray-800">
         <div class="flex justify-between items-center p-4 border-b dark:border-gray-700">
           <CardTitle class="text-lg font-bold dark:text-white">
-            Elegant Venue in the City Center
+            {{ venueListing.title }}
           </CardTitle>
           <div class="flex space-x-2">
             <Button variant="ghost" class="OrangeText">
               <Save class="w-5 h-5" /> Save
             </Button>
             <Button variant="ghost" class="OrangeText">
-              <ShareButton @click="sharePage" class="w-5 h-5" /> Share
+              <!-- <ShareButton @click="sharePage" class="w-5 h-5" />--> Share
             </Button>
           </div>
         </div>
