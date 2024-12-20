@@ -51,7 +51,6 @@ const handleFileUpload = async (event: Event) => {
 
 
 const formData = ref({
-    id: null,
   full_name: '',
   business_name: '',
   headline: '',
