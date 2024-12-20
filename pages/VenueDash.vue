@@ -144,9 +144,9 @@ async function confirmBooking(request){
   <div class="flex min-h-screen bg-[#FFFAF0] dark:bg-black text-gray-900">
     <main class="flex-1 p-8">
       <Tabs default-value="requested-from-me" class="w-full">
-        <TabsList class="flex w-full justify-around border-b-2 border-orange-300">
-          <TabsTrigger value="requested-from-me" class="py-2">Venues requested from me</TabsTrigger>
-          <TabsTrigger value="requested" class="py-2">Venues I requested or offered to me</TabsTrigger>
+        <TabsList class="flex w-full justify-around border-b-2 border-orange-300 bg-orange-500 text-white ">
+          <TabsTrigger value="requested-from-me" class="py-2 font-semibold text-md">Venues requested from me</TabsTrigger>
+          <TabsTrigger value="requested" class="py-2 font-semibold text-md">Venues I requested or offered to me</TabsTrigger>
         </TabsList>
 
         <TabsContent value="requested-from-me" class="space-y-6">
