@@ -196,7 +196,7 @@ const date = ref<Date>()
       </div>
       
         <!-- <VenueSearchLanding/> -->
-      <VenueBookingRequest1 :venue="venueListing"/>
+      <VenueBookingRequest1 :venueId="venueId"/>
       </div>
       <!-- <AspectRatio class="rounded-lg overflow-hidden shadow-sm">
           <MapViewer :address="venueListing.address"/>

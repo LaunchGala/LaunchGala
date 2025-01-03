@@ -44,6 +44,100 @@ import { Calendar } from '@/components/ui/calendar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+
+const user = useSupabaseUser();
+const supabase = useSupabaseClient();
+const selectedView = ref('Dashboard');
+const userProfile = ref({
+  full_name: '',
+  email: '',
+  website: '',
+  avatar_path: '',
+  banner_path: '',
+  phone: '',
+  job_title: '',
+  company: '',
+  location: '',
+  about: '',
+  linkedin: '',
+  youtube: '',
+  facebook: '',
+  twitter: '',
+  industries: [],
+  is_expert: false,
+  is_influencer: false,
+  is_volunteer: false,
+  is_talent: false,
+  positions:[],
+  avatarSRC: ''
+});
+async function getProfileWithDetails() {
+
+try {
+  // Fetch profile by id along with the related data from other tables
+  const { data, error } = await supabase
+    .from('profiles')
+    .select(`
+      *,
+      Experts(*),
+      Volunteers(*),
+      Influencers!Influencer_profile_id_fkey(*),
+      Talent(*),
+      positions:profile_company(
+        job_title,
+        company:Companies(
+          name
+        )
+      )
+    `)
+    .eq('id', user.value?.id);
+
+  if (error) {
+    throw error;
+  }
+  if (data && data.length > 0) {
+      const profile = data[0];
+      // Copy profile data to userProfile object
+      userProfile.value.full_name = profile.full_name || '';
+      userProfile.value.email = profile.email || user.value.email;
+      userProfile.value.website = profile.website || '';
+      userProfile.value.avatar_path = profile.avatar_url || '';
+      userProfile.value.banner_path = profile.banner_url || '';
+      userProfile.value.phone = profile.phone || '';
+      userProfile.value.job_title = profile.job_title || '';
+      userProfile.value.company = profile.company || '';
+      userProfile.value.location = profile.location || '';
+      userProfile.value.about = profile.about || '';
+      userProfile.value.linkedin = profile.linkedin || '';
+      userProfile.value.youtube = profile.youtube || '';
+      userProfile.value.facebook = profile.facebook || '';
+      userProfile.value.twitter = profile.twitter || '';
+      userProfile.value.industries = profile.industries || [];
+      userProfile.value.positions = profile.positions || [];
+      userProfile.value.is_expert = profile.is_expert || false;
+      userProfile.value.is_influencer = profile.is_influencer || false;
+      userProfile.value.is_volunteer = profile.is_volunteer || false;
+      userProfile.value.is_talent = profile.is_talent || false;
+      userProfile.value.avatarSRC =  await fetchImage(profile.avatar_url, 'avatars')
+    }
+      console.log(data)
+    return data;
+  } catch (err) {
+    console.error('Error fetching profile details:', err);
+    return null;
+  }
+
+}
+const fetchImage = async (id, bucket) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+  }
+  onMounted(() => {
+    getProfileWithDetails()
+  });
 </script>
 
 <template>
@@ -61,11 +155,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
       </div> -->
       <div class="flex items-center space-x-4 ">
           <Avatar class="w-28 h-28 ">
-            <AvatarImage src="/PinkPavatar Background Removed Background Removed.png" alt="Your Name" />
+            <AvatarImage :src="userProfile?.avatarSRC" alt="Your Name" />
           </Avatar>
           <div>
             <div class="flex ">
-            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, Pinky!</h1>
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, {{userProfile.full_name}}!</h1>
             <BadgeCheck class="w-6 h-6 ml-2 font-bold text-orange-500" />
             
           </div>
@@ -165,41 +259,43 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
     </div>
   </div>
   <div class="flex min-h-screen bg-gray-50 dark:bg-black text-gray-800 dark:text-white">
-    <aside class="w-80  p-8 bg-white dark:bg-gray-900 shadow-xl">
-      <Card class="rounded-xl overflow-hidden border dark:border-transparent h-1/2 " >
+    <aside class="w-80 bg-white dark:bg-gray-900 shadow-xl">
+      <Card class="rounded-xl w-full overflow-hidden border dark:border-transparent h-1/2 " >
 
         <CardHeader class="bg-orange-500 dark:bg-orange-500 p-6">
           <CardTitle class="text-xl font-semibold text-left text-white">Offers & Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
           <ul>
-            <NuxtLink to="VenueDash">
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded mt-6">
+            <li @click="selectedView = 'Dashboard'" :class="selectedView == 'Dashboard' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded mt-6' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded mt-6'">
+              <List class="w-5 h-5 mr-2 text-indigo-500" />
+              <span>Dashboard</span>
+            </li>
+            <li @click="selectedView = 'VenueDash'" :class="selectedView == 'VenueDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <List class="w-5 h-5 mr-2 text-indigo-500" />
               <span>Venues</span>
             </li>
-          </NuxtLink>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'VolunteerDash'" :class="selectedView == 'VolunteerDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <List class="w-5 h-5 mr-2 text-blue-300" />
               <span>Volunteers</span>
             </li>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'EventDash'" :class="selectedView == 'EventDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Volume2 class="w-5 h-5 mr-2 text-orange-500" />
               <span>Events</span>
             </li>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'SponsorDash'" :class="selectedView == 'SponsorDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <UserPlus class="w-5 h-5 mr-2 text-green-500" />
               <span>Sponsors</span>
             </li>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'ExpertDash'" :class="selectedView == 'ExpertDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Award class="w-5 h-5 mr-2 text-purple-500" />
               <span>Experts</span>
             </li>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'VendorDash'" :class="selectedView == 'VendorDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Award class="w-5 h-5 mr-2 text-yellow-500" />
               <span>Vendors</span>
             </li>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'NetworkDash'" :class="selectedView == 'NetworkDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Users class="w-5 h-5 mr-2 text-orange-500" />
               <span>Network</span>
             </li>
@@ -215,11 +311,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
               <Volume2 class="w-5 h-5 mr-2 text-red-500" />
               <span>Angel AI</span>
             </li> -->
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'NotificationDash'" :class="selectedView == 'NotificationDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Mail class="w-5 h-5 mr-2 text-red-500" />
               <span>Notifications</span>
             </li>
-            <li class="flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded">
+            <li @click="selectedView = 'Settings'" :class="selectedView == 'Settings' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Cog class="w-5 h-5 mr-2 text-gray-500" />
               <span>Settings</span>
             </li>
@@ -241,7 +337,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
       </div>
     </aside>
     <main class="flex-1 p-8">
-      <section class="mb-8">
+      <section class="mb-8" v-if="selectedView == 'Dashboard'">
         <!-- <Card class="bg-white dark:bg-gray-800 shadow rounded-lg p-5 mb-6">
           <CardHeader class="border-b pb-4">
             <CardTitle class="text-2xl font-bold leading-tight">New Updates</CardTitle>
@@ -489,6 +585,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
           </Card>
       </div>
     </div>
+      </section>
+      <section class="mb-8" v-if="selectedView == 'VenueDash'">
+        <MyVenueDash></MyVenueDash>
       </section>
     </main>
   </div>
