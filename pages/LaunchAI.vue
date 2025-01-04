@@ -143,9 +143,12 @@ const date = ref<Date>()
             <p class="text-gray-600 dark:text-gray-400 flex-grow">{{ category.description }}</p>
           </CardContent>
           <CardFooter class="mr-12 ml-12 dark:bg-gray-900">
+            <NuxtLink :to="'AiAgentPage'">
+
             <Button variant="default" class="w-3/4 bg-gray-100 text-orange-500 border border-orange-500 hover:bg-orange-500 hover:text-white rounded-half transition-colors duration-300">
               Learn More
             </Button>
+          </NuxtLink>
           </CardFooter>
         </Card>
       </div>

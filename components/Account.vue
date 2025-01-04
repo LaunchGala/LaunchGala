@@ -596,7 +596,7 @@ onMounted(() => {
 </script>
 
 <template>
-<div>
+<div class="bg-orange-100 rounded-lg  pt-16 pb-16">
   <div v-if="loading" class="loading-overlay">
     <div class="loading-spinner">Loading...</div>
   </div>
@@ -738,7 +738,7 @@ onMounted(() => {
     <Accordion type="single" collapsible class="space-y-2">
       <AccordionItem value="expert">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Become an Expert</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become an Expert</span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">
@@ -785,7 +785,7 @@ onMounted(() => {
 
       <AccordionItem value="volunteer">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Become a Volunteer</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm ">Become a Volunteer</span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">
@@ -832,7 +832,7 @@ onMounted(() => {
 
       <AccordionItem value="influencer">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Become an Influencer</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become an Influencer</span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">
@@ -899,7 +899,7 @@ onMounted(() => {
       </AccordionItem>
       <AccordionItem value="talent">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="font-medium">Talent</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">List your Talent</span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">

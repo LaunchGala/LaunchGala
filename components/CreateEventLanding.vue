@@ -26,7 +26,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
     <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Home Party Card -->
       <Card as-child>
-        <a href="/workshops" class="block">
+        <a href="/CreateEvent" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Workshops" class="w-full h-full object-cover">
           </AspectRatio>
@@ -43,7 +43,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 
       <!-- Corporate Event Card -->
       <Card as-child>
-        <a href="/corporate-event" class="block">
+        <a href="/CreateEvent" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Corporate Event" class="w-full h-full object-cover">
           </AspectRatio>
@@ -59,7 +59,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 
       <!-- Private Meeting Card -->
       <Card as-child>
-        <a href="/private-meeting" class="block">
+        <a href="/CreateEvent" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Private Meeting" class="w-full h-full object-cover">
           </AspectRatio>
@@ -75,7 +75,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 
       <!-- Workshops Card -->
       <Card as-child>
-        <a href="/home-party" class="block">
+        <a href="/CreateEvent" class="block">
           <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
             <img src="/Launch_Gala_Logo-removebgHD.png" alt="Home Party" class="w-full h-full object-cover">
           </AspectRatio>

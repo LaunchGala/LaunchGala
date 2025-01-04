@@ -75,7 +75,7 @@
 
   
         <!-- Input area -->
-        <div class="p-4 bg-white border-t">
+        <div class="p-4 bg-white border-t ">
           <form @submit.prevent="sendMessage" class="flex items-center">
             <input
               v-model="newMessage"
@@ -89,7 +89,7 @@
               :disabled="!selectedConversation"
               class="bg-orange-500 text-white rounded-r-lg px-4 py-2 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
             >
-              <SendIcon class="h-5 w-5" />
+              <SendIcon class="h-6 w-5" />
             </button>
           </form>
         </div>
