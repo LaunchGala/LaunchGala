@@ -230,8 +230,8 @@ function toggleShowRejected(){
                       <h3 class="font-semibold text-center text-md mt-2">{{ item.event.event_owner.full_name }}</h3>
                     </div>
                     <div class="flex grow flex-col items-center">
-                      <h3 class="font-semibold text-2xl">{{ item.venue.title }}</h3>
-                      <h6 class="font-semibold text-large text-gray-500">{{ item.event.title }}</h6>
+                      <h3 class="font-semibold text-2xl">{{ item.venue?.title }}</h3>
+                      <h6 class="font-semibold text-large text-gray-500">{{ item.event?.title }}</h6>
                     </div>
                     <div v-if="item.status == 'open'" class="p-1 rounded-lg border-2 border-orange-300 h-min">Open</div>
                     <div v-if="item.status == 'approved'" class="p-1 rounded-lg bg-green-300 text-white-300 h-min">Approved</div>
@@ -295,8 +295,8 @@ function toggleShowRejected(){
                       <h3 class="font-semibold text-center text-md mt-2">{{ item.venue.venue_owner.full_name }}</h3>
                     </div>
                     <div class="flex grow flex-col items-center">
-                      <h3 class="font-semibold text-2xl">{{ item?.venue.title }}</h3>
-                      <h6 class="font-semibold text-large text-gray-500">{{ item?.event.title }}</h6>
+                      <h3 class="font-semibold text-2xl">{{ item?.venue?.title }}</h3>
+                      <h6 class="font-semibold text-large text-gray-500">{{ item?.event?.title }}</h6>
                     </div>
                     <div v-if="item.status == 'open'" class="p-1 rounded-lg border-2 border-orange-300 h-min">Open</div>
                     <div v-if="item.status == 'approved'" class="p-1 rounded-lg bg-green-300 text-white-300 h-min">Approved</div>
