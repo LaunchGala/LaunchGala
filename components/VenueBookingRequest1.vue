@@ -17,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const startDate = ref<Date | null>(new Date());
 const endDate = ref<Date | null>(new Date());
@@ -29,7 +30,7 @@ const supabase = useSupabaseClient()
 
 const user = useSupabaseUser()
 
-const props = defineProps(['venue'])
+const props = defineProps(['venueId'])
 const loading = ref(true)
 const full_name = ref('')
 const avatar_url = ref('')
@@ -68,12 +69,17 @@ async function getEvents() {
 async function checkDisable(){
     try {
     const eventId = selectedEvent?.value?.id ?? null;
+    if(!eventId){
+      disabled.value = true
+      message.value = "Venue Requests Disabled"
+      return;
+    }
     // Query the table for rows where the property is true
     let query = supabase
       .from("VenueBookings")
-      .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
-      .eq("venue_id", props.venue.id)
-      .eq("requesting_user_id", user.value.id);
+      .select('*, event:AllEvents(profiles!AllEvents_created_by_fkey (id))', { count: 'exact' })  // `count: 'exact'` is important to return the row count
+      .eq("venue_id", props.venueId)
+      .eq("event.profiles.id", user.value.id);
       if (eventId === null) {
         query = query.is('event_id', null);
       } else {
@@ -95,10 +101,9 @@ async function checkDisable(){
     // Query the table for rows where the property is true
     const { data, error, count } = await supabase
       .from("VenueBookings")
-      .select('*', { count: 'exact' })  // `count: 'exact'` is important to return the row count
-      .eq("requesting_user_id", user.value.id)
-      .eq("is_cancelled", false)
-      .eq("is_request", true);          // Match the property set to true
+      .select('*, event:AllEvents(profiles!AllEvents_created_by_fkey (id))', { count: 'exact' })  // `count: 'exact'` is important to return the row count
+      .eq("event.profiles.id", user.value.id)
+      .eq("status", 'open');        // Match the property set to true
     if(count > 5){
         disabled.value = true
         message.value = "Exceeded Booking Request Limit"
@@ -134,15 +139,8 @@ async function checkDisable(){
 async function bookingActivity() {
 
   const booking = {
-    requesting_user_id: user.value?.id,
-    venue_owner_id: props.venue.createdBy,
-    event_start_date: startDate.value,
-    event_end_date: endDate.value,
-    event_start_time: startTime.value,
-    event_end_time: endTime.value,
-    event_type: eventStyle.value,
-    number_of_guests: numberOfGuests.value,
-    venue_id: props.venue.id,
+    status: 'open',
+    venue_id: props.venueId,
     event_id: selectedEvent?.value?.id,
   }
 
@@ -168,13 +166,14 @@ async function bookingActivity() {
 
 function selectEvent(event) {
   selectedEvent.value = event
-  startDate.value = new Date(event.event_start_date)
-  endDate.value = new Date(event.event_end_date)
-  startTime.value = event.event_start_time
-  endTime.value = event.event_end_time
-  eventStyle.value = event.event_type
-  numberOfGuests.value = event.number_of_guests
   checkDisable()
+}
+const isDialogOpen = ref(false)
+
+async function selectNewEventAndClose(id: any){
+  await getEvents();
+  selectEvent(events.value.find(e => e.id == id));
+  isDialogOpen.value = false;
 }
 
 onMounted(async () => {
@@ -184,7 +183,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="bg-white dark:bg-black p-6 rounded-md shadow-lg w-1/3  ">
+  <div class="bg-white dark:bg-black p-6 rounded-md shadow-lg w-1/3 max-h-fit">
     <div class="space-y-4">
 
       <div class="grid grid-cols-1 gap-4">
@@ -200,54 +199,29 @@ onMounted(async () => {
               {{ event.title }}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem @click="selectedEvent = null" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+            <DropdownMenuItem @click="selectEvent(null)" class="hover:bg-orange-200 dark:hover:bg-orange-700">
               <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />No event created yet.
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Popover>
-          <PopoverTrigger as-child>
-            <Button :disabled="!!selectedEvent" variant="outline" class="w-full flex justify-between items-center">
-              <CalendarIcon class="mr-2 h-5 w-5" />
-              <span class="flex-1">{{ startDate ? format(startDate, 'PPP') : 'Start Date' }}</span>
-              <ChevronDown class="ml-2 h-5 w-5" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent class="p-4">
-            <Calendar v-model="startDate" />
-          </PopoverContent>
-        </Popover>
-        <Popover>
-          <PopoverTrigger as-child>
-            <Button :disabled="!!selectedEvent" variant="outline" class="w-full flex justify-between items-center">
-              <CalendarIcon class="mr-2 h-5 w-5" />
-              <span class="flex-1">{{ endDate ? format(endDate, 'PPP') : 'End Date' }}</span>
-              <ChevronDown class="ml-2 h-5 w-5" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent class="p-4">
-            <Calendar v-model="endDate" />
-          </PopoverContent>
-        </Popover>
-      </div>
-
-      <div class="grid grid-cols-2 gap-4">
-        <Input :disabled="!!selectedEvent" v-model="startTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
-        <Input :disabled="!!selectedEvent" v-model="endTime" type="time" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
-      </div>
-
-      <Input :disabled="!!selectedEvent" v-model="eventStyle" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Event Type" />
-
-      <Input :disabled="!!selectedEvent" v-model="numberOfGuests" type="number" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Number of Guests" />
-
-      <Textarea v-model="note" placeholder="Additional notes" class="border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize-none" />
-
+        <Dialog v-slot="{ }" v-model:open="isDialogOpen" v-if="!selectedEvent">
+          <DialogTrigger>
+            <Button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Create New Event</Button>
+          </DialogTrigger>
+          <DialogContent class="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-lg space-y-4 max-w-3xl" v-model:open="open">
+            <DialogHeader>
+              <DialogTitle class="text-lg">Create New Event</DialogTitle>
+            </DialogHeader>
+            <EventCreationForm @eventCreated="selectNewEventAndClose"></EventCreationForm>
+          </DialogContent>
+        </Dialog>
       <Button @click="bookingActivity" :disabled="disabled" class="w-full OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
         {{ message }}
       </Button>
 
     </div>
+  </div>
   </div>
 </template>
 <style>
