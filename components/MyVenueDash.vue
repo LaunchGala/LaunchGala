@@ -219,8 +219,9 @@ function toggleShowRejected(){
             <div class="flex">
               <div class="w-1/3">
                 <div v-for="item in filterVenues(venuesRequestedFromMe, showOpen, showApproved, showRejected)"
-                  class="flex flex-col w-full border border-black-300 space-y-0 bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]"
-                  :class="{ 'border-2 border-orange-500': selectedBooking.id == item.id }"
+                  :class="{ 'flex flex-col w-full border border-black-300 space-y-0 p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]border-2 border-orange-500 bg-orange-100': selectedBooking.id == item.id,
+                    'flex flex-col w-full border border-black-300 space-y-0 bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]': selectedBooking.id != item.id
+                   }"
                   @click="selectBooking(item)">
                   <div class="flex">
                     <div class="flex flex-1 flex-col items-center">
