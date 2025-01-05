@@ -29,16 +29,16 @@ async function fetchVenuesRequestedFromMe() {
   .from('VenueBookings')
   .select(`
     *,
-    event:AllEvents (
+    event:AllEvents!inner (
       *,
-      event_owner:profiles!AllEvents_created_by_fkey (*)
+      event_owner:profiles!inner (*)
     ),
-    venue:AllVenues (
+    venue:AllVenues!inner (
       *,
-      venue_owner:profiles!AllVenues_createdBy_fkey (*)
+      venue_owner:profiles!inner (*)
     )
   `)
-  .eq('venue.createdBy', user.value.id);
+  .eq('AllVenues.venue_owner.id', user.value.id);
   if (response.error) {
     console.error(response.error);
     return;
@@ -55,16 +55,16 @@ async function fetchVenuesIRequested() {
   .from('VenueBookings')
   .select(`
     *,
-    event:AllEvents (
+    event:AllEvents!inner (
       *,
-      event_owner:profiles!AllEvents_created_by_fkey (*)
+      event_owner:profiles!inner (*)
     ),
-    venue:AllVenues (
+    venue:AllVenues!inner (
       *,
-      venue_owner:profiles!AllVenues_createdBy_fkey (*)
+      venue_owner:profiles!inner (*)
     )
   `)
-  .eq('event.created_by', user.value.id);
+  .eq('AllEvents.event_owner.id', user.value.id);
   if (response.error) {
     console.error(response.error);
     return;
@@ -224,10 +224,10 @@ function toggleShowRejected(){
                   <div class="flex">
                     <div class="flex flex-1 flex-col items-center">
                       <Avatar class="w-16 h-16">
-                        <AvatarImage :src="item.event.event_owner.avatarSRC" alt="User's Name" />
+                        <AvatarImage :src="item.event?.event_owner.avatarSRC" alt="User's Name" />
                         <AvatarFallback>UN</AvatarFallback>
                       </Avatar>
-                      <h3 class="font-semibold text-center text-md mt-2">{{ item.event.event_owner.full_name }}</h3>
+                      <h3 class="font-semibold text-center text-md mt-2">{{ item.event?.event_owner.full_name }}</h3>
                     </div>
                     <div class="flex grow flex-col items-center">
                       <h3 class="font-semibold text-2xl">{{ item.venue?.title }}</h3>
@@ -244,16 +244,16 @@ function toggleShowRejected(){
                         <div class="space-y-0">
                           <div class="flex items-center">
                             <p class="text-sm font-semibold text-gray-700 mr-2">Event type:</p>
-                            <p class="text-sm">{{ item.event.event_type }}</p>
+                            <p class="text-sm">{{ item.event?.event_type }}</p>
                           </div>
                           <div class="flex items-center">
                             <p class="text-sm font-semibold text-gray-700 mr-2">Number of guests:</p>
-                            <p class="text-sm">{{ item.event.number_of_guests }}</p>
+                            <p class="text-sm">{{ item.event?.number_of_guests }}</p>
                           </div>
                           <div class="flex items-center">
                             <p class="text-sm font-semibold text-gray-700 mr-2">Event date:</p>
-                            <p class="text-sm">{{ formatDate(item.event.event_start_date) }} - {{
-                              formatDate(item.event.event_end_date) }}</p>
+                            <p class="text-sm">{{ formatDate(item.event?.event_start_date) }} - {{
+                              formatDate(item.event?.event_end_date) }}</p>
                           </div>
                         </div>
                       </div>
@@ -263,10 +263,10 @@ function toggleShowRejected(){
                 </div>
               </div>
               <div class="w-2/3">
-                <EventBookingCard v-if="Object.keys(selectedBooking).length !== 0" :event="selectedBooking?.event" :venue-name="selectedBooking?.venue.title">
+                <EventBookingCard v-if="Object.keys(selectedBooking).length !== 0" :event="selectedBooking?.event" :venue-name="selectedBooking?.venue?.title">
                   <template #action-buttons>
                     <MessagesButton :label="'Contact'" :isIcon="false"
-                          :newConversationInfo="getContactInfo(selectedBooking?.event.event_owner)"></MessagesButton>
+                          :newConversationInfo="getContactInfo(selectedBooking?.event?.event_owner)"></MessagesButton>
                         <Button v-if="selectedBooking.status == 'open'" @click="acceptRequest(selectedBooking)" class="bg-green-500 text-white m-2">Accept</Button>
                         <Button v-if="selectedBooking.status == 'open'" @click="rejectRequest(selectedBooking)" class="bg-red-500 text-white m-2">Reject</Button>
                         <Button v-if="selectedBooking.status == 'rejected' || selectedBooking.status == 'approved'" @click="rejectRequest(selectedBooking)" class="bg-white-500 text-orange m-2">Reopen</Button>
@@ -309,16 +309,16 @@ function toggleShowRejected(){
                         <div class="space-y-0">
                           <div class="flex items-center">
                             <p class="text-sm font-semibold text-gray-700 mr-2">Event type:</p>
-                            <p class="text-sm">{{ item.event.event_type }}</p>
+                            <p class="text-sm">{{ item.event?.event_type }}</p>
                           </div>
                           <div class="flex items-center">
                             <p class="text-sm font-semibold text-gray-700 mr-2">Number of guests:</p>
-                            <p class="text-sm">{{ item.event.number_of_guests }}</p>
+                            <p class="text-sm">{{ item.event?.number_of_guests }}</p>
                           </div>
                           <div class="flex items-center">
                             <p class="text-sm font-semibold text-gray-700 mr-2">Event date:</p>
-                            <p class="text-sm">{{ formatDate(item.event.event_start_date) }} - {{
-                              formatDate(item.event.event_end_date) }}</p>
+                            <p class="text-sm">{{ formatDate(item.event?.event_start_date) }} - {{
+                              formatDate(item.event?.event_end_date) }}</p>
                           </div>
                         </div>
                       </div>
@@ -328,10 +328,10 @@ function toggleShowRejected(){
                 </div>
               </div>
               <div class="w-2/3">
-                <VenueBookingCard v-if="Object.keys(selectedBooking).length !== 0" :venue="selectedBooking?.venue" :event-name="selectedBooking?.event.title">
+                <VenueBookingCard v-if="Object.keys(selectedBooking).length !== 0" :venue="selectedBooking?.venue" :event-name="selectedBooking?.event?.title">
                   <template #action-buttons>
                     <MessagesButton :label="'Contact'" :isIcon="false"
-                          :newConversationInfo="getContactInfo(selectedBooking?.venue.venue_owner)"></MessagesButton>
+                          :newConversationInfo="getContactInfo(selectedBooking?.venue?.venue_owner)"></MessagesButton>
                     <Button v-if="selectedBooking.status == 'cancelled'" @click="reopenRequest(selectedBooking)" class="bg-green-500 text-white m-2">Reopen</Button>
                     <Button v-if="selectedBooking.status == 'open' || selectedBooking.status == 'approved'" @click="cancelRequest(selectedBooking)" class="bg-green-500 text-white m-2">Cancel</Button>
                   </template>
