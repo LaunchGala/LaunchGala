@@ -8,6 +8,7 @@ import {
   Clock,
   UserIcon,
   CheckCircle,
+  Check
 } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 
@@ -17,6 +18,14 @@ const props = defineProps({
     required: true,
   },
   eventName: {
+    type: String,
+    required: true
+  },
+  requesting_sponsorship:{
+    type: Boolean,
+    required: true
+  },
+  note: {
     type: String,
     required: true
   }
@@ -42,9 +51,9 @@ const formatTime = (time: string) =>
 <template>
   <Card class="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden">
     <CardHeader
-      class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white"
+      class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white relative"
     >
-    <span class="text-xl opacity-90">Event: {{ eventName }}</span>
+    <span v-if="!!eventName" class="text-xl opacity-90">Event: {{ eventName }}</span>
       <Avatar class="mb-4 w-24 h-24 ring-4 ring-white">
         <AvatarImage :src="venue.venue_owner.avatarSRC" alt="Event Banner" />
         <AvatarFallback>EV</AvatarFallback>
@@ -58,13 +67,22 @@ const formatTime = (time: string) =>
       </div>
     </CardHeader>
     <CardContent class="p-6">
+      <div class="max-w-fit">
+        <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Sponsorship Requested
+            </span>
+      </div>
       <!-- Custom Buttons Slot -->
       <div class="flex justify-end mt-1 space-x-4 align-middle">
         <slot name="action-buttons">
         </slot>
       </div>
+      <h3 class="font-semibold mt-6 mb-2">Description:</h3>
       <p class="text-gray-700 dark:text-gray-300 mb-6">{{ venue.description }}</p>
-
+      <div class="relative">
+          <ImageCarousel class="w-full h-64 object-cover" :image-names="venue.images" alt="Apartment image" />
+        </div>
 
       <!-- Amenities -->
       <h3 class="font-semibold mt-6 mb-2">Amenities</h3>

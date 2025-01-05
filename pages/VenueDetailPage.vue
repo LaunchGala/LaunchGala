@@ -159,7 +159,7 @@ const date = ref<Date>()
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />
-          <span>Company <strong>{{venueListing.venue_owner.user_company}}</strong></span>
+          <span>Company <strong>{{venueListing.company_name}}</strong></span>
         </div>
         <div class="flex items-center space-x-2 space-y-4">
           <User class="w-5 h-5" />

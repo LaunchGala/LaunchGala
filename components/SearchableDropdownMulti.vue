@@ -77,7 +77,7 @@ const formatArray = (arr: any[], length: any) => arr.length > 3 ? `${arr.slice(0
         />
       </div>
       <ScrollArea class="h-80 w-full p-1">
-        <ul class="menu">
+        <ul class="menu overflow-y-scroll max-h-full">
           <li v-for="opt in options" :key="opt" class="flex items-center gap-2">
             <input type="checkbox" 
             :checked="selected.includes(opt)"

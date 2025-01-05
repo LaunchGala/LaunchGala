@@ -220,6 +220,7 @@ function toggleShowRejected(){
               <div class="w-1/3">
                 <div v-for="item in filterVenues(venuesRequestedFromMe, showOpen, showApproved, showRejected)"
                   class="flex flex-col w-full border border-black-300 space-y-0 bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]"
+                  :class="{ 'border-2 border-orange-500': selectedBooking.id == item.id }"
                   @click="selectBooking(item)">
                   <div class="flex">
                     <div class="flex flex-1 flex-col items-center">
@@ -255,6 +256,10 @@ function toggleShowRejected(){
                             <p class="text-sm">{{ formatDate(item.event?.event_start_date) }} - {{
                               formatDate(item.event?.event_end_date) }}</p>
                           </div>
+                          <div class="flex items-center">
+                            <p class="text-sm font-semibold text-gray-700 mr-2">Requested on:</p>
+                            <p class="text-sm">{{ formatDate(item.created_at) }}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -279,12 +284,14 @@ function toggleShowRejected(){
 
           <TabsContent value="requested" class="space-y-6">
             <p class="text-gray-800 p-2 font-semibold">
-              View the venues that others have requested from you:
+              View the venues that you have requested from others:
             </p>
             <div class="flex">
               <div class="w-1/3">
                 <div v-for="item in filterVenues(venuesIRequested, showOpen, showApproved, showRejected)"
-                  class="flex flex-col w-full border border-black-300 space-y-0 bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]"
+                  :class="{ 'flex flex-col w-full border border-black-300 space-y-0 p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]border-2 border-orange-500 bg-orange-100': selectedBooking.id == item.id,
+                    'flex flex-col w-full border border-black-300 space-y-0 bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]': selectedBooking.id != item.id
+                   }"
                   @click="selectBooking(item)">
                   <div class="flex">
                     <div class="flex flex-1 flex-col items-center">
@@ -320,6 +327,10 @@ function toggleShowRejected(){
                             <p class="text-sm">{{ formatDate(item.event?.event_start_date) }} - {{
                               formatDate(item.event?.event_end_date) }}</p>
                           </div>
+                          <div class="flex items-center">
+                            <p class="text-sm font-semibold text-gray-700 mr-2">Requested on:</p>
+                            <p class="text-sm">{{ formatDate(item.created_at) }}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -328,7 +339,8 @@ function toggleShowRejected(){
                 </div>
               </div>
               <div class="w-2/3">
-                <VenueBookingCard v-if="Object.keys(selectedBooking).length !== 0" :venue="selectedBooking?.venue" :event-name="selectedBooking?.event?.title">
+                <VenueBookingCard v-if="Object.keys(selectedBooking).length !== 0" :venue="selectedBooking?.venue" :event-name="selectedBooking?.event?.title"
+                :requesting_sponsorship="selectedBooking?.requesting_sponsorship" :note="selectedBooking?.note">
                   <template #action-buttons>
                     <MessagesButton :label="'Contact'" :isIcon="false"
                           :newConversationInfo="getContactInfo(selectedBooking?.venue?.venue_owner)"></MessagesButton>

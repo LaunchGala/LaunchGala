@@ -24,6 +24,7 @@ console.log(props.venueListing);
         </CardHeader>
         <CardContent class="space-y-6">
           <Input v-model="props.venueListing.title" placeholder="Venue Name" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500" />
+          <Input v-model="props.venueListing.company_name" placeholder="Company Name" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500" />
           <Textarea v-model="props.venueListing.description" placeholder="Short description of the venue" rows="4" class="w-full px-4 py-2 border rounded-md dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500"></Textarea>
         </CardContent>
         <div class="flex justify-between items-center p-4">

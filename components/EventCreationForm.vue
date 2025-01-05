@@ -11,6 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 const uploading = ref(false); // Track upload status
 const toast = useToast();
 const user = useSupabaseUser();
+const note = ref('')
+const requesting_sponsorship = ref(false);
 // Emit event to notify parent
 const emit = defineEmits(['eventCreated'])
 
@@ -132,7 +134,7 @@ const onSubmit = async (event: Event) => {
     toast.error(`Error: ${error.message}`);
   } else {
     toast.success('Event created successfully');
-    emit('eventCreated', data[0].id)
+    emit('eventCreated', data[0].id, note.value, requesting_sponsorship.value)
   }
 };
 
@@ -268,6 +270,17 @@ onMounted(() => {
           <Label for="number_of_guests">Number of Guests</Label>
           <Input id="number_of_guests" type="number" v-model="formData.number_of_guests" />
         </div>
+          <div class="p-2 flex items-center">
+            <Checkbox id="request_sponsorship" class="w-4 h-4 text-orange-600 focus:ring-orange-400 dark:border-gray-600"
+                      :checked="requesting_sponsorship"
+                      @update:checked="value => requesting_sponsorship = value" />
+            <Label class="ml-2 text-md" for="request_sponsorship">Request Sponsorship</Label>
+          </div>
+          <!-- Note -->
+          <div>
+            <Label for="note">Additional Note</Label>
+            <Textarea id="note" v-model="note" placeholder="Additional Note" />
+          </div>
 
         <!-- Submit Button -->
         <Button type="submit" class="w-full bg-orange-500 text-white">

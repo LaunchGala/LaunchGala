@@ -583,6 +583,7 @@ function addNewPosition(){
     job_title: '',
     company: selectedCompany
   }
+  updateProfile()
 }
 function removePosition(ind){
   userProfile.value.positions.splice(ind, 1)
@@ -652,20 +653,20 @@ onMounted(() => {
             <div v-for="position, ind in userProfile.positions">
               <div class="flex">
                 <div class="flex-grow">
-                  <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{ position.job_title }} at {{ position.company.name }}</span>
+                  <span class="text-md font-medium mr-2 px-2.5 py-0.5 rounded">{{ position.job_title }} at {{ position.company.name }}</span>
                 </div>
                 <XCircle v-if="!editDisabled" class="flex-shrink-0" @click="removePosition(ind)"></XCircle>
               </div>
             </div>
             <label v-if="!editDisabled" class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="positions">Add New Position</label>
-            <div v-if="!editDisabled" class="flex space-x-4">
+            <div class="flex space-x-4">
               <Input v-model="newPosition.job_title" placeholder="Job Title..." class="mt-1 rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
-              <TableDropdownSingle v-model:selectedValue="selectedCompany" :table="'Companies'" :column="'name'">
-                <CreateCompanyDialog></CreateCompanyDialog>
-              </TableDropdownSingle>
+              <TableInputSearch v-model:selectedValue="selectedCompany" :table="'Companies'" :column="'name'">
+                
+              </TableInputSearch>
             </div>
           </div>
-          <Button v-if="!editDisabled" @click="addNewPosition" variant="secondary" class="flex items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400">
+          <Button :disabled="!newPosition || !newPosition.job_title || !selectedCompany || Object.keys(selectedCompany).length == 0" @click="addNewPosition" variant="secondary" class="flex items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400">
             <PlusCircle class="w-5 h-5" /> Add Position
           </Button>
         </div>

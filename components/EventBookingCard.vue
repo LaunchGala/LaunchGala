@@ -8,6 +8,7 @@ import {
   Clock,
   UserIcon,
   CheckCircle,
+  Check
 } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 
@@ -17,6 +18,14 @@ const props = defineProps({
     required: true,
   },
   venueName: {
+    type: String,
+    required: true
+  },
+  requesting_sponsorship:{
+    type: Boolean,
+    required: true
+  },
+  note: {
     type: String,
     required: true
   }
@@ -51,19 +60,26 @@ const formatTime = (time: string) =>
       </Avatar>
       <h3 class="font-semibold text-center text-md mt-2">{{ event.event_owner.full_name }}</h3>
       <CardTitle class="text-2xl font-bold">{{ event.title }}</CardTitle>
-      <span class="text-lg opacity-90">{{ event.event_type }}</span>
-      <div class="flex items-center mt-2">
+      <span v-if="!!event.event_type" class="text-lg opacity-90">{{ event.event_type }}</span>
+      <div v-if="!!event.location" class="flex items-center mt-2">
         <MapPinIcon class="w-5 h-5" />
         <span class="ml-2 font-semibold">{{ event.location }}</span>
       </div>
     </CardHeader>
     <CardContent class="p-6">
+      <div v-if="!!requesting_sponsorship" class="max-w-fit">
+        <span class="flex items-center gap-1 bg-gray-200 dark:bg-gray-700 py-1 px-2 rounded">
+              <Check class="w-4 h-4 text-green-500" />
+              Sponsorship Requested
+            </span>
+      </div>
       <!-- Custom Buttons Slot -->
       <div class="flex justify-end mt-1 space-x-4 align-middle">
         <slot name="action-buttons">
         </slot>
       </div>
-      <p class="text-gray-700 dark:text-gray-300 mb-6">{{ event.description }}</p>
+      <h3 v-if="!!event.description" class="font-semibold mt-6 mb-2">Description:</h3>
+      <p v-if="!!event.description" class="text-gray-700 dark:text-gray-300 mb-6">{{ event.description }}</p>
 
       <!-- Event Details -->
       <div class="grid grid-cols-2 gap-4">
@@ -88,8 +104,8 @@ const formatTime = (time: string) =>
       </div>
 
       <!-- Industries -->
-      <h3 class="font-semibold mt-6 mb-2">Industries</h3>
-      <div class="flex gap-2 flex-wrap">
+      <h3 v-if="!!event.industries" class="font-semibold mt-6 mb-2">Industries</h3>
+      <div v-if="!!event.industries" class="flex gap-2 flex-wrap">
         <span
           v-for="industry in event.industries"
           :key="industry"
@@ -119,14 +135,14 @@ const formatTime = (time: string) =>
       </div>
 
       <!-- Number of Guests -->
-      <h3 class="font-semibold mt-6 mb-2">Expected Guests</h3>
-      <div class="flex items-center">
+      <h3 v-if="!!event.number_of_guests" class="font-semibold mt-6 mb-2">Expected Guests</h3>
+      <div v-if="!!event.number_of_guests" class="flex items-center">
         <UserIcon class="w-5 h-5 mr-2 text-blue-600" />
         <span>{{ event.number_of_guests }}</span>
       </div>
 
       <!-- External Link -->
-      <h3 class="font-semibold mt-6 mb-2">Event Link</h3>
+      <h3 v-if="!!event.link" class="font-semibold mt-6 mb-2">Event Link</h3>
       <div v-if="event.link" class="flex items-center bg-gray-100 dark:bg-gray-800 rounded-md p-2">
         <GlobeIcon class="w-5 h-5 text-orange-600" />
         <a :href="event.link" target="_blank" class="ml-2 hover:underline">{{ event.link }}</a>

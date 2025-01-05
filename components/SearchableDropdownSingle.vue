@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { ChevronDown } from 'lucide-vue-next';
-import Input from './ui/input/Input.vue'; 
+import Input from './ui/input/Input.vue';
 
 // Define props and emit events
 const props = defineProps({
@@ -50,27 +50,22 @@ fetchOptions();
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger
-      class="flex mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2 text-sm text-left"
-    >
+      class="flex mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2 text-sm text-left">
       <ChevronDown class="w-5 h-5 mr-2 text-orange-600 dark:text-orange-400" />
-      <span>{{ !!selected ? selected : !!props.label ? props.label : 'Choose one.'  }}</span>
+      <span>{{ !!selected ? selected : !!props.label ? props.label : 'Choose one.' }}</span>
     </DropdownMenuTrigger>
-    <DropdownMenuContent class="border rounded-md border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg">
+    <DropdownMenuContent
+      class="border rounded-md border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg">
       <div class="p-2">
-        <Input
-          v-model="searchQuery"
-          placeholder="Search..."
-          class="w-full mb-2 rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2"
-        />
+        <Input v-model="searchQuery" placeholder="Search..."
+          class="w-full mb-2 rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2" />
       </div>
-      <DropdownMenuItem
-        v-for="option in options"
-        :key="option"
-        @click="selected = option"
-        class="hover:bg-orange-200 dark:hover:bg-orange-700"
-      >
-        {{ option }}
-      </DropdownMenuItem>
+      <div class="overflow-y-scroll max-h-48">
+        <DropdownMenuItem v-for="option in options" :key="option" @click="selected = option"
+          class="hover:bg-orange-200 dark:hover:bg-orange-700">
+          {{ option }}
+        </DropdownMenuItem>
+      </div>
       <DropdownMenuSeparator />
       <div>
         <slot />

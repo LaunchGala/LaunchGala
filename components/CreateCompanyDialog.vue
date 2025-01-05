@@ -78,11 +78,11 @@
                 <label for="stage" class="block text-sm font-medium text-gray-700">Stage</label>
                 <DropdownMenu>
                 <DropdownMenuTrigger class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
-                  <span>{{ company.value.stage || 'Select business stage' }}</span>
+                  <span>{{ company.stage || 'Select business stage' }}</span>
                   <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
-                  <DropdownMenuItem v-for="stage in stages" :key="stage" @click="company.value.stage = stage">
+                  <DropdownMenuItem v-for="stage in stages" :key="stage" @click="company.stage = stage">
                     {{ stage }}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -110,15 +110,15 @@
                 <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
                 <DropdownMenu>
                 <DropdownMenuTrigger class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
-                    <span>{{ company.value.location || 'Select your city' }}</span>
+                    <span>{{ company.location || 'Select your city' }}</span>
                     <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent class="rounded-md border border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg py-1">
-                    <DropdownMenuItem v-for="city in cities" :key="city" @click="company.value.location = city">
+                    <DropdownMenuItem v-for="city in cities" :key="city" @click="company.location = city">
                     {{ city }}
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem @click="company.value.location = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
+                    <DropdownMenuItem @click="company.location = ''" class="hover:bg-orange-200 dark:hover:bg-orange-700">
                     <XCircle class="mr-2 text-orange-500 dark:text-orange-300" />Other
                     </DropdownMenuItem>
                 </DropdownMenuContent>
