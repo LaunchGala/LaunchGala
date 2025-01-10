@@ -14,7 +14,7 @@ import { Check } from 'lucide-vue-next';
     <Card class=" dark:bg-gray-800 w-full max-w-md rounded-lg shadow-lg overflow-hidden ">
       <CardHeader class="px-6 py-8 bg-orange-500 mb-2">
 
-        <CardTitle class="text-xl font-bold text-white  ml-2 mb-1 ">Create your Event, Launch your Startup</CardTitle>
+        <CardTitle class="text-xl font-bold text-white  ml-2 mb-1 ">Create your Event or just pick a venue and more from down below</CardTitle>
         <CardDescription class="text-sm font-semibold text-gray-100 ml-2 mb-2 ">
           Tell us about your dream event and we will help you make it happen. It's Free.
         </CardDescription>
@@ -65,7 +65,8 @@ import { Check } from 'lucide-vue-next';
 
     </div>
     <div class="w-1/2 font-bold text-5xl absolute top-0 right-32  z-20 m-8 mt-56 text-center text-white">
-      <div>It is that easy!</div>Find your Venue, Volunteers, <div>Speakers, Sponsors, Influencers,</div> <div>Co-Founders, Investors,</div><div class="mt-6"> AI Agents & More... </div>
+      <!-- <div class="mt-2">It is that easy!</div> -->
+       <div class="mt-2">Find your Venue, Volunteers,</div> <div class="mt-2">Speakers, Sponsors, <div class="mt-2">Influencers,</div></div> <div class="mt-2">Co-Founders, Investors,</div><div class="mt-2"> AI Agents & Vendors </div>
     </div>
 </div>
 </template>

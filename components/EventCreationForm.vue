@@ -148,6 +148,7 @@ onMounted(() => {
     <div class="bg-white p-8 rounded-lg max-h-full shadow-lg max-w-full mx-auto dark:bg-black overflow-scroll">
       <form @submit="onSubmit" class="space-y-6 m-4 max-h-full">
         <h3 class="text-3xl font-bold text-center text-orange-600 dark:text-white">Event Creation</h3>
+        <div class="text-sm font-normal text-center ">You can change, publish, delete and add more details to this event from your dashboard</div>
 
         <!-- Title -->
         <div>
@@ -162,10 +163,10 @@ onMounted(() => {
         </div>
 
         <!-- Agenda -->
-        <div>
+        <!-- <div>
           <Label for="agenda">Agenda</Label>
           <Textarea id="agenda" v-model="formData.agenda" placeholder="Event Agenda" />
-        </div>
+        </div> -->
 
         <!-- Link -->
         <div>
@@ -222,19 +223,19 @@ onMounted(() => {
         </div>
 
         <!-- Location -->
-        <div>
-          <Label for="location">Location</Label>
+        <!-- <div>
+          <Label for="location">City</Label>
           <Input id="location" v-model="formData.location" placeholder="Event Location" />
-        </div>
+        </div> -->
 
         <!-- Images -->
-        <div>
+        <!-- <div>
           <Label for="images">Images</Label>
           <ImageUploader :image-names="formData.images"/>
-        </div>
+        </div> -->
 
         <!-- Boolean Toggles -->
-        <div class="grid grid-cols-2 gap-4">
+        <!-- <div class="grid grid-cols-2 gap-4">
           <div>
             <Checkbox id="allow_volunteers_offering" v-model="formData.allow_volunteers_offering" />
             <Label for="allow_volunteers_offering">Allow Volunteers Offering</Label>
@@ -263,24 +264,24 @@ onMounted(() => {
             <Checkbox id="is_published" v-model="formData.is_published" />
             <Label for="is_published">Is Published</Label>
           </div>
-        </div>
+        </div> -->
 
         <!-- Number of Guests -->
         <div>
           <Label for="number_of_guests">Number of Guests</Label>
           <Input id="number_of_guests" type="number" v-model="formData.number_of_guests" />
         </div>
-          <div class="p-2 flex items-center">
+          <!-- <div class="p-2 flex items-center">
             <Checkbox id="request_sponsorship" class="w-4 h-4 text-orange-600 focus:ring-orange-400 dark:border-gray-600"
                       :checked="requesting_sponsorship"
                       @update:checked="value => requesting_sponsorship = value" />
             <Label class="ml-2 text-md" for="request_sponsorship">Request Sponsorship</Label>
-          </div>
+          </div> -->
           <!-- Note -->
-          <div>
+          <!-- <div>
             <Label for="note">Additional Note</Label>
             <Textarea id="note" v-model="note" placeholder="Additional Note" />
-          </div>
+          </div> -->
 
         <!-- Submit Button -->
         <Button type="submit" class="w-full bg-orange-500 text-white">

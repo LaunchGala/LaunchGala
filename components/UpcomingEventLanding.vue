@@ -45,13 +45,13 @@ onMounted(() => {
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2 dark:text-white">{{event.title}}</div>
           <div class="text-gray-700 text-base dark:text-gray-300">
-            <div class="flex items-center mb-1">
+            <!-- <div class="flex items-center mb-1">
               <Avatar class="bg-gray-200 dark:bg-gray-700 mr-4">
               <AvatarImage :src="event?.event_owner?.avatarSRC" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
               {{event.event_owner?.full_name}}
-            </div>
+            </div> -->
             <div class="flex items-center mt-2 mb-2">
               <Tag class="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2"/>
               {{event.event_type}}

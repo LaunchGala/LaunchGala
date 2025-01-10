@@ -205,7 +205,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="bg-white dark:bg-black p-6 rounded-md shadow-lg w-1/3 max-h-fit">
+  <div class="bg-white dark:bg-black p-6 rounded-md shadow-lg w-full max-h-fit">
     <div class="space-y-4">
 
       <div class="grid grid-cols-1 gap-4">
@@ -213,7 +213,7 @@ onMounted(async () => {
 
         <DropdownMenu v-model:open="isDropdownOpen">
           <DropdownMenuTrigger
-            class=" mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
+            class=" mb-2 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
             <span>{{ selectedEvent?.title || 'Select your event' }}</span>
             <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
           </DropdownMenuTrigger>
@@ -248,9 +248,10 @@ onMounted(async () => {
         </DropdownMenu>
 
         <div v-if="!selectedEvent">
+          <h3 class="font-semibold text-md mb-4">No event created! Just enter date & time: </h3>
 
           <!-- Start Date & End Date -->
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-6">
             <div>
               <Label for="event_start_date">Start Date</Label>
               <Input id="event_start_date" type="date" v-model="formData.event_start_date" />
@@ -262,7 +263,7 @@ onMounted(async () => {
           </div>
 
           <!-- Start Time & End Time -->
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-6 mt-4">
             <div>
               <Label for="event_start_time">Start Time</Label>
               <Input id="event_start_time" type="time" v-model="formData.event_start_time" />
@@ -272,11 +273,11 @@ onMounted(async () => {
               <Input id="event_end_time" type="time" v-model="formData.event_end_time" />
             </div>
           </div>
-          <div class="p-2 flex items-center">
+          <div class="p-2 mt-4 mb-4 flex items-center">
             <Checkbox id="request_sponsorship"
-              class="w-4 h-4 text-orange-600 focus:ring-orange-400 dark:border-gray-600"
+              class="w-5 h-5 text-orange-600 focus:ring-orange-400 dark:border-gray-600"
               :checked="requesting_sponsorship" @update:checked="value => requesting_sponsorship = value" />
-            <Label class="ml-2 text-md" for="request_sponsorship">Request Sponsorship</Label>
+            <Label class="ml-2 text-md text-orange-500" for="request_sponsorship">Request Sponsorship</Label>
           </div>
           <!-- Note -->
           <div>
@@ -303,9 +304,10 @@ onMounted(async () => {
           class="w-full OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
           {{ message }}
         </Button>
-
+        
       </div>
     </div>
+    <div class="text-sm mt-4 text-center">You won't be charged yet</div>
   </div>
 </template>
 <style>
