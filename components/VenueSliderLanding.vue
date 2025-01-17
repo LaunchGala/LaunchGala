@@ -30,7 +30,7 @@ onMounted(() => {
 <template>
   <div class="mx-8 my-8 bg-white dark:bg-black">
     <div class="flex justify-between">
-    <div class=" text-2xl font-semibold mb-4  text-gray-700">Chose your Venue</div>
+    <div class=" text-2xl font-semibold mb-4  text-gray-700">Choose your Venue</div>
     <NuxtLink to="VenueListing">
     <Button variant="default" class="ButtonCol  hover:bg-gray-200 transition-colors">Provide your Venue</Button>
   </NuxtLink>
@@ -45,14 +45,14 @@ onMounted(() => {
           <Badge v-if="venue.sponsorshipOption" variant="secondary" class="absolute top-3 right-3">Sponsorship Available</Badge>
         </div>
         <div class="px-6 py-4">          
-          <div class="flex items-center mt-4 mb-4">
+          <!-- <div class="flex items-center mt-4 mb-4">
             <Avatar class="bg-gray-200 dark:bg-gray-700">
               <AvatarImage :src="venue.venue_owner.avatarSRC" alt="@radix-vue" />
               <AvatarFallback class="dark:text-white">CN</AvatarFallback>
             </Avatar>
             <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">Host: {{ venue.venue_owner.full_name}}</span>
             
-          </div>
+          </div> -->
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
 
           <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.city }}, {{ venue.country }}</span>

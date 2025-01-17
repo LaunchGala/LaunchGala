@@ -10,11 +10,11 @@
             />
             <h1 class="text-3xl font-bold">TechNova</h1>
           </div>
-          <nav>
+          <!-- <nav>
             <ul class="flex space-x-4">
               <li><a href="#contact" class="hover:underline">Contact</a></li>
             </ul>
-          </nav>
+          </nav> -->
         </div>
       </header>
   
@@ -73,8 +73,16 @@
             <LinkedinIcon class="w-5 h-5"/>
             <a href="https://linkedin.com/in/volunteername" class="ml-2 hover:underline">linkedin.com/in/volunteername</a>
           </div>
+          <div class="flex justify-center items-center mt-8">
+          <!-- <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
+            Edit
+          </Button> -->
+          <MessagesButton v-if="Object.keys(contactInfo).length !== 0" :label="'Contact'" :isIcon="false" :newConversationInfo="contactInfo"></MessagesButton>
+        </div>
             </div>
+            
           </div>
+          
         </div>
       </main>
   
@@ -84,7 +92,7 @@
   
   <script setup>
   import { ref, computed } from 'vue'
-  import { MapPin, Phone, Mail } from 'lucide-vue-next'
+  import { MapPin, Phone, Mail, Link } from 'lucide-vue-next'
   import { GlobeIcon, LinkedinIcon, MapPinIcon, UserIcon } from 'lucide-vue-next'
 
   
@@ -100,6 +108,8 @@
   const contactInfo = ref([
     { icon: MapPin, value: '123 Innovation Drive, San Francisco, CA 94105' },
     { icon: Phone, value: '(555) 123-4567' },
-    { icon: Mail, value: 'info@technova.com' }
+    { icon: Mail, value: 'info@technova.com' },
+    { icon: Link, value: 'www.technova.com' }
+
   ])
   </script>
