@@ -410,7 +410,7 @@ onMounted(() => {
           </div>
           <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ venue.title }}</h5>
 
-          <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.city }}, {{ venue.country }}</span>
+          <span class="  text-l mt-4 text-gray-600 dark:text-gray-400">{{ venue.address }}</span>
           <div class=" text-l mt-2 mb-2 text-gray-600 dark:text-gray-400">Price: ${{ venue.price }}/hr</div>
           <!-- Hide Price here and on all detailed and listing for this venue if Price = 0 Null -->
           <div class="text-l mt-2 mb-2 text-gray-600 dark:text-gray-400"> Sponsorship option: {{ venue.sponsorshipOption ? 'Yes' : 'No' }}</div>
@@ -433,15 +433,15 @@ onMounted(() => {
             <span class="ml-2 font-semibold text-l text-gray-600 dark:text-gray-400">{{ venue.hostName}}</span>
             
           </div> -->
+
+          <div class="flex items-center justify-between mt-3 align-middle">
           <NuxtLink :to="{ name: 'VenueDetailPage', query: { id: venue.id } }">
 
-          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500 transition-colors ButtonCol">
+          <Button class="inline-flex items-center rounded-lg py-2 px-4 bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />
           </Button>
         </NuxtLink>
-
-          <div class="flex items-center justify-between mt-3">
             <Button variant="ghost" class="flex items-center justify-center dark:text-white">
               <Heart :fill="venue.likeVenue ? 'orange' : 'none'" class="w-5 h-5 mr-1" />
               Like
