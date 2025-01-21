@@ -329,7 +329,11 @@ onMounted(() => {
             />
             <Label for="terms" class="ml-2 block text-sm text-orange-700 dark:text-gray-300">
               I agree to the 
+              <NuxtLink to="TermsOfService">
+
               <a href="#" class="text-orange-600 hover:underline dark:hover:text-orange-500">Terms and Conditions</a>.
+              </NuxtLink>
+
             </Label>
           </div>
   
