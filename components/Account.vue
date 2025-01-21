@@ -660,8 +660,8 @@ onMounted(() => {
             </div>
             <label v-if="!editDisabled" class="block text-sm font-semibold text-gray-600 dark:text-gray-400" for="positions">Add New Position</label>
             <div class="flex space-x-4">
-              <Input v-model="newPosition.job_title" placeholder="Job Title..." class="mt-1 rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
-              <TableInputSearch v-model:selectedValue="selectedCompany" :table="'Companies'" :column="'name'">
+              <Input v-model="newPosition.job_title" placeholder="Job Title..." class="mt-1 rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 max-w-48" />
+              <TableInputSearch v-model:selectedValue="selectedCompany" :table="'Companies'" :column="'name'" class="mt-1 align-left">
                 
               </TableInputSearch>
             </div>
