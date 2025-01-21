@@ -1,21 +1,5 @@
 
 <script setup lang="ts">
-// import {
-//   AspectRatio,
-//   Button,
-//   Card,
-//   CardContent,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-//   Calendar as CalendarIcon
-// } from '@/components/ui'
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger
-// } from '@/components/ui/popover'
-// import { Calendar } from '@/components/ui/calendar'
 import { MapPin, Star, User, ArrowRight, Home, Check, Share2, Bookmark, Save, Clock, Info, Shield, XCircle } from 'lucide-vue-next'
 import { ref, defineProps } from 'vue'
 import { format } from 'date-fns'

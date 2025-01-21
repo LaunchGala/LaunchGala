@@ -435,7 +435,7 @@ onMounted(() => {
           </div> -->
 
           <div class="flex items-center justify-between mt-3 align-middle">
-          <NuxtLink :to="{ name: 'VenueDetailPage', query: { id: venue.id } }">
+          <NuxtLink :to="{ name: 'VenuePageNew', query: { id: venue.id } }">
 
           <Button class="inline-flex items-center rounded-lg py-2 px-4 bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500 transition-colors ButtonCol">
             Explore

@@ -1,30 +1,3 @@
-<template>
-  <div>
-    <div class="carousel-grid">
-      <!-- Show the first 5 images -->
-      <div
-        v-for="(image, index) in displayedImages"
-        :key="index"
-        class="carousel-image"
-        @click="openFullGallery"
-      >
-        <img :src="image" :alt="'Image ' + (index + 1)" />
-        <!-- Show overlay if it's the last image and there are more -->
-        <div v-if="index === 4 && remainingImages > 0" class="overlay">
-          <span class="overlay-text">+{{ remainingImages }}</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Show All Photos Button -->
-    <button v-if="images?.length > 5" @click="openFullGallery" class="show-all-button">
-      Show All Photos
-    </button>
-
-    <p v-else>No images available</p>
-  </div>
-</template>
-
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -36,6 +9,13 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  title: {
+    type: String,
+  },
+  showButton: {
+    type: Boolean,
+    default: false
+  }
 });
 
 // State
@@ -56,9 +36,7 @@ const fetchImages = async () => {
       })
     );
 
-    images.value = fetchedImages;
-    displayedImages.value = images.value.slice(0, 5); // Show up to 5 images
-    remainingImages.value = images.value.length > 5 ? images.value.length - 5 : 0;
+    images.value = fetchedImages ? fetchedImages : [];
   }
 };
 
@@ -77,6 +55,25 @@ onMounted(() => {
   fetchImages();
 });
 </script>
+
+<template>
+    <img :src="images[0]" alt="Venue main image" class="w-full h-full object-cover" v-if="images.length > 0"/>
+    <div v-if="showButton">
+      <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+      <Button variant="ghost">
+        <Share class="absolute top-8 right-8 text-xl font-bold text-white"/>Share
+
+            <!-- <ShareButton @click="sharePage" class="w-5 h-5" /> Share -->
+          </Button>
+      <h1 class="absolute bottom-8 left-8 text-4xl font-bold text-white">{{ props.title }}</h1>
+
+    <!-- Show All Photos Button -->
+    <button v-if="images?.length > 5" @click="openFullGallery" class="show-all-button">
+      Show All Photos
+    </button>
+
+    <p v-else>No images available</p></div>
+</template>
 
 <style scoped>
 .carousel-grid {
