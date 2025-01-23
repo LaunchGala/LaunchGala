@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, ArrowRight, Home, Building, Image, BookOpen, Globe, Search, Users, GraduationCap, Camera, HotelIcon, Palette, Castle, Landmark, Theater, Wine, Sun, Medal, Briefcase, Store } from 'lucide-vue-next';
+import { ArrowLeft, ArrowRight, Home, Building, Image, BookOpen, Globe, Search, Users, GraduationCap, Camera, HotelIcon, Palette, Castle, Landmark, Theater, Wine, Sun, Medal, Briefcase, Store, Ship } from 'lucide-vue-next';
 import { Hotel } from 'lucide-vue-next';
 import VenueListing from '~/pages/VenueListing.vue';
 
@@ -117,19 +117,19 @@ watch(() => props.venueListing.venueType, (newValue, oldValue) => {
             <div class="m-3 cursor-pointer">
               <Users class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
-                          <span class="text-sm font-semibold">Conference center</span>
+                          <span class="text-sm font-semibold">Conference/Convention center</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
 
             </button>
             <button 
             class="flex flex-col items-center p-4 border rounded-lg shadow-lg"
-              :class="{ 'shadow-orange-500': selectedType == 'Convention center', 'shadow-lg': selectedType != 'Convention center' }"
-              @click="selectType('Convention center')"
+              :class="{ 'shadow-orange-500': selectedType == 'Boat and Yacht', 'shadow-lg': selectedType != 'Boat and Yacht' }"
+              @click="selectType('Boat and Yacht')"
             >
             <div class="m-3 cursor-pointer">
-              <Briefcase class="w-10 h-10 text-orange-500 hover:text-orange-300" />
+              <Ship class="w-10 h-10 text-orange-500 hover:text-orange-300" />
             </div>
-                          <span class="text-sm font-semibold">Convention center</span>
+                          <span class="text-sm font-semibold">Boat/Yacht</span>
                           <span class="text-sm dark:text-gray-300">On-site parking or valet service</span>
 
             </button>

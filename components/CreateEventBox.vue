@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Check } from 'lucide-vue-next';
+import AnimatedText from './AnimatedText.vue';
 </script>
 
 <template>
@@ -56,7 +57,7 @@ import { Check } from 'lucide-vue-next';
   </div>
 </div>
 
-  <img src="/eventLanding02.jpg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl overflow-hidden w-3/4 h-5/6">
+  <img src="/eventLanding01.jpg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl overflow-hidden w-3/4 h-5/6">
   <div class="absolute top-2 right-6 z-20 m-8">
       <Button variant="default" class="mt-16  text-md text-white bg-orange-500 rounded-md hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
         Sign Up for Free
@@ -64,9 +65,22 @@ import { Check } from 'lucide-vue-next';
 
 
     </div>
-    <div class="w-1/2 font-bold text-5xl absolute top-0 right-32  z-20 m-8 mt-56 text-center text-white">
+    <div class="w-1/2 h-1/2 font-bold text-4xl absolute top-0 right-32  z-20 m-8 mt-56 text-center text-gray-700 bg-white p-8 rounded-md bg-opacity-70  ">
+      <!-- <div class="mt-2">Find your Venue, Volunteers,</div> <div class="mt-2">Speakers, Sponsors, <div class="mt-2">Influencers,</div></div> <div class="mt-2">Co-Founders, Investors,</div><div class="mt-2"> AI Agents & Vendors </div> -->
+      <div >First AI-Powered Event Organizer</div>
+      
+      <AnimatedText/>
+      <div class="mt-5 p-8 absolute flex-col text-lg sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 bottom-2">
+        <input 
+          type="text" 
+          placeholder="Where are you looking for a venue?" 
+          class="px-6 py-3 w-full sm:w-96 rounded-full border-2 border-orange-300 focus:border-orange-500 focus:outline-none text-black"
+        >
+        <button class="px-6 py-3 bg-orange-600 text-white rounded-full hover:bg-orange-700 transition duration-300 w-full sm:w-auto">
+          Find Venues
+        </button>
+      </div>
       <!-- <div class="mt-2">It is that easy!</div> -->
-       <div class="mt-2">Find your Venue, Volunteers,</div> <div class="mt-2">Speakers, Sponsors, <div class="mt-2">Influencers,</div></div> <div class="mt-2">Co-Founders, Investors,</div><div class="mt-2"> AI Agents & Vendors </div>
     </div>
 </div>
 </template>

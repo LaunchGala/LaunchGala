@@ -120,7 +120,7 @@ import MessagesButton from './MessagesButton.vue';
         </NuxtLink> -->
         <NuxtLink to="LaunchAI">
           <a class="text-sm font-semibold  hover:underline">
-            Launch AI
+            AI Lounge
           </a>
 
         </NuxtLink>
