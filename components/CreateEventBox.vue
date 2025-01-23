@@ -67,19 +67,47 @@ import AnimatedText from './AnimatedText.vue';
     </div>
     <div class="w-1/2 h-1/2 font-bold text-4xl absolute top-0 right-32  z-20 m-8 mt-56 text-center text-gray-700 bg-white p-8 rounded-md bg-opacity-70  ">
       <!-- <div class="mt-2">Find your Venue, Volunteers,</div> <div class="mt-2">Speakers, Sponsors, <div class="mt-2">Influencers,</div></div> <div class="mt-2">Co-Founders, Investors,</div><div class="mt-2"> AI Agents & Vendors </div> -->
-      <div >First AI-Powered Event Organizer</div>
+      <div >Your AI-Powered Event Organizer</div>
       
       <AnimatedText/>
-      <div class="mt-5 p-8 absolute flex-col text-lg sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 bottom-2">
-        <input 
+      <div class="mt-5 p-4 absolute flex-col text-lg sm:flex-row justify-center items-center bottom-2">
+        <!-- <input 
           type="text" 
           placeholder="Where are you looking for a venue?" 
           class="px-6 py-3 w-full sm:w-96 rounded-full border-2 border-orange-300 focus:border-orange-500 focus:outline-none text-black"
         >
         <button class="px-6 py-3 bg-orange-600 text-white rounded-full hover:bg-orange-700 transition duration-300 w-full sm:w-auto">
           Find Venues
-        </button>
+        </button> -->
+        <div class="bg-white rounded-xl shadow-2xl p-4 max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border-b md:border-b-0 md:border-r border-gray-200 p-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">What are you looking for?</label>
+            <select class="w-full bg-transparent text-lg text-gray-900 focus:outline-none">
+              <option>Venues</option>
+              <option>Volunteers</option>
+              <option>Speakers</option>
+              <option>Sponsors</option>
+              <option>Influencers</option>
+              <option>Vendors</option>
+              <option>All</option>
+
+
+            </select>
+          </div>
+          <div class="border-b md:border-b-0 md:border-r border-gray-200 p-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Event City</label>
+            <input type="text" class="w-full bg-transparent text-lg text-gray-900 focus:outline-none">
+          </div>
+          <div class="flex items-end p-2">
+            <button class="w-full btn-primary py-4 bg-orange-500 rounded-md text-white">
+              Search
+            </button>
+          </div>
+        </div>
       </div>
+      </div>
+      
       <!-- <div class="mt-2">It is that easy!</div> -->
     </div>
 </div>
