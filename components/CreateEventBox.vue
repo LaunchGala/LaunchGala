@@ -65,9 +65,10 @@ import AnimatedText from './AnimatedText.vue';
 
 
     </div>
-    <div class="w-1/2 h-1/2 font-bold text-4xl absolute top-0 right-32  z-20 m-8 mt-56 text-center text-gray-700 bg-white p-8 rounded-md bg-opacity-70  ">
+    <div class="w-1/2 h-3/5 font-bold text-4xl absolute top-0 right-32  z-20 m-8 mt-56 text-center text-gray-700 bg-white p-8 rounded-md bg-opacity-70  ">
       <!-- <div class="mt-2">Find your Venue, Volunteers,</div> <div class="mt-2">Speakers, Sponsors, <div class="mt-2">Influencers,</div></div> <div class="mt-2">Co-Founders, Investors,</div><div class="mt-2"> AI Agents & Vendors </div> -->
-      <div >Your AI-Powered Event Organizer</div>
+      <div>Meet Zoe</div>
+      <div >Your Personal AI Event Organizer</div>
       
       <AnimatedText/>
       <div class="mt-5 p-4 absolute flex-col text-lg sm:flex-row justify-center items-center bottom-2">
