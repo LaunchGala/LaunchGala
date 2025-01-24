@@ -5,7 +5,7 @@ const isOpen = ref(false)
 const messages = ref([
   {
     type: 'bot',
-    content: 'Hi! I\'m Zoe, Your Personal Event Organizer. How can I help you today?'
+    content: 'Hi! I\'m Gala, Your Personal Event Organizer. How can I help you today?'
   }
 ])
 const newMessage = ref('')
@@ -54,7 +54,7 @@ const sendMessage = () => {
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
       </svg>
-      <span class="hidden sm:inline">Zoe, Your Personal Event Organizer</span>
+      <span class="hidden sm:inline">Gala, lets build your event together</span>
     </button>
 
     <!-- Chat Window -->
@@ -71,7 +71,7 @@ const sendMessage = () => {
             </svg>
           </div>
           <div>
-            <h3 class="font-medium">Zoe, Event Organizer</h3>
+            <h3 class="font-medium">Gala, Event Organizer</h3>
             <p class="text-sm text-white/80">Online</p>
           </div>
         </div>
