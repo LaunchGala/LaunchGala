@@ -5,7 +5,7 @@ const isOpen = ref(false)
 const messages = ref([
   {
     type: 'bot',
-    content: 'Hi! I\'m Gala, Your Personal Event Organizer. How can I help you today?'
+    content: 'Hi I\'m Gala, Your Personal Event Organizer. How can I help you today?'
   }
 ])
 const newMessage = ref('')
