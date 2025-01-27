@@ -739,7 +739,11 @@ onMounted(() => {
     <Accordion type="single" collapsible class="space-y-2">
       <AccordionItem value="expert">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become an Expert</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become an Expert
+          <span class="tooltip flex">ⓘ
+                      <span class="tooltiptext">The legal name of your company</span>
+                    </span>
+                  </span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">
@@ -786,7 +790,11 @@ onMounted(() => {
 
       <AccordionItem value="volunteer">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm ">Become a Volunteer</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm ">Become a Volunteer
+          <span class="tooltip flex">ⓘ
+                      <span class="tooltiptext">The legal name of your company</span>
+                    </span>
+                  </span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">
@@ -833,7 +841,11 @@ onMounted(() => {
 
       <AccordionItem value="influencer">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become an Influencer</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become an Influencer
+          <span class="tooltip flex">ⓘ
+                      <span class="tooltiptext">The legal name of your company</span>
+                    </span>
+                  </span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">
@@ -900,7 +912,11 @@ onMounted(() => {
       </AccordionItem>
       <AccordionItem value="talent">
         <AccordionTrigger class="flex items-center justify-between">
-          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">List your Talent</span>
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">List your Talent
+          <span class="tooltip flex ">ⓘ
+                      <span class="tooltiptext">The legal name of your company</span>
+                    </span>
+                  </span>
         </AccordionTrigger>
         <AccordionContent>
           <div class="mt-4 space-y-4">
@@ -939,6 +955,20 @@ onMounted(() => {
             <PreviewTalentDialog :profile="userProfile"></PreviewTalentDialog>
           </div>
         </AccordionContent>
+        <AccordionTrigger class="flex items-center justify-between">
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">List your Startup
+          <span class="tooltip flex">ⓘ
+                      <span class="tooltiptext">The legal name of your company</span>
+                    </span>
+                  </span>
+        </AccordionTrigger>
+        <AccordionTrigger class="flex items-center justify-between">
+          <span class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become a Vendor
+          <span class="tooltip flex">ⓘ
+                      <span class="tooltiptext">The legal name of your company</span>
+                    </span>
+                  </span>
+        </AccordionTrigger>
       </AccordionItem>
     </Accordion>
   </div>
@@ -962,4 +992,31 @@ onMounted(() => {
   color: #fff;
   font-size: 1.5em;
 }
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
 </style>

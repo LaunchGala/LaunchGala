@@ -71,7 +71,7 @@ const date = ref<Date>()
 <template>
   <div class="flex flex-col space-y-4 p-6 dark:bg-black">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Find Talents</h1>
+      <h1 class="text-2xl font-bold dark:text-white">Vendors Marketplace</h1>
       <NuxtLink to="VendorListing">
 
       <Button @click="console.log(VolunteerListing)" class="bg-orange-500 text-white dark:text-white">Add/Edit Vendors</Button>

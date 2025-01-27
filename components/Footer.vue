@@ -89,18 +89,31 @@ import { Tiktoken } from 'js-tiktoken';
         <div>
           <h3 class="font-bold text-lg mb-4">Legal & Privacy</h3>
           <ul>
+            <NuxtLink to="PrivacyPolicy">
+
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Privacy Policy</a>
             </li>
+          </NuxtLink>
+          <NuxtLink to="TermsOfService">
+
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Terms of Service</a>
             </li>
+          </NuxtLink>
+          <NuxtLink to="EuGlobalCompliance">
+
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">EU & Global Compliance</a>
             </li>
+          </NuxtLink>
+          <NuxtLink to="CookiesPage">
+
             <li class="mb-2">
               <a href="#" class="hover:text-gray-900 dark:hover:text-gray-300">Cookies & Other Policies</a>
             </li>
+          </NuxtLink>
+
           </ul>
         </div>
       </div>
@@ -137,7 +150,7 @@ import { Tiktoken } from 'js-tiktoken';
             <button class="hover:text-gray-900 dark:hover:text-gray-300">Get Newsletters</button>
           </span>
         </div>
-        <p class="py-4 border-t border-gray-300 text-center md:text-left">© 2024 Meta Bang LLC</p>
+        <p class="py-4 border-t border-gray-300 text-center md:text-left">© 2025 Meta Bang LLC</p>
         <div class="flex justify-between space-x-6 py-4 border-t border-gray-300">
           <a href="#">
             <Facebook class="h-6 w-6 hover:text-gray-900 dark:hover:text-gray-300" />
