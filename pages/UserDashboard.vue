@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import {
   Check,
@@ -24,10 +23,10 @@ import {
   BadgeCheck,
   Ribbon,
   HeartHandshake,
-  
-  
 
-  
+
+
+
 } from 'lucide-vue-next';
 import {
   Card,
@@ -68,16 +67,16 @@ const userProfile = ref({
   is_influencer: false,
   is_volunteer: false,
   is_talent: false,
-  positions:[],
+  positions: [],
   avatarSRC: ''
 });
 async function getProfileWithDetails() {
 
-try {
-  // Fetch profile by id along with the related data from other tables
-  const { data, error } = await supabase
-    .from('profiles')
-    .select(`
+  try {
+    // Fetch profile by id along with the related data from other tables
+    const { data, error } = await supabase
+      .from('profiles')
+      .select(`
       *,
       Experts(*),
       Volunteers(*),
@@ -90,12 +89,12 @@ try {
         )
       )
     `)
-    .eq('id', user.value?.id);
+      .eq('id', user.value?.id);
 
-  if (error) {
-    throw error;
-  }
-  if (data && data.length > 0) {
+    if (error) {
+      throw error;
+    }
+    if (data && data.length > 0) {
       const profile = data[0];
       // Copy profile data to userProfile object
       userProfile.value.full_name = profile.full_name || '';
@@ -118,9 +117,9 @@ try {
       userProfile.value.is_influencer = profile.is_influencer || false;
       userProfile.value.is_volunteer = profile.is_volunteer || false;
       userProfile.value.is_talent = profile.is_talent || false;
-      userProfile.value.avatarSRC =  await fetchImage(profile.avatar_url, 'avatars')
+      userProfile.value.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
     }
-      console.log(data)
+    console.log(data)
     return data;
   } catch (err) {
     console.error('Error fetching profile details:', err);
@@ -129,19 +128,18 @@ try {
 
 }
 const fetchImage = async (id, bucket) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
+  if (!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+    return urlData?.data?.signedUrl ?? "";
   }
-  onMounted(() => {
-    getProfileWithDetails()
-  });
+}
+onMounted(() => {
+  getProfileWithDetails()
+});
 </script>
 
 <template>
-      <div class="bg-white dark:bg-gray-900 p-6 shadow-lg rounded-lg transition-colors">
+  <div class="bg-white dark:bg-gray-900 p-6 shadow-lg rounded-lg transition-colors">
     <div class="flex items-center justify-between">
       <!-- <div class="flex items-center space-x-4">
         <Avatar class="w-12 h-12 border-2 border-orange-500 dark:border-orange-400 rounded-full">
@@ -154,100 +152,109 @@ const fetchImage = async (id, bucket) => {
         </div>
       </div> -->
       <div class="flex items-center space-x-4 ">
-          <Avatar class="w-28 h-28 ">
-            <AvatarImage :src="userProfile?.avatarSRC" alt="Your Name" />
-          </Avatar>
-          <div>
-            <div class="flex ">
-            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, {{userProfile.full_name}}!</h1>
+        <Avatar class="w-28 h-28 ">
+          <AvatarImage :src="userProfile?.avatarSRC" alt="Your Name" />
+        </Avatar>
+        <div>
+          <div class="flex ">
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">Welcome Back, {{ userProfile.full_name }}!</h1>
             <BadgeCheck class="w-6 h-6 ml-2 font-bold text-orange-500" />
-            
+
           </div>
           <div class="flex items-baseline space-x-2">
-              <p class="text-sm font-bold text-orange-500 dark:text-orange-400">2,235</p>
-              <span class="text-sm font-bold text-gray-500 dark:text-gray-300">KUDOS</span>
-              <heart-handshake class="w-4 h-4 font-bold text-orange-500" />
+            <p class="text-sm font-bold text-orange-500 dark:text-orange-400">2,235</p>
+            <span class="text-sm font-bold text-gray-500 dark:text-gray-300">KUDOS</span>
+            <heart-handshake class="w-4 h-4 font-bold text-orange-500" />
           </div>
           <div class="flex justify-left gap-2 mt-2 mb-2">
-        <Dialog v-slot="{ }">
-          <DialogTrigger>
-            <Badge class="cursor-pointer bg-orange-100 text-orange-800">
-              <Users class="w-4 h-4 mr-1" /> Following you
-              <span class="ml-1">123</span>
-            </Badge>
-          </DialogTrigger>
-          <DialogContent class="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-lg space-y-4" v-model:open="open">
-            <DialogHeader>
-              <DialogTitle class="text-lg">People Following You</DialogTitle>
-            </DialogHeader>
-            <!-- Placeholder for user list -->
-            <p>Here you will be able to see the list of people following you.</p>
-            <button class="w-full p-2 text-center rounded-lg bg-orange-600 dark:bg-orange-500 text-white hover:bg-orange-700 dark:hover:bg-orange-600" @click="close">Close</button>
-          </DialogContent>
-        </Dialog>
-        
-        <Dialog v-slot="{ }">
-          <DialogTrigger>
-            <Badge class="cursor-pointer bg-orange-100 text-orange-800">
-              <Users class="w-4 h-4 mr-1" /> You follow
-              <span class="ml-1">56</span>
-            </Badge>
-          </DialogTrigger>
-          <DialogContent class="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-lg space-y-4" v-model:open="open">
-            <DialogHeader>
-              <DialogTitle class="text-lg">People You Follow</DialogTitle>
-            </DialogHeader>
-            <!-- Placeholder for user list -->
-            <p>Here you will view all the people you follow.</p>
-            <button class="w-full p-2 text-center rounded-lg bg-orange-600 dark:bg-orange-500 text-white hover:bg-orange-700 dark:hover:bg-orange-600" @click="close">Close</button>
-          </DialogContent>
-        </Dialog>
-      </div>
+            <Dialog v-slot="{}">
+              <DialogTrigger>
+                <Badge class="cursor-pointer bg-orange-100 text-orange-800">
+                  <Users class="w-4 h-4 mr-1" /> Following you
+                  <span class="ml-1">123</span>
+                </Badge>
+              </DialogTrigger>
+              <DialogContent class="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-lg space-y-4" v-model:open="open">
+                <DialogHeader>
+                  <DialogTitle class="text-lg">People Following You</DialogTitle>
+                </DialogHeader>
+                <!-- Placeholder for user list -->
+                <p>Here you will be able to see the list of people following you.</p>
+                <button
+                  class="w-full p-2 text-center rounded-lg bg-orange-600 dark:bg-orange-500 text-white hover:bg-orange-700 dark:hover:bg-orange-600"
+                  @click="close">Close</button>
+              </DialogContent>
+            </Dialog>
 
-            <!-- <div class="flex items-baseline space-x-2">
+            <Dialog v-slot="{}">
+              <DialogTrigger>
+                <Badge class="cursor-pointer bg-orange-100 text-orange-800">
+                  <Users class="w-4 h-4 mr-1" /> You follow
+                  <span class="ml-1">56</span>
+                </Badge>
+              </DialogTrigger>
+              <DialogContent class="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-lg space-y-4" v-model:open="open">
+                <DialogHeader>
+                  <DialogTitle class="text-lg">People You Follow</DialogTitle>
+                </DialogHeader>
+                <!-- Placeholder for user list -->
+                <p>Here you will view all the people you follow.</p>
+                <button
+                  class="w-full p-2 text-center rounded-lg bg-orange-600 dark:bg-orange-500 text-white hover:bg-orange-700 dark:hover:bg-orange-600"
+                  @click="close">Close</button>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          <!-- <div class="flex items-baseline space-x-2">
               <p class="text-xl font-bold text-orange-500 dark:text-orange-400">2,235</p>
               <span class="text-lg font-medium text-gray-500 dark:text-gray-300">Kudos</span>
               <Trophy class="w-5 h-5 font-bold text-orange-500" />
           </div> -->
           <div class="flex space-x-2">
-          <Badge class="bg-red-100 text-red-800 dark:bg-red-800 dark:text-orang-100 py-1 px-2 rounded-full text-xs flex items-center">
-            <Check class="w-3 h-3 mr-1" /> 12 Volunteering Contribution
-          </Badge>
-          <Badge class="bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-orang-100 py-1 px-2 rounded-full text-xs flex items-center">
-            <Check class="w-4 h-4 mr-1" /> 8 Venue Contribution
-          </Badge>
-          <div class="flex space-x-2">
-          <Badge class="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 py-1 px-2 rounded-full text-xs flex items-center">
-            <Check class="w-4 h-4 mr-1" /> 5 Expert Contribution
-          </Badge>
-          <Badge class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 py-1 px-2 rounded-full text-xs flex items-center">
-            <Check class="w-4 h-4 mr-1" /> 2 Sponsor Contribution
-          </Badge>
-        </div>
-        </div>
-        
+            <Badge
+              class="bg-red-100 text-red-800 dark:bg-red-800 dark:text-orang-100 py-1 px-2 rounded-full text-xs flex items-center">
+              <Check class="w-3 h-3 mr-1" /> 12 Volunteering Contribution
+            </Badge>
+            <Badge
+              class="bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-orang-100 py-1 px-2 rounded-full text-xs flex items-center">
+              <Check class="w-4 h-4 mr-1" /> 8 Venue Contribution
+            </Badge>
+            <div class="flex space-x-2">
+              <Badge
+                class="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 py-1 px-2 rounded-full text-xs flex items-center">
+                <Check class="w-4 h-4 mr-1" /> 5 Expert Contribution
+              </Badge>
+              <Badge
+                class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 py-1 px-2 rounded-full text-xs flex items-center">
+                <Check class="w-4 h-4 mr-1" /> 2 Sponsor Contribution
+              </Badge>
+            </div>
           </div>
+
         </div>
+      </div>
       <div class="flex space-x-2 items-center">
         <div class="flex space-x-4">
-            <button class="p-2 bg-gray-200 rounded-full dark:bg-gray-700">
-              <Bell class="h-5 w-5 text-gray-600 dark:text-gray-300" />
-            </button>
-            <button class="p-2 bg-gray-200 rounded-full dark:bg-gray-700">
-              <MessageSquare class="h-5 w-5 text-gray-600 dark:text-gray-300" />
-            </button>
-          </div>
+          <button class="p-2 bg-gray-200 rounded-full dark:bg-gray-700">
+            <Bell class="h-5 w-5 text-gray-600 dark:text-gray-300" />
+          </button>
+          <button class="p-2 bg-gray-200 rounded-full dark:bg-gray-700">
+            <MessageSquare class="h-5 w-5 text-gray-600 dark:text-gray-300" />
+          </button>
+        </div>
         <!-- <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs hover:bg-orange-500 hover:text-white">
           Pro
         </Badge> -->
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger as="template">
-                <NuxtLink to="Profile">
+              <NuxtLink to="Profile">
 
-              <Button variant="outline" class="flex items-center border border-orange-500 dark:border-orange-400 text-orange-500 dark:text-orange-400 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-400 dark:hover:text-gray-900 font-semibold py-1.5 px-3 rounded-md focus:outline-none focus:ring focus:ring-orange-300 dark:focus:ring-orange-400 dark:ring-offset-gray-800">
-                <User class="w-4 h-4 mr-1.5" /> Profile
-              </Button>
+                <Button variant="outline"
+                  class="flex items-center border border-orange-500 dark:border-orange-400 text-orange-500 dark:text-orange-400 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-400 dark:hover:text-gray-900 font-semibold py-1.5 px-3 rounded-md focus:outline-none focus:ring focus:ring-orange-300 dark:focus:ring-orange-400 dark:ring-offset-gray-800">
+                  <User class="w-4 h-4 mr-1.5" /> Profile
+                </Button>
               </NuxtLink>
             </TooltipTrigger>
             <!-- <TooltipContent>
@@ -260,42 +267,50 @@ const fetchImage = async (id, bucket) => {
   </div>
   <div class="flex min-h-screen bg-gray-50 dark:bg-black text-gray-800 dark:text-white">
     <aside class="w-80 bg-white dark:bg-gray-900 shadow-xl">
-      <Card class="rounded-xl w-full overflow-hidden border dark:border-transparent h-1/2 " >
+      <Card class="rounded-xl w-full overflow-hidden border dark:border-transparent h-1/2 ">
 
         <CardHeader class="bg-orange-500 dark:bg-orange-500 p-6">
           <CardTitle class="text-xl font-semibold text-left text-white">Offers & Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
           <ul>
-            <li @click="selectedView = 'Dashboard'" :class="selectedView == 'Dashboard' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded mt-6' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded mt-6'">
+            <li @click="selectedView = 'Dashboard'"
+              :class="selectedView == 'Dashboard' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded mt-6' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded mt-6'">
               <List class="w-5 h-5 mr-2 text-indigo-500" />
               <span>Dashboard</span>
             </li>
-            <li @click="selectedView = 'VenueDash'" :class="selectedView == 'VenueDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'VenueDash'"
+              :class="selectedView == 'VenueDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <List class="w-5 h-5 mr-2 text-indigo-500" />
               <span>Venues</span>
             </li>
-            <li @click="selectedView = 'VolunteerDash'" :class="selectedView == 'VolunteerDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'VolunteerDash'"
+              :class="selectedView == 'VolunteerDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <List class="w-5 h-5 mr-2 text-blue-300" />
               <span>Volunteers</span>
             </li>
-            <li @click="selectedView = 'EventDash'" :class="selectedView == 'EventDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'EventDash'"
+              :class="selectedView == 'EventDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Volume2 class="w-5 h-5 mr-2 text-orange-500" />
               <span>Events</span>
             </li>
-            <li @click="selectedView = 'SponsorDash'" :class="selectedView == 'SponsorDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'SponsorDash'"
+              :class="selectedView == 'SponsorDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <UserPlus class="w-5 h-5 mr-2 text-green-500" />
               <span>Sponsors</span>
             </li>
-            <li @click="selectedView = 'ExpertDash'" :class="selectedView == 'ExpertDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'ExpertDash'"
+              :class="selectedView == 'ExpertDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Award class="w-5 h-5 mr-2 text-purple-500" />
               <span>Experts</span>
             </li>
-            <li @click="selectedView = 'VendorDash'" :class="selectedView == 'VendorDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'VendorDash'"
+              :class="selectedView == 'VendorDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Award class="w-5 h-5 mr-2 text-yellow-500" />
               <span>Vendors</span>
             </li>
-            <li @click="selectedView = 'NetworkDash'" :class="selectedView == 'NetworkDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'NetworkDash'"
+              :class="selectedView == 'NetworkDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Users class="w-5 h-5 mr-2 text-orange-500" />
               <span>Network</span>
             </li>
@@ -311,23 +326,26 @@ const fetchImage = async (id, bucket) => {
               <Volume2 class="w-5 h-5 mr-2 text-red-500" />
               <span>Angel AI</span>
             </li> -->
-            <li @click="selectedView = 'NotificationDash'" :class="selectedView == 'NotificationDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'NotificationDash'"
+              :class="selectedView == 'NotificationDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Mail class="w-5 h-5 mr-2 text-red-500" />
               <span>Notifications</span>
             </li>
-            <li @click="selectedView = 'Settings'" :class="selectedView == 'Settings' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+            <li @click="selectedView = 'Settings'"
+              :class="selectedView == 'Settings' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Cog class="w-5 h-5 mr-2 text-gray-500" />
               <span>Settings</span>
             </li>
           </ul>
 
-          
+
         </CardContent>
 
-        
+
       </Card>
       <div class="mt-auto">
-        <Button variant="default" class="flex text-sm rounded-md items-center justify-center space-x-2 w-full py-1 bg-orange-500 text-white  hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-400">
+        <Button variant="default"
+          class="flex text-sm rounded-md items-center justify-center space-x-2 w-full py-1 bg-orange-500 text-white  hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-400">
           <Power class="w-5 h-5" />
           <span>Sign Out</span>
         </Button>
@@ -409,120 +427,124 @@ const fetchImage = async (id, bucket) => {
         </Card> -->
         <div class=" lg:grid-cols-3 gap-6 px-4">
 
-      <!-- Large Box -->
-      <div class="lg:col-span-2 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
-        <div class="flex space-x-96 mb-2">
-        <p class="text-md font-semibold  text-gray-600 dark:text-gray-400">Here's what's happening with your gala today:</p>
-        <NuxtLink to="EarningDash">
+          <!-- Large Box -->
+          <div class="lg:col-span-2 bg-white dark:bg-gray-900 shadow rounded-lg p-6">
+            <div class="flex space-x-96 mb-2">
+              <p class="text-md font-semibold  text-gray-600 dark:text-gray-400">Here's what's happening with your gala
+                today:</p>
+              <NuxtLink to="EarningDash">
 
-        <Button class="justify-center" variant="outline">
-        <DollarSignIcon class="w-4 h-4 mr-2 font-semibold text-orange-500" />Earning
-      </Button>
-    </NuxtLink>
+                <Button class="justify-center" variant="outline">
+                  <DollarSignIcon class="w-4 h-4 mr-2 font-semibold text-orange-500" />Earning
+                </Button>
+              </NuxtLink>
 
-    </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <!-- Upcoming Events -->
-          <Card class="transition hover:shadow-md">
-            <CardHeader>
-              <CardTitle>My Upcoming Events</CardTitle>
-              <Badge class="mr-auto bg-orange-100 text-orange-700">3 New</Badge>
+              <!-- Upcoming Events -->
+              <Card class="transition hover:shadow-md">
+                <CardHeader>
+                  <CardTitle>My Upcoming Events</CardTitle>
+                  <Badge class="mr-auto bg-orange-100 text-orange-700">3 New</Badge>
 
-            </CardHeader>
-            <CardContent class="space-y-4">
-              <div class="flex items-center space-x-4">
-                <img src="public/Bootstrapping.png" alt="Event Image" class="w-20 h-20 rounded-lg" />
-                <div>
-                  <p class="font-semibold text-lg">Event A</p>
-                  <p class="text-sm text-gray-500 dark:text-gray-400">Oct 24, 2023</p>
-                </div>
-                <Badge variant="primary" class="ml-auto ">New</Badge>
-              </div>
-              <div class="flex items-center space-x-4">
-                <img src="public/Bootstrapping.png" alt="Event Image" class="w-20 h-20 rounded-lg" />
-                <div>
-                  <p class="font-semibold text-lg">Event B</p>
-                  <p class="text-sm text-gray-500 dark:text-gray-400">Nov 11, 2023</p>
-                </div>
-                <Badge variant="primary" class="ml-auto">New</Badge>
-              </div>
-            </CardContent>
-          </Card>
-          <!-- Upcoming Reservations -->
-          <Card class="transition hover:shadow-md">
-            <CardHeader>
-              <CardTitle>Venues Reservations</CardTitle>
-              <Badge class="mr-auto bg-orange-100 text-orange-700">2 Pending</Badge>
+                </CardHeader>
+                <CardContent class="space-y-4">
+                  <div class="flex items-center space-x-4">
+                    <img src="public/Bootstrapping.png" alt="Event Image" class="w-20 h-20 rounded-lg" />
+                    <div>
+                      <p class="font-semibold text-lg">Event A</p>
+                      <p class="text-sm text-gray-500 dark:text-gray-400">Oct 24, 2023</p>
+                    </div>
+                    <Badge variant="primary" class="ml-auto ">New</Badge>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <img src="public/Bootstrapping.png" alt="Event Image" class="w-20 h-20 rounded-lg" />
+                    <div>
+                      <p class="font-semibold text-lg">Event B</p>
+                      <p class="text-sm text-gray-500 dark:text-gray-400">Nov 11, 2023</p>
+                    </div>
+                    <Badge variant="primary" class="ml-auto">New</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+              <!-- Upcoming Reservations -->
+              <Card class="transition hover:shadow-md">
+                <CardHeader>
+                  <CardTitle>Venues Reservations</CardTitle>
+                  <Badge class="mr-auto bg-orange-100 text-orange-700">2 Pending</Badge>
 
-            </CardHeader>
-            <CardContent class="space-y-4">
-              <div class="flex items-center space-x-4">
-                <img src="public/Bootstrapping.png" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">Conference Room A</p>
-              </div>
-              <div class="flex items-center space-x-4">
-                <img src="public/Bootstrapping.png" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">Hall B</p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card class="transition hover:shadow-md">
-            <CardHeader>
-              <CardTitle>Speakers & Volunteers</CardTitle>
-              <Badge class="mr-auto bg-orange-100 text-orange-700">3 Pending</Badge>
+                </CardHeader>
+                <CardContent class="space-y-4">
+                  <div class="flex items-center space-x-4">
+                    <img src="public/Bootstrapping.png" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                    <p class="font-semibold">Conference Room A</p>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <img src="public/Bootstrapping.png" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                    <p class="font-semibold">Hall B</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card class="transition hover:shadow-md">
+                <CardHeader>
+                  <CardTitle>Speakers & Volunteers</CardTitle>
+                  <Badge class="mr-auto bg-orange-100 text-orange-700">3 Pending</Badge>
 
-            </CardHeader>
-            <CardContent class="space-y-4">
-              <div class="flex items-center space-x-4">
-                <img src="public/LarryPage.jpeg" alt="Reservation" class="w-20 h-20 rounded-full" />
-                <div >
-                <div class="font-semibold"> Larry Page</div>
-                <div class="font-semibold"> Google - Founder & CEO</div>
-              </div>
-              </div>
-              <div class="flex items-center space-x-4">
-                <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation" class="w-20 h-20 rounded-full" />
-                <div>
-                <div class="font-semibold"> Pinky</div>
-                <div class="font-semibold"> Pinkypedia - Founder & CEO</div>             
-               </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card class="transition hover:shadow-md">
-            <CardHeader>
-              <CardTitle>New Messages</CardTitle>
-              <Badge class="mr-auto bg-orange-100 text-orange-700">5 Unread</Badge>
-            </CardHeader>
+                </CardHeader>
+                <CardContent class="space-y-4">
+                  <div class="flex items-center space-x-4">
+                    <img src="public/LarryPage.jpeg" alt="Reservation" class="w-20 h-20 rounded-full" />
+                    <div>
+                      <div class="font-semibold"> Larry Page</div>
+                      <div class="font-semibold"> Google - Founder & CEO</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation"
+                      class="w-20 h-20 rounded-full" />
+                    <div>
+                      <div class="font-semibold"> Pinky</div>
+                      <div class="font-semibold"> Pinkypedia - Founder & CEO</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card class="transition hover:shadow-md">
+                <CardHeader>
+                  <CardTitle>New Messages</CardTitle>
+                  <Badge class="mr-auto bg-orange-100 text-orange-700">5 Unread</Badge>
+                </CardHeader>
 
-            <CardContent class="space-y-4">
-              <div class="flex items-center space-x-4">
-                <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation" class="w-20 h-20 rounded-full " />
-                <p class="font-semibold">Conference Room A</p>
+                <CardContent class="space-y-4">
+                  <div class="flex items-center space-x-4">
+                    <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation"
+                      class="w-20 h-20 rounded-full " />
+                    <p class="font-semibold">Conference Room A</p>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation"
+                      class="w-20 h-20 rounded-full" />
+                    <p class="font-semibold">Hall B</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <!-- User Calendar -->
+              <div class="lg:col-span-2">
+                <Card class="transition hover:shadow-md">
+                  <CardHeader>
+                    <CardTitle>Your Calendar</CardTitle>
+                  </CardHeader>
+                  <CardContent class="p-4">
+                    <Calendar class="rounded-md border" />
+                  </CardContent>
+                </Card>
               </div>
-              <div class="flex items-center space-x-4">
-                <img src="public/PinkPavatar Background Removed Background Removed.png" alt="Reservation" class="w-20 h-20 rounded-full" />
-                <p class="font-semibold">Hall B</p>
-              </div>
-            </CardContent>
-          </Card>
-          <!-- User Calendar -->
-          <div class="lg:col-span-2">
-            <Card class="transition hover:shadow-md">
-              <CardHeader>
-                <CardTitle>Your Calendar</CardTitle>
-              </CardHeader>
-              <CardContent class="p-4">
-                <Calendar class="rounded-md border" />
-              </CardContent>
-            </Card>
+            </div>
           </div>
-        </div>
-      </div>
-      <!-- Smaller Boxes -->
-      <div class="space-y-6">
-        <!-- <Card class="transform hover:scale-105 transition bg-white dark:bg-gray-900 shadow rounded-lg p-6">
+          <!-- Smaller Boxes -->
+          <div class="space-y-6">
+            <!-- <Card class="transform hover:scale-105 transition bg-white dark:bg-gray-900 shadow rounded-lg p-6">
           <CardHeader>
             <CardTitle>New Messages</CardTitle>
           </CardHeader>
@@ -552,39 +574,39 @@ const fetchImage = async (id, bucket) => {
             <Badge class="shrink-0">3 pending</Badge>
           </CardContent>
         </Card> -->
-        <Card class="transition hover:shadow-md p-6">
-            <CardHeader >
-              <CardTitle>New Resources</CardTitle>
-            </CardHeader>
-            <CardContent class="space-y-4 columns-2 ">
-              <div class="flex items-center space-x-4 ">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">Launch AI</p>
-              </div>
-              <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">AWS: $5000 Cloud storage credit</p>
-              </div>
-              <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">Blog: How to create a grate event</p>
-              </div>
-              <div class="flex items-center space-x-4 ">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">Launch AI</p>
-              </div>
-              <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">AWS: $5000 Cloud storage credit</p>
-              </div>
-              <div class="flex items-center space-x-4">
-                <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
-                <p class="font-semibold">Blog: How to create a grate event</p>
-              </div>
-            </CardContent>
-          </Card>
-      </div>
-    </div>
+            <Card class="transition hover:shadow-md p-6">
+              <CardHeader>
+                <CardTitle>New Resources</CardTitle>
+              </CardHeader>
+              <CardContent class="space-y-4 columns-2 ">
+                <div class="flex items-center space-x-4 ">
+                  <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                  <p class="font-semibold">Launch AI</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                  <p class="font-semibold">AWS: $5000 Cloud storage credit</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                  <p class="font-semibold">Blog: How to create a grate event</p>
+                </div>
+                <div class="flex items-center space-x-4 ">
+                  <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                  <p class="font-semibold">Launch AI</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                  <p class="font-semibold">AWS: $5000 Cloud storage credit</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <img src="/placeholder.svg" alt="Reservation" class="w-20 h-20 rounded-lg" />
+                  <p class="font-semibold">Blog: How to create a grate event</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </section>
       <section class="mb-8" v-if="selectedView == 'VenueDash'">
         <MyVenueDash></MyVenueDash>
@@ -592,3 +614,23 @@ const fetchImage = async (id, bucket) => {
     </main>
   </div>
 </template>
+<style scoped>
+main {
+  overflow-y: auto;
+  /* Enable vertical scrolling for the main section */
+  height: 100%;
+  /* Ensure it fills the available space */
+  padding: 1rem;
+  /* Optional padding */
+}
+
+aside {
+  position: sticky;
+  top: 0;
+  /* Keeps the sidebar fixed */
+  height: 100vh;
+  /* Ensures the sidebar occupies the full viewport height */
+  overflow-y: auto;
+  /* Enable scrolling for the sidebar if needed */
+}
+</style>

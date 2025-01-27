@@ -5,10 +5,16 @@ const user = useSupabaseUser()
 const isLoggedIn = computed(() => user.value !== null)
 
 import { Badge } from '@/components/ui/badge'
-import { CrownIcon } from 'lucide-vue-next';
+import { ArrowLeft, ArrowLeftCircle, CrownIcon } from 'lucide-vue-next';
 import MessagesButton from './MessagesButton.vue';
+import { useRouter, useRoute } from 'vue-router';
+import Button from './ui/button/Button.vue';
 
 
+const router = useRouter();
+const goBack = () => {
+  router.go(-1); // Go back to the previous page
+};
 </script>
 
 
@@ -168,6 +174,11 @@ import MessagesButton from './MessagesButton.vue';
       </button>
     </NuxtLink>
     <MessagesButton></MessagesButton>
+  </div>
+  <div class="bg-white">
+    <Button @click="goBack" class="bg-white-500 hover:bg-gray-100 text-orange-500 font-bold rounded-full shadow-lg ml-3 mb-2">
+      <ArrowLeft class=" text-orange-500 text-xl "></ArrowLeft>
+    </Button>
   </div>
 </template>
 
