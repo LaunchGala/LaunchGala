@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { Button } from '@/components/ui/button';
 const supabase = useSupabaseClient();
 
 // Props: List of public image URLs
@@ -42,7 +43,7 @@ const fetchImages = async () => {
 
 // Open full gallery in a new page/component
 const openFullGallery = () => {
-  router.push({ name: 'GalleryPage', query: { images: JSON.stringify(images.value) } });
+  router.push({ name: 'AllImages', query: { images: JSON.stringify(images.value) } });
 };
 
 watch(
@@ -68,11 +69,14 @@ onMounted(() => {
       <h1 class="absolute bottom-8 left-8 text-4xl font-bold text-white">{{ props.title }}</h1>
 
     <!-- Show All Photos Button -->
-    <button v-if="images?.length > 5" @click="openFullGallery" class="show-all-button">
-      Show All Photos
-    </button>
 
+    <NuxtLink v-if="images?.length" :to="{ name: 'AllImagesPage', query: { images: JSON.stringify(images) } }">
+    <Button  class="show-all-button absolute bottom-8 right-8 rounded-lg py-2 px-4 bg-orange-500 text-white">
+      Show All Photos
+    </Button>
+    </NuxtLink>
     <p v-else>No images available</p></div>
+
 </template>
 
 <style scoped>

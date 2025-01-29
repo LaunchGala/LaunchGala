@@ -191,9 +191,9 @@ onMounted(() => {
 
 // Fetch images
 const fetchImages = async () => {
-  if (venue.imageNames && venue.imageNames.length > 0) {
+  if (venue.value.images && venue.value.images.length > 0) {
     const fetchedImages = await Promise.all(
-      venue.imageNames.map(async (fileName) => {
+      venue.value.images.map(async (fileName) => {
         const { data } = await supabase.storage.from('images').createSignedUrl(fileName, 60);
         return data.signedUrl;
       })
