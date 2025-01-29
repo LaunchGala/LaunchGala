@@ -216,6 +216,8 @@ const Industries = [
   const cities = ['San Francisco', 'New York', 'Los Angeles', 'Chicago', 'Houston', 'Austin']
   
 const user = useSupabaseUser();
+// Emit event to notify parent
+const emit = defineEmits(['added'])
 const open = ref(false)
   const company = ref({
     created_by: user.value.id,
@@ -248,6 +250,7 @@ const open = ref(false)
       if (error) throw error;
       console.log('Company created:', company.value);
       toast.success('Company created successfully!');
+      emit('added')
       open.value = false;
     } catch (error) {
       errorMessage.value = error.message || 'Error creating company.';

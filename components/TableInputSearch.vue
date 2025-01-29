@@ -1,77 +1,132 @@
 <script setup lang="ts">
 import { ref, watch, defineProps, defineEmits } from 'vue';
-import { ComboboxContent, ComboboxInput, ComboboxItem, ComboboxTrigger, ComboboxRoot, ComboboxAnchor } from 'radix-vue'
+import {
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxTrigger,
+  ComboboxRoot,
+  ComboboxAnchor,
+} from 'radix-vue';
 import Input from './ui/input/Input.vue';
 
-// Define props and emit events
+// Props and emit setup
 const props = defineProps({
   table: { type: String, required: true },
   column: { type: String, required: true },
-  selectedValue: { type: Object, default: () => ({}) }, // Initial selected value
+  selectedValue: { type: Object, default: () => ({}) },
+  allowString: { type: Boolean, default: false },
 });
-const emit = defineEmits(['update:selectedValue']); // For two-way binding
+const emit = defineEmits(['update:selectedValue']);
 
-// Initialize Supabase client (replace with your credentials)
+// Supabase client
 const supabase = useSupabaseClient();
 
 // Reactive state
 const searchQuery = ref('');
-const options = ref([]); // The current list of options
-const selected = ref(props.selectedValue); // Local copy of the selected item
+const options = ref([]); // The list of dropdown options
+const selected = ref(props.selectedValue); // Track selected item
 const isDropdownOpen = ref(false);
-const v = ref('')
+
 // Fetch options from Supabase
 async function fetchOptions() {
-  if (!!searchQuery) {
+  selected.value = {}
+  if (searchQuery.value.trim()) {
     try {
       const { data, error } = await supabase
         .from(props.table)
         .select('*')
-        .ilike(props.column, `%${searchQuery.value}%`) // Case-insensitive partial match
-        .limit(100); // Fetch only the first 100 results
+        .ilike(props.column, `%${searchQuery.value}%`)
+        .limit(100);
 
       if (error) {
         console.error('Supabase error:', error);
       } else {
-        options.value = data.map((row) => row);
-        isDropdownOpen.value = options.value.length > 0
+        options.value = data;
+        isDropdownOpen.value = options.value.length > 0;
       }
     } catch (err) {
       console.error('Fetch error:', err);
     }
+  } else {
+    options.value = [];
+    isDropdownOpen.value = false;
   }
 }
 
-// Watch searchQuery to re-fetch options on input change
+// Watch for search query changes to fetch options
 watch(searchQuery, () => {
   fetchOptions();
 });
 
-// Watch selected value to sync with props and emit changes
+// Sync the selected item
 watch(selected, (newValue) => {
-  emit('update:selectedValue', newValue); // Emit the updated value to the parent
+  if(Object.keys(selected.value).length > 0){
+    console.log('real')
+    searchQuery.value = newValue.name || '';
+    emit('update:selectedValue', newValue);
+  }
 });
 
-</script>
+// Handle input blur to use `searchQuery` if no selection is made
+function handleBlur() {
+  if (props.allowString && Object.keys(selected.value).length === 0) {
+    selected.value = { name: searchQuery.value };
+    emit('update:selectedValue', { name: searchQuery.value });
+  }
+}
 
+// Select an option
+function selectOption(option) {
+  selected.value = option;
+  isDropdownOpen.value = false;
+}
+</script>
 <template>
-  <ComboboxRoot v-model:open="isDropdownOpen" class="relative w-full self-start">
-    <ComboboxAnchor class="min-w-[160px] inline-flex items-center justify-between rounded">
-      <!-- The trigger for opening the dropdown -->
-      <ComboboxTrigger as-child class="block w-full">
+  <ComboboxRoot v-model:open="isDropdownOpen" class="relative w-full">
+    <ComboboxAnchor class="min-w-[160px] inline-flex w-full">
+      <ComboboxTrigger as-child>
       </ComboboxTrigger>
-      <Input id="company" v-model="searchQuery" placeholder="Type to search..." />
+        <Input
+          id="company"
+          v-model="searchQuery"
+          placeholder="Search for a company..."
+          class="w-full"
+          @blur="handleBlur" 
+        />
     </ComboboxAnchor>
-    <ComboboxContent position="popper"
-      class="absolute z-10 w-full mt-2 min-w-[160px] bg-white overflow-hidden rounded">
-      <ComboboxItem class="w-full p-3 flex gap-2 items-start hover:bg-orange-100 cursor-pointer" v-for="opt in options"
-        :key="opt.name">
-        {{ opt.name }}
-      </ComboboxItem>
+    <ComboboxContent
+      position="popper"
+      class="absolute min-w-[160px] z-10 w-full mt-2 border rounded-md border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg -left-20 max-h-60 overflow-y-auto"
+    >
+      <div v-if="options.length > 0">
+        <ComboboxItem
+          v-for="option in options"
+          :key="option.name"
+          class="p-3 flex gap-2 items-center hover:bg-orange-100 cursor-pointer"
+          @click="selectOption(option)"
+        >
+          <div>
+            <p class="font-medium">{{ option.name }}</p>
+          </div>
+        </ComboboxItem>
+      </div>
+      <div v-else class="p-3 text-gray-500 text-sm text-center">
+        No results found
+      </div>
     </ComboboxContent>
   </ComboboxRoot>
 </template>
-
 <style scoped>
-/* Add any additional styles as needed */
+/* Customize dropdown appearance */
+.ComboboxContent {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+}
+.ComboboxItem {
+  transition: background-color 0.2s ease;
+}
+.ComboboxItem:hover {
+  background-color: #fef3c7;
+}
 </style>
