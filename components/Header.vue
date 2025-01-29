@@ -7,6 +7,8 @@ const isLoggedIn = computed(() => user.value !== null)
 import { Badge } from '@/components/ui/badge'
 import { CrownIcon } from 'lucide-vue-next';
 import MessagesButton from './MessagesButton.vue';
+import ChatBot from '~/components/ChatBot.vue'
+
 
 
 </script>
@@ -169,6 +171,8 @@ import MessagesButton from './MessagesButton.vue';
     </NuxtLink>
     <MessagesButton></MessagesButton>
   </div>
+  <ChatBot />
+
 </template>
 
 <style>

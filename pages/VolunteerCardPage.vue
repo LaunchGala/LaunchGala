@@ -9,7 +9,7 @@ const venueId = route.query.id;
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-200 dark:bg-black flex items-center justify-center p-4">
+  <div class="min-h-screen bg-orange-50 dark:bg-black flex items-center justify-center p-4">
     <VolunteerDetailCard :id="venueId"></VolunteerDetailCard>
   </div>
 </template>

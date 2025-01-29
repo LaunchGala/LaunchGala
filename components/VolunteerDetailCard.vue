@@ -1,114 +1,269 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { GlobeIcon, LinkedinIcon, MapPinIcon, UserIcon } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
+import { ref, onMounted } from 'vue'
+import { MapPin, Globe, Linkedin, UserPlus, Github, Twitter } from 'lucide-vue-next'
+import { SupabaseClient } from '@supabase/supabase-js'
 
-
-const props = defineProps(['id', 'profile']);
+const props = defineProps(['id', 'profile'])
 const supabase = useSupabaseClient()
-const profile = ref({});
+const profile = ref({})
 const contactInfo = ref({})
 
-const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
+const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ")
+const formatUrl = url => !url?.startsWith('http') ? `https://${url}` : url
+
 async function getAllExperts(query) {
   const { data: AllExperts, error } = !!query ? await query : await supabase
     .from('profiles')
-    .select('*, volunteer:Volunteers(*)') // Assuming the table is named 'experts'
+    .select('*, volunteer:Volunteers(*)')
     .eq('is_volunteer', true)
-    .eq('id', props.id);
+    .eq('id', props.id)
+
   console.log(error)
   Promise.all(AllExperts.map(async (profile) => {
     profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
     profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
   })).then(() => {
-    profile.value = AllExperts[0];
+    profile.value = AllExperts[0]
     contactInfo.value = {other_user_id: profile.value.id, other_user_name: profile.value.full_name}
-    console.log(AllExperts)
   })
 }
+
 const fetchImage = async (id, bucket) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
+  if(!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60)
+    return urlData?.data?.signedUrl ?? ""
   }
-const formatUrl = url => !url?.startsWith('http') ? `https://${url}` : url;
+}
+
+const connect = () => {
+  // Implement connection logic here
+  console.log('Connecting with', profile.value?.full_name)
+}
+
 onMounted(() => {
-    if(props.id != null){
-        getAllExperts(null)
-    }else{
-        profile.value = props.profile
-        fetchImage(profile.value.avatar_path, 'avatars')
-        .then((avatar) => {
-          profile.value.avatarSRC = avatar;
-        })
-        .catch((error) => {
-          console.error('Error fetching avatar image:', error);
-        });
-        fetchImage(profile.value.banner_path, 'images')
-        .then((banner) => {
-          profile.value.bannerSRC = banner;
-        })
-        .catch((error) => {
-          console.error('Error fetching banner image:', error);
-        });
-    }
+  if(props.id != null){
+    getAllExperts(null)
+  } else {
+    profile.value = props.profile
+    fetchImage(profile.value.avatar_path, 'avatars')
+      .then((avatar) => {
+        profile.value.avatarSRC = avatar
+      })
+      .catch((error) => {
+        console.error('Error fetching avatar image:', error)
+      })
+    fetchImage(profile.value.banner_path, 'images')
+      .then((banner) => {
+        profile.value.bannerSRC = banner
+      })
+      .catch((error) => {
+        console.error('Error fetching banner image:', error)
+      })
+  }
 })
 </script>
 
 <template>
-    <Card class="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden">
-      <CardHeader :style="profile?.bannerSRC 
-    ? { backgroundImage: `url(${profile?.bannerSRC})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : null"
-  class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white">
-        <button>
-        <Avatar class="mb-4 w-24 h-24 ring-4 ring-white">
-          <AvatarImage :src="profile?.avatarSRC" alt="Volunteer Name" />
-          <AvatarFallback>VC</AvatarFallback>
-        </Avatar>
-        <CardTitle class="text-2xl font-bold">{{ profile?.full_name }}</CardTitle>
-        <span class="text-m opacity-90">{{profile?.volunteer?.headline}} </span>
+  <div class="min-h-screen bg-orange-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <!-- Banner -->
+      <div class="h-64 w-full bg-gradient-to-r  relative">
+        <img 
+          :src="profile?.bannerSRC || '/placeholder.svg?height=300&width=1200'" 
+          alt="Profile banner" 
+          class="w-full h-full object-cover "
+        >
+      </div>
+      
+      <!-- Avatar -->
+      <div class="relative">
+        <img 
+          :src="profile?.avatarSRC || '/placeholder.svg?height=192&width=192'" 
+          :alt="'Profile picture of ' + profile?.full_name"
+          class="absolute left-8 -top-24 w-48 h-48 rounded-full border-4 border-white shadow-xl object-cover"
+        >
+      </div>
 
-    </button>
-        <div class="flex items-center mt-2">
-          <MapPinIcon class="w-5 h-5" />
-          <span class="ml-2 font-semibold">{{profile?.location}}</span>
-        </div>
-        <div v-if="profile?.volunteer?.will_travel" variant="light" class="mt-3 px-4 py-1 rounded text-white text-s font-normal bg-opacity-20">Available for Travel</div>
-      </CardHeader>
-      <CardContent class="p-6">
-        <p class="text-gray-700 dark:text-gray-300 mb-6">
-          {{profile?.about}}
-        </p>
-        <h2 class="font-semibold mb-4">Volunteer Categories:</h2>
-        <div v-for="category in profile?.volunteer?.categories" class="mb-6 flex gap-2 flex-wrap">
-          <span class="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{category}}</span>
-        </div>
-        <h2 class="font-semibold mb-4">Industries:</h2>
-        <div v-for="industry in profile?.industries" class="mb-6 flex gap-2 flex-wrap">
-          <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{industry}}</span>
-        </div>
-        <h2 class="font-semibold mb-4">Links:</h2>
-
-        <div class="flex flex-wrap justify-between">
-          <div class="flex items-center text-gray-700 dark:text-gray-300">
-            <GlobeIcon class="w-5 h-5"/>
-            <a :href="formatUrl(profile?.website)" class="ml-2 hover:underline">{{profile?.website}}</a>
+      <div class="p-8 pt-28">
+        <div class="flex justify-between items-start">
+          <div>
+            <h1 class="text-4xl font-bold text-gray-900">{{ profile?.full_name }}</h1>
+            <p class="mt-1 text-2xl text-orange-600">{{ profile?.volunteer?.headline }}</p>
+            <div class="mt-2 flex items-center text-gray-600">
+              <MapPin class="h-5 w-5 mr-2" />
+              <span>{{ profile?.location }}</span>
+            </div>
+            <div v-if="profile?.volunteer?.will_travel" class="mt-2 inline-block px-4 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
+              Available for Travel
+            </div>
           </div>
-          <div class="flex items-center text-gray-700 dark:text-gray-300">
-            <LinkedinIcon class="w-5 h-5"/>
-            <a :href="formatUrl(profile?.linkedin)" class="ml-2 hover:underline">{{profile?.linkedin}}</a>
+          <button 
+            v-if="Object.keys(contactInfo).length !== 0"
+            @click="connect" 
+            class="px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-300 flex items-center shadow-md"
+          >
+            <UserPlus class="h-5 w-5 mr-2" />
+            Connect
+          </button>
+        </div>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900">About</h2>
+          <p class="mt-2 text-gray-600 text-lg">{{ profile?.about }}</p>
+        </div>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900">Volunteer Categories</h2>
+          <div class="mt-3 flex flex-wrap gap-3">
+            <span 
+              v-for="category in profile?.volunteer?.categories" 
+              :key="category"
+              class="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
+            >
+              {{ category }}
+            </span>
           </div>
         </div>
-        <div class="flex justify-between mt-8">
-          <!-- <Button class="flex items-center justify-center px-8 py-3 rounded-md bg-orange-500 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500  text-white">
-            Edit
-          </Button> -->
-          <MessagesButton v-if="Object.keys(contactInfo).length !== 0" :label="'Contact'" :isIcon="false" :newConversationInfo="contactInfo"></MessagesButton>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900">Industries</h2>
+          <div class="mt-3 flex flex-wrap gap-3">
+            <span 
+              v-for="industry in profile?.industries" 
+              :key="industry"
+              class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full text-sm font-medium"
+            >
+              {{ industry }}
+            </span>
+          </div>
         </div>
-      </CardContent>
-    </Card>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">Links</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a 
+              v-if="profile?.website"
+              :href="formatUrl(profile?.website)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+            >
+              <Globe class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-orange-800 font-medium">Website</span>
+            </a>
+            <a 
+              v-if="profile?.linkedin"
+              :href="formatUrl(profile?.linkedin)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+            >
+              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
+              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+            </a>
+            <a 
+              v-if="profile?.website"
+              :href="formatUrl(profile?.website)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+            >
+              <Globe class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-orange-800 font-medium">Website</span>
+            </a>
+            <a 
+              v-if="profile?.linkedin"
+              :href="formatUrl(profile?.linkedin)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+            >
+              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
+              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+            </a>
+            <a 
+              v-if="profile?.website"
+              :href="formatUrl(profile?.website)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+            >
+              <Globe class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-orange-800 font-medium">Website</span>
+            </a>
+            <a 
+              v-if="profile?.linkedin"
+              :href="formatUrl(profile?.linkedin)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+            >
+              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
+              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+            </a>
+            <a 
+              v-if="profile?.website"
+              :href="formatUrl(profile?.website)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+            >
+              <Globe class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-orange-800 font-medium">Website</span>
+            </a>
+            <a 
+              v-if="profile?.linkedin"
+              :href="formatUrl(profile?.linkedin)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+            >
+              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
+              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+            </a>
+            <a 
+              v-if="profile?.website"
+              :href="formatUrl(profile?.website)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+            >
+              <Globe class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-orange-800 font-medium">Website</span>
+            </a>
+            <a 
+              v-if="profile?.linkedin"
+              :href="formatUrl(profile?.linkedin)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+            >
+              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
+              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+            </a>
+            <a 
+              v-if="profile?.website"
+              :href="formatUrl(profile?.website)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+            >
+              <Globe class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-orange-800 font-medium">Website</span>
+            </a>
+            <a 
+              v-if="profile?.linkedin"
+              :href="formatUrl(profile?.linkedin)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+            >
+              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
+              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
