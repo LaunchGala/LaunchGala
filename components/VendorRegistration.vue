@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
   import { useToast } from 'vue-toastification';
 import { User, Edit2, Mail, MapPin, Phone, Twitter, Facebook, Instagram, Linkedin, Youtube } from 'lucide-vue-next';
 
+const routeBack = ref(false);
 const uploading = ref(false); // Track upload status
 const toast = useToast();
 const route = useRoute();
@@ -87,7 +88,11 @@ const onSubmit = async (event: Event) => {
     toast.error('Error');
   } else {
     toast.success('Registration Successful');
-    router.push('/AllVendors');
+    if(routeBack.value){
+      router.go(-1)
+    }else{
+      router.push('/AllVendors');
+    }
   }
 };
 
@@ -131,6 +136,7 @@ const loadFormData = async (id: string) => {
 // Load form data on component mount if `id` is present
 onMounted(() => {
   const id = route.query.id;
+  routeBack.value = !!route.query.routeBack ? true : false;
   if (id) {
     loadFormData(id);
   }
