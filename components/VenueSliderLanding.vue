@@ -67,7 +67,7 @@ onMounted(() => {
         </div>
 
         <div class="px-6 pt-4 pb-2">
-          <NuxtLink :to="{ name: 'VenuePageNew', query: { id: venue.id } }">
+          <NuxtLink :to="{ name: 'VenueDetailPage', query: { id: venue.id } }">
           <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors ButtonCol">
             Explore
             <ArrowRight class="w-5 h-5 ml-2" />

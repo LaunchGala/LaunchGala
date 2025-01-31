@@ -7,16 +7,15 @@ import ChatBot from '~/components/ChatBot.vue'
 <template>
   <div>
   <CreateEventBox/>
-  <ChatBot/>
-  <VenueSliderLanding/>
+  <VenueSliderLandingNew/>
   <VolunteersLanding/>
-  <SponsorsLanding/>
+  <!-- <SponsorsLanding/> -->
   <OtherServicesLanding/>
-  <CompanyFundingLanding/>
-  <LaunchAILanding/>
-  <UpcomingEventLanding/>
   <CreateEventLanding/>
-  <RequestServiceLanding/>
+  <!-- <CompanyFundingLanding/> -->
+  <!-- <LaunchAILanding/> -->
+  <!-- <UpcomingEventLanding/> -->
+  <!-- <RequestServiceLanding/> -->
   <FAQlanding/>
 </div>
 

@@ -8,7 +8,7 @@ import AnimatedText from './AnimatedText.vue';
 </script>
 
 <template>
-      <div class="flex items-left justify-left  bg-gray-100 dark:bg-black p-6  ">
+      <div class="flex items-left justify-left  bg-gray-100 dark:bg-black pb-6  ">
         <div class="space-y-4 w-1/4 z-20 mx-10 mb-6 ">
 
         <div class="flex dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-3">
@@ -57,9 +57,9 @@ import AnimatedText from './AnimatedText.vue';
   </div>
 </div>
 
-  <img src="/eventLanding01.jpg" alt="Landing Page" class="z-10 absolute right-10 rounded-xl overflow-hidden w-3/4 h-5/6">
+  <img src="/eventLanding01.jpg" alt="Landing Page" class="z-10 absolute overflow-hidden w-full h-full">
   <div class="absolute top-2 right-6 z-20 m-8">
-      <Button variant="default" class="mt-16  text-md text-white bg-orange-500 rounded-md hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
+      <Button variant="default" class="mt-6  text-md text-white bg-orange-500 rounded-md hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
         Sign Up for Free
       </Button>
 
