@@ -1,190 +1,3 @@
-<script setup lang="ts">
-
-const user = useSupabaseUser()
-
-const isLoggedIn = computed(() => user.value !== null)
-
-import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, ArrowLeftCircle, CrownIcon } from 'lucide-vue-next';
-import MessagesButton from './MessagesButton.vue';
-import { useRouter, useRoute } from 'vue-router';
-import Button from './ui/button/Button.vue';
-import ChatBot from '~/components/ChatBot.vue'
-
-
-
-const router = useRouter();
-const goBack = () => {
-  router.go(-1); // Go back to the previous page
-};
-</script>
-
-
-<template>
-        <div class=" w-full h-16 flex items-center justify-between px-2 headerMain shadow-md">
-      <a class="flex items-center gap-1 font-semibold text-sm" href="/" rel="ugc">
-        <!-- <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="h-6 w-6"
-        >
-          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-          <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg> -->
-        <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-16 h-16">
-        <span class=" colorOrange">Launch Gala</span>
-      </a>
-      <nav class="hidden lg:flex gap-7 ml-18">
-        <NuxtLink to="AllVenues">
-          <a class="text-sm font-semibold  hover:underline">
-            Venues
-          </a>
-        </NuxtLink>
-        <NuxtLink to="AllVolunteers">
-          <a class="text-sm font-semibold  hover:underline">
-            Volunteers
-          </a>
-        </NuxtLink>
-        <NuxtLink to="FoundersAndStartups">
-          <a class="text-sm font-semibold  hover:underline">
-            Startups
-
-          </a>
-        </NuxtLink>
-
-        <NuxtLink to="AllSpeakers">
-          <a class="text-sm font-semibold  hover:underline">
-            Experts/Investors
-          </a>
-        </NuxtLink>
-        <NuxtLink to="AllVendors">
-
-<a class="text-sm font-semibold  hover:underline">
-  Vendors
-</a>
-
-</NuxtLink>
-
-        <NuxtLink to="AllMedia">
-          <a class="text-sm font-semibold  hover:underline">
-            Influencers 
-          </a>
-
-        </NuxtLink>
-        <NuxtLink to="AllTalents">
-          <a class="text-sm font-semibold  hover:underline">
-            Talents
-          </a>
-
-        </NuxtLink>
-        <!-- <NuxtLink to="AllSponsors">
-          <a class="text-sm font-semibold  hover:underline">
-            Sponsors
-          </a>
-        </NuxtLink> -->
-        <!-- <NuxtLink to="AllCommunities">
-          <a class="text-sm font-semibold  hover:underline">
-            Communities
-          </a>
-
-        </NuxtLink> -->
-        <!-- <NuxtLink to="AllResources">
-          <a class="text-sm font-semibold  hover:underline">
-            Resources
-          </a>
-
-        </NuxtLink> -->
-<!-- 
-
-        <NuxtLink to="AllCommunities">
-          <a class="text-m font-semibold  hover:underline">
-            Talents 
-          </a>
-          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
-            Coming Soon!
-          </Badge>
-        </NuxtLink>
-
-        <NuxtLink to="AllCommunities">
-          <a class="text-m font-semibold  hover:underline">
-            Communities
-          </a>
-          <Badge class="transform  text-xs py-0.5 px-2 bg-orange-500 text-white dark:bg-black">
-            Coming Soon!
-          </Badge>
-        </NuxtLink> -->
-        <!-- <NuxtLink to="AllResources">
-
-          <a class="text-m  font-semibold hover:underline">
-            Resources
-          </a>
-        </NuxtLink> -->
-        <NuxtLink to="LaunchAI">
-          <a class="text-sm font-semibold  hover:underline">
-            AI Lounge
-          </a>
-
-        </NuxtLink>
-        <NuxtLink to="AllEvents">
-          <a class="text-sm font-semibold  hover:underline">
-            Events
-          </a>
-        </NuxtLink>
-        <!-- <NuxtLink to="TokenizedSharesCreator">
-          <a class="text-sm font-semibold  hover:underline ">
-            Founders Coin 
-          </a> -->
-          <!-- <Badge class="  text-xs border-orange-500 bg-white text-orange-500 mr-6">
-            $ --.--
-          </Badge> -->
-        <!-- </NuxtLink>
-        <NuxtLink to="PartnerOptionGrants">
-          <a class="text-sm font-semibold  hover:underline">
-            Partner Options
-          </a>
-
-        </NuxtLink> -->
-      </nav>
-      <NuxtLink to="CreateEvent">
-      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:underline h-10 px-4 py-2 mr-4 ">
-        + Create Event
-      </button>
-      </NuxtLink>
-      <Badge class="bg-orange-200 text-orange-600 dark:bg-orange-800 dark:text-orange-100 py-1 px-3 rounded-full text-xs mr-4 hover:bg-orange-500 hover:text-white">
-        <CrownIcon class="w-5 h-5 text-orange-500 hover:text-orange-300" />
-  
-        <spam class="text-md ml-1">Pro</spam>
-        </Badge>
-      <span class="absolute top-5 right-24 -mt-3 mr-4 bg-white text-orange-500 rounded-full text-xs px-1">
-                        11
-                    </span>
-    <NuxtLink v-if="!isLoggedIn" to="logIn">
-      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-orange-500 text-primary-foreground hover:bg-orange-400 h-10 px-4 py-2 ml-auto">
-        Login
-      </button>
-    </NuxtLink>
-      <NuxtLink v-else to="UserDashboard">
-      <button class="inline-flex items-center justify-center border whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none  border-orange-500 bg-white text-orange-500 hover:bg-orange-500 hover:text-white h-10 px-4 py-2 ml-auto">
-        Dashboard 
-      </button>
-    </NuxtLink>
-    <MessagesButton></MessagesButton>
-  </div>
-  <div class="bg-white">
-    <Button @click="goBack" class="bg-white-500 hover:bg-gray-100 text-orange-500 font-bold rounded-full shadow-lg ml-3 mb-2">
-      <ArrowLeft class=" text-orange-500 text-xl "></ArrowLeft>
-    </Button>
-  </div>
-  <ChatBot />
-
-</template>
 
 <style>
     .headerMain {
@@ -199,4 +12,229 @@ const goBack = () => {
     .colorOrangeBg {
         background-color: #ff6900;
     }
+</style>
+
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { ChevronDown, Menu, Bell, Search } from 'lucide-vue-next'
+
+const isDropdownOpen = ref(false)
+const isMobileMenuOpen = ref(false)
+const isScrolled = ref(false)
+
+const navigationItems = [
+  { name: 'Venues', href: '/venues' },
+  { name: 'Volunteers', href: '/volunteers' },
+  { name: 'Startups', href: '/startups', new: true },
+  { name: 'Experts/Investors', href: '/experts' },
+  { name: 'Vendors', href: '/vendors', new: true },
+  { name: 'Influencers', href: '/influencers', new: true },
+  { name: 'Talents', href: '/talents' },
+  { name: 'AI Lounge', href: '/ai-lounge', new: true },
+  { name: 'Events', href: '/events' },
+  { name: 'Contact us', href: '/contact' }
+]
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value
+}
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const closeDropdown = () => {
+  isDropdownOpen.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    isScrolled.value = window.scrollY > 20
+  })
+})
+</script>
+
+<template>
+  <header 
+    :class="[
+      'fixed w-full top-0 z-50 transition-all duration-300',
+      isScrolled ? 'bg-white shadow-lg' : 'bg-white/80 backdrop-blur-lg'
+    ]"
+  >
+    <div class=" mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo and Website Name -->
+        <div class="flex items-center">
+          <a href="/" class="group flex items-center space-x-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-all duration-300">
+              <span class="text-white text-xl font-bold">LG</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                Launch Gala
+              </span>
+              <span class="text-sm text-gray-500">Event Planning Platform</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center space-x-8">
+          <!-- Search Bar -->
+          <!-- <div class="relative">
+            <div class="flex items-center bg-gray-100 rounded-full pl-4 pr-6 py-2 focus-within:ring-2 focus-within:ring-orange-500 transition-all">
+              <Search class="w-5 h-5 text-gray-400" />
+              <input 
+                type="text" 
+                placeholder="Search events, venues..." 
+                class="ml-2 bg-transparent border-none focus:outline-none text-gray-600 placeholder-gray-400 w-48"
+              >
+            </div>
+          </div> -->
+
+          <!-- Dropdown Menu -->
+          <div class="relative">
+            <button
+              @click="toggleDropdown"
+              class="flex items-center space-x-2 px-4 py-2 rounded-full hover:bg-orange-50 text-gray-700 hover:text-orange-500 transition-all"
+            >
+              <span>Explore</span>
+              <ChevronDown 
+                :class="{ 'transform rotate-180': isDropdownOpen }" 
+                class="w-4 h-4 transition-transform duration-200" 
+              />
+            </button>
+
+            <!-- Dropdown Panel -->
+            <div
+              v-show="isDropdownOpen"
+              @mouseleave="closeDropdown"
+              class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transform origin-top transition-all duration-200"
+            >
+              <div class="py-2">
+                <a
+                  v-for="item in navigationItems"
+                  :key="item.name"
+                  :href="item.href"
+                  class="flex items-center justify-between px-4 py-3 hover:bg-orange-50 group transition-colors"
+                >
+                  <span class="text-gray-600 group-hover:text-orange-500">{{ item.name }}</span>
+                  <span 
+                    v-if="item.new" 
+                    class="px-2 py-1 text-xs bg-orange-100 text-orange-600 rounded-full"
+                  >
+                    Soon
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Become a Host Button -->
+          <a
+            href="/become-host"
+            class="px-6 py-2.5  text-gray-700 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Become a Host
+          </a>
+
+          <!-- Notifications -->
+          <button class="relative p-2 hover:bg-orange-50 rounded-full transition-colors">
+            <Bell class="w-6 h-6 text-gray-600" />
+            <span class="absolute top-0 right-0 w-2 h-2 bg-orange-500 rounded-full"></span>
+          </button>
+
+          <!-- User Avatar -->
+          <a
+            href="/dashboard"
+            class="relative group"
+          >
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-orange-100 group-hover:ring-orange-500 transition-all duration-300">
+              <img
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt="User avatar"
+                class="w-full h-full object-cover"
+              >
+            </div>
+            <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          @click="toggleMobileMenu"
+          class="lg:hidden p-2 hover:bg-orange-50 rounded-lg transition-colors"
+        >
+          <Menu class="w-6 h-6 text-gray-600" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div
+      v-show="isMobileMenuOpen"
+      class="lg:hidden bg-white border-t shadow-lg"
+    >
+      <!-- Mobile Search -->
+      <div class="p-4">
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+          <Search class="w-5 h-5 text-gray-400" />
+          <input 
+            type="text" 
+            placeholder="Search events, venues..." 
+            class="ml-2 bg-transparent border-none focus:outline-none text-gray-600 placeholder-gray-400 w-full"
+          >
+        </div>
+      </div>
+
+      <div class="px-4 py-2 space-y-1">
+        <a
+          v-for="item in navigationItems"
+          :key="item.name"
+          :href="item.href"
+          class="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-orange-50 group transition-colors"
+        >
+          <span class="text-gray-600 group-hover:text-orange-500">{{ item.name }}</span>
+          <span 
+            v-if="item.new" 
+            class="px-2 py-1 text-xs bg-orange-100 text-orange-600 rounded-full"
+          >
+            New
+          </span>
+        </a>
+        <a
+          href="/become-host"
+          class="block px-4 py-3 text-center bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl mt-4"
+        >
+          Become a Host
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Spacer to prevent content from hiding under fixed header -->
+  <div class="h-20"></div>
+  <ChatBot/>
+</template>
+
+<style scoped>
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.2s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+input::placeholder {
+  color: #9CA3AF;
+}
+
+input:focus::placeholder {
+  color: #D1D5DB;
+}
 </style>

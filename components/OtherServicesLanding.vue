@@ -1,136 +1,172 @@
-
-<script setup lang="ts">
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Home, Check, User, ArrowRight } from 'lucide-vue-next';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-</script>
-
 <template>
-  <section class="py-16  bg-gray-100 dark:bg-black">
-    
-    <!-- Header and Description -->
-    <div class=" mx-8 mb-16 text-left">
-      <h2 class="text-2xl font-semibold mb-4  text-gray-700">We also help you with</h2>
-      <p class="text-md mt-3 dark:text-gray-400">Finding Speakers, Investors, Advisers, Talents, Media, Influencers, Vendors & more</p>
+  <section class="pb-16 pt-2 p-8 bg-orange-200 bg-opacity-50">
+    <div class="max-w-7xl mx-auto">
+      <header class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">We also help you with</h2>
+        <p class="text-lg text-gray-600">
+          Finding Speakers, Investors, Advisers, Talents, Media, Influencers, Vendors & more
+        </p>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div 
+          v-for="(service, index) in services" 
+          :key="service.title"
+          class="service-card"
+          :style="{ animationDelay: `${index * 100}ms` }"
+        >
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 h-full">
+            <div class="icon-wrapper mb-6 relative h-32 flex items-center justify-center group">
+              <component 
+                :is="service.icon" 
+                class="w-16 h-16 text-orange-500 z-10 transform group-hover:scale-110 transition-transform duration-300"
+              />
+              <div class="absolute inset-0 bg-orange-100 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-900 mb-3 text-center">
+              {{ service.title }}
+            </h3>
+            <p class="text-gray-600 text-center mb-6">
+              {{ service.description }}
+            </p>
+            
+            <button class="flex items-center justify-center w-full text-orange-500 hover:text-orange-600 font-medium transition-colors duration-300 group">
+              Explore
+              <ArrowRightIcon class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Home Party Card -->
-      <Card as-child>
-        <NuxtLink to="AllSpeakers">
-        <a href="/home-party" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Home Party" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <Home class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Speakers, Investors & Advisers</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Create an intimate event at your home.
-          </CardContent>
-          
-        </a>
-        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
-            Explore
-            <ArrowRight class="w-5 h-5 ml-2" />
-          </Button>
-      </NuxtLink>
-      </Card>
-
-      <!-- Corporate Event Card -->
-      <Card as-child>
-        <NuxtLink to="AllMedia">
-        <a href="/corporate-event" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Corporate Event" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <Check class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Media & influencers</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Organize your business conferences.
-          </CardContent>
-        </a>
-        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
-            Explore
-            <ArrowRight class="w-5 h-5 ml-2" />
-          </Button>
-      </NuxtLink>
-      </Card>
-
-      <!-- Private Meeting Card -->
-      <Card as-child>
-        <NuxtLink to="AllVendors">
-        <a href="/private-meeting" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Private Meeting" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <User class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Vendors</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Plan confidential discussions...................
-          </CardContent>
-        </a>
-        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
-            Explore
-            <ArrowRight class="w-5 h-5 ml-2" />
-          </Button>
-      </NuxtLink>
-      </Card>
-
-      <!-- Workshops Card -->
-      <Card as-child>
-        <NuxtLink to="AllResources">
-        <a href="/workshops" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Workshops" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <ArrowRight class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Talents</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Match with Co-founders and find you dream team
-          </CardContent>
-        </a>
-        <Button class=" mt-2 ml-6 mr-12 mb-8 inline-flex items-center ButtonCol rounded-lg py-2 px-4 hover:bg-gray-200 transition-colors">
-            Explore
-            <ArrowRight class="w-5 h-5 ml-2" />
-          </Button>
-      </NuxtLink>
-      </Card>
-    </div>
-    <!-- <div class="mt-8 flex justify-center">
-      <Button class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Explore events</Button>
-    </div> -->
   </section>
 </template>
 
+<script setup>
+import { 
+  UsersIcon, 
+  RadioIcon, 
+  ShoppingBagIcon, 
+  UsersRoundIcon,
+  SparklesIcon,
+  ArrowRightIcon,
+  LightbulbIcon 
+} from 'lucide-vue-next'
 
-<style>
- .OrangeCol {   
-  border-color: #ff6900;
- }
+const services = [
+  {
+    title: 'Speakers and Investors',
+    description: 'Invite Experts and Advisers to your Event',
+    icon: UsersIcon
+  },
+  {
+    title: 'Media & Influencers',
+    description: 'Partner and Collaborate to Boost your Event',
+    icon: RadioIcon
+  },
+  {
+    title: 'Vendors',
+    description: 'Find the Perfect Vendors to Meet All your Event Needs',
+    icon: ShoppingBagIcon
+  },
+  {
+    title: 'Talents',
+    description: 'Match with Co-founders and Find your Dream Team',
+    icon: LightbulbIcon
+  },
+  {
+    title: 'Sponsors',
+    description: 'Plan your Event and Secure Various Sponsorships',
+    icon: SparklesIcon
+  }
+]
+</script>
 
- .ButtonCol {
-  background-color: white;
-  color:#ff6900;
-  border-color: #ff6900;
-  border-radius: solid 15px;
-  border-width: 1px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  
- }
+<style scoped>
+.service-card {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at center,
+    rgba(251, 146, 60, 0.2) 0%,
+    rgba(251, 146, 60, 0) 70%
+  );
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.icon-wrapper:hover::before {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+/* Custom animations for each icon on hover */
+.service-card:nth-child(1) .icon-wrapper:hover svg {
+  animation: shake 0.5s ease infinite;
+}
+
+.service-card:nth-child(2) .icon-wrapper:hover svg {
+  animation: pulse 1s ease infinite;
+}
+
+.service-card:nth-child(3) .icon-wrapper:hover svg {
+  animation: swing 1s ease infinite;
+}
+
+.service-card:nth-child(4) .icon-wrapper:hover svg {
+  animation: bounce 0.5s ease infinite;
+}
+
+.service-card:nth-child(5) .icon-wrapper:hover svg {
+  animation: sparkle 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg); 
+  }
+  50% { 
+    transform: scale(1.2) rotate(180deg); 
+  }
+}
 </style>

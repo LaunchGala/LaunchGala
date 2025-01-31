@@ -1,114 +1,159 @@
-
-<script setup lang="ts">
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Home, Check, User, ArrowRight } from 'lucide-vue-next';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-</script>
-
 <template>
-  <section class="py-10 px-4 bg-gray-100 dark:bg-black">
-    <!-- Header and Description -->
-    <div class="mb-10 mr-8 ml-8 flex justify-between">
-      <h2 class="text-2xl font-semibold mb-4  text-gray-700">Create your event</h2>
-      <!-- <p class="text-md mt-3 dark:text-gray-400">Choose the event type that suits your need</p> -->
-      <NuxtLink to="CreateEvent">
-      <Button class="ButtonCol  hover:bg-gray-200 transition-colors">Create Event</Button>
-      </NuxtLink>
+  <section class="pb-2 pt-12  p-8">
+    <div class="max-w-7xl mx-auto">
+      <header class="flex justify-between items-center mb-8">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Create your Event</h2>
+          <p class="text-lg text-gray-600">
+            From Conferences to Concerts, Access Venues, Talent and Resources for Any Occasion
+          </p>
+        </div>
+        <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5">
+          Create Event
+        </button>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div 
+          v-for="(event, index) in events" 
+          :key="event.title"
+          class="event-card group"
+          :style="{ animationDelay: `${index * 100}ms` }"
+        >
+          <div class="relative h-full overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+            <!-- Background Image with Gradient Overlay -->
+            <div class="absolute inset-0">
+              <img 
+                :src="event.image" 
+                :alt="event.title"
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative h-full p-6 flex flex-col">
+              <div class="network-icon mb-6 transform group-hover:scale-110 transition-all duration-300">
+                <svg width="80" height="80" viewBox="0 0 120 120" class="mx-auto">
+                  <!-- Central circle -->
+                  <circle cx="60" cy="60" r="8" class="fill-orange-500" />
+                  
+                  <!-- Connecting lines and nodes -->
+                  <g class="nodes-group">
+                    <template v-for="(_, i) in 8" :key="i">
+                      <line
+                        :x1="60"
+                        :y1="60"
+                        :x2="60 + 40 * Math.cos(i * Math.PI / 4)"
+                        :y2="60 + 40 * Math.sin(i * Math.PI / 4)"
+                        class="stroke-orange-300 stroke-2"
+                      />
+                      <circle
+                        :cx="60 + 40 * Math.cos(i * Math.PI / 4)"
+                        :cy="60 + 40 * Math.sin(i * Math.PI / 4)"
+                        r="6"
+                        class="fill-orange-500"
+                      />
+                    </template>
+                  </g>
+                  
+                  <!-- Rocket -->
+                  <path
+                    d="M60 30 L65 45 L60 40 L55 45 Z"
+                    class="fill-orange-500 transform origin-center rocket"
+                  />
+                </svg>
+              </div>
+
+              <h3 class="text-2xl font-semibold text-white mb-3">
+                {{ event.title }}
+              </h3>
+              <p class="text-gray-200 mb-6 flex-grow">
+                {{ event.description }}
+              </p>
+              
+              <button class="flex items-center text-orange-400 hover:text-orange-300 font-medium transition-colors duration-300 group/btn mt-auto">
+                Create
+                <ArrowRightIcon class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="text-md mb-4 mt-0 ml-8 mr-8 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
-
-    <div class="grid mx-8 my-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Home Party Card -->
-      <Card as-child>
-        <a href="/CreateEvent" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Workshops" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <ArrowRight class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Launch Event</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Launch your Startup or promote new service/product
-          </CardContent>
-        </a>
-      </Card>
-
-
-      <!-- Corporate Event Card -->
-      <Card as-child>
-        <a href="/CreateEvent" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Corporate Event" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <Check class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Corporate Event</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Organize your business conferences.
-          </CardContent>
-        </a>
-      </Card>
-
-      <!-- Private Meeting Card -->
-      <Card as-child>
-        <a href="/CreateEvent" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Private Meeting" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <User class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">Pop-up Shop</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Influencers & live streamers connecting with audience in real life
-          </CardContent>
-        </a>
-      </Card>
-
-      <!-- Workshops Card -->
-      <Card as-child>
-        <a href="/CreateEvent" class="block">
-          <AspectRatio :ratio="16 / 9" class="rounded-t-lg overflow-hidden">
-            <img src="/Launch_Gala_Logo-removebgHD.png" alt="Home Party" class="w-full h-full object-cover">
-          </AspectRatio>
-          <CardHeader>
-            <!-- <Home class="w-5 h-5 dark:text-white" /> -->
-            <CardTitle class="text-lg dark:text-white">House Party</CardTitle>
-          </CardHeader>
-          <CardContent class="dark:text-gray-400">
-            Create an intimate event at your home.
-          </CardContent>
-        </a>
-      </Card>
-    </div>
-    <!-- <div class="mt-8 flex justify-center">
-      <Button class="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700">Create Event</Button>
-    </div> -->
   </section>
 </template>
 
-<style>
- .OrangeCol {   
-  border-color: #ff6900;
- }
+<script setup>
+import { ArrowRightIcon } from 'lucide-vue-next'
 
- .ButtonCol {
-  background-color: white;
-  color:#ff6900;
-  border-color: #ff6900;
-  border-radius: solid 15px;
-  border-width: 1px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  
- }
+const events = [
+  {
+    title: 'Launch Event',
+    description: 'Launch your Startup or promote new service/product',
+    image: '/eventLanding01.jpg'
+  },
+  {
+    title: 'Corporate Event',
+    description: 'Organize your business conferences.',
+    image: '/eventLanding03.jpg'
+  },
+  {
+    title: 'Pop-up Shop',
+    description: 'Influencers & live streamers connecting with audience in real life',
+    image: '/eventLanding04.jpg'
+  },
+  {
+    title: 'House Party',
+    description: 'Create an intimate event at your home.',
+    image: '/venueBG01.jpeg'
+  }
+]
+</script>
+
+<style scoped>
+.event-card {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.network-icon:hover .nodes-group {
+  animation: rotate 10s linear infinite;
+}
+
+.network-icon:hover .rocket {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>

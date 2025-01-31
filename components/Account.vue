@@ -828,6 +828,71 @@ async function refreshCompanies() {
           <AccordionItem value="expert">
             <AccordionTrigger class="flex items-center justify-between">
               <span
+                class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Provide your Venue
+                <span class="tooltip flex">ⓘ
+                  <span class="tooltiptext">The legal name of your company</span>
+                </span>
+              </span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div class="mt-4 space-y-4">
+                <div class="grid grid-cols-2">
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400"
+                      for="expertWillTravel">List as Expert</label>
+                    <Switch :disabled="editDisabled" :default-checked="userProfile.is_expert"
+                      @update:checked="setIsExpert" id="expertWillTravel" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400"
+                      for="expertHeadline">Headline</label>
+                    <Input id="expertHeadline" :disabled="editDisabled" v-model="userProfile.expert.headline"
+                      class="mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400"
+                      for="expertWillTravel">Willing to Travel</label>
+                    <Switch :disabled="editDisabled" :default-checked="userProfile.expert.will_travel"
+                      @update:checked="setExpertWillTravel" id="expertWillTravel" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-600 dark:text-gray-400"
+                      for="expert_category">Expert Type</label>
+                    <Popover>
+                      <PopoverTrigger :disabled="editDisabled"
+                        class="flex mt-1 w-full rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700 p-2 text-sm text-left">
+                        <ChevronDown class="w-5 h-5 mr-2 text-orange-600 dark:text-orange-400" />
+                        <span>{{ userProfile.expert.categories.length ? userProfile.expert.categories.join(', ') :
+                          'Select' }}</span>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        class="border rounded-md border-orange-300 dark:border-orange-600 bg-white dark:bg-gray-800 shadow-lg">
+                        <div class="p-2">
+                          <Input v-model="searchExpertCategory" placeholder="Search expert categories..."
+                            class="w-full mb-2 rounded-md bg-gray-100 dark:bg-gray-800 border-transparent focus:border-gray-400 dark:focus:border-gray-700" />
+                        </div>
+                        <ScrollArea class="h-80 w-full p-1">
+                          <ul class="menu">
+                            <li v-for="expert_category in filteredExpertCategories" :key="expert_category"
+                              class="flex items-center gap-2">
+                              <Checkbox :checked="userProfile.expert.categories.includes(expert_category)"
+                                @click="toggleExpertCategorySelection(expert_category)" />
+                              <span>{{ expert_category }}</span>
+                            </li>
+                          </ul>
+                        </ScrollArea>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                </div>
+                <PreviewExpertDialog :profile="userProfile"></PreviewExpertDialog>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="expert">
+            <AccordionTrigger class="flex items-center justify-between">
+              <span
                 class="flex p-2 items-center gap-2 text-white bg-orange-500  hover:bg-orange-400 focus:ring-orange-400 border-solid rounded-sm">Become
                 an Expert
                 <span class="tooltip flex">ⓘ

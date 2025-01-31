@@ -1,75 +1,146 @@
-
-<script setup lang="ts">
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Search } from 'lucide-vue-next'
-
-
-</script>
-
 <template>
-  <section class="py-16 bg-gray-100 dark:bg-black">
-    <div class="mx-8 text-center mb-8 flex justify-between">
-      <h2 class=" text-2xl font-semibold mb-4  text-gray-700">Find Volunteers</h2>
-      <Button variant="default" class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-300 transition-colors">Become a volunteer</Button>
-      <!-- <p class="text-gray-600 dark:text-gray-400">Explore our volunteer categories</p> -->
+  <section class="pt-12 pb-1 bg-orange-200 bg-opacity-50 p-8">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header Section -->
+      <header class="flex justify-between items-center mb-8">
+        <div>
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">Find Volunteers</h1>
+          <p class="text-lg text-gray-900">
+            Finding professional volunteers to help you with your event
+          </p>
+        </div>
+        <!-- <button 
+          class="bg-white text-orange-500 border-2 border-orange-500 px-6 py-3 rounded-lg font-medium hover:bg-orange-500 hover:text-white transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+        >
+          Become a volunteer
+        </button> -->
+      </header>
 
+      <!-- Categories Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+        <div 
+          v-for="(category, index) in categories" 
+          :key="category.title"
+          class="category-card group"
+          :style="{ animationDelay: `${index * 100}ms` }"
+          @mouseenter="activeCard = index"
+          @mouseleave="activeCard = null"
+        >
+          <div 
+            class="relative bg-white rounded-xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 h-full overflow-hidden"
+            :class="{ 'ring-2 ring-orange-500': activeCard === index }"
+          >
+            <!-- Background Pattern -->
+            <div 
+              class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+              :style="{
+                backgroundImage: 'radial-gradient(circle at 20px 20px, orange 2px, transparent 0)',
+                backgroundSize: '40px 40px'
+              }"
+            ></div>
+
+            <!-- Icon -->
+            <div class="relative z-10 mb-6">
+              <div class="w-20 h-20 mx-auto bg-orange-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                <component 
+                  :is="category.icon" 
+                  class="w-12 h-12 text-orange-500 transform group-hover:rotate-12 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 text-center">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-orange-500 transition-colors duration-300">
+                {{ category.title }}
+              </h3>
+              <p v-if="category.description" class="text-gray-600 text-sm ">
+                {{ category.description }}
+              </p>
+            </div>
+
+            <!-- Hover Border Effect -->
+            <div class="absolute inset-0 border-2 border-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View All Button -->
+      <!-- <div class="text-left">
+        <button class="inline-flex items-left text-orange-500 hover:text-orange-600 font-medium group ">
+          <span class="bg-white text-orange-500 border-2 border-orange-500 px-6 py-3 rounded-lg font-medium hover:bg-orange-500 hover:text-white transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5">View All</span>
+        </button>
+      </div> -->
     </div>
-    <p class="text-md mb-8 ml-8 mr-8 dark:text-gray-400">Finding speakers, media, influencer, vendors & more</p>
-
-    <div class="flex justify-center gap-8 flex-wrap px-8">
-      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
-        <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Admin Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">Administrative Support</span>
-      </div>
-      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
-        <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Tech Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">Tech Support</span>
-      </div>
-      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
-        <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Building Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">Logistics & Coordination</span>
-      </div>
-      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
-        <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="Building Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">Catering & Hospitality</span>
-      </div>
-      <NuxtLink to="AllVolunteers">
-      <div class="flex flex-col items-center justify-center w-60 h-60 bg-white rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-2 dark:bg-gray-800">
-        <img src="/placeholder.svg" class="w-20 h-20 mb-4" alt="More Category"/>
-        <span class="text-xl text-gray-800 dark:text-white">More...</span>
-      </div>
-    </NuxtLink>
-  </div>
-  <div class="py-8 ml-10 mt-10">
-    <NuxtLink to="AllVolunteers">
-      <Button class="ButtonCol rounded-lg px-6 py-3 hover:bg-gray-300 transition-colors">
-      View All
-      <ArrowRight class="w-5 h-5 ml-2" />
-        </Button>
-      </NuxtLink>
-  </div>
-    
   </section>
-
 </template>
 
+<script setup>
+import { ref } from 'vue'
+import { 
+  ClipboardListIcon, 
+  MonitorIcon, 
+  TruckIcon, 
+  UtensilsIcon, 
+  MoreHorizontalIcon,
+  ArrowRightIcon 
+} from 'lucide-vue-next'
 
-<style>
- .OrangeCol {   
-  border-color: #ff6900;
- }
+const activeCard = ref(null)
 
- .ButtonCol {
-  background-color: white;
-  color:#ff6900;
-  border-color: #ff6900;
-  border-radius: solid 15px;
-  border-width: 1px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  
- }
+const categories = [
+  {
+    title: 'Administrative Support',
+    icon: ClipboardListIcon,
+    description: 'Help with planning, scheduling, and organization'
+  },
+  {
+    title: 'Tech Support',
+    icon: MonitorIcon,
+    description: 'Provide technical assistance and IT solutions'
+  },
+  {
+    title: 'Logistics & Coordination',
+    icon: TruckIcon,
+    description: 'Manage event logistics and coordination'
+  },
+  {
+    title: 'Catering & Hospitality',
+    icon: UtensilsIcon,
+    description: 'Support with food service and guest relations'
+  },
+  {
+    title: 'More...',
+    icon: MoreHorizontalIcon,
+    description: 'Discover additional volunteer opportunities'
+  }
+]
+</script>
+
+<style scoped>
+.category-card {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover lift effect */
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Smooth transitions */
+.category-card > div {
+  transition: all 0.3s ease;
+}
 </style>

@@ -88,7 +88,7 @@ const getResponse = (message: string): string => {
     <button 
       v-if="!isOpen"
       @click="isOpen = true"
-      class="bg-orange-500 text-white p-4 rounded-full shadow-lg hover:bg-orange-600 transition-all duration-300 flex items-center space-x-2"
+      class="bg-orange-100 text-orange-600 p-4 rounded-full shadow-lg hover:bg-orange-500 hover:text-white transition-all duration-300 flex items-center space-x-2"
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
