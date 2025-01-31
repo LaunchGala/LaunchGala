@@ -1,7 +1,7 @@
 <template>
     <div>
       <!-- Radix Dialog for Creating a Company -->
-      <Dialog v-slot="{ }" v-model:open="open">
+      <Dialog v-slot="{ }" v-model:open="open" >
         <!-- Button to open the create company dialog -->
         <DialogTrigger asChild>
           <Button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
@@ -9,7 +9,7 @@
           </Button>
         </DialogTrigger>
         <DialogContent>
-          <div class="bg-white rounded-lg shadow-lg w-full max-w-m p-6">
+          <div class="bg-white rounded-lg shadow-lg w-full max-w-m p-6 max-h-[80vh] overflow-y-scroll">
             <h2 class="text-2xl font-bold mb-4 text-center">Create Company</h2>
   
             <!-- Display error message if there is any -->

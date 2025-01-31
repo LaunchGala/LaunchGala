@@ -265,9 +265,9 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <div class="flex min-h-screen bg-gray-50 dark:bg-black text-gray-800 dark:text-white">
-    <aside class="w-80 bg-white dark:bg-gray-900 shadow-xl">
-      <Card class="rounded-xl w-full overflow-hidden border dark:border-transparent h-1/2 ">
+  <div class="flex bg-gray-50 dark:bg-black text-gray-800 dark:text-white">
+    <aside class="w-80 shadow-xl">
+      <Card class="rounded-xl w-full overflow-hidden border dark:border-transparent ">
 
         <CardHeader class="bg-orange-500 dark:bg-orange-500 p-6">
           <CardTitle class="text-xl font-semibold text-left text-white">Offers & Inquiries</CardTitle>
