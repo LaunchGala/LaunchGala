@@ -1,51 +1,60 @@
-
-<style>
-    .headerMain {
-        background-color: white;
-        color: black;
-        font-weight: 600;
-    }
-    .colorOrange {
-        color: #ff6900;
-    }
-
-    .colorOrangeBg {
-        background-color: #ff6900;
-    }
-</style>
-
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { ChevronDown, Menu, Bell, Search } from 'lucide-vue-next'
 
-const isDropdownOpen = ref(false)
+const isExploreDropdownOpen = ref(false)
+const isUserDropdownOpen = ref(false)
 const isMobileMenuOpen = ref(false)
 const isScrolled = ref(false)
 
 const navigationItems = [
-  { name: 'Venues', href: '/venues' },
+  { name: 'Venues', href: '/venues', new: true },
   { name: 'Volunteers', href: '/volunteers' },
   { name: 'Startups', href: '/startups', new: true },
   { name: 'Experts/Investors', href: '/experts' },
-  { name: 'Vendors', href: '/vendors', new: true },
-  { name: 'Influencers', href: '/influencers', new: true },
+  { name: 'Vendors', href: '/vendors' },
+  { name: 'Influencers', href: '/influencers' },
   { name: 'Talents', href: '/talents' },
   { name: 'AI Lounge', href: '/ai-lounge', new: true },
   { name: 'Events', href: '/events' },
   { name: 'Contact us', href: '/contact' }
 ]
 
-const toggleDropdown = () => {
-  isDropdownOpen.value = !isDropdownOpen.value
+const menuItems = [
+  { label: 'Messages', icon: 'message-circle', href: '/messages', badge: 1 },
+  { label: 'Dashboard', icon: 'map-pin', href: '/Dashboard' },
+  { label: 'Likelists', icon: 'heart', href: '/likelists' },
+  { divider: true },
+  { label: 'Provide your Venue', icon: 'home', href: '/provide/venue' },
+  { label: 'Create an event', icon: 'user-plus', href: '/create/event' },
+  { label: 'Refer a Host', icon: 'user-plus', href: '/refer' },
+  { label: 'Account', icon: 'user', href: '/account' },
+  { divider: true },
+  { label: 'Gift cards', icon: 'gift', href: '/gift' },
+  { label: 'Help Center', icon: 'help-circle', href: '/help' },
+  { label: 'Log out', icon: 'log-out', href: '/logout' }
+]
+
+const toggleExploreDropdown = () => {
+  isExploreDropdownOpen.value = !isExploreDropdownOpen.value
+  if (isExploreDropdownOpen.value) isUserDropdownOpen.value = false
+}
+
+const toggleUserDropdown = () => {
+  isUserDropdownOpen.value = !isUserDropdownOpen.value
+  if (isUserDropdownOpen.value) isExploreDropdownOpen.value = false
 }
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 
-const closeDropdown = () => {
-  isDropdownOpen.value = false
+const closeExploreDropdown = () => {
+  isExploreDropdownOpen.value = false
+}
+
+const closeUserDropdown = () => {
+  isUserDropdownOpen.value = false
 }
 
 onMounted(() => {
@@ -93,24 +102,25 @@ onMounted(() => {
             </div>
           </div> -->
 
-          <!-- Dropdown Menu -->
+          <!-- Explore Dropdown -->
           <div class="relative">
             <button
-              @click="toggleDropdown"
+              @click="toggleExploreDropdown"
+              @mouseleave="closeExploreDropdown"
               class="flex items-center space-x-2 px-4 py-2 rounded-full hover:bg-orange-50 text-gray-700 hover:text-orange-500 transition-all"
             >
               <span>Explore</span>
               <ChevronDown 
-                :class="{ 'transform rotate-180': isDropdownOpen }" 
+                :class="{ 'transform rotate-180': isExploreDropdownOpen }" 
                 class="w-4 h-4 transition-transform duration-200" 
               />
             </button>
 
-            <!-- Dropdown Panel -->
+            <!-- Explore Dropdown Panel -->
             <div
-              v-show="isDropdownOpen"
-              @mouseleave="closeDropdown"
-              class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transform origin-top transition-all duration-200"
+              v-show="isExploreDropdownOpen"
+              @mouseleave="closeExploreDropdown"
+              class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
             >
               <div class="py-2">
                 <a
@@ -124,7 +134,7 @@ onMounted(() => {
                     v-if="item.new" 
                     class="px-2 py-1 text-xs bg-orange-100 text-orange-600 rounded-full"
                   >
-                    Soon
+                    New
                   </span>
                 </a>
               </div>
@@ -145,20 +155,56 @@ onMounted(() => {
             <span class="absolute top-0 right-0 w-2 h-2 bg-orange-500 rounded-full"></span>
           </button>
 
-          <!-- User Avatar -->
-          <a
-            href="/dashboard"
-            class="relative group"
-          >
-            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-orange-100 group-hover:ring-orange-500 transition-all duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt="User avatar"
-                class="w-full h-full object-cover"
-              >
+          <!-- User Menu -->
+          <div class="relative">
+            <button
+              @click="toggleUserDropdown"
+              class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-full transition-colors border border-gray-200"
+            >
+              <Menu class="w-5 h-5 text-gray-600" />
+              <div class="relative">
+                <img
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt="User avatar"
+                  class="w-8 h-8 rounded-full"
+                >
+                <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">
+                  1
+                </span>
+              </div>
+            </button>
+
+            <!-- User Dropdown Menu -->
+            <div
+              v-show="isUserDropdownOpen"
+              class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+            >
+              <div class="py-2">
+                <div v-for="(item, index) in menuItems" :key="index">
+                  <div 
+                    v-if="item.divider" 
+                    class="border-t border-gray-100 my-2"
+                  ></div>
+                  <a
+                    v-else
+                    :href="item.href"
+                    class="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors"
+                  >
+                    <div class="flex items-center space-x-3">
+                      <i :class="['w-5 h-5 text-gray-500', `lucide-${item.icon}`]"></i>
+                      <span class="text-gray-700">{{ item.label }}</span>
+                    </div>
+                    <span 
+                      v-if="item.badge"
+                      class="px-2 py-1 bg-red-500 text-white text-xs rounded-full"
+                    >
+                      {{ item.badge }}
+                    </span>
+                  </a>
+                </div>
+              </div>
             </div>
-            <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
-          </a>
+          </div>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -189,6 +235,7 @@ onMounted(() => {
       </div>
 
       <div class="px-4 py-2 space-y-1">
+        <!-- Mobile Navigation Items -->
         <a
           v-for="item in navigationItems"
           :key="item.name"
@@ -215,7 +262,6 @@ onMounted(() => {
 
   <!-- Spacer to prevent content from hiding under fixed header -->
   <div class="h-20"></div>
-  <ChatBot/>
 </template>
 
 <style scoped>
