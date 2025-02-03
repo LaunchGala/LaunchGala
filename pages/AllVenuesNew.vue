@@ -1,107 +1,267 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-interface Venue {
-  id: number
-  name: string
-  location: string
-  price: number
-  capacity: number
-  style: string
-  rating: number
-  reviews: number
-  images: string[]
-  amenities: string[]
-  distance: string
-  isFavorite: boolean
-  description: string
-  instantBook: boolean
-  availability: string[]
-}
+const isOpen = ref(false)
+const date = ref<Date>()
+const venues = ref([]);
 
-const venues = ref<Venue[]>([
-  {
-    id: 1,
-    name: "Grand Ballroom",
-    location: "San Francisco, CA",
-    price: 2500,
-    capacity: 500,
-    style: "Modern",
-    rating: 4.92,
-    reviews: 128,
-    images: [
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Parking", "Catering", "Sound System", "Stage"],
-    distance: "2.5 miles away",
-    isFavorite: false,
-    description: "Elegant ballroom with modern amenities, perfect for large corporate events and weddings.",
-    instantBook: true,
-    availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-  },
-  {
-    id: 2,
-    name: "Waterfront Plaza",
-    location: "Seattle, WA",
-    price: 3500,
-    capacity: 300,
-    style: "Contemporary",
-    rating: 4.97,
-    reviews: 85,
-    images: [
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Waterfront View", "Kitchen", "WiFi", "Outdoor Space"],
-    distance: "5 miles away",
-    isFavorite: true,
-    description: "Stunning waterfront venue with panoramic views of the bay. Indoor and outdoor spaces available.",
-    instantBook: false,
-    availability: ["Fri", "Sat", "Sun"]
-  },
-  {
-    id: 3,
-    name: "Historic Theatre",
-    location: "Portland, OR",
-    price: 1800,
-    capacity: 200,
-    style: "Vintage",
-    rating: 4.89,
-    reviews: 156,
-    images: [
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Stage", "Lighting", "Dressing Rooms", "Box Office"],
-    distance: "1.8 miles away",
-    isFavorite: false,
-    description: "Beautifully restored historic theatre with state-of-the-art lighting and sound systems.",
-    instantBook: true,
-    availability: ["Mon", "Tue", "Wed", "Thu"]
-  },
-  {
-    id: 4,
-    name: "Skyline Loft",
-    location: "Los Angeles, CA",
-    price: 4200,
-    capacity: 150,
-    style: "Industrial",
-    rating: 4.95,
-    reviews: 92,
-    images: [
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["City View", "Full Kitchen", "Elevator", "Security"],
-    distance: "3.2 miles away",
-    isFavorite: true,
-    description: "Modern loft space with stunning city views, perfect for intimate gatherings and photo shoots.",
-    instantBook: false,
-    availability: ["Wed", "Thu", "Fri", "Sat"]
+const venueTypes = [
+  "Office space",
+  "Meeting room",
+  "Gallery & Showroom",
+  "Co-Working space",
+  "Warehouse",
+  "Auditorium",
+  "Conference center",
+  "Convention center",
+  "Hotels & banquet halls",
+  "Exhibition hall",
+  "Theaters & performance space",
+  "Museum",
+  "University & college facility",
+  "Library",
+  "Historical building",
+  "Restaurant & bar",
+  "Sports arena and facility",
+  "Outdoor event space"
+]
+
+const amenities = [
+  "On-site parking",
+  "Public transportation access",
+  "Wi-Fi",
+  "Audiovisual equipment",
+  "Stage/Speaking platform",
+  "Mic & Sound system",
+  "Projectors & Screens",
+  "Adjustable lighting",
+  "Tables & chairs",
+  "AC & heating controls",
+  "Restrooms",
+  "Disability access",
+  "Security services",
+  "Reception/Registration area",
+  "Room/space divider options",
+  "Private meeting rooms",
+  "On-site accommodations",
+  "Outdoor spaces",
+  "Signage & branding option",
+  "Cloakroom/Coat check",
+  "Green room/VIP area",
+  "Smoke alarm",
+  "Refrigerator",
+  "Microwave",
+  "Private entrance",
+  "Elevators",
+  "Bar space",
+  "Kitchen",
+  "Coffee Machine",
+  "Computer",
+  "Games",
+  "Waterfront"
+]
+
+const eventTypes = [
+  "Hackathon",
+  "Networking Event",
+  "Pitching event",
+  "Dinner event",
+  "Sales & Trade show",
+  "Conference",
+  "Seminar & workshop",
+  "Product launch",
+  "Corporate events & retreats",
+  "Panel & roundtables",
+  "Award ceremony & Gala",
+  "Job fair & career expo",
+  "Academic conference",
+  "Investor & funding meetup",
+  "Startup accelerator & incubator",
+  "Industry-specific summit",
+  "Press conference",
+  "Executive & leadership forum",
+  "Publishing & signing event",
+  "Art show & exhibition"
+]
+
+const venueFilters = ref({
+  title: '',
+  description: '',
+  capacity: 0,
+  price: 0,
+  venueType: [],
+  amenities: [],
+  eventType: [],
+  images: [],
+  sponsorshipOption: null,
+  nonSmoking: null,
+  maskRequired: null,
+  noPets: null,
+  noCommercialPhotography: null,
+  securityCameras: null,
+  postEventCleaning: null,
+  mustClimbStairs: null,
+  additionalInsurance: null,
+  openSpace: null,
+  is_published: null
+});
+const venueFiltersEnabled = ref({
+  title: false,
+  description: false,
+  capacity: false,
+  price: false,
+  venueType: false,
+  amenities: false,
+  eventType: false,
+  sponsorshipOption: false,
+  nonSmoking: false,
+  maskRequired: false,
+  noPets: false,
+  noCommercialPhotography: false,
+  securityCameras: false,
+  postEventCleaning: false,
+  mustClimbStairs: false,
+  additionalInsurance: false,
+  openSpace: false,
+})
+async function fetchFilteredVenueListings() {
+  // Start the base query for the 'venue_listings' table
+  let query = supabase.from('AllVenues').select('*, venue_owner:profiles!createdBy(*)').eq('is_published', true);
+
+  // Apply filters based on `venueFilters` fields
+  if (venueFilters.value.title) {
+    query = query.ilike('title', `%${venueFilters.value.title}%`); // Case-insensitive search
   }
-])
 
+  if (venueFilters.value.capacity > 0) {
+    query = query.gte('capacity', venueFilters.value.capacity);
+  }
+
+  if (venueFilters.value.price > 0) {
+    query = query.lte('price', venueFilters.value.price);
+  }
+
+  if (venueFilters.value.venueType.length > 0) {
+    query = query.in('venueType', venueFilters.value.venueType);
+  }
+
+  if (venueFilters.value.amenities.length > 0) {
+    query = query.contains('amenities', venueFilters.value.amenities); // Array contains all items
+  }
+
+  if (venueFilters.value.eventType.length > 0) {
+    query = query.contains('eventType', venueFilters.value.eventType); // Array contains all items
+  }
+
+  // Boolean filters
+  if (venueFilters.value.sponsorshipOption !== null) {
+    query = query.eq('sponsorshipOption', venueFilters.value.sponsorshipOption);
+  }
+
+  if (venueFilters.value.nonSmoking !== null) {
+    query = query.eq('nonSmoking', venueFilters.value.nonSmoking);
+  }
+
+  if (venueFilters.value.maskRequired !== null) {
+    query = query.eq('maskRequired', venueFilters.value.maskRequired);
+  }
+
+  if (venueFilters.value.noPets !== null) {
+    query = query.eq('noPets', venueFilters.value.noPets);
+  }
+
+  if (venueFilters.value.noCommercialPhotography !== null) {
+    query = query.eq('noCommercialPhotography', venueFilters.value.noCommercialPhotography);
+  }
+
+  if (venueFilters.value.securityCameras !== null) {
+    query = query.eq('securityCameras', venueFilters.value.securityCameras);
+  }
+
+  if (venueFilters.value.postEventCleaning !== null) {
+    query = query.eq('postEventCleaning', venueFilters.value.postEventCleaning);
+  }
+
+  if (venueFilters.value.mustClimbStairs !== null) {
+    query = query.eq('mustClimbStairs', venueFilters.value.mustClimbStairs);
+  }
+
+  if (venueFilters.value.additionalInsurance !== null) {
+    query = query.eq('additionalInsurance', venueFilters.value.additionalInsurance);
+  }
+
+  if (venueFilters.value.openSpace !== null) {
+    query = query.eq('openSpace', venueFilters.value.openSpace);
+  }
+
+  if (venueFilters.value.is_published !== null) {
+    query = query.eq('isPublished', venueFilters.value.is_published);
+  }
+  getAllVenues(query)
+}
+// Function to toggle selection of a venue type
+const toggleVenueTypeSelection = (venueType) => {
+  const index = venueFilters.value.venueType.indexOf(venueType);
+  if (index === -1) {
+    // Add to selected items
+    venueFilters.value.venueType.push(venueType);
+  } else {
+    // Remove from selected items
+    venueFilters.value.venueType.splice(index, 1);
+  }
+};
+// Check if an item is selected
+const isVenueTypeSelected = (venueType) => venueFilters.value.venueType.includes(venueType);
+
+// Function to toggle selection of a venue type
+const toggleAmenitySelection = (amenity) => {
+  const index = venueFilters.value.amenities.indexOf(amenity);
+  if (index === -1) {
+    // Add to selected items
+    venueFilters.value.amenities.push(amenity);
+  } else {
+    // Remove from selected items
+    venueFilters.value.amenities.splice(index, 1);
+  }
+};
+// Check if an item is selected
+const isAmenitySelected = (amenity) => venueFilters.value.amenities.includes(amenity);
+
+// Function to toggle selection of a venue type
+const toggleEventTypeSelection = (eventType) => {
+  const index = venueFilters.value.eventType.indexOf(eventType);
+  if (index === -1) {
+    // Add to selected items
+    venueFilters.value.eventType.push(eventType);
+  } else {
+    // Remove from selected items
+    venueFilters.value.eventType.splice(index, 1);
+  }
+};
+// Check if an item is selected
+const isEventTypeSelected = (eventType) => venueFilters.value.eventType.includes(eventType);
+
+async function getAllVenues(query) {
+  const { data: AllVenues, error } = !!query ? await query : await supabase.from('AllVenues').select('*, venue_owner:profiles!createdBy(*)').eq('is_published', true)
+  console.log(error)
+  Promise.all(AllVenues.map(async (venue) => {
+    venue.venue_owner.avatarSRC = await fetchImage(venue.venue_owner.avatar_url)
+  })).then(() => {
+    venues.value = AllVenues;
+    console.log(AllVenues)
+  })
+}
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+  }
+onMounted(() => {
+  getAllVenues(null)
+})
+ 
 const filters = ref({
   location: '',
   minCapacity: '',
@@ -172,14 +332,6 @@ const resetFilters = () => {
   }
 }
 
-const nextImage = (venueId: number, totalImages: number) => {
-  activeImageIndex.value[venueId] = ((activeImageIndex.value[venueId] || 0) + 1) % totalImages
-}
-
-const prevImage = (venueId: number, totalImages: number) => {
-  activeImageIndex.value[venueId] = ((activeImageIndex.value[venueId] || 0) - 1 + totalImages) % totalImages
-}
-
 const sortedVenues = computed(() => {
   let sorted = [...venues.value]
   switch (sortBy.value) {
@@ -232,7 +384,7 @@ const applyFilters = () => {
               >
             </div>
             <button
-              @click="showFilters = !showFilters"
+              @click="isOpen = !isOpen"
               class="px-6 py-3 rounded-xl border border-gray-300 hover:border-orange-500 flex items-center space-x-2 whitespace-nowrap bg-white hover:bg-orange-50 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -266,7 +418,7 @@ const applyFilters = () => {
         </div>
 
         <!-- Filters Panel -->
-        <div v-if="showFilters" class="mt-4 p-8 bg-white rounded-xl shadow-xl border border-gray-100">
+        <div v-if="isOpen" class="mt-4 p-8 bg-white rounded-xl shadow-xl border border-gray-100">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Capacity</label>
@@ -391,13 +543,8 @@ const applyFilters = () => {
         <div class="flex-1">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div v-for="venue in sortedVenues" :key="venue.id" 
-                 class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+                 class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
               <div class="relative aspect-[4/3] rounded-t-2xl overflow-hidden">
-                <img 
-                  :src="venue.images[activeImageIndex[venue.id] || 0]" 
-                  :alt="venue.name"
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                >
                 <button 
                   @click="toggleFavorite(venue.id)"
                   class="absolute top-4 right-4 p-2.5 rounded-full bg-white/90 hover:bg-white transition-colors shadow-lg"
@@ -418,36 +565,17 @@ const applyFilters = () => {
                     />
                   </svg>
                 </button>
-                <!-- Image Navigation -->
-                <div class="absolute inset-y-0 left-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button 
-                    @click.stop="prevImage(venue.id, venue.images.length)"
-                    class="p-2 bg-white/90 hover:bg-white rounded-r-xl shadow-lg transform transition-transform hover:scale-105 ml-2"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                </div>
-                <div class="absolute inset-y-0 right-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button 
-                    @click.stop="nextImage(venue.id, venue.images.length)"
-                    class="p-2 bg-white/90 hover:bg-white rounded-l-xl shadow-lg transform transition-transform hover:scale-105 mr-2"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                </div>
+                <ImageCarousel class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" :image-names="venue.images"/>
                 <!-- Instant Book Badge -->
-                <div v-if="venue.instantBook" 
+                <div v-if="venue.sponsorshipOption" 
                      class="absolute top-4 left-4 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-full shadow-lg">
                   Instant Book (change Sponsorship Available)
                 </div>
               </div>
-              <div class="p-6 space-y-4">
+              <div class="p-6 space-y-4 flex-grow flex flex-col">
+                <div class="space-y-4 flex-grow">
                 <div class="flex justify-between items-start">
-                  <h3 class="text-xl font-semibold text-gray-900">{{ venue.name }}</h3>
+                  <h3 class="text-xl font-semibold text-gray-900">{{ venue.title }}</h3>
                   <div class="flex items-center bg-orange-50 px-2 py-1 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -470,7 +598,7 @@ const applyFilters = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                   </svg>
-                  {{ venue.location }} · {{ venue.distance }}
+                  {{ venue.address }} {{!!venue.distance ? " · " + venue.distance : '' }}
                 </div>
                 <div class="flex items-center text-gray-500">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -478,7 +606,8 @@ const applyFilters = () => {
                   </svg>
                   {{ venue.capacity }} guests
                 </div>
-                <div class="flex items-center justify-between pt-4 border-t">
+              </div>
+                <div class="flex items-center justify-between pt-4 border-t mt-auto">
                   <div>
                     <span class="text-2xl font-bold text-gray-900">${{ venue.price }}</span>
                     <span class="text-gray-500">/hour</span>
