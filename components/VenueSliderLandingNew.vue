@@ -1,146 +1,28 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-interface Venue {
-  id: number
-  name: string
-  location: string
-  price: number
-  capacity: number
-  style: string
-  rating: number
-  reviews: number
-  images: string[]
-  amenities: string[]
-  distance: string
-  isFavorite: boolean
-  description: string
-  instantBook: boolean
-  availability: string[]
-}
 
-const venues = ref<Venue[]>([
-  {
-    id: 1,
-    name: "Grand Ballroom",
-    location: "San Francisco, CA",
-    price: 2500,
-    capacity: 500,
-    style: "Modern",
-    rating: 5.00,
-    reviews: 128,
-    images: [
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Parking", "Catering", "Sound System", "Stage"],
-    distance: "2.5 miles away",
-    isFavorite: false,
-    description: "Elegant ballroom with modern amenities, perfect for large corporate events and weddings.",
-    instantBook: true,
-    availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-  },
-  {
-    id: 2,
-    name: "Waterfront Plaza",
-    location: "Seattle, WA",
-    price: 3500,
-    capacity: 300,
-    style: "Contemporary",
-    rating: 5.00,
-    reviews: 85,
-    images: [
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Waterfront View", "Kitchen", "WiFi", "Outdoor Space"],
-    distance: "5 miles away",
-    isFavorite: true,
-    description: "Stunning waterfront venue with panoramic views of the bay. Indoor and outdoor spaces available.",
-    instantBook: false,
-    availability: ["Fri", "Sat", "Sun"]
-  },
-  {
-    id: 3,
-    name: "Historic Theatre",
-    location: "Portland, OR",
-    price: 0,
-    capacity: 200,
-    style: "Vintage",
-    rating: 5,
-    reviews: 156,
-    images: [
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Stage", "Lighting", "Dressing Rooms", "Box Office"],
-    distance: "1.8 miles away",
-    isFavorite: false,
-    description: "Beautifully restored historic theatre with state-of-the-art lighting and sound systems.",
-    instantBook: true,
-    availability: ["Mon", "Tue", "Wed", "Thu"]
-  },
-  {
-    id: 4,
-    name: "Skyline Loft",
-    location: "Los Angeles, CA",
-    price: 4200,
-    capacity: 150,
-    style: "Industrial",
-    rating: 5,
-    reviews: 92,
-    images: [
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["City View", "Full Kitchen", "Elevator", "Security"],
-    distance: "3.2 miles away",
-    isFavorite: true,
-    description: "Modern loft space with stunning city views, perfect for intimate gatherings and photo shoots.",
-    instantBook: false,
-    availability: ["Wed", "Thu", "Fri", "Sat"]
-  },
-  {
-    id: 5,
-    name: "Grand Ballroom",
-    location: "San Francisco, CA",
-    price: 2500,
-    capacity: 500,
-    style: "Modern",
-    rating: 5.00,
-    reviews: 128,
-    images: [
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Parking", "Catering", "Sound System", "Stage"],
-    distance: "2.5 miles away",
-    isFavorite: false,
-    description: "Elegant ballroom with modern amenities, perfect for large corporate events and weddings.",
-    instantBook: true,
-    availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-  },
-  {
-    id: 6,
-    name: "Waterfront Plaza",
-    location: "Seattle, WA",
-    price: 3500,
-    capacity: 300,
-    style: "Contemporary",
-    rating: 5.00,
-    reviews: 85,
-    images: [
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: ["Waterfront View", "Kitchen", "WiFi", "Outdoor Space"],
-    distance: "5 miles away",
-    isFavorite: true,
-    description: "Stunning waterfront venue with panoramic views of the bay. Indoor and outdoor spaces available.",
-    instantBook: false,
-    availability: ["Fri", "Sat", "Sun"]
+async function getAllVenues(query) {
+  const { data: AllVenues, error } = await supabase.from('AllVenues').select('*, venue_owner:profiles!createdBy(*)').eq('is_published', true).limit(3)
+  console.log(error)
+  Promise.all(AllVenues.map(async (venue) => {
+    venue.venue_owner.avatarSRC = await fetchImage(venue.venue_owner.avatar_url)
+  })).then(() => {
+    venues.value = AllVenues;
+    console.log(AllVenues)
+  })
+}
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
   }
-])
+onMounted(() => {
+  getAllVenues(null)
+})
+const venues = ref([])
 
 const filters = ref({
   location: '',
@@ -277,11 +159,7 @@ const applyFilters = () => {
             <div v-for="venue in sortedVenues" :key="venue.id" 
                  class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
               <div class="relative aspect-[4/3] rounded-t-2xl overflow-hidden">
-                <img 
-                  :src="venue.images[activeImageIndex[venue.id] || 0]" 
-                  :alt="venue.name"
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                >
+                <ImageCarousel class="w-full h-64 object-cover" :image-names="venue.images"/>
                 <button 
                   @click="toggleFavorite(venue.id)"
                   class="absolute top-4 right-4 p-2.5 rounded-full bg-white/90 hover:bg-white transition-colors shadow-lg"
@@ -302,36 +180,16 @@ const applyFilters = () => {
                     />
                   </svg>
                 </button>
-                <!-- Image Navigation -->
-                <div class="absolute inset-y-0 left-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button 
-                    @click.stop="prevImage(venue.id, venue.images.length)"
-                    class="p-2 bg-white/90 hover:bg-white rounded-r-xl shadow-lg transform transition-transform hover:scale-105 ml-2"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                </div>
-                <div class="absolute inset-y-0 right-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button 
-                    @click.stop="nextImage(venue.id, venue.images.length)"
-                    class="p-2 bg-white/90 hover:bg-white rounded-l-xl shadow-lg transform transition-transform hover:scale-105 mr-2"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                </div>
+                
                 <!-- Instant Book Badge -->
-                <div v-if="venue.instantBook" 
+                <div v-if="venue.sponsorshipOption" 
                      class="absolute top-4 left-4 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-full shadow-lg">
                   Sponsorship Available
                 </div>
               </div>
               <div class="p-4 space-y-4">
                 <div class="flex justify-between items-start">
-                  <h3 class="text-xl font-semibold text-gray-900">{{ venue.name }}</h3>
+                  <h3 class="text-xl font-semibold text-gray-900">{{ venue.title }}</h3>
                   <div class="flex items-center bg-orange-50 px-2 py-1 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -353,7 +211,7 @@ const applyFilters = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                   </svg>
-                  {{ venue.location }} 
+                  {{ venue.address }} 
                 </div>
                 <div class="flex items-center text-gray-500">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">

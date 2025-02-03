@@ -8,7 +8,7 @@ import AnimatedText from './AnimatedText.vue';
 </script>
 
 <template>
-      <div class="flex items-left justify-left  bg-gray-100 dark:bg-black pb-6  ">
+      <div class="flex items-left justify-left  bg-gray-100 dark:bg-black pb-6 h-screen">
         <div class="space-y-4 w-1/4 z-20 mx-10 mb-6 ">
 
         <div class="flex dark:bg-black shadow-lg rounded-md max-w-md mx-auto my-3">

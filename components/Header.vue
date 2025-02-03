@@ -24,15 +24,15 @@ const isMobileMenuOpen = ref(false)
 const isScrolled = ref(false)
 
 const navigationItems = [
-  { name: 'Venues', href: '/venues' },
-  { name: 'Volunteers', href: '/volunteers' },
-  { name: 'Startups', href: '/startups', new: true },
-  { name: 'Experts/Investors', href: '/experts' },
-  { name: 'Vendors', href: '/vendors', new: true },
-  { name: 'Influencers', href: '/influencers', new: true },
-  { name: 'Talents', href: '/talents' },
+  { name: 'Venues', href: '/AllVenues' },
+  { name: 'Volunteers', href: '/AllVolunteers' },
+  { name: 'Startups', href: '/FoundersAndStartups', new: true },
+  { name: 'Experts/Investors', href: '/AllSpeakers' },
+  { name: 'Vendors', href: '/AllVendors', new: true },
+  { name: 'Influencers', href: '/AllMedia', new: true },
+  { name: 'Talents', href: '/AllTalents' },
   { name: 'AI Lounge', href: '/ai-lounge', new: true },
-  { name: 'Events', href: '/events' },
+  { name: 'Events', href: '/AllEvents' },
   { name: 'Contact us', href: '/contact' }
 ]
 
@@ -113,10 +113,10 @@ onMounted(() => {
               class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transform origin-top transition-all duration-200"
             >
               <div class="py-2">
-                <a
+                <NuxtLink
                   v-for="item in navigationItems"
                   :key="item.name"
-                  :href="item.href"
+                  :to="item.href"
                   class="flex items-center justify-between px-4 py-3 hover:bg-orange-50 group transition-colors"
                 >
                   <span class="text-gray-600 group-hover:text-orange-500">{{ item.name }}</span>
@@ -126,18 +126,18 @@ onMounted(() => {
                   >
                     Soon
                   </span>
-                </a>
+                </NuxtLink>
               </div>
             </div>
           </div>
 
           <!-- Become a Host Button -->
-          <a
-            href="/become-host"
+          <NuxtLink
+            to="VenueListing"
             class="px-6 py-2.5  text-gray-700 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
           >
             Become a Host
-          </a>
+          </NuxtLink>
 
           <!-- Notifications -->
           <button class="relative p-2 hover:bg-orange-50 rounded-full transition-colors">
@@ -189,10 +189,10 @@ onMounted(() => {
       </div>
 
       <div class="px-4 py-2 space-y-1">
-        <a
+        <NuxtLink
           v-for="item in navigationItems"
           :key="item.name"
-          :href="item.href"
+          :to="item.href"
           class="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-orange-50 group transition-colors"
         >
           <span class="text-gray-600 group-hover:text-orange-500">{{ item.name }}</span>
@@ -202,13 +202,13 @@ onMounted(() => {
           >
             New
           </span>
-        </a>
-        <a
-          href="/become-host"
+        </NuxtLink>
+        <NuxtLink
+          href="VenueListing"
           class="block px-4 py-3 text-center bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl mt-4"
         >
           Become a Host
-        </a>
+        </NuxtLink>
       </div>
     </div>
   </header>

@@ -4,9 +4,26 @@
       <div class="carousel-item" v-for="(image, index) in images" :key="index">
         <img :src="image" :alt="'Image ' + (index + 1)" />
       </div>
-    </div>
-    <button @click="prevImage" class="carousel-button prev">‹</button>
-    <button @click="nextImage" class="carousel-button next">›</button>
+    </div><div class="absolute inset-y-0 left-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button 
+                    @click.stop="prevImage"
+                    class="p-2 bg-white/90 hover:bg-white rounded-r-xl shadow-lg transform transition-transform hover:scale-105 ml-2"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="absolute inset-y-0 right-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button 
+                    @click.stop="nextImage"
+                    class="p-2 bg-white/90 hover:bg-white rounded-l-xl shadow-lg transform transition-transform hover:scale-105 mr-2"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
   </div>
   <p v-else>No images available</p>
 </template>
