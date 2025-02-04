@@ -177,7 +177,7 @@ onMounted(() => {
             <!-- User Dropdown Menu -->
             <div
               v-show="isUserDropdownOpen"
-              class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+              class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden  "
             >
               <div class="py-2">
                 <div v-for="(item, index) in menuItems" :key="index">

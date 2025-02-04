@@ -24,7 +24,7 @@ const venues = ref<Venue[]>([
     id: 1,
     name: "Grand Ballroom",
     location: "San Francisco, CA",
-    price: 2500,
+    price: 250,
     capacity: 500,
     style: "Modern",
     rating: 5.00,
@@ -44,7 +44,7 @@ const venues = ref<Venue[]>([
     id: 2,
     name: "Waterfront Plaza",
     location: "Seattle, WA",
-    price: 3500,
+    price: 350,
     capacity: 300,
     style: "Contemporary",
     rating: 5.00,
@@ -84,7 +84,7 @@ const venues = ref<Venue[]>([
     id: 4,
     name: "Skyline Loft",
     location: "Los Angeles, CA",
-    price: 4200,
+    price: 420,
     capacity: 150,
     style: "Industrial",
     rating: 5,
@@ -104,7 +104,7 @@ const venues = ref<Venue[]>([
     id: 5,
     name: "Grand Ballroom",
     location: "San Francisco, CA",
-    price: 2500,
+    price: 200,
     capacity: 500,
     style: "Modern",
     rating: 5.00,
@@ -124,8 +124,8 @@ const venues = ref<Venue[]>([
     id: 6,
     name: "Waterfront Plaza",
     location: "Seattle, WA",
-    price: 3500,
-    capacity: 300,
+    price: 50,
+    capacity: 100,
     style: "Contemporary",
     rating: 5.00,
     reviews: 85,
@@ -363,7 +363,9 @@ const applyFilters = () => {
                 </div>
                 <div class="flex items-center justify-between pt-4 border-t">
                   <div>
-                    <span class="text-lg font-bold text-gray-900">${{ venue.price }}</span>
+                    <span class="text-gray-500">From </span>
+
+                    <span class="text-md font-bold text-gray-900">${{ venue.price }}</span>
                     <span class="text-gray-500">/hour</span>
                   </div>
                   <button class="px-6 py-3  text-orange-500 rounded-xl hover:bg-orange-500 hover:text-white transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
