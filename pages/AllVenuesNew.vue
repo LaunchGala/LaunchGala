@@ -369,7 +369,7 @@ const applyFilters = () => {
     </div>
 
     <!-- Search Bar -->
-    <div class="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-200">
+    <div class="sticky top-0 z-40 bg-white shadow-lg border-b border-gray-200">
       <div class=" mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div class="flex flex-col sm:flex-row items-center gap-4">
           <div class="flex-1 w-full flex items-center gap-4">
@@ -612,9 +612,10 @@ const applyFilters = () => {
                     <span class="text-2xl font-bold text-gray-900">${{ venue.price }}</span>
                     <span class="text-gray-500">/hour</span>
                   </div>
+                  <NuxtLink :to="{ name: 'VenuePageNew', query: { id: venue.id } }">
                   <button class="px-6 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                     View Details
-                  </button>
+                  </button></NuxtLink>
                 </div>
               </div>
             </div>
