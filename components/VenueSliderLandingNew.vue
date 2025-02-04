@@ -213,7 +213,9 @@ const applyFilters = () => {
                 </div>
                 <div class="flex items-center justify-between pt-4 border-t">
                   <div>
-                    <span class="text-lg font-bold text-gray-900">${{ venue.price }}</span>
+                    <span class="text-gray-500">From </span>
+
+                    <span class="text-md font-bold text-gray-900">${{ venue.price }}</span>
                     <span class="text-gray-500">/hour</span>
                   </div>
                   <button
