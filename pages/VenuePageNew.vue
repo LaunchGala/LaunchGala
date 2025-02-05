@@ -27,7 +27,7 @@
             <h3 class="text-2xl font-semibold mb-4 text-gray-800">Perfect For</h3>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
               <div v-for="(event, index) in venue.eventType" :key="index" class="flex items-center">
-                <component :is="event.icon" class="w-5 h-5 mr-2 text-orange-500" />
+                <component :is="CheckIcon" class="w-5 h-5 mr-2 text-orange-500" />
                 <span class="text-gray-600">{{ event }}</span>
               </div>
             </div>
