@@ -184,6 +184,14 @@ function toggleShowApproved(){
 function toggleShowRejected(){
   showRejected.value = !showRejected.value;
 }
+const newVenueOwnerConversationInfo = computed(() => {
+  console.log("here")
+  return getContactInfo(selectedBooking.value?.venue?.venue_owner);
+});
+const newEventOwnerConversationInfo = computed(() => {
+  console.log("here2")
+  return getContactInfo(selectedBooking.value?.event?.event_owner);
+});
 </script>
 
 <template>
@@ -269,10 +277,10 @@ function toggleShowRejected(){
                 </div>
               </div>
               <div class="w-2/3">
-                <EventBookingCard v-if="Object.keys(selectedBooking).length !== 0" :event="selectedBooking?.event" :venue-name="selectedBooking?.venue?.title">
+                <EventBookingCard v-if="Object.keys(selectedBooking).length !== 0" :event="selectedBooking?.event" :venue-name="selectedBooking?.venue?.title" :requesting_sponsorship="selectedBooking?.requesting_sponsorship">
                   <template #action-buttons>
                     <MessagesButton :label="'Contact'" :isIcon="false"
-                          :newConversationInfo="getContactInfo(selectedBooking?.event?.event_owner)"></MessagesButton>
+                          :newConversationInfo="newEventOwnerConversationInfo"></MessagesButton>
                         <Button v-if="selectedBooking.status == 'open'" @click="acceptRequest(selectedBooking)" class="bg-green-500 text-white m-2">Accept</Button>
                         <Button v-if="selectedBooking.status == 'open'" @click="rejectRequest(selectedBooking)" class="bg-red-500 text-white m-2">Reject</Button>
                         <Button v-if="selectedBooking.status == 'rejected' || selectedBooking.status == 'approved'" @click="rejectRequest(selectedBooking)" class="bg-white-500 text-orange m-2">Reopen</Button>
@@ -344,7 +352,7 @@ function toggleShowRejected(){
                 :requesting_sponsorship="selectedBooking?.requesting_sponsorship" :note="selectedBooking?.note">
                   <template #action-buttons>
                     <MessagesButton :label="'Contact'" :isIcon="false"
-                          :newConversationInfo="getContactInfo(selectedBooking?.venue?.venue_owner)"></MessagesButton>
+                          :newConversationInfo="newVenueOwnerConversationInfo"></MessagesButton>
                     <Button v-if="selectedBooking.status == 'cancelled'" @click="reopenRequest(selectedBooking)" class="bg-green-500 text-white m-2">Reopen</Button>
                     <Button v-if="selectedBooking.status == 'open' || selectedBooking.status == 'approved'" @click="cancelRequest(selectedBooking)" class="bg-green-500 text-white m-2">Cancel</Button>
                   </template>

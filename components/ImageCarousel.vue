@@ -2,7 +2,7 @@
   <div class="carousel" v-if="images?.length">
     <div class="carousel-wrapper" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
       <div class="carousel-item" v-for="(image, index) in images" :key="index">
-        <img :src="image" :alt="'Image ' + (index + 1)" />
+        <img :src="image" :alt="'Image ' + (index + 1)" class="w-full h-full object-cover"/>
       </div>
     </div><div class="absolute inset-y-0 left-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <button 
@@ -102,7 +102,6 @@ onMounted(() => {
 }
 
 .carousel-item img {
-  object-fit: contain; /* Ensures the image fits without being cut off */
   display: block;
 }
 

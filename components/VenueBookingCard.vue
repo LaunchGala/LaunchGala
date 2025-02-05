@@ -8,7 +8,8 @@ import {
   Clock,
   UserIcon,
   CheckCircle,
-  Check
+  Check,
+  ArrowRight
 } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 
@@ -122,7 +123,15 @@ const formatTime = (time: string) =>
         <UserIcon class="w-5 h-5 mr-2 text-blue-600" />
         <span>{{ venue.capacity }}</span>
       </div>
+      <div class="grid justify-items-end">
+        <NuxtLink :to="{ name: 'VenuePageNew', query: { id: venue.id } }">
 
+          <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500 transition-colors ButtonCol">
+            Check it out
+            <ArrowRight class="w-5 h-5 ml-2" />
+          </Button>
+        </NuxtLink>
+      </div>
     </CardContent>
   </Card>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { Button } from '@/components/ui/button';
 
 const isOpen = ref(false)
 const date = ref<Date>()
@@ -361,11 +362,14 @@ const applyFilters = () => {
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
-    <div class="bg-grey-100 text-orange-600 py-6">
-      <div class=" mx-auto  sm:px-6 lg:px-8">
+    <div class="bg-grey-100 text-orange-600 py-6 flex">
+      <div class=" mx-auto  sm:px-6 lg:px-8 flex-grow">
         <h1 class="text-4xl font-bold ">Find Your Perfect Venue</h1>
         <p class="text-xl text-black/90">Discover unique spaces for any event, anywhere</p>
       </div>
+      <NuxtLink to="VenueListing" class="m-6 items-center">
+      <Button @click="console.log(allVenues)" class="bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500">Provide your Venue</Button>
+    </NuxtLink>
     </div>
 
     <!-- Search Bar -->

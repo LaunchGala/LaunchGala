@@ -46,6 +46,16 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 
 const user = useSupabaseUser();
 const supabase = useSupabaseClient();
+const router = useRouter();
+
+const logout = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error('Logout error:', error);
+  } else {
+    router.push('/'); // Redirect to login or home page
+  }
+};
 const selectedView = ref('Dashboard');
 const userProfile = ref({
   full_name: '',
@@ -344,7 +354,7 @@ onMounted(() => {
 
       </Card>
       <div class="mt-auto">
-        <Button variant="default"
+        <Button variant="default" @click="logout"
           class="flex text-sm rounded-md items-center justify-center space-x-2 w-full py-1 bg-orange-500 text-white  hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-400">
           <Power class="w-5 h-5" />
           <span>Sign Out</span>

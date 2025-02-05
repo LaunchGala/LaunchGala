@@ -95,6 +95,5 @@ watch(() => props.address, (newAddress) => {
 .map {
   height: 400px;
   width: 100%;
-  margin-top: 20px;
 }
 </style>

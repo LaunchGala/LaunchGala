@@ -7,7 +7,24 @@ import { useRouter, useRoute } from 'vue-router';
 import Button from './ui/button/Button.vue';
 
 const router = useRouter();
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
 const hasPreviousRoute = ref(false);
+const profile = ref({})
+
+const logout = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error('Logout error:', error);
+  } else {
+    router.push('/'); // Redirect to login or home page
+  }
+};
+const messagesDialog = ref(null);
+const openMessages = () => { 
+  messagesDialog.value.openManager = true;
+  console.log(messagesDialog.value.openManager)
+}
 
 // Watch route changes and track navigation
 router.beforeEach((to, from, next) => {
@@ -41,18 +58,18 @@ const navigationItems = [
 ]
 
 const menuItems = [
-  { label: 'Messages', icon: 'message-circle', href: '/messages', badge: 1 },
-  { label: 'Dashboard', icon: 'map-pin', href: '/Dashboard' },
+  { label: 'Messages', icon: 'message-circle', messages: true, badge: 1 },
+  { label: 'Dashboard', icon: 'map-pin', href: '/UserDashboard' },
   { label: 'Likelists', icon: 'heart', href: '/likelists' },
   { divider: true },
-  { label: 'Provide your Venue', icon: 'home', href: '/provide/venue' },
-  { label: 'Create an event', icon: 'user-plus', href: '/create/event' },
+  { label: 'Provide your Venue', icon: 'home', href: '/VenueListing' },
+  { label: 'Create an event', icon: 'user-plus', href: '/CreateEvent' },
   { label: 'Refer a Host', icon: 'user-plus', href: '/refer' },
-  { label: 'Account', icon: 'user', href: '/account' },
+  { label: 'Account', icon: 'user', href: '/profile' },
   { divider: true },
   { label: 'Gift cards', icon: 'gift', href: '/gift' },
   { label: 'Help Center', icon: 'help-circle', href: '/help' },
-  { label: 'Log out', icon: 'log-out', href: '/logout' }
+  { label: 'Log out', icon: 'log-out', method: logout }
 ]
 
 const toggleExploreDropdown = () => {
@@ -77,10 +94,25 @@ const closeUserDropdown = () => {
   isUserDropdownOpen.value = false
 }
 
+const loadProfile = async () => {
+  const { data: profiles, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.value.id)
+  profile.value = profiles[0]
+  profile.value.avatarSRC = await fetchImage(profile.value.avatar_url, 'avatars')
+}
+const fetchImage = async (id, bucket) => {
+  if(!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60)
+    return urlData?.data?.signedUrl ?? ""
+  }
+}
 onMounted(() => {
   window.addEventListener('scroll', () => {
     isScrolled.value = window.scrollY > 20
   })
+  loadProfile()
 })
 </script>
 
@@ -129,7 +161,6 @@ onMounted(() => {
           <div class="relative">
             <button
               @click="toggleExploreDropdown"
-              @mouseleave="closeExploreDropdown"
               class="flex items-center space-x-2 px-4 py-2 rounded-full hover:bg-orange-50 text-gray-700 hover:text-orange-500 transition-all"
             >
               <span>Explore</span>
@@ -179,7 +210,7 @@ onMounted(() => {
           </button>
 
           <!-- User Menu -->
-          <div class="relative">
+          <div v-if="user" class="relative">
             <button
               @click="toggleUserDropdown"
               class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-full transition-colors border border-gray-200"
@@ -187,7 +218,7 @@ onMounted(() => {
               <Menu class="w-5 h-5 text-gray-600" />
               <div class="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  :src="profile?.avatarSRC || '/placeholder.svg?height=192&width=192'" 
                   alt="User avatar"
                   class="w-8 h-8 rounded-full"
                 >
@@ -200,17 +231,19 @@ onMounted(() => {
             <!-- User Dropdown Menu -->
             <div
               v-show="isUserDropdownOpen"
+              @mouseleave="closeUserDropdown"
               class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden  "
             >
+
               <div class="py-2">
                 <div v-for="(item, index) in menuItems" :key="index">
                   <div 
                     v-if="item.divider" 
                     class="border-t border-gray-100 my-2"
                   ></div>
-                  <a
-                    v-else
-                    :href="item.href"
+                  <NuxtLink
+                    v-if="item.href"
+                    :to="item.href"
                     class="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors"
                   >
                     <div class="flex items-center space-x-3">
@@ -223,10 +256,43 @@ onMounted(() => {
                     >
                       {{ item.badge }}
                     </span>
-                  </a>
+                  </NuxtLink>
+                <NuxtLink v-if="item.method" class="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors" @click="item.method"
+                  >
+                    <div class="flex items-center space-x-3">
+                      <i :class="['w-5 h-5 text-gray-500', `lucide-${item.icon}`]"></i>
+                      <span class="text-gray-700">{{ item.label }}</span>
+                    </div>
+                    <span 
+                      v-if="item.badge"
+                      class="px-2 py-1 bg-red-500 text-white text-xs rounded-full"
+                    >
+                      {{ item.badge }}
+                    </span>
+
+                </NuxtLink>
+                <MessagesButton :hidden="true" v-if="item.messages" class="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors" 
+                  >
+                    <div class="flex items-center space-x-3">
+                      <i :class="['w-5 h-5 text-gray-500', `lucide-${item.icon}`]"></i>
+                      <span class="text-gray-700">{{ item.label }}</span>
+                    </div>
+                    <span 
+                      v-if="item.badge"
+                      class="px-2 py-1 bg-red-500 text-white text-xs rounded-full"
+                    >
+                      {{ item.badge }}
+                    </span>
+
+                </MessagesButton>
                 </div>
               </div>
             </div>
+          </div>
+          <div v-if="!user" class="relative">
+            <NuxtLink to="login" class="px-6 py-2.5 bg-orange-500 text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Sign in
+            </NuxtLink>
           </div>
         </div>
 
@@ -285,6 +351,7 @@ onMounted(() => {
 
   <!-- Spacer to prevent content from hiding under fixed header -->
   <div class="h-20"></div>
+  <ChatBot/>
 </template>
 
 <style scoped>

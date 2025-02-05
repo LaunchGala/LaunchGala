@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center">
+    <div class="text-center min-h-32 max-w-2xl">
       <h1 class="text-3xl sm:text-3xl font-semibold text-orange-600 mb-8 mt-10 relative">
         <span class="relative z-10">{{ displayText }}</span>
         <span 
