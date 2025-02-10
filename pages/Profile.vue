@@ -359,7 +359,7 @@ const user = useSupabaseUser()
              </button>
              <button
                @click="handleVerificationRequest"
-               class="px-6 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors shadow-md flex items-center"
+               class="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-0.5 flex items-center"
              >
                <Shield class="w-5 h-5 mr-2" />
                Submit Verification Request
@@ -603,7 +603,7 @@ const user = useSupabaseUser()
        </div>
  
        <!-- Additional Sections (only shown when not in preview mode) -->
-       <div v-if="!isPreviewMode" class="mt-8 space-y-6">
+       <div v-if="!isPreviewMode && !isPreviewMode" class="mt-8 space-y-6">
          <div v-for="section in sections" :key="section.id" 
               class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
            <div class="px-8 py-6 flex items-center justify-between">
@@ -663,11 +663,10 @@ const user = useSupabaseUser()
                    v-if="field.type === 'select'"
                    v-model="field.value"
                    :id="field.name"
-                   class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                   class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring -orange-500 focus:border-orange-500"
                  >
                    <option value="">Select an option</option>
                    <option v-for="option in field.options" :key="option" :value="option">
-                  ```
                      {{ option }}
                    </option>
                  </select>
@@ -703,4 +702,3 @@ const user = useSupabaseUser()
    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-orange-600;
  }
  </style>
- ```
