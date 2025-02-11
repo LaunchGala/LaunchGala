@@ -324,7 +324,7 @@ const user = useSupabaseUser()
                >
                <label
                  for="file-upload"
-                 class="cursor-pointer inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+                 class="cursor-pointer inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
                >
                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -353,16 +353,16 @@ const user = useSupabaseUser()
            <div class="flex justify-end space-x-4">
              <button
                @click="showVerificationModal = false"
-               class="px-4 py-2 text-gray-600 hover:text-gray-900"
+               class="px-6 py-3 text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors w-32"
              >
                Cancel
              </button>
              <button
                @click="handleVerificationRequest"
-               class="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-0.5 flex items-center"
+               class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center w-32"
              >
                <Shield class="w-5 h-5 mr-2" />
-               Submit Verification Request
+               Submit
              </button>
            </div>
          </div>
@@ -375,7 +375,7 @@ const user = useSupabaseUser()
        <span>Viewing profile as other users see it</span>
        <button 
          @click="togglePreviewMode"
-         class="ml-4 px-4 py-1 bg-white text-blue-500 rounded-full text-sm hover:bg-blue-50 transition-colors"
+         class="ml-4 px-6 py-2 bg-white text-blue-500 rounded-full text-sm hover:bg-blue-50 transition-colors w-32"
        >
          Exit Preview
        </button>
@@ -436,39 +436,41 @@ const user = useSupabaseUser()
                <div v-if="verificationStatus === 'none'">
                  <button 
                    @click="showVerificationModal = true"
-                   class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center space-x-2"
+                   class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center w-32"
                  >
-                   <Shield class="w-5 h-5" />
-                   <span>Get Verified</span>
+                   <Shield class="w-5 h-5 mr-2" />
+                   Verify
                  </button>
                </div>
-               <div v-else-if="verificationStatus === 'pending'" class="flex space-x-2">
+               <div v-else-if="verificationStatus === 'pending'">
                  <button 
                    @click="cancelVerification"
-                   class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors flex items-center space-x-2"
+                   class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors flex items-center justify-center w-32"
                  >
-                   <XCircle class="w-5 h-5" />
-                   <span>Cancel Request</span>
+                   <XCircle class="w-5 h-5 mr-2" />
+                   Cancel
                  </button>
                </div>
                
                <button 
                  @click="showPrivacySettings = !showPrivacySettings"
-                 class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors flex items-center space-x-2"
+                 class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors flex items-center justify-center w-32"
                >
-                 <Eye class="w-5 h-5" />
-                 <span>Privacy Settings</span>
+                 <Eye class="w-5 h-5 mr-2" />
+                 Privacy
                </button>
                <button 
                  @click="togglePreviewMode"
-                 class="px-6 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors flex items-center space-x-2"
+                 class="px-6 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors flex items-center justify-center w-32"
                >
-                 <User class="w-5 h-5" />
-                 <span>Preview Profile</span>
+                 <User class="w-5 h-5 mr-2" />
+                 Preview
                </button>
-               <button class="px-6 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors flex items-center space-x-2">
-                 <Edit3 class="w-5 h-5" />
-                 <span>Edit Profile</span>
+               <button 
+                 class="px-6 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors flex items-center justify-center w-32"
+               >
+                 <Edit3 class="w-5 h-5 mr-2" />
+                 Edit
                </button>
              </div>
            </div>
@@ -603,7 +605,7 @@ const user = useSupabaseUser()
        </div>
  
        <!-- Additional Sections (only shown when not in preview mode) -->
-       <div v-if="!isPreviewMode && !isPreviewMode" class="mt-8 space-y-6">
+       <div v-if="!isPreviewMode" class="mt-8 space-y-6">
          <div v-for="section in sections" :key="section.id" 
               class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
            <div class="px-8 py-6 flex items-center justify-between">
@@ -663,7 +665,7 @@ const user = useSupabaseUser()
                    v-if="field.type === 'select'"
                    v-model="field.value"
                    :id="field.name"
-                   class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring -orange-500 focus:border-orange-500"
+                   class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange -500 focus:border-orange-500"
                  >
                    <option value="">Select an option</option>
                    <option v-for="option in field.options" :key="option" :value="option">
