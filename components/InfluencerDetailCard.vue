@@ -1,152 +1,246 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { FacebookIcon, GlobeIcon, InstagramIcon, LinkedinIcon, MapPinIcon, TwitchIcon, TwitterIcon, UserIcon, YoutubeIcon } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
-import { DiscordLogoIcon } from '@radix-icons/vue';
-import { CIcon } from '@coreui/icons-vue';
-import { cibTiktok, cibSnapchat } from '@coreui/icons';
+import { ref, onMounted } from 'vue'
+import { MapPin, Globe, Linkedin, UserPlus, Github, Twitter, YoutubeIcon, FacebookIcon, InstagramIcon, Twitch } from 'lucide-vue-next'
+import { SupabaseClient } from '@supabase/supabase-js'
+import { cibSnapchat } from '@coreui/icons'
+import { DiscordLogoIcon } from '@radix-icons/vue'
 
-const props = defineProps(['id', 'influencer']);
+const props = defineProps(['id', 'profile'])
 const supabase = useSupabaseClient()
+const profile = ref({})
 const contactInfo = ref({})
 
-const influencer = ref({});
-const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
-async function getAllInfluencers(query) {
-  const { data: data, error } = !!query ? await query : await supabase
+const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ")
+const formatUrl = url => !url?.startsWith('http') ? `https://${url}` : url
+
+async function getAllExperts(query) {
+  const { data: AllExperts, error } = !!query ? await query : await supabase
     .from('profiles')
-    .select('*, influencer:Influencers(*)') // Assuming the table is named 'experts'
+    .select('*, influencer:Influencers(*)')
     .eq('is_influencer', true)
-    .eq('id', props.id);;
+    .eq('id', props.id)
+
   console.log(error)
-  Promise.all(data.map(async (profile) => {
+  Promise.all(AllExperts.map(async (profile) => {
     profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
     profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
   })).then(() => {
-    influencer.value = data[0];
-    contactInfo.value = {other_user_id: influencer.value.id, other_user_name: influencer.value.full_name}
-    console.log(data)
+    profile.value = AllExperts[0]
+    contactInfo.value = {other_user_id: profile.value.id, other_user_name: profile.value.full_name}
   })
 }
+
 const fetchImage = async (id, bucket) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
+  if(!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60)
+    return urlData?.data?.signedUrl ?? ""
   }
-const formatUrl = url => !url?.startsWith('http') ? `https://${url}` : url;
+}
+
+const connect = () => {
+  // Implement connection logic here
+  console.log('Connecting with', profile.value?.full_name)
+}
+
 onMounted(() => {
-    if(props.id != null){
-        getAllInfluencers(null)
-    }else{
-        influencer.value = props.influencer
-        fetchImage(influencer.value.avatar_path, 'avatars')
-        .then((avatar) => {
-            influencer.value.avatarSRC = avatar;
-        })
-        .catch((error) => {
-          console.error('Error fetching avatar image:', error);
-        });
-        fetchImage(influencer.value.banner_path, 'images')
-        .then((banner) => {
-            influencer.value.bannerSRC = banner;
-        })
-        .catch((error) => {
-          console.error('Error fetching banner image:', error);
-        });
-    }
+  if(props.id != null){
+    getAllExperts(null)
+  } else {
+    profile.value = props.profile
+    fetchImage(profile.value.avatar_path, 'avatars')
+      .then((avatar) => {
+        profile.value.avatarSRC = avatar
+      })
+      .catch((error) => {
+        console.error('Error fetching avatar image:', error)
+      })
+    fetchImage(profile.value.banner_path, 'images')
+      .then((banner) => {
+        profile.value.bannerSRC = banner
+      })
+      .catch((error) => {
+        console.error('Error fetching banner image:', error)
+      })
+  }
 })
 </script>
 
 <template>
-    <Card class="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden">
-      <CardHeader :style="influencer?.bannerSRC 
-    ? { backgroundImage: `url(${influencer?.bannerSRC})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : null"
-  class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white">
-        <button>
-        <Avatar class="mb-4 w-24 h-24 ring-4 ring-white">
-          <AvatarImage :src="influencer?.avatarSRC" alt="Volunteer Name" />
-          <AvatarFallback>VC</AvatarFallback>
-        </Avatar>
-        <CardTitle class="text-2xl font-bold">{{influencer?.full_name}}</CardTitle>
-        <span class="text-m opacity-90">{{influencer?.headline}}</span>
-    </button>
-        <div class="flex items-center mt-2">
-          <MapPinIcon class="w-5 h-5" />
-          <span class="ml-2 font-semibold">{{influencer?.location}}</span>
-        </div>
-        <div v-if="influencer?.influencer?.will_travel" variant="light" class="mt-3 px-4 py-1 rounded text-white text-s font-normal bg-opacity-20">Available for Travel</div>
-      </CardHeader>
-      <CardContent class="p-6">
-        <p class="text-gray-700 dark:text-gray-300 mb-6">
-          {{influencer?.about}}
-        </p>
-        <h2 class="font-semibold mb-4">Influencer Categories:</h2>
-        <div v-for="category in influencer?.influencer?.categories" class="mb-6 flex gap-2 flex-wrap">
-          <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{category}}</span>
-        </div>
-        <h2 class="font-semibold mb-4">Links:</h2>
+  <div class="min-h-screen bg-orange-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <!-- Banner -->
+      <div class="h-64 w-full bg-gradient-to-r  relative">
+        <img 
+          :src="profile?.bannerSRC || '/placeholder.svg?height=300&width=1200'" 
+          alt="Profile banner" 
+          class="w-full h-full object-cover "
+        >
+      </div>
+      
+      <!-- Avatar -->
+      <div class="relative">
+        <img 
+          :src="profile?.avatarSRC || '/placeholder.svg?height=192&width=192'" 
+          :alt="'Profile picture of ' + profile?.full_name"
+          class="absolute left-8 -top-24 w-48 h-48 rounded-full border-4 border-white shadow-xl object-cover"
+        >
+      </div>
 
-        <!-- <div class="flex  space-x-48">
-          <div class="flex items-center text-gray-700 dark:text-gray-300">
-            <GlobeIcon class="w-5 h-5"/>
-            <a :href="influencer.website" class="ml-2 hover:underline">{{influencer.website}}</a>
+      <div class="p-8 pt-28">
+        <div class="flex justify-between items-start">
+          <div>
+            <h1 class="text-4xl font-bold text-gray-900">{{ profile?.full_name }}</h1>
+            <p class="mt-1 text-2xl text-orange-600">{{ profile?.influencer?.headline }}</p>
+            <div class="mt-2 flex items-center text-gray-600">
+              <MapPin class="h-5 w-5 mr-2" />
+              <span>{{ profile?.location }}</span>
+            </div>
+            <div v-if="profile?.influencer?.will_travel" class="mt-2 inline-block px-4 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
+              Available for Travel
+            </div>
           </div>
-          <div class="flex items-center text-gray-700 dark:text-gray-300">
-            <GlobeIcon class="w-5 h-5"/>
-            <a href="https://portfolio.example.com" class="ml-2 hover:underline">WhatsApp</a>
+          <button 
+            v-if="Object.keys(contactInfo).length !== 0"
+            @click="connect" 
+            class="px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-300 flex items-center shadow-md"
+          >
+            <UserPlus class="h-5 w-5 mr-2" />
+            Connect
+          </button>
+        </div>
+        
+        <div class="flex flex-row mt-8 justify-between">
+          <div>
+            <h2 class="text-2xl font-semibold text-gray-900">About</h2>
+            <p class="mt-2 text-gray-600 text-lg">{{ profile?.about }}</p>
           </div>
-          <div class="flex items-center text-gray-700 dark:text-gray-300">
-            <GlobeIcon class="w-5 h-5"/>
-            <a href="https://portfolio.example.com" class="ml-2 hover:underline">Telegram</a>
-          </div> 
-        </div>-->
-    <div class="flex flex-col justify-between">
-      <div v-if="influencer?.website" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <GlobeIcon class="w-6 h-6 ml-3 text-blue-500" />
-        <a :href="formatUrl(influencer?.website)" class="ml-2 hover:underline">{{influencer?.website}}</a>
-      </div>
-      <div v-if="influencer?.linkedin" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <LinkedinIcon class="w-6 h-6 ml-3 text-black-500" />
-        <a :href="formatUrl(influencer?.linkedin)" class="ml-2 hover:underline">{{influencer?.linkedin}}</a>
-      </div>
-      <div v-if="influencer?.youtube" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <YoutubeIcon class="w-6 h-6 ml-3 text-red-500" />
-        <a :href="formatUrl(influencer?.youtube)" class="ml-2 hover:underline">{{influencer?.youtube}}</a>
-      </div>
-      <div v-if="influencer?.facebook" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <FacebookIcon class="w-6 h-6 ml-3 text-blue-600" />
-        <a :href="formatUrl(influencer?.facebook)" class="ml-2 hover:underline">{{influencer?.facebook}}</a>
-      </div>
-      <div v-if="influencer?.influencer?.instagram" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <InstagramIcon class="w-6 h-6 ml-3 text-blue-500" />
-        <a :href="formatUrl(influencer?.influencer?.instagram)" class="ml-2 hover:underline">{{influencer?.influencer?.instagram}}</a>
-      </div>
-      <div v-if="influencer?.influencer?.tiktok" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <CIcon :icon="cibTiktok" class="w-6 h-6 ml-3 text-blue-500" />
-        <a :href="formatUrl(influencer?.influencer?.tiktok)" class="ml-2 hover:underline">{{influencer?.influencer?.tiktok}}</a>
-      </div>
-      <div v-if="influencer?.influencer?.snapchat" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <CIcon :icon="cibSnapchat" class="w-6 h-6 ml-3 text-blue-500" />
-        <a :href="formatUrl(influencer?.influencer?.snapchat)" class="ml-2 hover:underline">{{influencer?.influencer?.snapchat}}</a>
-      </div>
-      <div v-if="influencer?.influencer?.twitch" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <TwitchIcon class="w-6 h-6 ml-3 text-red-500" />
-        <a :href="formatUrl(influencer?.influencer?.twitch)" class="ml-2 hover:underline">{{influencer?.influencer?.twitch}}</a>
-      </div>
-      <div v-if="influencer?.influencer?.discord" class="flex items-center flex-1 bg-gray-100 dark:bg-gray-800 rounded-md m-2">
-        <DiscordLogoIcon class="w-6 h-6 ml-3 text-blue-600" />
-        <a :href="formatUrl(influencer?.influencer?.discord)" class="ml-2 hover:underline">{{influencer?.influencer?.discord}}</a>
+          <div class="w-1/3 shrink">
+            <InfluencerBookingRequest :profile-id="profile.id" />
+          </div>
+        </div>
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900">Influencer Categories</h2>
+          <div class="mt-3 flex flex-wrap gap-3">
+            <span 
+              v-for="category in profile?.influencer?.categories" 
+              :key="category"
+              class="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
+            >
+              {{ category }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900">Industries</h2>
+          <div class="mt-3 flex flex-wrap gap-3">
+            <span 
+              v-for="industry in profile?.industries" 
+              :key="industry"
+              class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full text-sm font-medium"
+            >
+              {{ industry }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">Links</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a 
+              v-if="profile?.website"
+              :href="formatUrl(profile?.website)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+            >
+              <Globe class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-orange-800 font-medium">{{profile?.website}}</span>
+            </a>
+            <a 
+              v-if="profile?.linkedin"
+              :href="formatUrl(profile?.linkedin)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+            >
+              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
+              <span class="text-blue-800 font-medium">{{profile?.linkedin}}</span>
+            </a>
+            <a 
+              v-if="profile?.youtube"
+              :href="formatUrl(profile?.youtube)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-red-300 rounded-lg hover:bg-red-400 transition-colors duration-300"
+            >
+              <YoutubeIcon class="h-6 w-6 text-neutral-50 mr-3" />
+              <span class="text-neutral-50 font-medium">{{profile?.youtube}}</span>
+            </a>
+            <a 
+              v-if="profile?.facebook"
+              :href="formatUrl(profile?.facebook)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-blue-300 rounded-lg hover:bg-blue-400 transition-colors duration-300"
+            >
+              <FacebookIcon class="h-6 w-6 text-neutral-50 mr-3" />
+              <span class="text-neutral-50 font-medium">{{profile?.facebook}}</span>
+            </a>
+            
+            <a 
+              v-if="profile?.instagram"
+              :href="formatUrl(profile?.instagram)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-pink-100 rounded-lg hover:bg-pink-200 transition-colors duration-300"
+            >
+              <InstagramIcon class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-white-800 font-medium">{{profile?.instagram}}</span>
+            </a>
+            <a 
+              v-if="profile?.tiktok"
+              :href="formatUrl(profile?.tiktok)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-colors duration-300"
+            >
+              <TiktokIcon class="h-6 w-6 text-red-600 mr-3" />
+              <span class="text-sky-800 font-medium">{{profile?.tiktok}}</span>
+            </a>
+            <a 
+              v-if="profile?.snapchat"
+              :href="formatUrl(profile?.snapchat)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-yellow-100 rounded-lg hover:bg-yellow-200 transition-colors duration-300"
+            >
+              <cibSnapchat class="h-6 w-6 text-yellow-600 mr-3" />
+              <span class="text-yellow-800 font-medium">{{profile?.snapchat}}</span>
+            </a>
+            <a 
+              v-if="profile?.twitch"
+              :href="formatUrl(profile?.twitch)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-purple-100 rounded-lg hover:bg-purple-200 transition-colors duration-300"
+            >
+              <Twitch class="h-6 w-6 text-purple-600 mr-3" />
+              <span class="text-purple-800 font-medium">{{profile?.twitch}}</span>
+            </a>
+            <a 
+              v-if="profile?.discord"
+              :href="formatUrl(profile?.discord)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-indigo-100 rounded-lg hover:bg-indigo-200 transition-colors duration-300"
+            >
+              <DiscordLogoIcon class="h-6 w-6 text-indigo-600 mr-3" />
+              <span class="text-indigo-800 font-medium">{{profile?.discord}}</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-        
-        <div class="flex justify-between mt-8">
-
-            <MessagesButton v-if="Object.keys(contactInfo).length !== 0" :label="'Contact'" :isIcon="false" :newConversationInfo="contactInfo"></MessagesButton>
-        </div>
-      </CardContent>
-    </Card>
+  </div>
 </template>

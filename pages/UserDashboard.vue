@@ -23,6 +23,7 @@ import {
   BadgeCheck,
   Ribbon,
   HeartHandshake,
+  Mic,
 
 
 
@@ -43,6 +44,8 @@ import { Calendar } from '@/components/ui/calendar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import MyVolunteerDash from '~/components/MyVolunteerDash.vue';
+import { cilMicrophone } from '@coreui/icons';
 
 const user = useSupabaseUser();
 const supabase = useSupabaseClient();
@@ -313,6 +316,11 @@ onMounted(() => {
               :class="selectedView == 'ExpertDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
               <Award class="w-5 h-5 mr-2 text-purple-500" />
               <span>Experts</span>
+            </li>
+            <li @click="selectedView = 'InfluencerDash'"
+              :class="selectedView == 'InfluencerDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
+              <Mic class="w-5 h-5 mr-2 text-indigo-500" />
+              <span>Influencers</span>
             </li>
             <li @click="selectedView = 'VendorDash'"
               :class="selectedView == 'VendorDash' ? 'bg-gray-300 flex items-center p-2 dark:hover:bg-gray-700 cursor-pointer rounded' : 'flex items-center p-2 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer rounded'">
@@ -621,7 +629,19 @@ onMounted(() => {
       <section class="mb-8" v-if="selectedView == 'VenueDash'">
         <MyVenueDash></MyVenueDash>
       </section>
-    </main>
+      <section class="mb-8" v-if="selectedView == 'VolunteerDash'">
+        <MyVolunteerDash></MyVolunteerDash>
+      </section>
+      <section class="mb-8" v-if="selectedView == 'ExpertDash'">
+        <MyExpertDash></MyExpertDash>
+      </section>
+
+      <section class="mb-8" v-if="selectedView == 'InfluencerDash'">
+        <MyInfluencerDash></MyInfluencerDash>
+      </section> 
+      <section class="mb-8" v-if="selectedView == 'VendorDash'">
+        <MyVendorDash></MyVendorDash>
+      </section>   </main>
   </div>
 </template>
 <style scoped>

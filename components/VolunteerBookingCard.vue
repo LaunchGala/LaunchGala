@@ -1,128 +1,65 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapPin, Globe, Linkedin, UserPlus, Github, Twitter, YoutubeIcon, FacebookIcon, InstagramIcon, Twitch } from 'lucide-vue-next'
-import { SupabaseClient } from '@supabase/supabase-js'
 import { cibSnapchat } from '@coreui/icons'
 import { DiscordLogoIcon } from '@radix-icons/vue'
+import { Button } from '@/components/ui/button';
 
-const props = defineProps(['id', 'profile'])
-const supabase = useSupabaseClient()
-const profile = ref({})
-const contactInfo = ref({})
+const props = defineProps({
+  profile: {
+    type: Object,
+    required: true,
+  },
+  eventName: {
+    type: String,
+    required: true
+  },
+  note: {
+    type: String,
+    required: true
+  }
+});
 
-const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ")
 const formatUrl = url => !url?.startsWith('http') ? `https://${url}` : url
-
-async function getAllExperts(query) {
-  const { data: AllExperts, error } = !!query ? await query : await supabase
-    .from('profiles')
-    .select('*, expert:Experts(*)')
-    .eq('is_expert', true)
-    .eq('id', props.id)
-
-  console.log(error)
-  Promise.all(AllExperts.map(async (profile) => {
-    profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
-    profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
-  })).then(() => {
-    profile.value = AllExperts[0]
-    contactInfo.value = {other_user_id: profile.value.id, other_user_name: profile.value.full_name}
-  })
-}
-
-const fetchImage = async (id, bucket) => {
-  if(!!id) {
-    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60)
-    return urlData?.data?.signedUrl ?? ""
-  }
-}
-
-const connect = () => {
-  // Implement connection logic here
-  console.log('Connecting with', profile.value?.full_name)
-}
-
-onMounted(() => {
-  if(props.id != null){
-    getAllExperts(null)
-  } else {
-    profile.value = props.profile
-    fetchImage(profile.value.avatar_path, 'avatars')
-      .then((avatar) => {
-        profile.value.avatarSRC = avatar
-      })
-      .catch((error) => {
-        console.error('Error fetching avatar image:', error)
-      })
-    fetchImage(profile.value.banner_path, 'images')
-      .then((banner) => {
-        profile.value.bannerSRC = banner
-      })
-      .catch((error) => {
-        console.error('Error fetching banner image:', error)
-      })
-  }
-})
 </script>
 
 <template>
-  <div class="min-h-screen bg-orange-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-      <!-- Banner -->
-      <div class="h-64 w-full bg-gradient-to-r  relative">
-        <img 
-          :src="profile?.bannerSRC || '/placeholder.svg?height=300&width=1200'" 
-          alt="Profile banner" 
-          class="w-full h-full object-cover "
-        >
+  <Card class="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden">
+    <CardHeader
+      :class="profile.bannerSRC ? '' : 'bg-gradient-to-r from-orange-600 to-orange-400'" 
+      class="p-6 flex flex-col items-center text-white relative"
+      :style="profile.bannerSRC ? { backgroundImage: `url(${profile.bannerSRC})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', } : ''"
+    >
+    <span v-if="!!eventName" class="text-xl opacity-90 bg-orange-600 p-2 rounded">Event: {{ eventName }}</span>
+      <Avatar class="mb-4 w-24 h-24 ring-4 ring-white">
+        <AvatarImage :src="profile.avatarSRC" alt="Event Banner" />
+        <AvatarFallback>EV</AvatarFallback>
+      </Avatar>
+      <CardTitle class="text-2xl font-bold bg-orange-600 p-2 rounded">{{ profile.full_name }}</CardTitle>
+      <span class="text-lg opacity-90 bg-orange-600 p-2 rounded">{{ profile.volunteer?.headline }}</span>
+      <div class="flex items-center mt-2 bg-orange-600 p-2 rounded">
+        <MapPin class="w-5 h-5" />
+        <span class="ml-2 font-semibold">{{ profile.location }}</span>
       </div>
-      
-      <!-- Avatar -->
-      <div class="relative">
-        <img 
-          :src="profile?.avatarSRC || '/placeholder.svg?height=192&width=192'" 
-          :alt="'Profile picture of ' + profile?.full_name"
-          class="absolute left-8 -top-24 w-48 h-48 rounded-full border-4 border-white shadow-xl object-cover"
-        >
+    </CardHeader>
+    <CardContent class="p-6">
+      <!-- Custom Buttons Slot -->
+      <div class="flex justify-end mt-1 space-x-4 align-middle">
+        <slot name="action-buttons">
+        </slot>
       </div>
-
-      <div class="p-8 pt-28">
-        <div class="flex justify-between items-start">
-          <div>
-            <h1 class="text-4xl font-bold text-gray-900">{{ profile?.full_name }}</h1>
-            <p class="mt-1 text-2xl text-orange-600">{{ profile?.expert?.headline }}</p>
-            <div class="mt-2 flex items-center text-gray-600">
-              <MapPin class="h-5 w-5 mr-2" />
-              <span>{{ profile?.location }}</span>
-            </div>
-            <div v-if="profile?.expert?.will_travel" class="mt-2 inline-block px-4 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
-              Available for Travel
-            </div>
-          </div>
-          <button 
-            v-if="Object.keys(contactInfo).length !== 0"
-            @click="connect" 
-            class="px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-300 flex items-center shadow-md"
-          >
-            <UserPlus class="h-5 w-5 mr-2" />
-            Connect
-          </button>
-        </div>
-        
         <div class="flex flex-row mt-8 justify-between">
           <div>
             <h2 class="text-2xl font-semibold text-gray-900">About</h2>
             <p class="mt-2 text-gray-600 text-lg">{{ profile?.about }}</p>
           </div>
-          <div class="w-1/3 shrink">
-            <ExpertBookingRequest :profile-id="profile.id" />
-          </div>
         </div>
         <div class="mt-8">
-          <h2 class="text-2xl font-semibold text-gray-900">Expert Categories</h2>
+          <h2 class="text-2xl font-semibold text-gray-900">Volunteer Categories</h2>
           <div class="mt-3 flex flex-wrap gap-3">
             <span 
-              v-for="category in profile?.expert?.categories" 
+              v-for="category in profile?.volunteer?.categories" 
               :key="category"
               class="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
             >
@@ -240,7 +177,6 @@ onMounted(() => {
             </a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 </template>

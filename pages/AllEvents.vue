@@ -178,7 +178,7 @@ onMounted(() => {
         </div>
         <div class="px-6 pt-4 pb-2">
           <div class="flex items-center justify-between mb-4">
-            <NuxtLink :to="{ name: 'EventDetailPage', query: { id: event.id } }">
+            <NuxtLink :to="{ name: 'EventCardNew', query: { id: event.id } }">
 
               <Button class="mt-4 inline-flex items-center rounded-lg py-2 px-4 bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500 transition-colors ButtonCol">
                 Check it out

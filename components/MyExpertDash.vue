@@ -3,74 +3,75 @@ import { ref, computed, onMounted } from 'vue';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Dialog, DialogContent, DialogTrigger, DialogClose } from '@/components/ui/dialog';
 import Checkbox from '@/components/ui/checkbox/Checkbox.vue';
 import Label from './ui/label/Label.vue';
 
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
-const venuesRequestedFromMe = ref([]);
-const venuesIRequested = ref([]);
+const expertsRequestedFromMe = ref([]);
+const expertsIRequested = ref([]);
 
 function getContactInfo(profile) {
   if (!profile) return null;
   return { other_user_id: profile.id, other_user_name: profile.full_name };
 }
 
-// New filtering function with requested & offered statuses
-function filterVenues(venues, requested, offered, approved, rejected, cancelled) {
-  return venues.filter(
-    (venue) =>
-      (venue.status === 'requested' && requested) ||
-      (venue.status === 'offered' && offered) ||
-      (venue.status === 'approved' && approved) ||
-      (venue.status === 'rejected' && rejected) ||
-      (venue.status === 'cancelled' && cancelled)
+// Filtering experts based on status
+function filterRequests(requests, requested, offered, approved, rejected, cancelled) {
+  return requests.filter(
+    (req) =>
+      (req.status == 'requested' && requested) ||
+      (req.status == 'offered' && offered) ||
+      (req.status == 'approved' && approved) ||
+      (req.status == 'rejected' && rejected) ||
+      (req.status == 'cancelled' && cancelled)
   );
 }
 
-async function fetchVenuesRequestedFromMe() {
+// Fetch experts requested FROM ME
+async function fetchExpertsRequestedFromMe() {
   const response = await supabase
-    .from('VenueBookings')
+    .from('ExpertBooking')
     .select(`
       *,
       event:AllEvents!inner (
         *,
         event_owner:profiles!inner (*)
       ),
-      venue:AllVenues!inner (
+      expert:profiles!inner (
         *,
-        venue_owner:profiles!inner (*)
+        expert:Experts!inner (*)
       )
     `)
-    .eq('venue.venue_owner.id', user.value.id);
+    .eq('expert.id', user.value.id);
 
   if (response.error) {
     console.error(response.error);
     return;
   }
+
   Promise.all(response.data.map(async (ven) => {
     ven.event.event_owner.avatarSRC = await fetchImage(ven.event.event_owner.avatar_url, 'avatars')
   })).then(() => {
-    venuesRequestedFromMe.value = response.data;
+    expertsRequestedFromMe.value = response.data;
     console.log(response.data)
   })
 }
 
-async function fetchVenuesIRequested() {
+// Fetch experts I requested
+async function fetchExpertsIRequested() {
   const response = await supabase
-    .from('VenueBookings')
+    .from('ExpertBooking')
     .select(`
       *,
       event:AllEvents!inner (
         *,
         event_owner:profiles!inner (*)
       ),
-      venue:AllVenues!inner (
+      expert:profiles!inner (
         *,
-        venue_owner:profiles!inner (*)
+        expert:Experts!inner (*)
       )
     `)
     .eq('event.event_owner.id', user.value.id);
@@ -81,9 +82,10 @@ async function fetchVenuesIRequested() {
   }
 
   Promise.all(response.data.map(async (ven) => {
-    ven.venue.venue_owner.avatarSRC = await fetchImage(ven.venue.venue_owner.avatar_url, 'avatars')
+    ven.expert.avatarSRC = await fetchImage(ven.expert.avatar_url, 'avatars')
+    ven.expert.bannerSRC = await fetchImage(ven.expert.banner_url, 'images')
   })).then(() => {
-    venuesIRequested.value = response.data;
+    expertsIRequested.value = response.data;
     console.log(response.data)
   })
 
@@ -99,8 +101,8 @@ const fetchImage = async (id, bucket) => {
 }
 
 onMounted(() => {
-  fetchVenuesRequestedFromMe();
-  fetchVenuesIRequested();
+  fetchExpertsRequestedFromMe();
+  fetchExpertsIRequested();
 });
 
 function formatDate(date) {
@@ -110,13 +112,13 @@ function formatDate(date) {
 
 // Updating request status
 async function updateRequestStatus(request, status) {
-  const { error } = await supabase.from('VenueBookings').update({ status }).eq('id', request.id);
+  const { error } = await supabase.from('ExpertBooking').update({ status }).eq('id', request.id);
 
   if (error) {
     console.error('Error updating request status:', error);
   } else {
-    fetchVenuesRequestedFromMe();
-    fetchVenuesIRequested();
+    fetchExpertsRequestedFromMe();
+    fetchExpertsIRequested();
   }
 }
 
@@ -132,7 +134,7 @@ const showApproved = ref(false);
 const showRejected = ref(false);
 const showCancelled = ref(false);
 
-const newVenueOwnerConversationInfo = computed(() => getContactInfo(selectedBooking.value?.venue?.venue_owner));
+const newExpertConversationInfo = computed(() => getContactInfo(selectedBooking.value?.expert));
 const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBooking.value?.event?.event_owner));
 </script>
 
@@ -143,10 +145,10 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
         <Tabs default-value="requested-from-me" class="w-full">
           <TabsList class="flex w-full justify-around border-b-2 border-orange-300 bg-orange-500 text-white">
             <TabsTrigger @click="selectedBooking = {}" value="requested-from-me" class="py-2 font-semibold text-md">
-              Venues requested from me
+              My Expert Opportunities
             </TabsTrigger>
             <TabsTrigger @click="selectedBooking = {}" value="requested" class="py-2 font-semibold text-md">
-              Venues I requested
+              Experts I requested
             </TabsTrigger>
           </TabsList>
 
@@ -181,7 +183,7 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
             </p>
             <div class="flex">
               <div class="w-1/3">
-                <div v-for="item in filterVenues(venuesRequestedFromMe, showRequested, showOffered, showApproved, showRejected, showCancelled)"
+                <div v-for="item in filterRequests(expertsRequestedFromMe, showRequested, showOffered, showApproved, showRejected, showCancelled)"
                   :class="{ 'flex flex-col w-full border border-black-300 space-y-0 p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]border-2 border-orange-500 bg-orange-100': selectedBooking.id == item.id,
                     'flex flex-col w-full border border-black-300 space-y-0 bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]': selectedBooking.id != item.id
                    }"
@@ -195,7 +197,6 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
                       <h3 class="font-semibold text-center text-md mt-2">{{ item.event?.event_owner.full_name }}</h3>
                     </div>
                     <div class="flex grow flex-col items-center">
-                      <h3 class="font-semibold text-2xl">{{ item.venue?.title }}</h3>
                       <h6 class="font-semibold text-large text-gray-500">{{ item.event?.title }}</h6>
                     </div>
                     <div v-if="item.status == 'requested'" class="p-1 rounded-lg border-2 border-orange-300 h-min">Requested</div>
@@ -252,11 +253,11 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
           <!-- Venues I Requested -->
           <TabsContent value="requested" class="space-y-6">
             <p class="text-gray-800 p-2 font-semibold">
-              View the venues that you have requested from others:
+              View the experts that you have requested or been offered:
             </p>
             <div class="flex">
               <div class="w-1/3">
-                <div v-for="item in filterVenues(venuesIRequested, showRequested, showOffered, showApproved, showRejected, showCancelled)"
+                <div v-for="item in filterRequests(expertsIRequested, showRequested, showOffered, showApproved, showRejected, showCancelled)"
                   :class="{ 'flex flex-col w-full border border-black-300 space-y-0 p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]border-2 border-orange-500 bg-orange-100': selectedBooking.id == item.id,
                     'flex flex-col w-full border border-black-300 space-y-0 bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:shadow-2xl dark:bg-[#1A1A1A]': selectedBooking.id != item.id
                    }"
@@ -264,13 +265,12 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
                   <div class="flex">
                     <div class="flex flex-1 flex-col items-center">
                       <Avatar class="w-16 h-16">
-                        <AvatarImage :src="item.venue.venue_owner.avatarSRC" alt="User's Name" />
+                        <AvatarImage :src="item.expert.avatarSRC" alt="User's Name" />
                         <AvatarFallback>UN</AvatarFallback>
                       </Avatar>
-                      <h3 class="font-semibold text-center text-md mt-2">{{ item.venue.venue_owner.full_name }}</h3>
+                      <h3 class="font-semibold text-center text-md mt-2">{{ item.expert.full_name }}</h3>
                     </div>
                     <div class="flex grow flex-col items-center">
-                      <h3 class="font-semibold text-2xl">{{ item?.venue?.title }}</h3>
                       <h6 class="font-semibold text-large text-gray-500">{{ item?.event?.title }}</h6>
                     </div>
                     <div v-if="item.status == 'requested'" class="p-1 rounded-lg border-2 border-orange-300 h-min">Requested</div>
@@ -284,12 +284,8 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
                       <div>
                         <div class="space-y-0">
                           <div class="flex items-center">
-                            <p class="text-sm font-semibold text-gray-700 mr-2">Event type:</p>
-                            <p class="text-sm">{{ item.event?.event_type }}</p>
-                          </div>
-                          <div class="flex items-center">
-                            <p class="text-sm font-semibold text-gray-700 mr-2">Number of guests:</p>
-                            <p class="text-sm">{{ item.event?.number_of_guests }}</p>
+                            <p class="text-sm font-semibold text-gray-700 mr-2">Note:</p>
+                            <p class="text-sm">{{ item.note }}</p>
                           </div>
                           <div class="flex items-center">
                             <p class="text-sm font-semibold text-gray-700 mr-2">Event date:</p>
@@ -308,16 +304,15 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
                 </div>
               </div>
               <div class="w-2/3">
-                <VenueBookingCard v-if="Object.keys(selectedBooking).length !== 0" :venue="selectedBooking?.venue" :event-name="selectedBooking?.event?.title"
-                :requesting_sponsorship="selectedBooking?.requesting_sponsorship" :note="selectedBooking?.note">
+                <ExpertBookingCard v-if="Object.keys(selectedBooking).length !== 0" :profile="selectedBooking?.expert" :event-name="selectedBooking?.event?.title" :note="selectedBooking?.note">
                   <template #action-buttons>
                     <MessagesButton :label="'Contact'" :isIcon="false"
-                          :newConversationInfo="newVenueOwnerConversationInfo"></MessagesButton>
+                          :newConversationInfo="newExpertConversationInfo"></MessagesButton>
                     <Button v-if="selectedBooking.status == 'cancelled'" @click="updateRequestStatus(selectedBooking, 'requested')" class="bg-green-500 text-white m-2 rounded-full">Reopen</Button>
                     <Button v-if="selectedBooking.status == 'requested' || selectedBooking.status == 'approved'" @click="updateRequestStatus(selectedBooking, 'cancelled')" class="bg-slate-500 text-white m-2 rounded-full">Cancel</Button>
                     <Button v-if="selectedBooking.status == 'offered'" @click="updateRequestStatus(selectedBooking, 'rejected')" class="bg-red-500 text-white m-2 rounded-full">Reject</Button>
                   </template>
-                </VenueBookingCard>
+                </ExpertBookingCard>
               </div>
             </div>
           </TabsContent>

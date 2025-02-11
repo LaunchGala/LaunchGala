@@ -1,31 +1,29 @@
 <template>
     <div class="min-h-screen bg-orange-50 py-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <!-- Event Banner -->
-        <div class="h-64 w-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 relative">
-          <img src="/placeholder.svg?height=300&width=1200" alt="Event banner" class="w-full h-full object-cover mix-blend-overlay">
+        <div class="relative h-96 overflow-hidden">
+          <TitleImagesBanner :imageNames="event.images" :showButton="true" />
         </div>
-        
-        <!-- Event Logo -->
         <div class="relative">
-          <img src="/placeholder.svg?height=192&width=192" alt="Event logo" class="absolute left-8 -top-24 w-48 h-48 rounded-full border-4 border-white shadow-xl object-cover">
+          <img :src="event?.event_owner?.avatarSRC" alt="Event logo" class="absolute left-8 -top-24 w-48 h-48 rounded-full border-4 border-white shadow-xl object-cover">
         </div>
+  
   
         <div class="p-8 pt-28">
           <div class="flex justify-between items-start">
             <div>
-              <h1 class="text-4xl font-bold text-gray-900">TechConf 2023</h1>
-              <p class="mt-1 text-2xl text-orange-600">The Future of Technology</p>
+              <h1 class="text-4xl font-bold text-gray-900">{{event.title}}</h1>
+              <p class="mt-1 text-2xl text-orange-600">{{event.event_type}}</p>
               <div class="mt-2 flex items-center text-gray-600">
                 <MapPin class="h-5 w-5 mr-2" />
-                <span>San Francisco Convention Center</span>
+                <span>{{event.location}}</span>
               </div>
             </div>
           </div>
           
           <div class="mt-8">
             <h2 class="text-2xl font-semibold text-gray-900">About the Event</h2>
-            <p class="mt-2 text-gray-600 text-lg">Join us for TechConf 2023, where industry leaders and innovators come together to explore the cutting-edge technologies shaping our future. From AI to blockchain, we've got it all covered!</p>
+            <p class="mt-2 text-gray-600 text-lg">{{ event.description }}</p>
           </div>
           
           <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -33,11 +31,11 @@
               <h2 class="text-2xl font-semibold text-gray-900">Date & Time</h2>
               <div class="mt-3 flex items-center text-gray-600">
                 <Calendar class="h-5 w-5 mr-2 text-orange-500" />
-                <span>September 15-17, 2023</span>
+                <span>{{ formatDateRange(event.event_start_date, event.event_end_date) }}</span>
               </div>
               <div class="mt-2 flex items-center text-gray-600">
                 <Clock class="h-5 w-5 mr-2 text-orange-500" />
-                <span>9:00 AM - 6:00 PM (PDT)</span>
+                <span>{{ formatTimeRange(event.event_start_time, event.event_end_time)}}</span>
               </div>
             </div>
             
@@ -45,16 +43,12 @@
               <h2 class="text-2xl font-semibold text-gray-900">Ticket Information</h2>
               <div class="mt-3 flex items-center text-gray-600">
                 <DollarSign class="h-5 w-5 mr-2 text-orange-500" />
-                <span>Early Bird: $499 (until July 31)</span>
-              </div>
-              <div class="mt-2 flex items-center text-gray-600">
-                <DollarSign class="h-5 w-5 mr-2 text-orange-500" />
-                <span>Regular: $699</span>
+                <span>Price: {{event.ticket_price}}</span>
               </div>
             </div>
           </div>
           
-          <div class="mt-8">
+          <div v-if="event?.featured_speakers?.length" class="mt-8">
             <h2 class="text-2xl font-semibold text-gray-900">Featured Speakers</h2>
             <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div v-for="speaker in speakers" :key="speaker.name" class="flex items-center p-3 bg-orange-100 rounded-lg">
@@ -70,9 +64,9 @@
           <div class="mt-8">
             <h2 class="text-2xl font-semibold text-gray-900 mb-4">Event Industries</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div v-for="highlight in highlights" :key="highlight.title" class="flex items-center p-4 bg-gray-100 rounded-lg">
-                <component :is="highlight.icon" class="h-6 w-6 text-orange-600 mr-3" />
-                <span class="text-gray-800 font-medium">{{ highlight.title }}</span>
+              <div v-for="highlight in event.industries" :key="highlight" class="flex items-center p-4 bg-gray-100 rounded-lg">
+                <component :is="Network" class="h-6 w-6 text-orange-600 mr-3" />
+                <span class="text-gray-800 font-medium">{{ highlight }}</span>
               </div>
             </div>
           </div>
@@ -135,42 +129,123 @@
   
   <script setup>
   import { ref } from 'vue'
+  import { format } from 'date-fns';
+import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
   import { MapPin, Ticket, Calendar, Clock, DollarSign, Mail, Twitter, Linkedin, Instagram, Users, Lightbulb, Mic, Network, Building, Heart, Briefcase, ShoppingBag } from 'lucide-vue-next'
-  
-  const speakers = ref([
-    { name: 'Jane Doe', role: 'AI Research Lead', avatar: '/placeholder.svg?height=100&width=100' },
-    { name: 'John Smith', role: 'Blockchain Expert', avatar: '/placeholder.svg?height=100&width=100' },
-    { name: 'Emily Johnson', role: 'IoT Innovator', avatar: '/placeholder.svg?height=100&width=100' },
-  ])
-  
-  const highlights = ref([
-    { title: 'AI', icon: Mic },
-    { title: 'Pharma', icon: Users },
-    { title: 'Blockchain', icon: Lightbulb },
-    { title: 'Energy', icon: Network },
-  ])
-  
-  const registerNow = () => {
-    console.log('Registering for TechConf 2023')
+  const route = useRoute();
+const venueId = route.query.id;
+const event = ref({
+  created_by: 1,
+  title: '',
+  description: '',
+  invite_only: false,
+  ticket_price: 0,
+  event_type: '',
+  industries: [],
+  images: [],
+  event_start_date: new Date(),
+  event_end_date: new Date(),
+  event_start_time: '12:00:00',
+  event_end_time: '14:00:00',
+  location: '',
+  agenda: '',
+  link: '',
+  allow_venue_offering: true,
+  allow_volunteers_offering: true,
+  allow_sponsorship_offering: true,
+  allow_expertise_offering: true,
+  allow_vendors_offering: true,
+  allow_registration_request: true,
+  is_published: false
+
+
+
+
+});
+const contactInfo = ref({})
+async function getEvent() {
+  const { data: AllEvents, error } = await supabase.from('AllEvents').select('*, event_owner:profiles!created_by(*)').eq('id', venueId)
+  console.log(error)
+  Promise.all(AllEvents.map(async (event) => {
+    event.event_owner.avatarSRC = await fetchImage(event.event_owner.avatar_url)
+  })).then(() => {
+    event.value = AllEvents[0];
+    contactInfo.value = {other_user_id: event.value.event_owner.id, other_user_name: event.value.event_owner.full_name}
+    console.log(AllEvents)
+  })
+}
+const fetchImage = async (id) => {
+    if(!!id)
+    {
+            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+            return urlData?.data?.signedUrl ?? "";
+    }
+    return "";
+  }
+onMounted(() => {
+  getEvent()
+});
+
+// Function to handle the "Share" button click
+const sharePage = () => {
+  const url = window.location.href;
+  const title = event.value.title;
+
+  if (navigator.share) {
+    // Use Web Share API if available
+    navigator.share({
+      title: title,
+      text: `Check out this event: ${title}`,
+      url: url,
+    })
+    .then(() => console.log('Successfully shared'))
+    .catch((error) => console.error('Error sharing', error));
+  } else {
+    // Fallback: Copy URL to clipboard
+    copyToClipboard(url);
+    alert('Page link copied to clipboard!');
+  }
+};
+
+// Function to copy a URL to clipboard
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text).then(
+    () => console.log('Text copied to clipboard'),
+    (error) => console.error('Could not copy text: ', error)
+  );
+};
+function formatDateRange(start, end) {
+  if (!start || !end) return '';
+
+  const startMonth = format(start, 'MMMM');
+  const endMonth = format(end, 'MMMM');
+  const startYear = format(start, 'yyyy');
+  const endYear = format(end, 'yyyy');
+  const startDay = format(start, 'd');
+  const endDay = format(end, 'd');
+  const days = startDay == endDay ? `${startDay}` : `${startDay}-${endDay}`
+  if (startYear === endYear) {
+    if (startMonth === endMonth) {
+      return `${startMonth} ${days}, ${startYear}`;
+    }
+    return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
   }
   
-  const offerVenue = () => {
-    console.log('Offering venue for TechConf 2023')
-  }
-  
-  const offerSponsorship = () => {
-    console.log('Offering sponsorship for TechConf 2023')
-  }
-  
-  const offerVolunteering = () => {
-    console.log('Offering to volunteer for TechConf 2023')
-  }
-  
-  const offerExpertise = () => {
-    console.log('Offering expertise for TechConf 2023')
-  }
-  
-  const vendorsOffering = () => {
-    console.log('Vendor offering for TechConf 2023')
-  }
+  return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+}
+function formatTimeRange(startTime, endTime) {
+  if (!startTime || !endTime) return '';
+
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Detect user's local timezone
+
+  // Convert input time (HH:mm) to UTC, then format it for the user's timezone
+  const startUtc = fromZonedTime(`1970-01-01T${startTime}`, 'UTC');
+  const endUtc = fromZonedTime(`1970-01-01T${endTime}`, 'UTC');
+
+  const startFormatted = formatInTimeZone(startUtc, timeZone, 'h:mm a');
+  const endFormatted = formatInTimeZone(endUtc, timeZone, 'h:mm a');
+  const timeZoneAbbr = formatInTimeZone(new Date(), timeZone, 'zzz'); // Get local timezone abbreviation
+
+  return `${startFormatted} - ${endFormatted} (${timeZoneAbbr})`;
+}
   </script>

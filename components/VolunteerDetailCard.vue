@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { MapPin, Globe, Linkedin, UserPlus, Github, Twitter } from 'lucide-vue-next'
+import { MapPin, Globe, Linkedin, UserPlus, Github, Twitter, YoutubeIcon, FacebookIcon, InstagramIcon, Twitch } from 'lucide-vue-next'
 import { SupabaseClient } from '@supabase/supabase-js'
+import { cibSnapchat } from '@coreui/icons'
+import { DiscordLogoIcon } from '@radix-icons/vue'
 
 const props = defineProps(['id', 'profile'])
 const supabase = useSupabaseClient()
@@ -107,11 +109,15 @@ onMounted(() => {
           </button>
         </div>
         
-        <div class="mt-8">
-          <h2 class="text-2xl font-semibold text-gray-900">About</h2>
-          <p class="mt-2 text-gray-600 text-lg">{{ profile?.about }}</p>
+        <div class="flex flex-row mt-8 justify-between">
+          <div>
+            <h2 class="text-2xl font-semibold text-gray-900">About</h2>
+            <p class="mt-2 text-gray-600 text-lg">{{ profile?.about }}</p>
+          </div>
+          <div class="w-1/3 shrink">
+            <VolunteerBookingRequest :profile-id="profile.id" />
+          </div>
         </div>
-        
         <div class="mt-8">
           <h2 class="text-2xl font-semibold text-gray-900">Volunteer Categories</h2>
           <div class="mt-3 flex flex-wrap gap-3">
@@ -149,7 +155,7 @@ onMounted(() => {
               class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
             >
               <Globe class="h-6 w-6 text-orange-600 mr-3" />
-              <span class="text-orange-800 font-medium">Website</span>
+              <span class="text-orange-800 font-medium">{{profile?.website}}</span>
             </a>
             <a 
               v-if="profile?.linkedin"
@@ -159,107 +165,78 @@ onMounted(() => {
               class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
             >
               <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
-              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+              <span class="text-blue-800 font-medium">{{profile?.linkedin}}</span>
             </a>
             <a 
-              v-if="profile?.website"
-              :href="formatUrl(profile?.website)" 
+              v-if="profile?.youtube"
+              :href="formatUrl(profile?.youtube)" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+              class="flex items-center p-4 bg-red-300 rounded-lg hover:bg-red-400 transition-colors duration-300"
             >
-              <Globe class="h-6 w-6 text-orange-600 mr-3" />
-              <span class="text-orange-800 font-medium">Website</span>
+              <YoutubeIcon class="h-6 w-6 text-neutral-50 mr-3" />
+              <span class="text-neutral-50 font-medium">{{profile?.youtube}}</span>
             </a>
             <a 
-              v-if="profile?.linkedin"
-              :href="formatUrl(profile?.linkedin)" 
+              v-if="profile?.facebook"
+              :href="formatUrl(profile?.facebook)" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+              class="flex items-center p-4 bg-blue-300 rounded-lg hover:bg-blue-400 transition-colors duration-300"
             >
-              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
-              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+              <FacebookIcon class="h-6 w-6 text-neutral-50 mr-3" />
+              <span class="text-neutral-50 font-medium">{{profile?.facebook}}</span>
+            </a>
+            
+            <a 
+              v-if="profile?.instagram"
+              :href="formatUrl(profile?.instagram)" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center p-4 bg-pink-100 rounded-lg hover:bg-pink-200 transition-colors duration-300"
+            >
+              <InstagramIcon class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-white-800 font-medium">{{profile?.instagram}}</span>
             </a>
             <a 
-              v-if="profile?.website"
-              :href="formatUrl(profile?.website)" 
+              v-if="profile?.tiktok"
+              :href="formatUrl(profile?.tiktok)" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+              class="flex items-center p-4 bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-colors duration-300"
             >
-              <Globe class="h-6 w-6 text-orange-600 mr-3" />
-              <span class="text-orange-800 font-medium">Website</span>
+              <TiktokIcon class="h-6 w-6 text-red-600 mr-3" />
+              <span class="text-sky-800 font-medium">{{profile?.tiktok}}</span>
             </a>
             <a 
-              v-if="profile?.linkedin"
-              :href="formatUrl(profile?.linkedin)" 
+              v-if="profile?.snapchat"
+              :href="formatUrl(profile?.snapchat)" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+              class="flex items-center p-4 bg-yellow-100 rounded-lg hover:bg-yellow-200 transition-colors duration-300"
             >
-              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
-              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+              <cibSnapchat class="h-6 w-6 text-yellow-600 mr-3" />
+              <span class="text-yellow-800 font-medium">{{profile?.snapchat}}</span>
             </a>
             <a 
-              v-if="profile?.website"
-              :href="formatUrl(profile?.website)" 
+              v-if="profile?.twitch"
+              :href="formatUrl(profile?.twitch)" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
+              class="flex items-center p-4 bg-purple-100 rounded-lg hover:bg-purple-200 transition-colors duration-300"
             >
-              <Globe class="h-6 w-6 text-orange-600 mr-3" />
-              <span class="text-orange-800 font-medium">Website</span>
+              <Twitch class="h-6 w-6 text-purple-600 mr-3" />
+              <span class="text-purple-800 font-medium">{{profile?.twitch}}</span>
             </a>
             <a 
-              v-if="profile?.linkedin"
-              :href="formatUrl(profile?.linkedin)" 
+              v-if="profile?.discord"
+              :href="formatUrl(profile?.discord)" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
+              class="flex items-center p-4 bg-indigo-100 rounded-lg hover:bg-indigo-200 transition-colors duration-300"
             >
-              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
-              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
-            </a>
-            <a 
-              v-if="profile?.website"
-              :href="formatUrl(profile?.website)" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
-            >
-              <Globe class="h-6 w-6 text-orange-600 mr-3" />
-              <span class="text-orange-800 font-medium">Website</span>
-            </a>
-            <a 
-              v-if="profile?.linkedin"
-              :href="formatUrl(profile?.linkedin)" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
-            >
-              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
-              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
-            </a>
-            <a 
-              v-if="profile?.website"
-              :href="formatUrl(profile?.website)" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors duration-300"
-            >
-              <Globe class="h-6 w-6 text-orange-600 mr-3" />
-              <span class="text-orange-800 font-medium">Website</span>
-            </a>
-            <a 
-              v-if="profile?.linkedin"
-              :href="formatUrl(profile?.linkedin)" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="flex items-center p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300"
-            >
-              <Linkedin class="h-6 w-6 text-blue-600 mr-3" />
-              <span class="text-blue-800 font-medium">LinkedIn Profile</span>
+              <DiscordLogoIcon class="h-6 w-6 text-indigo-600 mr-3" />
+              <span class="text-indigo-800 font-medium">{{profile?.discord}}</span>
             </a>
           </div>
         </div>
