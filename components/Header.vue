@@ -52,7 +52,7 @@ const navigationItems = [
   { name: 'Vendors', href: '/AllVendors', new: true },
   { name: 'Influencers', href: '/AllMedia', new: true },
   { name: 'Talents', href: '/AllTalents' },
-  { name: 'AI Lounge', href: '/ai-lounge', new: true },
+  { name: 'AI Lounge', href: '/LaunchAI', new: true },
   { name: 'Events', href: '/AllEvents' },
   { name: 'Contact us', href: '/contact' }
 ]
@@ -351,7 +351,7 @@ onMounted(() => {
 
   <!-- Spacer to prevent content from hiding under fixed header -->
   <div class="h-20"></div>
-  <ChatBot/>
+  <!-- <ChatBot/> -->
 </template>
 
 <style scoped>
