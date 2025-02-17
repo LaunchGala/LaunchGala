@@ -1,194 +1,240 @@
-
 <script setup lang="ts">
 import {
   Heart,
   MessageCircle,
   ChevronDown,
   Filter,
-  Plus
+  Plus,
+  Search,
+  ArrowRight,
+  Calendar as CalendarIcon,
+  MapPin,
+  Mail,
+  Phone,
+  Globe,
+  Briefcase,
+  Users
 } from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Toggle } from '@/components/ui/toggle';
-
-import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
 import { Badge } from '@/components/ui/badge';
-import { Calendar } from '@/components/ui/calendar';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { volunteerTagColors } from '@/utils/volunteerTagColors';
 import VolunteerListing from './VolunteerListing.vue';
 
 const supabase = useSupabaseClient()
 const isOpen = ref(false)
-const date = ref<Date>()
+const searchQuery = ref('')
+const selectedCategory = ref('')
+
+const categories = [
+  'All Categories',
+  'Event Planning',
+  'Technical Support',
+  'Marketing',
+  'Photography',
+  'Guest Relations',
+  'Security'
+]
 
 const allVolunteers = ref([]);
 async function getAllVolunteers(query) {
   const { data: AllExperts, error } = !!query ? await query : await supabase
     .from('profiles')
-    .select('*, volunteer:Volunteers(*)') // Assuming the table is named 'experts'
+    .select('*, volunteer:Volunteers(*)')
     .eq('is_volunteer', true);
-  console.log(error)
-  Promise.all(AllExperts.map(async (profile) => {
+  
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  await Promise.all(AllExperts.map(async (profile) => {
     profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
     profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
-  })).then(() => {
-    allVolunteers.value = AllExperts;
-    console.log(AllExperts)
-  })
+  }));
+  
+  allVolunteers.value = AllExperts;
 }
+
 const fetchImage = async (id, bucket) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
+  if (!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+    return urlData?.data?.signedUrl ?? "";
   }
+  return "";
+}
+
+const filteredVolunteers = computed(() => {
+  return allVolunteers.value.filter(volunteer => {
+    const matchesSearch = !searchQuery.value || 
+      volunteer.full_name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      volunteer.location.toLowerCase().includes(searchQuery.value.toLowerCase());
+    
+    const matchesCategory = !selectedCategory.value || 
+      selectedCategory.value === 'All Categories' ||
+      volunteer.volunteer?.categories?.includes(selectedCategory.value);
+    
+    return matchesSearch && matchesCategory;
+  });
+});
+
 onMounted(() => {
   getAllVolunteers(null)
 })
 </script>
 
 <template>
-  <div class="flex flex-col space-y-4 p-6 dark:bg-black">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Find volunteers</h1>
-      <NuxtLink to="VolunteerListing">
-
-      <Button @click="console.log(VolunteerListing)" class="bg-orange-500 text-white dark:text-white">Become a volunteer</Button>
-      </NuxtLink>
-
-    </div>
-    
-    <Collapsible v-model:open="isOpen" class="px-6 py-4">
-        <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
-            <span>Search Filters</span>
-            <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
-        </CollapsibleTrigger>
-
-      <CollapsibleContent class="space-y-4 pb-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <Input placeholder="Location" />
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="studio">Studio</SelectItem>
-              <SelectItem value="1br">1 Bedroom</SelectItem>
-              <SelectItem value="2br">2 Bedroom</SelectItem>
-              <SelectItem value="3brplus">3+ Bedroom</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Venue Type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="apartment">Apartment</SelectItem>
-              <SelectItem value="house">House</SelectItem>
-              <SelectItem value="condo">Condo</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Amenities" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="pool">Pool</SelectItem>
-              <SelectItem value="gym">Gym</SelectItem>
-              <SelectItem value="wifi">WiFi</SelectItem>
-            </SelectContent>
-          </Select>
-          <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                variant="outline"
-                class="dark:text-white dark:bg-gray-700 dark:border-gray-700"
-              >
-                <CalendarIcon class="mr-2 h-4 w-4" />
-                Pick a date
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar v-model="date" />
-            </PopoverContent>
-          </Popover>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Sponsor" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sponsored">Sponsored</SelectItem>
-              <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-            <Search class="w-5 h-5 mr-2" />
-            Search
-          </Button>
-        </div>
-      </CollapsibleContent>
-
-    </Collapsible>
-    <div class="px-6 py-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="volunteer in allVolunteers"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <!-- <div class="relative">
-          <img class="w-full h-64 object-cover" :src="volunteer.img" alt="Apartment image" />
-        </div> -->
-        <!-- user will have a banner image on their profile and we will use it -->
-        <CardContent class="p-4">
-          <div class="flex justify-between ">
-            <div class="ml-2 mt-4 mb-2">
-            <h3 class="text-lg font-semibold dark:black-white">{{volunteer.full_name}}</h3>
-          </div>
-            <Avatar class="m-4 w-24 h-24">
-              <AvatarImage :src="volunteer.avatarSRC" alt="Profile" />
-              <AvatarFallback>XX</AvatarFallback>
-            </Avatar>
-        </div> 
-            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
-            <p class=" text-m font-semibold text-gray-500"> Location: {{volunteer.location}}</p>
-            <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
-              <div class="flex flex-wrap h-14 overflow-hidden">
-               <div v-for="tag in volunteer.volunteer.categories" :class="volunteerTagColors[tag]" class="text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
-              </div>
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-orange-600 to-orange-500 overflow-hidden">
+      <div class="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex justify-between items-center">
+          <div class="max-w-2xl">
+            <h1 class="text-4xl font-bold text-white mb-4">Connect with Volunteers</h1>
+            <p class="text-xl text-white/90">
+              Find passionate individuals ready to contribute to your event's success
             </p>
+          </div>
+          <NuxtLink to="VolunteerListing">
+            <Button class="bg-white text-orange-600 hover:bg-orange-50 shadow-lg">
+              <Users class="w-5 h-5 mr-2" />
+              Become a Volunteer
+            </Button>
+          </NuxtLink>
+        </div>
 
-            <div class="flex items-center justify-between mt-4">
-              <NuxtLink :to="{ name: 'VolunteerCardPage', query: { id: volunteer.id } }">
-                <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
-                  View
-                  <ArrowRight class="w-4 h-4  ml-4" /> 
+        <!-- Search Section -->
+        <div class="mt-12 max-w-4xl mx-auto">
+          <div class="flex gap-4">
+            <div class="flex-1 relative">
+              <Search class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Search by name, location, or skills..."
+                class="w-full pl-12 pr-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+              />
+            </div>
+            <select
+              v-model="selectedCategory"
+              class="px-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+            >
+              <option v-for="category in categories" :key="category" :value="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Volunteers Grid -->
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          v-for="volunteer in filteredVolunteers"
+          :key="volunteer.id"
+          class="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+        >
+          <!-- Business Card Design -->
+          <div class="relative h-48 bg-gradient-to-r from-orange-500 to-orange-600">
+            <div class="absolute inset-0 bg-grid-white/[0.1] bg-[size:16px_16px]"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
+            
+            <!-- Logo/Avatar -->
+            <div class="absolute -bottom-14 left-6">
+              <Avatar class="w-28 h-28 rounded-full border-4 border-white shadow-lg">
+                <AvatarImage :src="volunteer.avatarSRC" :alt="volunteer.full_name" />
+                <AvatarFallback>{{ volunteer.full_name.charAt(0) }}</AvatarFallback>
+              </Avatar>
+            </div>
+
+            <!-- Favorite Button -->
+            <button class="absolute top-4 right-4 p-2 rounded-full bg-white/90 hover:bg-white transition-colors">
+              <Heart class="w-5 h-5 text-orange-500" />
+            </button>
+          </div>
+
+          <div class="p-6 pt-16">
+            <!-- Name and Title -->
+            <div class="mb-4">
+              <h3 class="text-xl font-bold text-gray-900">{{ volunteer.full_name }}</h3>
+              <p class="text-orange-600 font-medium">{{ volunteer.volunteer?.headline }}</p>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-gray-600">
+                <MapPin class="w-4 h-4 mr-2" />
+                <span class="text-sm">{{ volunteer.location }}</span>
+              </div>
+            </div>
+
+            <!-- Skills/Categories -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                v-for="category in volunteer.volunteer?.categories?.slice(0, 2)"
+                :key="category"
+                :class="[
+                  'px-3 py-1 rounded-full text-sm font-medium',
+                  volunteerTagColors[category] || 'bg-gray-100 text-gray-700'
+                ]"
+              >
+                {{ category }}
+              </span>
+              <span 
+                v-if="volunteer.volunteer?.categories?.length > 3"
+                class="text-sm text-gray-500"
+              >
+                +{{ volunteer.volunteer.categories.length - 3 }} more
+              </span>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+              <Button class="flex-1 bg-orange-500 text-white hover:bg-orange-600">
+                Message
+                <MessageCircle class="w-4 h-4 ml-2" />
+              </Button>
+              <NuxtLink 
+                :to="{ name: 'VolunteerCardPage', query: { id: volunteer.id } }"
+                class="flex-1"
+              >
+                <Button class="w-full bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-50">
+                  View Profile
+                  <ArrowRight class="w-4 h-4 ml-2" />
                 </Button>
               </NuxtLink>
-              <Toggle aria-label="Like">
-                <Heart :fill="volunteer.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
-              </Toggle>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.bg-grid-white {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

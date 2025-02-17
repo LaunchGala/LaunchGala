@@ -1,188 +1,247 @@
-
 <script setup lang="ts">
 import {
   Heart,
   MessageCircle,
   ChevronDown,
   Filter,
-  Plus
+  Plus,
+  Search,
+  ArrowRight,
+  Star,
+  MapPin,
+  Users,
+  Instagram,
+  Youtube,
+  Twitter,
+  Globe,
+  Link2
 } from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Toggle } from '@/components/ui/toggle';
-
-import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
 import { Badge } from '@/components/ui/badge';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 
-
-const isOpen = ref(false)
-const date = ref<Date>()
-
+const searchQuery = ref('')
+const selectedCategory = ref('')
 const allInfluencers = ref([]);
-const formatArray = arr => arr.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr.join(", ");
+
+const categories = [
+  'All Categories',
+  'Brand Ambassador',
+  'Content Creator',
+  'Social Media',
+  'Event Host',
+  'Industry Expert',
+  'Public Speaker'
+]
+
+const formatArray = arr => arr?.length > 3 ? `${arr.slice(0, 3).join(", ")}...` : arr?.join(", ");
+
 async function getAllInfluencers(query) {
-  const { data: data, error } = !!query ? await query : await supabase
+  const { data, error } = !!query ? await query : await supabase
     .from('profiles')
-    .select('*, influencer:Influencers(*)') // Assuming the table is named 'experts'
+    .select('*, influencer:Influencers(*)')
     .eq('is_influencer', true);
-  console.log(error)
-  Promise.all(data.map(async (profile) => {
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  await Promise.all(data.map(async (profile) => {
     profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
     profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
-  })).then(() => {
-    allInfluencers.value = data;
-    console.log(data)
-  })
+  }));
+
+  allInfluencers.value = data;
 }
+
 const fetchImage = async (id, bucket) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
+  if (!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+    return urlData?.data?.signedUrl ?? "";
   }
+  return "";
+}
+
+const filteredInfluencers = computed(() => {
+  return allInfluencers.value.filter(influencer => {
+    const matchesSearch = !searchQuery.value || 
+      influencer.full_name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      influencer.location?.toLowerCase().includes(searchQuery.value.toLowerCase());
+    
+    const matchesCategory = !selectedCategory.value || 
+      selectedCategory.value === 'All Categories' ||
+      influencer.influencer?.categories?.includes(selectedCategory.value);
+    
+    return matchesSearch && matchesCategory;
+  });
+});
+
 onMounted(() => {
   getAllInfluencers(null)
 })
 </script>
 
 <template>
-  <div class="flex flex-col space-y-4 p-6 dark:bg-black">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Find Influencers</h1>
-      <NuxtLink to="CreateExpert">
-      <Button class="bg-blue-500 text-white dark:bg-blue-600 dark:text-white">Become an Influencer</Button>
-    </NuxtLink>
-
-    </div>
-    
-    <Collapsible v-model:open="isOpen" class="px-6 py-4">
-        <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
-            <span>Search Filters</span>
-            <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
-        </CollapsibleTrigger>
-
-      <CollapsibleContent class="space-y-4 pb-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <Input placeholder="Location" />
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="studio">Studio</SelectItem>
-              <SelectItem value="1br">1 Bedroom</SelectItem>
-              <SelectItem value="2br">2 Bedroom</SelectItem>
-              <SelectItem value="3brplus">3+ Bedroom</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Venue Type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="apartment">Apartment</SelectItem>
-              <SelectItem value="house">House</SelectItem>
-              <SelectItem value="condo">Condo</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Amenities" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="pool">Pool</SelectItem>
-              <SelectItem value="gym">Gym</SelectItem>
-              <SelectItem value="wifi">WiFi</SelectItem>
-            </SelectContent>
-          </Select>
-          <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                variant="outline"
-                class="dark:text-white dark:bg-gray-700 dark:border-gray-700"
-              >
-                <CalendarIcon class="mr-2 h-4 w-4" />
-                Pick a date
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar v-model="date" />
-            </PopoverContent>
-          </Popover>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Sponsor" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sponsored">Sponsored</SelectItem>
-              <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-            <Search class="w-5 h-5 mr-2" />
-            Search
-          </Button>
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-orange-600 to-orange-500 overflow-hidden">
+      <div class="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex justify-between items-center">
+          <div class="max-w-2xl">
+            <h1 class="text-4xl font-bold text-white mb-4">Connect with Influencers</h1>
+            <p class="text-xl text-white/90">
+              Collaborate with influential voices to amplify your event's reach
+            </p>
+          </div>
+          <NuxtLink to="CreateExpert">
+            <Button class="bg-white text-orange-600 hover:bg-orange-50 shadow-lg">
+              <Star class="w-5 h-5 mr-2" />
+              Become an Influencer
+            </Button>
+          </NuxtLink>
         </div>
-      </CollapsibleContent>
 
-    </Collapsible>
-    <div class="px-6 py-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="influencer in allInfluencers"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <div class="relative">
-          <img class="w-full h-64 object-cover" :src="influencer.bannerSRC" alt="Apartment image" />
-        </div>
-          <Avatar class="m-4 w-24 h-24">
-            <AvatarImage :src="influencer.avatarSRC" alt="Profile" />
-            <AvatarFallback>XX</AvatarFallback>
-          </Avatar>
-          <CardContent class="p-4">
-            <h3 class="text-lg font-semibold dark:text-white">{{influencer.full_name}}</h3>
-            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}}</p>
-            
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p> -->
-            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{influencer.location}}</p>
-            Main Categories:
-            <div v-for="category in influencer.influencer?.categories" class="mb-2 flex gap-1 flex-wrap">
-          <span class="bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{ category }}</span>
-        </div>            
-
-            <div class="flex items-center justify-between mt-4">
-              <NuxtLink :to="{ name: 'InfluencerCard', query: { id: influencer.id } }">
-              <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
-                View
-                <ArrowRight class="w-4 h-4 ml-2" /> 
-              </Button>
-            </NuxtLink>
-              <Toggle aria-label="Like">
-                <Heart :fill="influencer.likeExpert ? 'orange': 'none'" class="w-5 h-5" />
-              </Toggle>
+        <!-- Search Section -->
+        <div class="mt-12 max-w-4xl mx-auto">
+          <div class="flex gap-4">
+            <div class="flex-1 relative">
+              <Search class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Search by name, location, or category..."
+                class="w-full pl-12 pr-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+              />
             </div>
-          </CardContent>
-        </Card>
+            <select
+              v-model="selectedCategory"
+              class="px-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+            >
+              <option v-for="category in categories" :key="category" :value="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Influencers Grid -->
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          v-for="influencer in filteredInfluencers"
+          :key="influencer.id"
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+        >
+          <!-- Banner Image -->
+          <div class="relative h-48">
+            <img 
+              :src="influencer.bannerSRC || 'https://via.placeholder.com/800x400'" 
+              :alt="influencer.full_name"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+            
+            <!-- Avatar -->
+            <div class="absolute -bottom-12 left-6">
+              <Avatar class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                <AvatarImage :src="influencer.avatarSRC" :alt="influencer.full_name" />
+                <AvatarFallback>{{ influencer.full_name.charAt(0) }}</AvatarFallback>
+              </Avatar>
+            </div>
+
+            <!-- Favorite Button -->
+            <button class="absolute top-4 right-4 p-2 rounded-full bg-white/90 hover:bg-white transition-colors">
+              <Heart class="w-5 h-5 text-orange-500" />
+            </button>
+          </div>
+
+          <div class="p-6 pt-14">
+            <!-- Profile Info -->
+            <div class="mb-4">
+              <h3 class="text-xl font-bold text-gray-900">{{ influencer.full_name }}</h3>
+              <p class="text-orange-600 font-medium">{{ influencer.influencer?.headline }}</p>
+              <div class="flex items-center mt-2 text-gray-600">
+                <MapPin class="w-4 h-4 mr-2" />
+                <span class="text-sm">{{ influencer.location }}</span>
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                v-for="category in influencer.influencer?.categories?.slice(0, 3)"
+                :key="category"
+                class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
+              >
+                {{ category }}
+              </span>
+              <span 
+                v-if="influencer.influencer?.categories?.length > 3"
+                class="text-sm text-gray-500"
+              >
+                +{{ influencer.influencer.categories.length - 3 }} more
+              </span>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="flex items-center justify-center space-x-4 mb-6">
+              <a href="#" class="group/social flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 transition-all duration-300">
+                <Instagram class="w-5 h-5 text-orange-600 group-hover/social:scale-110 transition-transform" />
+              </a>
+              <a href="#" class="group/social flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 transition-all duration-300">
+                <Youtube class="w-5 h-5 text-orange-600 group-hover/social:scale-110 transition-transform" />
+              </a>
+              <a href="#" class="group/social flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 transition-all duration-300">
+                <Twitter class="w-5 h-5 text-orange-600 group-hover/social:scale-110 transition-transform" />
+              </a>
+              <a href="#" class="group/social flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 transition-all duration-300">
+                <Globe class="w-5 h-5 text-orange-600 group-hover/social:scale-110 transition-transform" />
+              </a>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+              <Button class="flex-1 bg-orange-500 text-white hover:bg-orange-600">
+                Message
+                <MessageCircle class="w-4 h-4 ml-2" />
+              </Button>
+              <NuxtLink 
+                :to="{ name: 'InfluencerCard', query: { id: influencer.id } }"
+                class="flex-1"
+              >
+                <Button class="w-full bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-50">
+                  View Profile
+                  <ArrowRight class="w-4 h-4 ml-2" />
+                </Button>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.bg-grid-white {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
