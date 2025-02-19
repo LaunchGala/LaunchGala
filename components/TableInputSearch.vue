@@ -27,7 +27,13 @@ const searchQuery = ref('');
 const options = ref([]); // The list of dropdown options
 const selected = ref(props.selectedValue); // Track selected item
 const isDropdownOpen = ref(false);
-
+// Expose method so the parent can call it
+defineExpose({
+  clearSelection
+});
+function clearSelection(){
+  searchQuery.value = ''
+}
 // Fetch options from Supabase
 async function fetchOptions() {
   selected.value = {}

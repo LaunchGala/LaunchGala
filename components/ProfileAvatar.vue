@@ -119,12 +119,8 @@ watch(bannerPath, () => {
 </script>
 
 <template>
-  <div :style="bannerSRC 
-    ? { backgroundImage: `url(${bannerSRC})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', }
-    : null"
-  class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white h-40  mb-2"></div>
   <div class="relative">
-    <Avatar class="w-28 h-28 rounded-full shadow-lg">
+    <Avatar class="w-28 h-28 rounded-full shadow-lg border-4">
           <AvatarImage :src="src" alt="Profile picture" />
           <AvatarFallback>No Avatar</AvatarFallback>
     </Avatar>
