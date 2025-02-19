@@ -54,7 +54,7 @@ const navigationItems = [
   { name: 'Talents', href: '/AllTalents' },
   { name: 'AI Lounge', href: '/LaunchAI', new: true },
   { name: 'Events', href: '/AllEvents' },
-  { name: 'Contact us', href: '/contact' }
+  { name: 'Contact us', href: '/contactPage' }
 ]
 
 const menuItems = [

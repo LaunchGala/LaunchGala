@@ -1,55 +1,67 @@
-
 <script setup lang="ts">
 import {
   Heart,
   MessageCircle,
-  ChevronDown,
-  Filter,
-  Plus
+  Search,
+  ArrowRight,
+  MapPin,
+  Rocket,
+  Building2,
+  Users,
+  Target,
+  Briefcase,
+  Globe,
+  TrendingUp,
+  DollarSign,
+  Sparkles,
+  Link
 } from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Toggle } from '@/components/ui/toggle';
-
-import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
 import { Badge } from '@/components/ui/badge';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 
+const searchQuery = ref('')
+const selectedIndustry = ref('All Industries')
+const selectedStage = ref('All Stages')
 
-const isOpen = ref(false)
-const date = ref<Date>()
+const industries = [
+  'All Industries',
+  'Technology',
+  'Healthcare',
+  'Finance',
+  'E-commerce',
+  'Education',
+  'AI/ML',
+  'Blockchain'
+]
 
-const allExperts = ref([
+const stages = [
+  'All Stages',
+  'Pre-seed',
+  'Seed',
+  'Series A',
+  'Series B',
+  'Series C+'
+]
+
+const allStartups = ref([
   {
     img: "/Bootstrapping.png",
     name: "Larry Page",
     position: "Co-Founder",
     company: "Google",
-    industry: "IT",
-    description: "A stylish venue for modern gatherings.",
-    location: "SF, CA",
+    industry: "Technology",
+    industries: ["Search Engine", "Cloud Computing", "AI/ML", "Digital Advertising"],
+    stage: "Series A",
+    location: "Mountain View, CA",
     avatar: "/LarryPage.jpeg",
-    likeExpert: false
+    likeExpert: false,
+    metrics: {
+      team: 150,
+      raised: "12M",
+      growth: "125%"
+    }
   },
   {
     img: "/Bootstrapping.png",
@@ -57,153 +69,218 @@ const allExperts = ref([
     position: "CEO",
     company: "Apple",
     industry: "Technology",
-    description: "Leading the world in innovation and consumer electronics.",
+    industries: ["Consumer Electronics", "Software", "Services", "AI/ML"],
+    stage: "Series B",
     location: "Cupertino, CA",
     avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Tim_Cook.jpg",
-    likeExpert: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    name: "Mary Barra",
-    position: "CEO",
-    company: "General Motors",
-    industry: "Automotive",
-    description: "Driving towards a greener future with electric vehicles.",
-    location: "Detroit, MI",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/d/da/Mary_Barra_2013.jpg",
-    likeExpert: true
-  },
-
-  {
-    img: "/Bootstrapping.png",
-    name: "Jeff Bezos",
-    position: "Founder & Former CEO",
-    company: "Amazon",
-    industry: "E-commerce",
-    description: "Transforming the way we shop online and beyond.",
-    location: "Seattle, WA",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jeff_Bezos_%28cropped%29.jpg",
-    likeExpert: false
+    likeExpert: true,
+    metrics: {
+      team: 250,
+      raised: "25M",
+      growth: "200%"
+    }
   }
-
 ])
+
+const filteredStartups = computed(() => {
+  return allStartups.value.filter(startup => {
+    const matchesSearch = !searchQuery.value || 
+      startup.company.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      startup.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      startup.industry.toLowerCase().includes(searchQuery.value.toLowerCase());
+    
+    const matchesIndustry = selectedIndustry.value === 'All Industries' ||
+      startup.industry === selectedIndustry.value;
+    
+    const matchesStage = selectedStage.value === 'All Stages' ||
+      startup.stage === selectedStage.value;
+    
+    return matchesSearch && matchesIndustry && matchesStage;
+  });
+});
 </script>
 
 <template>
-  <div class="flex flex-col space-y-4 p-6 dark:bg-black">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Founders & Startups</h1>
-      <Button class="bg-orange-500 text-white dark:bg-orange-500 dark:text-white hover:bg-gray-100 hover:text-orange-500">List Your Startup</Button>
-
-    </div>
-    
-    <Collapsible v-model:open="isOpen" class="px-6 py-4">
-        <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
-            <span>Search Filters</span>
-            <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
-        </CollapsibleTrigger>
-
-      <CollapsibleContent class="space-y-4 pb-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <Input placeholder="Location" />
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="studio">Studio</SelectItem>
-              <SelectItem value="1br">1 Bedroom</SelectItem>
-              <SelectItem value="2br">2 Bedroom</SelectItem>
-              <SelectItem value="3brplus">3+ Bedroom</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Venue Type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="apartment">Apartment</SelectItem>
-              <SelectItem value="house">House</SelectItem>
-              <SelectItem value="condo">Condo</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Amenities" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="pool">Pool</SelectItem>
-              <SelectItem value="gym">Gym</SelectItem>
-              <SelectItem value="wifi">WiFi</SelectItem>
-            </SelectContent>
-          </Select>
-          <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                variant="outline"
-                class="dark:text-white dark:bg-gray-700 dark:border-gray-700"
-              >
-                <CalendarIcon class="mr-2 h-4 w-4" />
-                Pick a date
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar v-model="date" />
-            </PopoverContent>
-          </Popover>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Sponsor" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sponsored">Sponsored</SelectItem>
-              <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-            <Search class="w-5 h-5 mr-2" />
-            Search
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-orange-600 to-orange-500 overflow-hidden">
+      <div class="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)]"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex justify-between items-center">
+          <div class="max-w-2xl">
+            <div class="flex items-center space-x-3 mb-4">
+              <Rocket class="w-8 h-8 text-white animate-float" />
+              <h1 class="text-4xl font-bold text-white">Founders & Startups</h1>
+            </div>
+            <p class="text-xl text-white/90">
+              Connect with innovative startups and visionary founders
+            </p>
+          </div>
+          <Button class="bg-white text-orange-600 hover:bg-orange-50 shadow-lg transform hover:scale-105 transition-all">
+            <Sparkles class="w-5 h-5 mr-2" />
+            List Your Startup
           </Button>
         </div>
-      </CollapsibleContent>
 
-    </Collapsible>
-    <div class="px-6 py-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="expert in allExperts"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <div class="relative">
-            <h3 class="text-lg p-3 font-semibold dark:text-white bg-slate-100">{{expert.company}}</h3>
-          <img class="w-full h-64 object-cover" :src="expert.img" alt="Apartment image" />
-          <Badge variant="secondary" class="absolute top-4 right-3 font-semibold border-rounded border-solid border-orange-500 text-orange-500 bg-white">Raising: Series A</Badge>
-
+        <!-- Search and Filters -->
+        <div class="mt-12 max-w-4xl mx-auto">
+          <div class="relative">
+            <div class="absolute inset-0 bg-white/50 backdrop-blur-lg rounded-2xl"></div>
+            <div class="relative p-2">
+              <div class="flex items-center gap-4">
+                <div class="flex-1 bg-white rounded-xl shadow-lg">
+                  <div class="relative">
+                    <Search class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <input
+                      v-model="searchQuery"
+                      type="text"
+                      placeholder="Search startups by name, industry, or location..."
+                      class="w-full pl-12 pr-4 py-3 bg-transparent rounded-xl focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <select
+                  v-model="selectedIndustry"
+                  class="px-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+                >
+                  <option v-for="industry in industries" :key="industry" :value="industry">
+                    {{ industry }}
+                  </option>
+                </select>
+                <select
+                  v-model="selectedStage"
+                  class="px-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+                >
+                  <option v-for="stage in stages" :key="stage" :value="stage">
+                    {{ stage }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-          <Avatar class="m-4 w-24 h-24">
-            <AvatarImage :src="expert.avatar" alt="Profile" />
-            <AvatarFallback>XX</AvatarFallback>
-          </Avatar>
-          <CardContent class="p-4">
-            <h3 class="text-lg font-semibold dark:text-white">{{expert.name}}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.position}} at {{expert.company}}</p>
+    <!-- Startups Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          v-for="startup in filteredStartups"
+          :key="startup.company"
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+        >
+          <!-- Company Banner -->
+          <div class="relative h-32 bg-gradient-to-r from-orange-500 to-orange-600">
+            <div class="absolute inset-0 bg-grid-white/[0.1] bg-[size:16px_16px]"></div>
             
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{expert.industry}}</p>
-            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.description}}</p>
-            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{expert.location}}</p>
+            <!-- Company Logo/Avatar -->
+            <div class="absolute -bottom-10 left-6">
+              <Avatar class="w-20 h-20 rounded-xl border-4 border-white shadow-lg">
+                <AvatarImage :src="startup.avatar" :alt="startup.company" />
+                <AvatarFallback>{{ startup.company[0] }}</AvatarFallback>
+              </Avatar>
+            </div>
 
-            <div class="flex items-center justify-between mt-4">
-              <NuxtLink :to="{ name: 'StartupPage' }">
-                <Button class="flex items-center bg-orange-500 text-white border hover:bg-gray-500 hover:text-white transition-colors duration-300">
-                  <MessageCircle class="w-4 h-4 mr-2" /> Learn More
+            <!-- Funding Stage Badge -->
+            <div class="absolute top-4 right-4">
+              <Badge class="bg-white/90 text-orange-600 font-medium">
+                {{ startup.stage }}
+              </Badge>
+            </div>
+          </div>
+
+          <div class="p-6 pt-12">
+            <!-- Company Info -->
+            <div class="mb-6">
+              <h3 class="text-xl font-bold text-gray-900">{{ startup.company }}</h3>
+              <div class="flex items-center mt-1 text-gray-600">
+                <MapPin class="w-4 h-4 mr-2" />
+                <span class="text-sm">{{ startup.location }}</span>
+              </div>
+              <!-- Industries Tags (replacing description) -->
+              <div class="flex flex-wrap gap-2 mt-3">
+                <span
+                  v-for="industry in startup.industries?.slice(0, 3)"
+                  :key="industry"
+                  class="px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-sm font-medium"
+                >
+                  {{ industry }}
+                </span>
+                <span 
+                  v-if="startup.industries?.length > 3"
+                  class="text-sm text-gray-500 px-2 py-1"
+                >
+                  +{{ startup.industries.length - 3 }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-3 gap-4 mb-6">
+              <div class="p-3 bg-orange-50 rounded-lg text-center">
+                <Users class="w-5 h-5 text-orange-500 mx-auto mb-1" />
+                <span class="block text-sm font-medium text-gray-900">{{ startup.metrics.team }}</span>
+                <span class="text-xs text-gray-600">Team Size</span>
+              </div>
+              <div class="p-3 bg-orange-50 rounded-lg text-center">
+                <DollarSign class="w-5 h-5 text-orange-500 mx-auto mb-1" />
+                <span class="block text-sm font-medium text-gray-900">${{ startup.metrics.raised }}</span>
+                <span class="text-xs text-gray-600">Raised</span>
+              </div>
+              <div class="p-3 bg-orange-50 rounded-lg text-center">
+                <TrendingUp class="w-5 h-5 text-orange-500 mx-auto mb-1" />
+                <span class="block text-sm font-medium text-gray-900">{{ startup.metrics.growth }}</span>
+                <span class="text-xs text-gray-600">Growth</span>
+              </div>
+            </div>
+
+            <!-- Founder Info -->
+            <div class="flex items-center mb-6">
+              <Avatar class="w-10 h-10 rounded-full ring-2 ring-orange-100">
+                <AvatarImage :src="startup.avatar" :alt="startup.name" />
+                <AvatarFallback>{{ startup.name[0] }}</AvatarFallback>
+              </Avatar>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">{{ startup.name }}</p>
+                <p class="text-sm text-gray-600">{{ startup.position }}</p>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+              <Button class="flex-1 bg-orange-500 text-white hover:bg-orange-600">
+                Connect
+                <MessageCircle class="w-4 h-4 ml-2" />
+              </Button>
+              <NuxtLink :to="{ name: 'StartupPage' }" class="flex-1">
+                <Button class="w-full bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-50">
+                  Learn More
+                  <ArrowRight class="w-4 h-4 ml-2" />
                 </Button>
               </NuxtLink>
-              <Toggle aria-label="Like">
-                <Heart :fill="expert.likeExpert ? 'orange': 'none'" class="w-5 h-5" />
-              </Toggle>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.bg-grid-white {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+</style>

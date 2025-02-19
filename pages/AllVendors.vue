@@ -1,198 +1,314 @@
-
 <script setup lang="ts">
 import {
   Heart,
   MessageCircle,
-  ChevronDown,
-  Filter,
-  Plus
+  Search,
+  ArrowRight,
+  MapPin,
+  Star,
+  Building2,
+  Package,
+  Users,
+  Target,
+  Briefcase,
+  Globe,
+  TrendingUp,
+  DollarSign,
+  Sparkles,
+  Link,
+  ShoppingBag,
+  Phone,
+  Mail,
+  Clock,
+  CheckCircle,
+  Award
 } from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Toggle } from '@/components/ui/toggle';
-
-import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
 import { Badge } from '@/components/ui/badge';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { volunteerTagColors } from '@/utils/volunteerTagColors';
-import VolunteerListing from './VolunteerListing.vue';
 
 const supabase = useSupabaseClient()
+const searchQuery = ref('')
+const selectedCategory = ref('All Categories')
 
-const vendors = ref([]);
+const categories = [
+  'All Categories',
+  'Catering',
+  'Decor & Design',
+  'Audio/Visual',
+  'Photography',
+  'Transportation',
+  'Security',
+  'Rentals'
+]
+
+const vendors = ref([
+  {
+    id: 1,
+    business_name: "EventPro Catering",
+    location: "San Francisco, CA",
+    businessLogo: "path/to/logo.png",
+    categories: ["Catering", "Food Service", "Beverage"],
+    industries: ["Hospitality", "Events", "Food & Beverage"],
+    services: ["Corporate Catering", "Wedding Catering", "Event Planning"]
+  }
+]);
 
 async function getAllVendors(query) {
   const { data: AllVendors, error } = !!query ? await query : await supabase
     .from('Vendors')
     .select('*');
-  console.log(error)
-  Promise.all(AllVendors.map(async (vendor) => {
-    vendor.businessLogo = await fetchImage(vendor.business_logo, 'images')
-  })).then(() => {
-    vendors.value = AllVendors;
-    console.log(AllVendors)
-  })
-}
-const fetchImage = async (id, bucket) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
+
+  if (error) {
+    console.error(error);
+    return;
   }
+
+  await Promise.all(AllVendors.map(async (vendor) => {
+    vendor.businessLogo = await fetchImage(vendor.business_logo, 'images')
+  }));
+
+  vendors.value = AllVendors;
+}
+
+const fetchImage = async (id, bucket) => {
+  if (!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+    return urlData?.data?.signedUrl ?? "";
+  }
+  return "";
+}
+
+const filteredVendors = computed(() => {
+  return vendors.value.filter(vendor => {
+    const matchesSearch = !searchQuery.value || 
+      vendor.business_name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      vendor.location?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      vendor.headline?.toLowerCase().includes(searchQuery.value.toLowerCase());
+    
+    const matchesCategory = selectedCategory.value === 'All Categories' ||
+      vendor.categories?.includes(selectedCategory.value);
+    
+    return matchesSearch && matchesCategory;
+  });
+});
+
 onMounted(() => {
   getAllVendors(null)
 })
-
-const isOpen = ref(false)
-const date = ref<Date>()
 </script>
 
 <template>
-  <div class="flex flex-col space-y-4 p-6 dark:bg-black">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Vendors Marketplace</h1>
-      <NuxtLink to="VendorListing">
-
-      <Button @click="console.log(VolunteerListing)" class="bg-orange-500 text-white dark:text-white">Add/Edit Vendors</Button>
-      </NuxtLink>
-
-    </div>
-    
-    <Collapsible v-model:open="isOpen" class="px-6 py-4">
-        <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
-            <span>Search Filters</span>
-            <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
-        </CollapsibleTrigger>
-
-      <CollapsibleContent class="space-y-4 pb-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <Input placeholder="Location" />
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="studio">Studio</SelectItem>
-              <SelectItem value="1br">1 Bedroom</SelectItem>
-              <SelectItem value="2br">2 Bedroom</SelectItem>
-              <SelectItem value="3brplus">3+ Bedroom</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Venue Type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="apartment">Apartment</SelectItem>
-              <SelectItem value="house">House</SelectItem>
-              <SelectItem value="condo">Condo</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Amenities" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="pool">Pool</SelectItem>
-              <SelectItem value="gym">Gym</SelectItem>
-              <SelectItem value="wifi">WiFi</SelectItem>
-            </SelectContent>
-          </Select>
-          <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                variant="outline"
-                class="dark:text-white dark:bg-gray-700 dark:border-gray-700"
-              >
-                <CalendarIcon class="mr-2 h-4 w-4" />
-                Pick a date
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar v-model="date" />
-            </PopoverContent>
-          </Popover>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Sponsor" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sponsored">Sponsored</SelectItem>
-              <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-            <Search class="w-5 h-5 mr-2" />
-            Search
-          </Button>
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-orange-600 to-orange-500 overflow-hidden">
+      <div class="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)]"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex justify-between items-center">
+          <div class="max-w-2xl">
+            <div class="flex items-center space-x-3 mb-4">
+              <ShoppingBag class="w-8 h-8 text-white animate-bounce" />
+              <h1 class="text-4xl font-bold text-white">Vendors Marketplace</h1>
+            </div>
+            <p class="text-xl text-white/90">
+              Connect with trusted vendors to bring your event to life
+            </p>
+          </div>
+          <NuxtLink to="VendorListing">
+            <Button class="bg-white text-orange-600 hover:bg-orange-50 shadow-lg transform hover:scale-105 transition-all">
+              <Package class="w-5 h-5 mr-2" />
+              Add Your Business
+            </Button>
+          </NuxtLink>
         </div>
-      </CollapsibleContent>
 
-    </Collapsible>
-    <div class="px-6 py-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="vendor in vendors"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <!-- <div class="relative">
-          <img class="w-full h-64 object-cover" :src="volunteer.img" alt="Apartment image" />
-        </div> -->
-        <!-- user will have a banner image on their profile and we will use it -->
-        <CardContent class="p-4">
-          <div class="relative w-full">
-            <img class="w-full h-32 object-contain" :src="vendor.businessLogo" />
-          </div>
-          <div class="flex justify-between ">
-            <div class="ml-2 mt-4 mb-2">
-            <h3 class="text-lg font-semibold dark:black-white">{{vendor.business_name}}</h3>
-          </div>
-            <!-- <Avatar class="m-4 w-24 h-24">
-              <AvatarImage :src="talent.avatarSRC" alt="Profile" />
-              <AvatarFallback>XX</AvatarFallback>
-            </Avatar> -->
-        </div> 
-            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
-            <h4 class="ml-2 text-m font-semibold text-black-500"> {{vendor.headline}}</h4>
-            <p class="ml-2 text-m font-semibold text-gray-500"> Location: {{vendor.location}}</p>
-            <!-- <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
-              <div class="flex flex-wrap h-14 overflow-hidden">
-               <div v-for="tag in talent.talent.employment_type" class="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
+        <!-- Search Section -->
+        <div class="mt-12 max-w-4xl mx-auto">
+          <div class="relative">
+            <div class="absolute inset-0 bg-white/50 backdrop-blur-lg rounded-2xl"></div>
+            <div class="relative p-2">
+              <div class="flex items-center gap-4">
+                <div class="flex-1 bg-white rounded-xl shadow-lg">
+                  <div class="relative">
+                    <Search class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <input
+                      v-model="searchQuery"
+                      type="text"
+                      placeholder="Search vendors by name, service, or location..."
+                      class="w-full pl-12 pr-4 py-3 bg-transparent rounded-xl focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <select
+                  v-model="selectedCategory"
+                  class="px-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+                >
+                  <option v-for="category in categories" :key="category" :value="category">
+                    {{ category }}
+                  </option>
+                </select>
               </div>
-            </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <div class="flex items-center justify-between mt-4">
-              <NuxtLink :to="{ name: 'VendorDetailPage', query: { id: vendor.id } }">
-                <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
-                  View
-                  <ArrowRight class="w-4 h-4  ml-4" /> 
+    <!-- Vendors Grid -->
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          v-for="vendor in filteredVendors"
+          :key="vendor.id"
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1"
+        >
+          <!-- Large Image Section -->
+          <div class="relative h-64 bg-gradient-to-br from-orange-500 to-orange-600 p-8">
+            <div class="absolute inset-0 bg-grid-white/[0.1] bg-[size:16px_16px]"></div>
+            
+            <!-- Business Logo -->
+            <div class="relative h-full flex items-center justify-center">
+              <img 
+                :src="vendor.businessLogo" 
+                :alt="vendor.business_name"
+                class="max-w-full max-h-full object-contain filter drop-shadow-xl"
+              />
+            </div>
+
+            <!-- Verified Badge -->
+            <div class="absolute top-4 right-4">
+              <Badge class="bg-white/90 text-orange-600 font-medium flex items-center gap-1 px-3 py-1.5">
+                <CheckCircle class="w-4 h-4" />
+                Verified Vendor
+              </Badge>
+            </div>
+
+            <!-- Favorite Button -->
+            <button class="absolute top-4 left-4 p-2.5 rounded-full bg-white/90 hover:bg-white transition-colors">
+              <Heart class="w-5 h-5 text-orange-500" />
+            </button>
+          </div>
+
+          <div class="p-6">
+            <!-- Business Info -->
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">{{ vendor.business_name }}</h3>
+                <div class="flex items-center mt-1 text-gray-600">
+                  <MapPin class="w-4 h-4 mr-1" />
+                  <span class="text-sm">{{ vendor.location }}</span>
+                </div>
+              </div>
+              <div class="flex items-center bg-orange-50 px-3 py-1.5 rounded-full">
+                <Star class="w-4 h-4 text-orange-500 mr-1" />
+                <span class="text-sm font-medium text-orange-600">4.9</span>
+              </div>
+            </div>
+
+            <!-- Industries Row -->
+            <div class="mb-4">
+              <div class="flex items-center space-x-2 overflow-hidden">
+                <Badge class="bg-gray-100 text-gray-600 font-medium px-2 py-1">
+                  <Briefcase class="w-3 h-3 mr-1 inline-block" />
+                  Industries
+                </Badge>
+                <div class="flex-1 flex items-center space-x-2 overflow-hidden">
+                  <span
+                    v-for="industry in vendor.industries?.slice(0, 3)"
+                    :key="industry"
+                    class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium whitespace-nowrap"
+                  >
+                    {{ industry }}
+                  </span>
+                  <span 
+                    v-if="vendor.industries?.length > 3"
+                    class="text-sm text-gray-500 whitespace-nowrap"
+                  >
+                    +{{ vendor.industries.length - 3 }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Services Row -->
+            <div class="mb-4">
+              <div class="flex items-center space-x-2 overflow-hidden">
+                <Badge class="bg-gray-100 text-gray-600 font-medium px-2 py-1">
+                  <Package class="w-3 h-3 mr-1 inline-block" />
+                  Services
+                </Badge>
+                <div class="flex-1 flex items-center space-x-2 overflow-hidden">
+                  <span
+                    v-for="service in vendor.services?.slice(0, 3)"
+                    :key="service"
+                    class="px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-sm font-medium whitespace-nowrap"
+                  >
+                    {{ service }}
+                  </span>
+                  <span 
+                    v-if="vendor.services?.length > 3"
+                    class="text-sm text-gray-500 whitespace-nowrap"
+                  >
+                    +{{ vendor.services.length - 3 }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-3 mb-6">
+              <div class="p-2 bg-gray-50 rounded-lg text-center">
+                <span class="block text-sm font-medium text-gray-900">24/7</span>
+                <span class="text-xs text-gray-600">Support</span>
+              </div>
+              <div class="p-2 bg-gray-50 rounded-lg text-center">
+                <span class="block text-sm font-medium text-gray-900">2 Hr</span>
+                <span class="text-xs text-gray-600">Response</span>
+              </div>
+              <div class="p-2 bg-gray-50 rounded-lg text-center">
+                <span class="block text-sm font-medium text-gray-900">100+</span>
+                <span class="text-xs text-gray-600">Events</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+              <Button class="flex-1 bg-orange-500 text-white hover:bg-orange-600">
+                Contact
+                <MessageCircle class="w-4 h-4 ml-2" />
+              </Button>
+              <NuxtLink 
+                :to="{ name: 'VendorDetailPage', query: { id: vendor.id } }"
+                class="flex-1"
+              >
+                <Button class="w-full bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-50">
+                  View Details
+                  <ArrowRight class="w-4 h-4 ml-2" />
                 </Button>
               </NuxtLink>
-              <Toggle aria-label="Like">
-                <Heart :fill="vendor.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
-              </Toggle>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.bg-grid-white {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+</style>
