@@ -25,7 +25,8 @@ import {
   Clock, XCircle,
   SaveAll,
   PlusCircle,
-  Plus
+  Plus,
+  HandIcon
 } from 'lucide-vue-next'
 import {
   Card,
@@ -549,6 +550,22 @@ const sections = ref<ProfileSection[]>([
     title: 'List your Startup',
     description: 'Connect with investors and grow your business',
     icon: Rocket,
+    isExpanded: false,
+    isVisible: true,
+    fields: [
+      {
+        name: 'company',
+        type: 'company',
+        label: 'Manage Companies',
+        value: ''
+      }
+    ]
+  },
+  {
+    id: 'vendor',
+    title: 'Become a Vendor',
+    description: 'Offer your products and services',
+    icon: HandIcon,
     isExpanded: false,
     isVisible: true,
     fields: [
