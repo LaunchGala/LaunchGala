@@ -26,7 +26,8 @@ import {
   SaveAll,
   PlusCircle,
   Plus,
-  HandIcon
+  HandIcon,
+  Gift
 } from 'lucide-vue-next'
 import {
   Card,
@@ -482,6 +483,53 @@ const sections = ref<ProfileSection[]>([
         type: 'select',
         label: 'Influencer Type',
         options: ['Brand Ambassador', 'Speaker', 'Investor'],
+        value: computed({
+                get: () => profileData.value.influencer.categories, // Get value from nested object
+                set: (newValue) => profileData.value.influencer.categories = newValue, // Update original object
+              })
+      },
+      {
+        name: 'availability',
+        type: 'toggle',
+        label: 'Available for Events',
+        value: computed({
+                get: () => profileData.value.is_influencer, // Get value from nested object
+                set: (newValue) => profileData.value.is_influencer = newValue, // Update original object
+              })
+      },
+      {
+        name: 'willTravel',
+        type: 'toggle',
+        label: 'Willing to Travel',
+        value: computed({
+                get: () => profileData.value.influencer.will_travel, // Get value from nested object
+                set: (newValue) => profileData.value.influencer.will_travel = newValue, // Update original object
+              })
+      }
+    ]
+  },
+  {
+    id: 'sponsor',
+    title: 'Become a Sponsor',
+    description: 'Provide cash, service or product sponsorship',
+    icon: Gift,
+    isExpanded: false,
+    isVisible: true,
+    fields: [
+      {
+        name: 'headline',
+        type: 'text',
+        label: 'Headline',
+        value: computed({
+                get: () => profileData.value.sponsor.headline, // Get value from nested object
+                set: (newValue) => profileData.value.sponsor.headline = newValue, // Update original object
+              })
+      },
+      {
+        name: 'sponsorType',
+        type: 'select',
+        label: 'Sponsor Type',
+        options: ['Cash', 'Service', 'Product'],
         value: computed({
                 get: () => profileData.value.influencer.categories, // Get value from nested object
                 set: (newValue) => profileData.value.influencer.categories = newValue, // Update original object

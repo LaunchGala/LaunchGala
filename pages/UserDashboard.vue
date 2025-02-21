@@ -40,7 +40,9 @@ const quickActions = [
   { icon: MapPin, label: 'Book Venue', color: 'bg-blue-500', href: '/AllVenuesNew' },
   { icon: Star, label: 'Find Vendors', color: 'bg-green-500', href: '/AllVendors' },
   { icon: LightbulbIcon, label: 'Find Experts', color: 'bg-yellow-500', href: '/AllExperts' },
-  { icon: Users, label: 'Find Volunteers', color: 'bg-purple-500', href: '/AllVolunteers' }
+  { icon: Users, label: 'Find Volunteers', color: 'bg-purple-500', href: '/AllVolunteers' },
+  { icon: Gift, label: 'Find Sponsors', color: 'bg-indigo-500 ', href: '/AllSponsors' }
+
 ]
 
 const navigationItems = [
@@ -104,6 +106,16 @@ const stats = [
     color: 'text-purple-500',
     bgColor: 'bg-purple-50',
     details: 'Total hours contributed',
+    sparkline: [40, 60, 50, 80, 70, 100, 90]
+  },
+  { 
+    label: 'Sponsors Value', 
+    value: '$4.2K', 
+    icon: Gift, 
+    trend: '+25%', 
+    color: 'text-indigo-500',
+    bgColor: 'bg-indigo-50',
+    details: 'Sponsors total value',
     sparkline: [40, 60, 50, 80, 70, 100, 90]
   }
 ]
@@ -615,7 +627,7 @@ const getMessageIconColor = (type: string) => {
           </div>
 
           <!-- Quick Actions -->
-          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
             <button
               v-for="action in quickActions"
               :key="action.label"
@@ -631,7 +643,7 @@ const getMessageIconColor = (type: string) => {
         </div>
 
         <!-- Stats Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
           <div 
             v-for="stat in stats" 
             :key="stat.label"

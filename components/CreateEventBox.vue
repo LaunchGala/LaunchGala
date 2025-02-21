@@ -62,14 +62,14 @@ import AnimatedText from './AnimatedText.vue';
       </div>
     </div>
 
-    <div class="absolute top-2 right-6 z-20 m-8">
+    <!-- <div class="absolute top-2 right-6 z-20 m-8">
       <Button variant="default"
         class="mt-6  text-md text-white bg-orange-500 rounded-md hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
         Sign Up for Free
       </Button>
 
 
-    </div>
+    </div> -->
     <div
       class="w-100 h-[90%] font-bold text-4xl text-center text-gray-700 bg-white p-8 rounded-md bg-opacity-70 items-center">
       <!-- <div class="mt-2">Find your Venue, Volunteers,</div> <div class="mt-2">Speakers, Sponsors, <div class="mt-2">Influencers,</div></div> <div class="mt-2">Co-Founders, Investors,</div><div class="mt-2"> AI Agents & Vendors </div> -->
