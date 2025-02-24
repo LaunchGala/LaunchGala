@@ -25,7 +25,9 @@ import {
   Clock, XCircle,
   SaveAll,
   PlusCircle,
-  Plus
+  Plus,
+  HandIcon,
+  Gift
 } from 'lucide-vue-next'
 import {
   Card,
@@ -507,6 +509,53 @@ const sections = ref<ProfileSection[]>([
     ]
   },
   {
+    id: 'sponsor',
+    title: 'Become a Sponsor',
+    description: 'Provide cash, service or product sponsorship',
+    icon: Gift,
+    isExpanded: false,
+    isVisible: true,
+    fields: [
+      {
+        name: 'headline',
+        type: 'text',
+        label: 'Headline',
+        value: computed({
+                get: () => profileData.value.sponsor.headline, // Get value from nested object
+                set: (newValue) => profileData.value.sponsor.headline = newValue, // Update original object
+              })
+      },
+      {
+        name: 'sponsorType',
+        type: 'select',
+        label: 'Sponsor Type',
+        options: ['Cash', 'Service', 'Product'],
+        value: computed({
+                get: () => profileData.value.influencer.categories, // Get value from nested object
+                set: (newValue) => profileData.value.influencer.categories = newValue, // Update original object
+              })
+      },
+      {
+        name: 'availability',
+        type: 'toggle',
+        label: 'Available for Events',
+        value: computed({
+                get: () => profileData.value.is_influencer, // Get value from nested object
+                set: (newValue) => profileData.value.is_influencer = newValue, // Update original object
+              })
+      },
+      {
+        name: 'willTravel',
+        type: 'toggle',
+        label: 'Willing to Travel',
+        value: computed({
+                get: () => profileData.value.influencer.will_travel, // Get value from nested object
+                set: (newValue) => profileData.value.influencer.will_travel = newValue, // Update original object
+              })
+      }
+    ]
+  },
+  {
     id: 'talent',
     title: 'List your Talent',
     description: 'Showcase your skills and get discovered',
@@ -549,6 +598,22 @@ const sections = ref<ProfileSection[]>([
     title: 'List your Startup',
     description: 'Connect with investors and grow your business',
     icon: Rocket,
+    isExpanded: false,
+    isVisible: true,
+    fields: [
+      {
+        name: 'company',
+        type: 'company',
+        label: 'Manage Companies',
+        value: ''
+      }
+    ]
+  },
+  {
+    id: 'vendor',
+    title: 'Become a Vendor',
+    description: 'Offer your products and services',
+    icon: HandIcon,
     isExpanded: false,
     isVisible: true,
     fields: [

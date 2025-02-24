@@ -1,196 +1,261 @@
-
 <script setup lang="ts">
 import {
   Heart,
   MessageCircle,
   ChevronDown,
   Filter,
-  Plus
+  Plus,
+  Search,
+  ArrowRight,
+  Star,
+  MapPin,
+  Briefcase,
+  Award,
+  Users,
+  Sparkles
 } from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Toggle } from '@/components/ui/toggle';
-
-import { Share2, Search, ArrowRight, Calendar as CalendarIcon } from 'lucide-vue-next';
 import { Badge } from '@/components/ui/badge';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { volunteerTagColors } from '@/utils/volunteerTagColors';
-import VolunteerListing from './VolunteerListing.vue';
 
 const supabase = useSupabaseClient()
+const searchQuery = ref('')
+const selectedCategory = ref('')
+
+const categories = [
+  'All Categories',
+  'Performer',
+  'Speaker',
+  'Host',
+  'Artist',
+  'Musician',
+  'Designer',
+  'Technical Expert'
+]
 
 const talents = ref([]);
 
 async function getAllTalent(query) {
-  const { data: AllExperts, error } = !!query ? await query : await supabase
+  const { data: AllTalents, error } = !!query ? await query : await supabase
     .from('profiles')
-    .select('*, talent:Talent(*)') // Assuming the table is named 'experts'
+    .select('*, talent:Talent(*)')
     .eq('is_talent', true);
-  console.log(error)
-  Promise.all(AllExperts.map(async (profile) => {
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  await Promise.all(AllTalents.map(async (profile) => {
     profile.avatarSRC = await fetchImage(profile.avatar_url, 'avatars')
     profile.bannerSRC = await fetchImage(profile.banner_url, 'images')
-  })).then(() => {
-    talents.value = AllExperts;
-    console.log(AllExperts)
-  })
+  }));
+
+  talents.value = AllTalents;
 }
+
 const fetchImage = async (id, bucket) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
+  if (!!id) {
+    const urlData = await supabase.storage.from(bucket).createSignedUrl(id, 60);
+    return urlData?.data?.signedUrl ?? "";
   }
+  return "";
+}
+
+const filteredTalents = computed(() => {
+  return talents.value.filter(talent => {
+    const matchesSearch = !searchQuery.value || 
+      talent.full_name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      talent.location?.toLowerCase().includes(searchQuery.value.toLowerCase());
+    
+    const matchesCategory = !selectedCategory.value || 
+      selectedCategory.value === 'All Categories' ||
+      talent.talent?.categories?.includes(selectedCategory.value);
+    
+    return matchesSearch && matchesCategory;
+  });
+});
+
 onMounted(() => {
   getAllTalent(null)
 })
-
-const isOpen = ref(false)
-const date = ref<Date>()
 </script>
 
 <template>
-  <div class="flex flex-col space-y-4 p-6 dark:bg-black">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold dark:text-white">Find Talents</h1>
-      <NuxtLink to="VolunteerListing">
-
-      <Button @click="console.log(VolunteerListing)" class="bg-orange-500 text-white dark:text-white">Become a volunteer</Button>
-      </NuxtLink>
-
-    </div>
-    
-    <Collapsible v-model:open="isOpen" class="px-6 py-4">
-        <CollapsibleTrigger as="button" class="flex w-full justify-between px-4 py-3 mb-4 text-left bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md shadow">
-            <span>Search Filters</span>
-            <ArrowRight class="w-5 h-5 transition-transform" :class="{ 'rotate-90': isOpen }"  />
-        </CollapsibleTrigger>
-
-      <CollapsibleContent class="space-y-4 pb-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <Input placeholder="Location" />
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="studio">Studio</SelectItem>
-              <SelectItem value="1br">1 Bedroom</SelectItem>
-              <SelectItem value="2br">2 Bedroom</SelectItem>
-              <SelectItem value="3brplus">3+ Bedroom</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Venue Type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="apartment">Apartment</SelectItem>
-              <SelectItem value="house">House</SelectItem>
-              <SelectItem value="condo">Condo</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Amenities" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="pool">Pool</SelectItem>
-              <SelectItem value="gym">Gym</SelectItem>
-              <SelectItem value="wifi">WiFi</SelectItem>
-            </SelectContent>
-          </Select>
-          <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                variant="outline"
-                class="dark:text-white dark:bg-gray-700 dark:border-gray-700"
-              >
-                <CalendarIcon class="mr-2 h-4 w-4" />
-                Pick a date
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar v-model="date" />
-            </PopoverContent>
-          </Popover>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Sponsor" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sponsored">Sponsored</SelectItem>
-              <SelectItem value="nonsponsored">Non-Sponsored</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-            <Search class="w-5 h-5 mr-2" />
-            Search
-          </Button>
-        </div>
-      </CollapsibleContent>
-
-    </Collapsible>
-    <div class="px-6 py-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card v-for="talent in talents"  class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <!-- <div class="relative">
-          <img class="w-full h-64 object-cover" :src="volunteer.img" alt="Apartment image" />
-        </div> -->
-        <!-- user will have a banner image on their profile and we will use it -->
-        <CardContent class="p-4">
-          <div class="flex justify-between ">
-            <div class="ml-2 mt-4 mb-2">
-            <h3 class="text-lg font-semibold dark:black-white">{{talent.full_name}}</h3>
-          </div>
-            <Avatar class="m-4 w-24 h-24">
-              <AvatarImage :src="talent.avatarSRC" alt="Profile" />
-              <AvatarFallback>XX</AvatarFallback>
-            </Avatar>
-        </div> 
-            <!-- <p class="text-sm text-gray-500 dark:text-gray-400">Indusrty:{{volunteer.industry}}</p> -->
-            <p class=" text-m font-semibold text-gray-500"> Location: {{talent.location}}</p>
-            <p class="line-clamp-2 mt-3 text-sm text-gray-600 dark:text-gray-400"> 
-              <div class="flex flex-wrap h-14 overflow-hidden">
-               <div v-for="tag in talent.talent.employment_type" class="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 text-xs justify-center align-text-center font-semibold mr-2 px-2.5 py-1 rounded h-6 mb-1" > {{ tag }} </div> 
-              </div>
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-orange-600 to-orange-500 overflow-hidden">
+      <div class="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex justify-between items-center">
+          <div class="max-w-2xl">
+            <h1 class="text-4xl font-bold text-white mb-4">Discover Amazing Talent</h1>
+            <p class="text-xl text-white/90">
+              Connect with skilled professionals to make your event extraordinary
             </p>
+          </div>
+          <NuxtLink to="TalentListing">
+            <Button class="bg-white text-orange-600 hover:bg-orange-50 shadow-lg">
+              <Sparkles class="w-5 h-5 mr-2" />
+              Showcase Your Talent
+            </Button>
+          </NuxtLink>
+        </div>
 
-            <div class="flex items-center justify-between mt-4">
-              <NuxtLink :to="{ name: 'TalentCardPage', query: { id: talent.id } }">
-                <Button class="flex items-center bg-orange-500 text-white border hover:bg-orange-200 hover:text-white transition-colors duration-300">
-                  View
-                  <ArrowRight class="w-4 h-4  ml-4" /> 
+        <!-- Search Section -->
+        <div class="mt-12 max-w-4xl mx-auto">
+          <div class="flex gap-4">
+            <div class="flex-1 relative">
+              <Search class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Search by name, skills, or location..."
+                class="w-full pl-12 pr-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+              />
+            </div>
+            <select
+              v-model="selectedCategory"
+              class="px-4 py-3 bg-white rounded-xl shadow-lg focus:ring-2 focus:ring-orange-300 focus:outline-none"
+            >
+              <option v-for="category in categories" :key="category" :value="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Talents Grid -->
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          v-for="talent in filteredTalents"
+          :key="talent.id"
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+        >
+          <!-- Talent Card Header -->
+          <div class="relative h-48">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600">
+              <div class="absolute inset-0 bg-grid-white/[0.1] bg-[size:16px_16px]"></div>
+            </div>
+            <div class="absolute inset-0 bg-black/20"></div>
+          
+            <!-- Avatar -->
+            <div class="absolute -bottom-12 left-6">
+              <Avatar class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                <AvatarImage :src="talent.avatarSRC" :alt="talent.full_name" />
+                <AvatarFallback>{{ talent.full_name.charAt(0) }}</AvatarFallback>
+              </Avatar>
+            </div>
+
+            <!-- Favorite Button -->
+            <button class="absolute top-4 right-4 p-2 rounded-full bg-white/90 hover:bg-white transition-colors">
+              <Heart class="w-5 h-5 text-orange-500" />
+            </button>
+          </div>
+
+          <div class="p-6 pt-14">
+            <!-- Profile Info -->
+            <div class="mb-4">
+              <h3 class="text-xl font-bold text-gray-900">{{ talent.full_name }}</h3>
+              <p class="text-orange-600 font-medium">{{ talent.talent?.headline }}</p>
+              <div class="flex items-center mt-2 text-gray-600">
+                <MapPin class="w-4 h-4 mr-2" />
+                <span class="text-sm">{{ talent.location }}</span>
+              </div>
+            </div>
+
+            <!-- Employment Types -->
+            <div class="mb-4">
+              <h4 class="text-sm font-medium text-gray-700 mb-2">Employment Types</h4>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  v-for="type in talent.talent?.employment_type?.slice(0, 3)"
+                  :key="type"
+                  class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
+                >
+                  {{ type }}
+                </span>
+                <span 
+                  v-if="talent.talent?.employment_type?.length > 3"
+                  class="text-sm text-gray-500"
+                >
+                  +{{ talent.talent.employment_type.length - 3 }} more
+                </span>
+              </div>
+            </div>
+
+            <!-- Industries -->
+            <div class="mb-6">
+              <h4 class="text-sm font-medium text-gray-700 mb-2">Industries</h4>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  v-for="industry in talent.industries?.slice(0, 3)"
+                  :key="industry"
+                  class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium"
+                >
+                  {{ industry }}
+                </span>
+                <span 
+                  v-if="talent.industries?.length > 3"
+                  class="text-sm text-gray-500"
+                >
+                  +{{ talent.industries.length - 3 }} more
+                </span>
+              </div>
+            </div>
+
+            <!-- Experience Badge -->
+            <div class="mb-6">
+              <div class="p-3 bg-orange-50 rounded-lg">
+                <div class="flex items-center">
+                  <Award class="w-5 h-5 text-orange-500 mr-2" />
+                  <span class="text-sm text-gray-700">5 Years Experience</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+              <Button class="flex-1 bg-orange-500 text-white hover:bg-orange-600">
+                Contact
+                <MessageCircle class="w-4 h-4 ml-2" />
+              </Button>
+              <NuxtLink 
+                :to="{ name: 'TalentCardPage', query: { id: talent.id } }"
+                class="flex-1"
+              >
+                <Button class="w-full bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-50">
+                  View Profile
+                  <ArrowRight class="w-4 h-4 ml-2" />
                 </Button>
               </NuxtLink>
-              <Toggle aria-label="Like">
-                <Heart :fill="talent.likevolunteer ? 'red': 'none'" class="w-5 h-5" />
-              </Toggle>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.bg-grid-white {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
