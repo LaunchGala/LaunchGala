@@ -22,7 +22,7 @@
       <div v-for="(image, index) in uploadedImages" :key="index" class="image-wrapper">
         <img :src="image.url" class="preview-image" />
         <Badge
-          @click="confirmDelete(image.id, index)"
+          @click.stop="confirmDelete(image.id, index)"
           class="remove-button text-lg text-orange-500 hover:border-orange-500 hover:bg-orange-100 font-extrabold ml-2"
         >
           <div class="flex items-center">X</div>

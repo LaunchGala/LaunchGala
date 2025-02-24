@@ -41,13 +41,11 @@ function setAdditionalInsurance(toggleState: boolean) {
 // Reactive variable for new rule input
 const newRule = ref('');
 
-// Reactive array to hold the list of rules
-const rules = ref<string[]>([]);
-
 // Function to add new rule to the list
 const addRule = () => {
   if (newRule.value.trim()) {
-    rules.value.push(newRule.value.trim());  // Add new rule to the list
+    if(!props.venueListing.rules) props.venueListing.rules = [];
+    props.venueListing.rules.push(newRule.value.trim());  // Add new rule to the list
     newRule.value = '';  // Clear the input
   }
 };
@@ -190,7 +188,7 @@ console.log(props.venueListing);
 
     <!-- Display list of rules -->
     <ul class="list-disc ml-5">
-      <li v-for="(rule, index) in rules" :key="index" class="text-md text-gray-900 dark:text-white">
+      <li v-for="(rule, index) in venueListing.rules" :key="index" class="text-md text-gray-900 dark:text-white">
         {{ rule }}
       </li>
     </ul>

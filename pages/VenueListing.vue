@@ -44,59 +44,123 @@ const newVenueListing = ref({
 
 const toast = useToast();
 
-function publishVenueListing(isPublished: boolean){
+async function publishVenueListing(isPublished: boolean){
+  var errors = validateVenueListing(newVenueListing.value);
+  if(errors.length > 0){
+    toast.error("Error: " + errors[0], {
+        timeout: 5000,
+      });
+  }
   newVenueListing.value.is_published = isPublished;
   var toastText = isPublished ? "Venue Published" : "Venue Unpublished";
   console.log(newVenueListing.value)
-  supabase.from('AllVenues').upsert([
-    newVenueListing.value
-  ]).then(response => {
-    console.log(response)
-    toast.success(toastText, {
-        timeout: 5000,
-      });
-  }).catch(error => {
-    console.log(error)
-    toast.error("Error: Venue Not Updated", {
-        timeout: 5000,
-      });
-  })
+  try {
+    // Save venue to `AllVenues`
+    const { data, error } = await supabase
+      .from('AllVenues')
+      .upsert([newVenueListing.value])
+      .select(); // ✅ Ensure we retrieve the inserted/updated row(s)
+
+    if (error) {
+      throw error;
+    }
+
+    if (data && data.length > 0) {
+      newVenueListing.value.id = data[0].id; // ✅ Store the Supabase ID back in the object
+      console.log("New Venue ID:", newVenueListing.value.id);
+    }
+
+    toast.success("Venue Published", { timeout: 5000 });
+
+  } catch (error) {
+    console.error("Error:", error);
+    newVenueListing.value.is_published = false;
+    toast.error("Error: Venue Not Published", { timeout: 5000 });
+  }
 }
 
-function addVenueListing() {
-  console.log(newVenueListing.value)
-  supabase.from('AllVenues').upsert([
-    newVenueListing.value
-  ]).then(response => {
-    console.log(response)
-    toast.success("Venue Saved", {
-        timeout: 5000,
-      });
-  }).catch(error => {
-    console.log(error)
-    toast.error("Error: Venue Not Saved", {
-        timeout: 5000,
-      });
-  })
-}
+async function addVenueListing() {
+  console.log(newVenueListing.value);
 
+  try {
+    // Save venue to `AllVenues`
+    const { data, error } = await supabase
+      .from('AllVenues')
+      .upsert([newVenueListing.value])
+      .select(); // ✅ Ensure we retrieve the inserted/updated row(s)
+
+    if (error) {
+      throw error;
+    }
+
+    if (data && data.length > 0) {
+      newVenueListing.value.id = data[0].id; // ✅ Store the Supabase ID back in the object
+      console.log("New Venue ID:", newVenueListing.value.id);
+    }
+
+    toast.success("Venue Saved", { timeout: 5000 });
+
+  } catch (error) {
+    console.error("Error:", error);
+    toast.error("Error: Venue Not Saved", { timeout: 5000 });
+  }
+}
+function validateVenueListing(venue: any) {
+  const errors: string[] = [];
+
+  if (!venue.title || venue.title.trim() === '') {
+    errors.push("Title is required.");
+  }
+
+  if (!venue.address || venue.address.trim() === '') {
+    errors.push("Address is required.");
+  }
+
+  if (!venue.description || venue.description.trim() === '') {
+    errors.push("Description is required.");
+  }
+
+  if (!Array.isArray(venue.venueType) || venue.venueType.length === 0) {
+    errors.push("At least one venue type must be selected.");
+  }
+
+  if (!Array.isArray(venue.eventType) || venue.eventType.length === 0) {
+    errors.push("At least one event type must be selected.");
+  }
+
+  if (!Array.isArray(venue.images) || venue.images.length < 4) {
+    errors.push("At least 4 images are required.");
+  }
+
+  if (venue.capacity < 0) {
+    errors.push("Capacity cannot be negative.");
+  }
+
+  if (venue.price < 0) {
+    errors.push("Price cannot be negative.");
+  }
+
+  return errors; // Returns an array of errors (empty if valid)
+}
 function nextStep(item) {
   if(!!item){
     newVenueListing.value = item;
   }
   currentStep.value += 1;
   window.scrollTo(0, 0);
+  addVenueListing()
 }
 
 function previousStep() {
   currentStep.value -= 1;
   window.scrollTo(0, 0);
 }
+// Reactive array to hold the list of rules
+const rules = ref<string[]>([]);
 
 </script>
 
 <template>
-  <Button v-show="currentStep > 1" class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addVenueListing">Save</Button>
           <Button v-show="currentStep > 1 && !newVenueListing.is_published" @click="publishVenueListing(true)">
             Publish
           </Button>
@@ -113,8 +177,8 @@ function previousStep() {
     <VenueListing07 :venue-listing="newVenueListing" v-show="currentStep === 7" @next-step="nextStep" @previous-step="previousStep"/>
     <VenueListing08 :venue-listing="newVenueListing" v-show="currentStep === 8" @next-step="nextStep" @previous-step="previousStep"/>
     <VenueListing09 :venue-listing="newVenueListing" v-show="currentStep === 9" @next-step="nextStep" @previous-step="previousStep"/>    
-    <VenueListing10 :venue-listing="newVenueListing" v-show="currentStep === 10" @next-step="nextStep" @previous-step="previousStep"/>    
-    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" @next-step="nextStep" @previous-step="previousStep"/>    
+    <VenueListing10 :venue-listing="newVenueListing" :rules="rules" v-show="currentStep === 10" @next-step="nextStep" @previous-step="previousStep"/>    
+    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" :is-visible="currentStep === 11" @next-step="nextStep" @previous-step="previousStep"/>    
   </div>
 
 
