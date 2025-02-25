@@ -602,7 +602,7 @@ const getMessageIconColor = (type: string) => {
       </div>
 
       <!-- Page Content -->
-      <div class="p-8">
+      <div class="p-8" v-if="activeSection == 'dashboard'">
         <!-- Welcome Section -->
         <div class="bg-white rounded-2xl p-6 shadow-sm mb-8">
           <div class="flex items-center justify-between">
@@ -863,6 +863,22 @@ const getMessageIconColor = (type: string) => {
           </div>
         </div>
       </div>
+      <section class="mb-8" v-if="activeSection == 'venues'">
+        <MyVenueDash></MyVenueDash>
+      </section>
+      <section class="mb-8" v-if="activeSection == 'volunteers'">
+        <MyVolunteerDash></MyVolunteerDash>
+      </section>
+      <section class="mb-8" v-if="activeSection == 'experts'">
+        <MyExpertDash></MyExpertDash>
+      </section>
+
+      <section class="mb-8" v-if="activeSection == 'influencers'">
+        <MyInfluencerDash></MyInfluencerDash>
+      </section> 
+      <section class="mb-8" v-if="activeSection == 'vendors'">
+        <MyVendorDash></MyVendorDash>
+      </section>
     </main>
   </div>
 </template>
