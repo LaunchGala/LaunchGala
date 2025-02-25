@@ -102,11 +102,11 @@
           </div>
           
           <div class="mt-12">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-4">Contact & Social Media</h2>
+            <h2 class="text-2xl font-semibold text-gray-900 mb-4">Social</h2>
             <div class="flex flex-wrap gap-4">
               <a href="mailto:info@techconf2023.com" class="flex items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-300">
-                <Mail class="h-5 w-5 text-orange-600 mr-2" />
-                <span class="text-gray-800">Email Us</span>
+                <Webhook class="h-5 w-5 text-orange-600 mr-2" />
+                <span class="text-gray-800">Website</span>
               </a>
               <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center p-3 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300">
                 <Twitter class="h-5 w-5 text-blue-600 mr-2" />
@@ -131,7 +131,7 @@
   import { ref } from 'vue'
   import { format } from 'date-fns';
 import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
-  import { MapPin, Ticket, Calendar, Clock, DollarSign, Mail, Twitter, Linkedin, Instagram, Users, Lightbulb, Mic, Network, Building, Heart, Briefcase, ShoppingBag } from 'lucide-vue-next'
+  import { MapPin, Ticket, Calendar, Clock, DollarSign, Mail, Twitter, Linkedin, Instagram, Users, Lightbulb, Mic, Network, Building, Heart, Briefcase, ShoppingBag, Webhook } from 'lucide-vue-next'
   const route = useRoute();
 const venueId = route.query.id;
 const event = ref({
