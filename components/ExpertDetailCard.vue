@@ -114,7 +114,7 @@ onMounted(() => {
             <h2 class="text-2xl font-semibold text-gray-900">About</h2>
             <p class="mt-2 text-gray-600 text-lg">{{ profile?.about }}</p>
           </div>
-          <div class="w-1/3 shrink">
+          <div class="w-2/5 shrink">
             <ExpertBookingRequest :profile-id="profile.id" />
           </div>
         </div>

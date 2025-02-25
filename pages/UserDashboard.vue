@@ -480,7 +480,7 @@ const getMessageIconColor = (type: string) => {
               </button>
 
               <!-- Notifications Dropdown -->
-              <div 
+              <!-- <div 
                 v-if="showNotifications"
                 class="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
               >
@@ -521,7 +521,7 @@ const getMessageIconColor = (type: string) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Messages -->
             <button class="relative p-2 hover:bg-gray-100 rounded-xl transition-colors">
@@ -535,7 +535,7 @@ const getMessageIconColor = (type: string) => {
             </button>
 
             <!-- User Menu -->
-            <div class="relative">
+            <!--<div class="relative">
               <button 
                 @click="showUserMenu = !showUserMenu"
                 class="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-xl transition-colors"
@@ -550,8 +550,8 @@ const getMessageIconColor = (type: string) => {
                 />
               </button>
 
-              <!-- User Dropdown -->
-              <div 
+               User Dropdown
+               <div 
                 v-if="showUserMenu"
                 class="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
               >
@@ -595,8 +595,8 @@ const getMessageIconColor = (type: string) => {
                     {{ item.label }}
                   </a>
                 </div>
-              </div>
-            </div>
+              </div>-->
+            </div> 
           </div>
         </div>
       </div>
