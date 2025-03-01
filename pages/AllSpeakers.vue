@@ -16,7 +16,8 @@ import {
   X,
   Globe,
   Mail,
-  Linkedin
+  Linkedin,
+  Lightbulb
 } from 'lucide-vue-next';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -149,12 +150,34 @@ onMounted(() => {
     <div class="relative bg-gradient-to-r from-orange-600 to-orange-500 overflow-hidden">
       <div class="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]"></div>
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- <NuxtLink to="ExpertListing">
+            <Button class="bg-white text-orange-600 hover:bg-orange-50 shadow-lg absolute ">
+              <Users class="w-5 h-5 mr-2" />
+              Provide your Expertise
+            </Button>
+          </NuxtLink>
         <div class="text-center">
           <h1 class="text-4xl font-bold text-white mb-4">Connect with Industry Experts</h1>
           <p class="text-xl text-white/90 max-w-2xl mx-auto">
             Find and collaborate with experienced professionals who can help guide your journey
           </p>
-        </div>
+        </div> -->
+        <div class="flex justify-between items-center">
+          <div class="max-w-2xl">
+            <div class="flex items-center space-x-3 mb-4">
+              <Lightbulb class="w-8 h-8 text-white animate-float" />
+              <h1 class="text-4xl font-bold text-white">Connect with Industry Experts</h1>
+            </div>
+            <p class="text-xl text-white/90">
+              Find and collaborate with experienced professionals who can help guide your journey            </p>
+          </div>
+          <NuxtLink to="ExpertListing">
+          <Button class="bg-white text-orange-600 hover:bg-orange-50 shadow-lg transform hover:scale-105 transition-all">
+            <Sparkles class="w-5 h-5 mr-2" />
+            Provide your Expertise
+          </Button>
+        </NuxtLink>
+      </div>
 
         <!-- Search and Filters -->
         <div class="mt-8 max-w-2xl mx-auto">
@@ -384,5 +407,9 @@ onMounted(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 </style>
