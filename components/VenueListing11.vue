@@ -10,6 +10,10 @@ import { Progress } from '@/components/ui/progress';
 
 const props = defineProps(['venueListing', 'isVisible']);
 console.log(props.venueListing);
+const emits = defineEmits(['publish']);
+function publishVenueListing(){
+  emits('publish');
+}
 </script>
 
 <template>
@@ -21,16 +25,18 @@ console.log(props.venueListing);
           <CardDescription>Extensive view for your venue listing details.</CardDescription>
         </CardHeader>
         <CardContent>
-          <VenueDetailCard :venue-id="props.venueListing.id" :is-visible="props.isVisible"></VenueDetailCard>
+          <VenueDetailCard :venue-id="props.venueListing.id" :is-visible="props.isVisible" :is-preview="true"></VenueDetailCard>
           </CardContent>
         <div class="flex justify-end gap-4 p-4 items-center">
           <Button @click="$emit('previousStep')" variant="outline" class="border-gray-300 text-gray-600 dark:border-gray-600 dark:text-gray-200">
             Edit Details
           </Button>
           <Progress :model-value="100"   />
-
-          <Button>
-            Publish Listing
+          <Button v-show="!venueListing.is_published" @click="publishVenueListing()">
+            Publish
+          </Button>
+          <Button v-show="venueListing.is_published" @click="publishVenueListing()">
+            Unpublish
           </Button>
         </div>
       </Card>

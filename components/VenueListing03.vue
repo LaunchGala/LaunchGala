@@ -173,23 +173,18 @@ watch(() => props.venueListing.capacity, (newValue) => {
 
         <!-- Navigation Buttons -->
         <div class="flex justify-between items-center p-6 border-t">
-          <Button 
-            @click="$emit('previousStep')" 
-            class="min-w-[120px] bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-50"
-          >
-            <ArrowLeft class="w-4 h-4 mr-2" />
-            Back
+          <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
+            <div  class="flex items-center">
+              <ArrowLeft class="w-4 h-4 mr-2" />
+              Back
+            </div>
           </Button>
-
-          <Progress :model-value="10" class="w-32" />
-
-          <Button 
-            @click="handleNext" 
-            :disabled="capacity <= 0 || !!error"
-            class="min-w-[120px] bg-orange-500 text-white hover:bg-orange-600"
-          >
-            Next
-            <ArrowRight class="w-4 h-4 ml-2" />
+          <Progress :model-value="20"  />
+          <Button @click="$emit('nextStep')" variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
+            <div  class="flex items-center">
+              Next
+              <ArrowRight class="w-4 h-4 ml-2" />
+            </div>
           </Button>
         </div>
       </Card>

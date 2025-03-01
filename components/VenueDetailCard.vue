@@ -132,9 +132,15 @@
           </ul>
         </div>
       </section>
-
+      <!-- Reservation Rules -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-semibold mb-6 text-gray-800">Cancellation Policy</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 border border-orange-200">
+          <p class="text-gray-600 leading-relaxed mb-6">{{ venue.cancellation_policy ? venue.cancellation_policy : 'No cancellation policy provided.' }}</p>
+        </div>
+      </section>
       <!-- Similar Venues -->
-      <section>
+      <section v-if="!isPreview" class="mb-16">
         <h2 class="text-3xl font-semibold mb-6 text-gray-800">Venues You Might Like</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div v-for="venue in similarVenues" :key="venue.id"
@@ -200,17 +206,17 @@
                   <span class="text-gray-500">/hour</span>
                 </div>
 
-                
-                  <button
-                    class="px-6 py-3  text-orange-500 rounded-xl hover:bg-orange-500 hover:text-white transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                    View Details
-                  </button>
+
+                <button
+                  class="px-6 py-3  text-orange-500 rounded-xl hover:bg-orange-500 hover:text-white transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                  View Details
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <div class="flex justify-center mt-4">
+      <div class="flex justify-center mt-4" v-if="!isPreview">
         <NuxtLink to="AllVenues">
           <button
             class="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition-colors duration-300 mt-8">
@@ -228,7 +234,7 @@ import { ref } from 'vue'
 import { UsersIcon, MapPinIcon, ClockIcon, DollarSignIcon, CheckCircleIcon, GlassesIcon, HeartIcon, MusicIcon, BriefcaseIcon, CakeIcon, InfoIcon, CheckIcon, GiftIcon, BuildingIcon, Building2Icon, HomeIcon, Share } from 'lucide-vue-next'
 import TitleImagesBanner from '~/components/TitleImagesBanner.vue';
 
-const props = defineProps(['venueId', 'isVisible'])
+const props = defineProps(['venueId', 'isVisible', 'isPreview'])
 const route = useRoute();
 const venueId = route.query.id;
 const supabase = useSupabaseClient()
@@ -289,7 +295,7 @@ const getVenueById = async (id) => {
 }
 
 onMounted(() => {
-  if(venueId != 0){
+  if (venueId != 0) {
     getVenueById(venueId)
   }
   getSimilarVenues(null)

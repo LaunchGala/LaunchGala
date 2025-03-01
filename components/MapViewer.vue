@@ -56,6 +56,7 @@ onMounted(async () => {
   const loader = new Loader({
     apiKey: apiKey,
     version: 'weekly',
+    libraries: ['places'],
   })
 
   try {

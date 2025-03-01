@@ -39,7 +39,7 @@ const quickActions = [
   { icon: Plus, label: 'Create Event', color: 'bg-orange-500', href: '/CreateEvent' },
   { icon: MapPin, label: 'Book Venue', color: 'bg-blue-500', href: '/AllVenuesNew' },
   { icon: Star, label: 'Find Vendors', color: 'bg-green-500', href: '/AllVendors' },
-  { icon: LightbulbIcon, label: 'Find Experts', color: 'bg-yellow-500', href: '/AllExperts' },
+  { icon: LightbulbIcon, label: 'Find Experts', color: 'bg-yellow-500', href: '/AllSpeakers' },
   { icon: Users, label: 'Find Volunteers', color: 'bg-purple-500', href: '/AllVolunteers' },
   { icon: Gift, label: 'Find Sponsors', color: 'bg-indigo-500 ', href: '/AllSponsors' }
 
@@ -628,8 +628,8 @@ const getMessageIconColor = (type: string) => {
 
           <!-- Quick Actions -->
           <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+            <NuxtLink v-for="action in quickActions" :to="action.href">
             <button
-              v-for="action in quickActions"
               :key="action.label"
               :class="[
                 'flex items-center space-x-3 p-4 rounded-xl text-white transition-all duration-200 transform hover:scale-105',
@@ -638,7 +638,7 @@ const getMessageIconColor = (type: string) => {
             >
               <component :is="action.icon" class="w-5 h-5" />
               <span>{{ action.label }}</span>
-            </button>
+            </button></NuxtLink>
           </div>
         </div>
 

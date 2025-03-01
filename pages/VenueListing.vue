@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { useToast } from 'vue-toastification';
+import { is } from 'date-fns/locale';
 
 const supabase = useSupabaseClient()
 
@@ -44,14 +45,16 @@ const newVenueListing = ref({
 
 const toast = useToast();
 
-async function publishVenueListing(isPublished: boolean){
+async function publishVenueListing(){
   var errors = validateVenueListing(newVenueListing.value);
   if(errors.length > 0){
     toast.error("Error: " + errors[0], {
         timeout: 5000,
       });
+    return;
   }
-  newVenueListing.value.is_published = isPublished;
+  newVenueListing.value.is_published = !newVenueListing.value.is_published;
+  var isPublished = newVenueListing.value.is_published;
   var toastText = isPublished ? "Venue Published" : "Venue Unpublished";
   console.log(newVenueListing.value)
   try {
@@ -74,7 +77,7 @@ async function publishVenueListing(isPublished: boolean){
 
   } catch (error) {
     console.error("Error:", error);
-    newVenueListing.value.is_published = false;
+    newVenueListing.value.is_published = !isPublished;
     toast.error("Error: Venue Not Published", { timeout: 5000 });
   }
 }
@@ -98,7 +101,7 @@ async function addVenueListing() {
       console.log("New Venue ID:", newVenueListing.value.id);
     }
 
-    toast.success("Venue Saved", { timeout: 5000 });
+    toast.success("Venue Saved", { timeout: 1000 });
 
   } catch (error) {
     console.error("Error:", error);
@@ -161,12 +164,6 @@ const rules = ref<string[]>([]);
 </script>
 
 <template>
-          <Button v-show="currentStep > 1 && !newVenueListing.is_published" @click="publishVenueListing(true)">
-            Publish
-          </Button>
-          <Button v-show="currentStep > 1 && newVenueListing.is_published" @click="publishVenueListing(false)">
-            Unpublish
-          </Button>
   <div>
     <VenueListing01 :venue-listing="newVenueListing" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
     <VenueListing02 :venue-listing="newVenueListing" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
@@ -178,7 +175,7 @@ const rules = ref<string[]>([]);
     <VenueListing08 :venue-listing="newVenueListing" v-show="currentStep === 8" @next-step="nextStep" @previous-step="previousStep"/>
     <VenueListing09 :venue-listing="newVenueListing" v-show="currentStep === 9" @next-step="nextStep" @previous-step="previousStep"/>    
     <VenueListing10 :venue-listing="newVenueListing" :rules="rules" v-show="currentStep === 10" @next-step="nextStep" @previous-step="previousStep"/>    
-    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" :is-visible="currentStep === 11" @next-step="nextStep" @previous-step="previousStep"/>    
+    <VenueListing11 :venue-listing="newVenueListing" v-show="currentStep === 11" :is-visible="currentStep === 11" @next-step="nextStep" @previous-step="previousStep" @publish="publishVenueListing"/>    
   </div>
 
 

@@ -32,7 +32,6 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { Badge } from '@/components/ui/badge';
@@ -54,34 +53,6 @@ const props = defineProps({
 const fileInput = ref(null);
 const uploadedImages = ref([]);
 
-// Fetch existing images passed through props
-const fetchImages = async () => {
-  if (props.imageNames?.length > 0) {
-    const results = await Promise.all(
-      props.imageNames.map(async (fileName) => {
-        const { data, error } = await supabase.storage
-          .from('images') // Replace with your bucket name
-          .createSignedUrl(fileName, 60);
-
-        if (error) {
-          console.error('Error fetching image URL:', error);
-          return null;
-        }
-
-        return {
-          id: fileName, // Use the file name as the ID
-          url: data.signedUrl, // Signed URL for preview
-        };
-      })
-    );
-
-    // Filter out any null results in case of errors
-    uploadedImages.value = results.filter((image) => image !== null);
-
-    // Emit the initial images
-    emit('update:images', uploadedImages.value.map((image) => image.id));
-  }
-};
 
 // Handle file drag-and-drop
 const handleDragOver = (event) => {
@@ -95,6 +66,18 @@ const handleDrop = async (event) => {
 };
 
 // Handle file selection
+const handleFiles = async (event) => {
+  const files = event.target.files;
+  await handleFileSelection(files);
+};
+
+
+// ✅ Function to validate file names before upload
+function isValidKey(key) {
+  return key.length > 0 && /^(\w|\/|!|-|\.|\*|'|\(|\)| |&|\$|@|=|;|:|\+|,|\?)*$/.test(key);
+}
+
+// Handle file selection
 const handleFileSelection = async (files) => {
   if (files) {
     const selectedFiles = Array.from(files);
@@ -104,25 +87,28 @@ const handleFileSelection = async (files) => {
       return;
     }
 
+    // ✅ Check all file names before uploading any files
+    const invalidFiles = selectedFiles.filter(file => !isValidKey(file.name));
+    
+    if (invalidFiles.length > 0) {
+      alert(`Invalid file names detected:\n${invalidFiles.map(f => f.name).join("\n")}\n\nPlease rename these files and try again.`);
+      return; // Stop upload if any file name is invalid
+    }
+
     if (!props.allowMultiple) {
       uploadedImages.value = []; // Clear previous images for single upload mode
     }
 
+    // ✅ Proceed with upload only if all files are valid
     for (const file of selectedFiles) {
       await uploadImage(file);
     }
 
-    // Emit the updated images
     emit('update:images', uploadedImages.value.map((image) => image.id));
   }
 };
 
-const handleFiles = async (event) => {
-  const files = event.target.files;
-  await handleFileSelection(files);
-};
-
-// Upload a single image to Supabase storage
+// ✅ Upload a single image to Supabase storage
 const uploadImage = async (file) => {
   const fileName = `${Date.now()}_${file.name}`;
   const url = URL.createObjectURL(file); // Generate preview URL
@@ -138,7 +124,7 @@ const uploadImage = async (file) => {
       return;
     }
 
-    // Add the uploaded image to the list
+    // ✅ Add uploaded image to the list
     uploadedImages.value.push({
       id: data.path,
       url,
@@ -159,8 +145,6 @@ const triggerFileInput = () => {
 const confirmDelete = async (fileId, index) => {
   if (confirm('Are you sure you want to delete this file?')) {
     await deleteFileFromBucket(fileId, index);
-
-    // Emit the updated images
     emit('update:images', uploadedImages.value.map((image) => image.id));
   }
 };
@@ -168,54 +152,60 @@ const confirmDelete = async (fileId, index) => {
 // Delete the file from Supabase storage
 const deleteFileFromBucket = async (fileId, index) => {
   try {
-    const { error } = await supabase.storage
-      .from('images') // Replace with your bucket name
-      .remove([fileId]);
+    const { error } = await supabase.storage.from('images').remove([fileId]);
 
     if (error) {
       console.error('Deletion error:', error);
       return;
     }
 
-    // Remove the image from the list
     uploadedImages.value.splice(index, 1);
   } catch (err) {
     console.error('Unexpected error:', err);
   }
 };
 
-// Fetch existing images when component is mounted
+// Fetch existing images passed through props
+const fetchImages = async () => {
+  if (props.imageNames?.length > 0) {
+    const results = await Promise.all(
+      props.imageNames.map(async (fileName) => {
+        const { data, error } = await supabase.storage
+          .from('images') // Replace with your bucket name
+          .createSignedUrl(fileName, 60);
+
+        if (error) {
+          console.error('Error fetching image URL:', error);
+          return null;
+        }
+
+        return {
+          id: fileName,
+          url: data.signedUrl,
+        };
+      })
+    );
+
+    uploadedImages.value = results.filter((image) => image !== null);
+    emit('update:images', uploadedImages.value.map((image) => image.id));
+  }
+};
+
+// Fetch images when the component is mounted
 onMounted(() => {
   fetchImages();
 });
-function arraysAreEqual(arr1, arr2) {
-  // Check if the lengths are different
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
 
-  // Iterate over the elements and compare them
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) {
-      return false;
-    }
-  }
-
-  // If all elements are equal, return true
-  return true;
-}
 // Watch for changes in `imageNames` prop to update the image list
 watch(
   () => props.imageNames,
   (newValue, oldValue) => {
-    if (!arraysAreEqual(newValue, oldValue)) {
+    if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
       fetchImages();
     }
   }
 );
 </script>
-
-
 
 <style scoped>
 .image-uploader {
