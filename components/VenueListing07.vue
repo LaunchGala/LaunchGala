@@ -10,6 +10,7 @@ import { Progress } from '@/components/ui/progress';
 const props = defineProps(['venueListing']);
 
 function handleImageUpdates(images) {
+  console.log(props.venueListing.images.length)
   props.venueListing.images = images;
 }
 
@@ -24,6 +25,9 @@ function handleImageUpdates(images) {
         </CardHeader>
         <CardContent>
           <ImageUploader :image-names="props.venueListing.images" @update:images="handleImageUpdates"/>
+          <p v-if="props.venueListing.images.length < 4" class="text-sm text-red-500 dark:text-red-400 mt-2">
+            Upload at least 4 images to proceed.
+          </p>
         </CardContent>
         <div class="flex justify-between items-center p-4">
           <Button @click="$emit('previousStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold mr-2">
@@ -33,7 +37,7 @@ function handleImageUpdates(images) {
             </div>
           </Button>
           <Progress :model-value="60"  />
-          <Button @click="$emit('nextStep')" :disabled="props.venueListing.images < 1" variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
+          <Button @click="$emit('nextStep')" :disabled="props.venueListing.images.length < 4" variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next
               <ArrowRight class="w-4 h-4 ml-2" />

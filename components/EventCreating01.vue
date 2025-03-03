@@ -1,6 +1,5 @@
-
 <script setup lang="ts">
-import { Plus, FilePlus, Copy } from 'lucide-vue-next';
+import { Plus, Copy, Trash } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -11,18 +10,20 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { useToast } from 'vue-toastification';
 
 const props = defineProps(['event']);
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
-const myEvents = ref([])
+const myEvents = ref([]);
 const emit = defineEmits(['nextStep']);
+const toast = useToast();
 
 async function fetchEvents() {
   const response = await supabase
     .from('AllEvents')
     .select()
-    .eq('created_by', user.value.id)
+    .eq('created_by', user.value.id);
   if (response.error) {
     console.error(response.error);
     return;
@@ -30,8 +31,30 @@ async function fetchEvents() {
   myEvents.value = response.data;
 }
 
-function editEvent(item){
-  emit('nextStep', item)
+function editEvent(item) {
+  emit('nextStep', item);
+}
+
+async function deleteEvent(event) {
+  if (confirm(`Are you sure you want to delete "${event.title}"?`)) {
+    try {
+      const { error } = await supabase
+        .from('AllEvents')
+        .delete()
+        .eq('id', event.id);
+
+      if (error) {
+        throw error;
+      }
+
+      myEvents.value = myEvents.value.filter((e) => e.id !== event.id);
+
+      toast.success(`"${event.title}" has been deleted.`, { timeout: 3000 });
+    } catch (error) {
+      console.error('Error deleting event:', error);
+      toast.error('Failed to delete event.', { timeout: 3000 });
+    }
+  }
 }
 
 onMounted(() => {
@@ -55,31 +78,33 @@ onMounted(() => {
               <Plus class="w-5 h-5" />
               Create New Event
             </Button>
-
           </div>
           <Table>
-    <TableHeader>
-      <TableRow>
-        <TableHead class="text-left">Event Name</TableHead>
-        <TableHead class="text-left">Location</TableHead>
-        <TableHead class="text-left">Actions</TableHead>
-      </TableRow>
-    </TableHeader>
-    
-    <TableBody>
-      <!-- Loop through the 'venues' array to create table rows -->
-      <TableRow v-for="(event, index) in myEvents" :key="index">
-        <TableCell>{{ event.title }}</TableCell>
-        <TableCell>{{ event.location }}</TableCell>
-        <TableCell class="text-right">
-          <Button class="flex items-center gap-2" variant="ghost" @click="editEvent(event)">
-            <Copy class="w-4 h-4"/>
-            Edit
-          </Button>
-        </TableCell>
-      </TableRow>
-    </TableBody>
-  </Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead class="text-left">Event Name</TableHead>
+                <TableHead class="text-left">Location</TableHead>
+                <TableHead class="text-left">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+
+            <TableBody>
+              <TableRow v-for="(event, index) in myEvents" :key="index">
+                <TableCell>{{ event.title }}</TableCell>
+                <TableCell>{{ event.location }}</TableCell>
+                <TableCell class="text-right flex flex-wrap gap-2">
+                    <Button class="flex items-center gap-2" variant="ghost" @click="editEvent(event)">
+                      <Copy class="w-4 h-4" />
+                      Edit
+                    </Button>
+                    <Button class="flex items-center gap-2" variant="ghost" @click="deleteEvent(event)">
+                      <Trash class="w-4 h-4" />
+                      Delete
+                    </Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </CardContent>
         <CardFooter>
           <div class="text-center">

@@ -5,6 +5,9 @@
     @drop.prevent="handleDrop"
     @click="triggerFileInput"
   >
+    <div v-if="isLoading" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
     <input
       type="file"
       :multiple="allowMultiple"
@@ -52,7 +55,7 @@ const props = defineProps({
 
 const fileInput = ref(null);
 const uploadedImages = ref([]);
-
+const isLoading = ref(false); // Added loading state
 
 // Handle file drag-and-drop
 const handleDragOver = (event) => {
@@ -98,11 +101,12 @@ const handleFileSelection = async (files) => {
     if (!props.allowMultiple) {
       uploadedImages.value = []; // Clear previous images for single upload mode
     }
-
+    isLoading.value = true; //Start loading
     // ✅ Proceed with upload only if all files are valid
     for (const file of selectedFiles) {
       await uploadImage(file);
     }
+    isLoading.value = false; //End loading
 
     emit('update:images', uploadedImages.value.map((image) => image.id));
   }
@@ -144,7 +148,9 @@ const triggerFileInput = () => {
 // Confirm and delete an image
 const confirmDelete = async (fileId, index) => {
   if (confirm('Are you sure you want to delete this file?')) {
+    isLoading.value = true; // Start loading when deleting
     await deleteFileFromBucket(fileId, index);
+    isLoading.value = false; // Stop loading when done
     emit('update:images', uploadedImages.value.map((image) => image.id));
   }
 };
@@ -167,6 +173,7 @@ const deleteFileFromBucket = async (fileId, index) => {
 
 // Fetch existing images passed through props
 const fetchImages = async () => {
+  isLoading.value = true; // Start loading when fetching
   if (props.imageNames?.length > 0) {
     const results = await Promise.all(
       props.imageNames.map(async (fileName) => {
@@ -189,6 +196,7 @@ const fetchImages = async () => {
     uploadedImages.value = results.filter((image) => image !== null);
     emit('update:images', uploadedImages.value.map((image) => image.id));
   }
+  isLoading.value = false; // Stop loading when done
 };
 
 // Fetch images when the component is mounted
@@ -259,5 +267,38 @@ watch(
 
 .uploaded-files {
   margin-top: 20px;
+}
+/* Styles for the loading overlay and spinner */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border-radius: 8px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #ff6900;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

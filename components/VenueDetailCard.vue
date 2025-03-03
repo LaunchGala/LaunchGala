@@ -69,7 +69,7 @@
             </div>
 
             <!-- Booking and Contact Box -->
-            <div class="bg-white rounded-lg shadow-lg border border-orange-200">
+            <div v-if="!isPreview" class="bg-white rounded-lg shadow-lg border border-orange-200">
               <VenueBookingRequest1 :venueId="venueId" />
             </div>
           </div>

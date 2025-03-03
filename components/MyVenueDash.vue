@@ -236,7 +236,7 @@ const newEventOwnerConversationInfo = computed(() => getContactInfo(selectedBook
                 <EventBookingCard v-if="Object.keys(selectedBooking).length !== 0" :event="selectedBooking?.event" :venue-name="selectedBooking?.venue?.title" :requesting_sponsorship="selectedBooking?.requesting_sponsorship">
                   <template #action-buttons>
                     <MessagesButton :label="'Contact'" :isIcon="false"
-                          :newConversationInfo="newEventOwnerConversationInfo"></MessagesButton>
+                    :start-conversation-user-id="selectedBooking?.event.event_owner.id"></MessagesButton>
                         <Button v-if="selectedBooking.status == 'requested'" @click="updateRequestStatus(selectedBooking, 'approved')" class="bg-green-500 text-white m-2 rounded-full">Accept</Button>
                         <Button v-if="selectedBooking.status == 'requested'" @click="updateRequestStatus(selectedBooking, 'rejected')" class="bg-red-500 text-white m-2 rounded-full">Reject</Button>
                         <Button v-if="selectedBooking.status == 'offered'" @click="updateRequestStatus(selectedBooking, 'approved')" class="bg-slate-500 text-white m-2 rounded-full">Cancel</Button>

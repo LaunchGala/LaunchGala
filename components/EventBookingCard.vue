@@ -42,11 +42,18 @@ const formatDate = (date: string) =>
     day: 'numeric',
   });
 
-const formatTime = (time: string) =>
-  new Date(`1970-01-01T${time}:00Z`).toLocaleTimeString('en-US', {
+const formatTime = (time: string) => {
+  if (!time) return ""; // Handle empty time
+  const [hours, minutes] = time.split(':');
+  const date = new Date();
+  date.setHours(parseInt(hours, 10));
+  date.setMinutes(parseInt(minutes, 10));
+  date.setSeconds(0);
+  return date.toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
   });
+};
 </script>
 
 <template>

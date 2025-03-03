@@ -73,7 +73,7 @@ async function publishVenueListing(){
       console.log("New Venue ID:", newVenueListing.value.id);
     }
 
-    toast.success("Venue Published", { timeout: 5000 });
+    toast.success(toastText, { timeout: 5000 });
 
   } catch (error) {
     console.error("Error:", error);
@@ -123,7 +123,7 @@ function validateVenueListing(venue: any) {
     errors.push("Description is required.");
   }
 
-  if (!Array.isArray(venue.venueType) || venue.venueType.length === 0) {
+  if (!venue.venueType || venue.venueType.trim() === '') {
     errors.push("At least one venue type must be selected.");
   }
 

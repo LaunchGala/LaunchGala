@@ -1,204 +1,184 @@
 <template>
-  <div class="flex h-full w-full bg-gray-100">
+  <div class="flex h-[70vh] w-full bg-gray-100 dark:bg-gray-800">
     <!-- Contacts sidebar -->
-    <div class="w-1/3 bg-white border-r">
-      <div class="p-4 bg-orange-500 text-white">
+    <aside class="w-1/3 bg-white dark:bg-gray-900 border-r dark:border-gray-700 h-full">
+      <div class="p-4 bg-orange-500 text-white dark:bg-orange-600 flex justify-between">
         <h2 class="text-xl font-semibold">Conversations</h2>
+        <Button @click="openNewConversationModal = true" variant="ghost" class="text-white">
+          <Plus class="w-4 h-4" />
+        </Button>
       </div>
-      <ul class="overflow-y-auto h-[calc(100%-4rem)]">
+      <ul class="overflow-y-auto h-full">
         <li v-for="conversation in conversations" :key="conversation.id" @click="selectConversation(conversation)"
-          class="p-4 hover:bg-gray-100 cursor-pointer transition-colors duration-200" :class="{
-            'bg-orange-100': selectedConversation?.id === conversation.id,
-            'font-bold text-orange-600': conversation.unreadCount > 0,
-          }">
+          class="p-4 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition-colors duration-200"
+          :class="{ 'bg-orange-100 dark:bg-orange-800': selectedConversation?.id === conversation.id }">
           <div class="flex items-center">
             <div
-              class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white text-sm font-semibold">
-              {{ conversation?.otherUserName?.charAt(0) }}
+              class="w-10 h-10 rounded-full bg-orange-500 dark:bg-orange-600 flex items-center justify-center text-white text-sm font-semibold">
+              {{ conversation.otherUserFullName?.charAt(0) }}
             </div>
-            <div class="flex flex-col flex-grow">
-              <span class="ml-3" :class="{
-                'font-medium': selectedConversation?.id === conversation.id,
-                'font-bold': conversation.unreadCount > 0,
-              }">{{ conversation?.otherUserName }}</span>
-              <span class="ml-3 font-light text-sm text-slate-400">
-                {{ conversation?.lastMessage?.length > 10
-                  ? conversation.lastMessage.substring(0, 10) + '...'
-                  : conversation.lastMessage }}
+            <div class="flex flex-col flex-grow ml-3">
+              <span class="font-medium dark:text-gray-300">{{ conversation.otherUserFullName }}</span>
+              <span class="font-light text-sm text-gray-500 dark:text-gray-400 truncate">
+                {{ conversation.lastMessage || 'No messages yet' }}
               </span>
             </div>
-            <!-- Unread Badge -->
             <div v-if="conversation.unreadCount > 0"
-              class="flex-shrink mr-4 w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center">
+              class="flex-shrink-0 ml-4 w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center">
               {{ conversation.unreadCount }}
             </div>
-            <span class="text-xs">{{ formatDateTime(conversation.updatedAt) }}</span>
+            <span class="text-xs text-gray-500 dark:text-gray-400">{{ formatDateTime(conversation.updatedAt) }}</span>
           </div>
         </li>
       </ul>
-    </div>
+    </aside>
 
     <!-- Chat area -->
-    <div class="w-2/3 flex-1 flex flex-col h-full ">
-      <!-- Chat header -->
-      <div class="bg-white border-b p-4 flex flex-col items-center">
-        <h4 v-if="selectedConversation?.pending">New Conversation with</h4>
-        <div class="flex items-center">
-          <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-semibold">
-            {{ selectedConversation?.otherUserName?.charAt(0) }}
+    <main class="w-2/3 flex-1 flex flex-col h-full">
+      <header class="bg-white dark:bg-gray-900 border-b dark:border-gray-700 p-4 flex items-center">
+        <div v-if="selectedConversation" class="flex items-center">
+          <div
+            class="w-10 h-10 rounded-full bg-orange-500 dark:bg-orange-600 flex items-center justify-center text-white text-sm font-semibold">
+            {{ selectedConversation?.otherUserFullName?.charAt(0) }}
           </div>
-          <h2 class="ml-3 text-xl font-semibold">{{ selectedConversation?.otherUserName }}</h2>
+          <h2 class="ml-3 text-xl font-semibold dark:text-white">{{ selectedConversation?.otherUserFullName }}</h2>
         </div>
-      </div>
+        <div v-if="!selectedConversation" class="flex items-center">
+          <h2 class="ml-3 text-xl font-semibold dark:text-white">Select a conversation or start a new one.</h2>
+        </div>
+      </header>
 
-      <!-- Messages area -->
-      <div class="flex-1 p-4 w-full overflow-y-auto space-y-4" ref="messagesContainer">
-        <div v-for="(message, index) in messages" :key="index" class="flex"
+      <section class="flex-1 p-4 w-full overflow-y-auto space-y-4" ref="messagesContainer">
+        <article v-for="message in messages" :key="message.id" class="flex"
           :class="{ 'justify-end': message.sender_id === currentUser.id }">
           <div class="flex flex-col max-w-full md:max-w-[70%]">
-            <p class="text-xs">{{ formatDateTime(message.created_at) }}</p>
-          <div class="rounded-lg p-3  break-words" :class="{
-            'bg-orange-500 text-white': message.sender_id === currentUser.id,
-            'bg-gray-100 border-2 border-orange-500': message.sender_id !== currentUser.id
-          }" style="word-wrap: break-word; overflow-wrap: break-word;">
-            <p class="text-sm">{{ message.content }}</p>
-          </div></div>
-        </div>
-      </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 self-end">{{ formatDateTime(message.created_at) }}</p>
+            <div class="rounded-lg p-3 break-words" :class="{
+              'bg-orange-500 text-white': message.sender_id === currentUser.id,
+              'bg-gray-100 dark:bg-gray-700 border-2 border-orange-500': message.sender_id !== currentUser.id
+            }" style="word-wrap: break-word; overflow-wrap: break-word;">
+              <p class="text-sm dark:text-gray-300">{{ message.content }}</p>
+            </div>
+          </div>
+        </article>
+      </section>
 
-
-      <!-- Input area -->
-      <div class="p-4 bg-white border-t ">
+      <footer class="p-4 bg-white dark:bg-gray-900 border-t dark:border-gray-700">
         <form @submit.prevent="sendMessage" class="flex items-center">
           <input v-model="newMessage" type="text" :disabled="!selectedConversation" placeholder="Type a message..."
-            class="flex-1 border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500" />
+            class="flex-1 border dark:border-gray-700 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800 dark:text-gray-300" />
           <button type="submit" :disabled="!selectedConversation"
-            class="bg-orange-500 text-white rounded-r-lg px-4 py-2 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            class="bg-orange-500 text-white dark:bg-orange-600 rounded-r-lg px-4 py-2 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">
             <SendIcon class="h-6 w-5" />
           </button>
         </form>
-      </div>
-    </div>
+      </footer>
+    </main>
+    <!-- New Conversation Modal -->
+    <Dialog v-model:open="openNewConversationModal">
+      <DialogContent class="sm:max-w-[425px] flex flex-col">
+        <DialogHeader>
+          <DialogTitle>New Conversation</DialogTitle>
+          <DialogDescription>
+            Select a user to start a new conversation with.
+          </DialogDescription>
+        </DialogHeader>
+        <div class="grid gap-4 py-4">
+          <div class="grid grid-cols-1 items-center gap-4">
+            <Label for="user-search" class="text-right">
+              Search Users
+            </Label>
+            <Input type="text" id="user-search" v-model="searchQuery" placeholder="Search by name" />
+            <ul class="mt-2 max-h-48 overflow-y-auto rounded-md border border-gray-300">
+              <li v-for="user in filteredUsers" :key="user.id" @click="selectUser(user)"
+                class="p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+                {{ user.full_name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <DialogFooter>
+          <Button @click="startNewConversation" type="submit" class="w-full" :disabled="!selectedUser">
+            Start Conversation
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   </div>
 </template>
 
+
 <script setup>
-import { Circle } from 'lucide-vue-next';
-import { SendIcon } from 'lucide-vue-next';
-import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
-const emit = defineEmits(['conversationStarted']);
-const props = defineProps(['newConversationInfo'])
-const currentUser = useSupabaseUser(); // Current authenticated user
+import { ref, onMounted, onUnmounted, nextTick, computed, watch, defineExpose } from 'vue';
+import { SendIcon, Plus } from 'lucide-vue-next';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+
+const supabase = useSupabaseClient();
+const currentUser = useSupabaseUser();
+
 const conversations = ref([]);
 const selectedConversation = ref(null);
 const messages = ref([]);
 const newMessage = ref('');
-const supabase = useSupabaseClient();
 const messagesContainer = ref(null);
-const pendingConversation = ref({})
-let messageSubscription = null; // Store the subscription reference
+let messageSubscription = null;
 
-watch(props.newConversationInfo, async (info) => {
-  console.log(info)
-  if (info) {
-    console.log(info.otherUserName)
-    await startConversation(info.otherUserId, info.otherUserName);
-  }
-});
-const startConversation = async (otherUserId, otherUserName) => {
-  try {
-    // Check if a conversation already exists in either direction
-    const { data: existingConversation, error: fetchError } = await supabase
-      .from('Conversations')
-      .select(`
-        id,
-        current_user_id,
-        other_user_id,
-        last_message,
-        unread_counts,
-        updated_at,
-        current_user:profiles!current_user_id(full_name),
-        other_user:profiles!other_user_id(full_name)
-      `)
-      .or(
-        `and(current_user_id.eq.${currentUser.value.id},other_user_id.eq.${otherUserId}),and(current_user_id.eq.${otherUserId},other_user_id.eq.${currentUser.value.id})`
-      )
-      .limit(1)
-      .single();
-    if (existingConversation) {
-      // If the conversation exists, select it
-      selectedConversation.value = {
-        id: existingConversation.id,
-        otherUserId: existingConversation.current_user_id === currentUser.value.id
-          ? existingConversation.other_user_id
-          : existingConversation.current_user_id,
-        otherUserName: existingConversation.current_user_id === currentUser.value.id
-          ? existingConversation.other_user?.full_name ?? 'Unknown'
-          : existingConversation.current_user?.full_name ?? 'Unknown',
-        lastMessage: existingConversation.last_message ?? '',
-        unreadCounts: existingConversation.unread_counts ?? 0,
-        updatedAt: existingConversation.updated_at ?? null,
-      };;
-      await selectConversation(selectedConversation.value);
-      console.log(existingConversation.other_user.full_name, existingConversation.current_user.full_name)
-    } else {
-      throw fetchError
-    }
-  } catch (error) {
-    if (error && error.code !== 'PGRST116') {
-      console.error('Error checking for existing conversation:', error);
-      return;
-    } else {
-      // Store conversation details temporarily
-      pendingConversation.value = {
-        otherUserId,
-        otherUserName,
-        pending: true
-      };
-      await selectConversation(pendingConversation.value);
-    }
-  }
-};
+//New Conversation Properties
+const openNewConversationModal = ref(false);
+const availableUsers = ref([]);
+const selectedUser = ref(null);
+const searchQuery = ref('');
 
-// Fetch conversations for the current user
+// Fetch all conversations for the current user
 const fetchConversations = async () => {
   const { data, error } = await supabase
     .from('Conversations')
     .select(`
-    id,
-    current_user_id,
-    other_user_id,
-    last_message,
-    unread_counts,
-    updated_at,
-    current_user:profiles!current_user_id(full_name),
-    other_user:profiles!other_user_id(full_name)
-  `)
-    .or(`current_user_id.eq.${currentUser.value.id},other_user_id.eq.${currentUser.value.id}`)
+      id,
+      created_at,
+      updated_at,
+      user_one_id,
+      user_two_id,
+      last_message,
+      unread_counts,
+      user_one:profiles!user_one_id(full_name),
+      user_two:profiles!user_two_id(full_name)
+    `)
+    .or(`user_one_id.eq.${currentUser.value.id},user_two_id.eq.${currentUser.value.id}`)
     .order('updated_at', { ascending: false });
 
-  if (!error) {
-    conversations.value = data.map((conv) => ({
-      id: conv.id,
-      otherUserId: conv.current_user_id === currentUser.value.id ? conv.other_user_id : conv.current_user_id,
-      otherUserName: conv.current_user_id === currentUser.value.id
-        ? conv.other_user.full_name
-        : conv.current_user.full_name,
-      lastMessage: conv.last_message,
-      unreadCounts: conv.unread_counts,
-      updatedAt: conv.updated_at,
-    }));
-    if (props.newConversationInfo) {
-      startConversation(props.newConversationInfo.other_user_id, props.newConversationInfo.other_user_name)
-    }
-  } else {
+  if (error) {
     console.error('Error fetching conversations:', error);
+    return;
   }
+
+  conversations.value = data.map(conv => {
+    const otherUser = conv.user_one_id === currentUser.value.id ? conv.user_two : conv.user_one;
+    return {
+      id: conv.id,
+      otherUserId: conv.user_one_id === currentUser.value.id ? conv.user_two_id : conv.user_one_id,
+      otherUserFullName: otherUser.full_name,
+      lastMessage: conv.last_message,
+      unreadCount: conv.unread_counts?.[currentUser.value.id] ?? 0,
+      updatedAt: conv.updated_at,
+    };
+  });
 };
 
-// Select a conversation and fetch messages
+// Select a conversation and fetch its messages
 const selectConversation = async (conversation) => {
   selectedConversation.value = conversation;
+
   if (conversation.id) {
     const { data, error } = await supabase
       .from('Messages')
@@ -206,30 +186,34 @@ const selectConversation = async (conversation) => {
       .eq('conversation_id', conversation.id)
       .order('created_at', { ascending: true });
 
-    if (!error) {
-      messages.value = data;
-      scrollToBottom();
-      markMessagesAsRead(conversation.id);
-    } else {
+    if (error) {
       console.error('Error fetching messages:', error);
+      return;
     }
+
+    messages.value = data;
+    scrollToBottom();
+    markMessagesAsRead(conversation.id);
+  } else {
+    messages.value = []
   }
 };
 
-// Mark messages as read
+// Mark messages as read for the current user
 const markMessagesAsRead = async (conversationId) => {
   const { error } = await supabase.rpc('reset_unread_count', {
     conversation_id: conversationId,
     user_id: currentUser.value.id,
   });
 
-  if (!error) {
-    const conversation = conversations.value.find((c) => c.id === conversationId);
-    if (conversation) {
-      conversation.unreadCount = 0;
-    }
-  } else {
+  if (error) {
     console.error('Error resetting unread count:', error);
+    return;
+  }
+
+  const conversation = conversations.value.find((c) => c.id === conversationId);
+  if (conversation) {
+    conversation.unreadCount = 0;
   }
 };
 
@@ -241,99 +225,64 @@ const scrollToBottom = async () => {
   }
 };
 
+// Send a message
 const sendMessage = async () => {
-  if (newMessage.value.trim() === '') return;
-
-  try {
-    let conversationId = selectedConversation.value?.id;
-
-    // If there's a pending conversation, create it or find an existing one
-    if (!conversationId && pendingConversation.value && selectedConversation.value == pendingConversation.value) {
-      const { otherUserId, otherUserName } = pendingConversation.value;
-
-      // Check again if a conversation exists (accounting for both directions)
-      const { data: existingConversation, error: fetchError } = await supabase
-        .from('Conversations')
-        .select('*')
-        .or(
-          `and(current_user_id.eq.${currentUser.value.id},other_user_id.eq.${otherUserId}),and(current_user_id.eq.${otherUserId},other_user_id.eq.${currentUser.value.id})`
-        )
-        .limit(1)
-        .single();
-
-      if (fetchError && fetchError.code !== 'PGRST116') {
-        console.error('Error checking for existing conversation:', fetchError);
-        return;
-      }
-
-      if (existingConversation) {
-        selectedConversation.value = existingConversation;
-        conversationId = existingConversation.id;
-      } else {
-        // Create a new conversation
-        const { data: newConversation, error: createError } = await supabase
-          .from('Conversations')
-          .insert({
-            current_user_id: currentUser.value.id,
-            other_user_id: otherUserId,
-            other_user_name: otherUserName,
-            last_message: newMessage.value.trim(),
-            unread_counts: { [currentUser.value.id]: 0, [otherUserId]: 1 }
-          })
-          .select()
-          .single();
-
-        if (createError) {
-          console.error('Error creating conversation:', createError);
-          return;
-        }
-
-        selectedConversation.value = {
-          id: newConversation.id,
-          otherUserId: newConversation.current_user_id === currentUser.value.id
-            ? newConversation.other_user_id
-            : newConversation.current_user_id,
-          otherUserName: newConversation.current_user_id === currentUser.value.id
-            ? newConversation.other_user?.full_name ?? 'Unknown'
-            : newConversation.current_user?.full_name ?? 'Unknown',
-          lastMessage: newConversation.last_message ?? '',
-          unreadCounts: newConversation.unread_counts ?? 0,
-          updatedAt: newConversation.updated_at ?? null,
-        };
-        conversationId = newConversation.id;
-
-        pendingConversation.value = null;
-
-        emit('conversationStarted', newConversation);
-      }
-    }
-
-    // Insert the message
-    const { error: messageError } = await supabase
-      .from('Messages')
+  if (!newMessage.value.trim() || !selectedConversation.value) return;
+  if(!selectedConversation.value.id){
+      const { data: newConversation, error: createError } = await supabase
+      .from('Conversations')
       .insert({
-        conversation_id: conversationId,
-        sender_id: currentUser.value.id,
-        receiver_id: selectedConversation.value.otherUserId,
-        content: newMessage.value.trim(),
-        read: false,
-      });
+          user_one_id: currentUser.value.id,
+          user_two_id: selectedConversation.value.otherUserId,
+          unread_counts: { [currentUser.value.id]: 0, [selectedConversation.value.otherUserId]: 1 },
+      })
+      .select(`
+          id,
+          created_at,
+          updated_at,
+          user_one_id,
+          user_two_id,
+          last_message,
+          unread_counts,
+          user_one:profiles!user_one_id(full_name),
+          user_two:profiles!user_two_id(full_name)
+      `)
+      .single();
 
-    if (!messageError) {
-      await supabase
-        .from('Conversations')
-        .update({ last_message: newMessage.value.trim() })
-        .eq('id', conversationId);
-
-      newMessage.value = '';
+      if (createError) {
+      console.error('Error creating conversation:', createError);
+      return;
+      }
+      selectedConversation.value.id = newConversation.id;
       await fetchConversations();
-      await selectConversation(selectedConversation.value);
-    } else {
-      console.error('Error sending message:', messageError);
-    }
-  } catch (error) {
-    console.error('Unexpected error:', error);
   }
+  const conversationId = selectedConversation.value.id;
+  const otherUserId = selectedConversation.value.otherUserId;
+  
+      
+  // Insert the message
+  const { error: messageError } = await supabase
+    .from('Messages')
+    .insert({
+      conversation_id: conversationId,
+      sender_id: currentUser.value.id,
+      content: newMessage.value.trim(),
+    });
+
+  if (messageError) {
+    console.error('Error sending message:', messageError);
+    return;
+  }
+
+  // Update last_message in Conversations table
+  await supabase
+    .from('Conversations')
+    .update({ last_message: newMessage.value.trim()})
+    .eq('id', conversationId);
+
+  newMessage.value = '';
+  await fetchConversations();
+  await selectConversation(selectedConversation.value);
 };
 
 // Real-time listener for new messages
@@ -345,23 +294,16 @@ const setupRealtimeListener = () => {
       { event: 'insert', schema: 'public', table: 'Messages' },
       (payload) => {
         const newMessage = payload.new;
-
-        const conversation = conversations.value.find(
-          (c) => c.id === newMessage.conversation_id
-        );
+        const conversation = conversations.value.find((c) => c.id === newMessage.conversation_id);
 
         if (conversation) {
           conversation.lastMessage = newMessage.content;
-          messages.value.push(newMessage)
+          messages.value.push(newMessage);
           scrollToBottom();
-
-          if (newMessage.receiver_id === currentUser.value.id) {
+          if (newMessage.sender_id !== currentUser.value.id) {
             conversation.unreadCount += 1;
           }
-          // After updating the lastMessage, reassign the conversations array to trigger reactivity
           conversations.value = [...conversations.value];
-        } else {
-          fetchConversations();
         }
       }
     )
@@ -375,33 +317,124 @@ const cleanupRealtimeListener = () => {
     messageSubscription = null;
   }
 };
+
+// Format date and time for messages and conversation list
 const formatDateTime = (dateTimeStr) => {
   const date = new Date(dateTimeStr);
   const now = new Date();
-
-  // Check if the date is today
   const isToday =
     date.getDate() === now.getDate() &&
     date.getMonth() === now.getMonth() &&
     date.getFullYear() === now.getFullYear();
 
   if (isToday) {
-    // Format the hour manually to remove leading zero
-    let hours = date.getHours();
-    const minutes = date.getMinutes().toString().padStart(2, '0'); // Ensure two-digit minutes
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12; // Convert to 12-hour format, ensuring 12 instead of 0
-
-    return `${hours}:${minutes} ${ampm}`;
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   } else {
-    // Format as "Jan 5"
-    return date.toLocaleString('en-US', { month: 'short', day: 'numeric' });
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   }
 };
 
-// Lifecycle hooks
-onMounted(() => {
-  fetchConversations();
+const fetchAvailableUsers = async () => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('id, full_name')
+    .neq('id', currentUser.value.id)
+    .limit(10)
+    .ilike('full_name', `%${searchQuery.value}%`); // Case-insensitive search
+
+  if (error) {
+    console.error('Error fetching available users:', error);
+    return;
+  }
+
+  availableUsers.value = data;
+};
+// Filter the users based on the search query
+
+const filteredUsers = computed(() => {
+  return availableUsers.value.filter(user =>
+    user.full_name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
+watch(searchQuery, async (newValue, oldValue) => {
+  await fetchAvailableUsers();
+})
+const checkExistingConversation = async (userId) => {
+    const { data: existingConversation, error: fetchError } = await supabase
+      .from('Conversations')
+      .select(`
+        id,
+        user_one_id,
+        user_two_id,
+        last_message,
+        unread_counts,
+        updated_at,
+        user_one:profiles!user_one_id(full_name),
+        user_two:profiles!user_two_id(full_name)
+      `)
+      .or(
+        `and(user_one_id.eq.${currentUser.value.id},user_two_id.eq.${userId}),and(user_one_id.eq.${userId},user_two_id.eq.${currentUser.value.id})`
+      )
+      .limit(1)
+      .single();
+    if (fetchError && fetchError.code !== 'PGRST116') {
+        console.error('Error checking for existing conversation:', fetchError);
+        return;
+    }
+    if (existingConversation) {
+        const otherUser = existingConversation.user_one_id === currentUser.value.id ? existingConversation.user_two : existingConversation.user_one;
+      const conversation = {
+        id: existingConversation.id,
+        otherUserId: existingConversation.user_one_id === currentUser.value.id ? existingConversation.user_two_id : existingConversation.user_one_id,
+        otherUserFullName: otherUser.full_name,
+        lastMessage: existingConversation.last_message,
+        unreadCount: existingConversation.unread_counts?.[currentUser.value.id] ?? 0,
+        updatedAt: existingConversation.updated_at,
+      }
+      selectConversation(conversation)
+    }
+    else{
+        const { data: user, error: userError } = await supabase
+        .from('profiles')
+        .select('id, full_name')
+        .eq('id', userId)
+        .single();
+        if(userError) return console.log("Error getting user data", userError)
+        const conversation = {
+            otherUserId: user.id,
+            otherUserFullName: user.full_name,
+            id: null
+        }
+        selectConversation(conversation)
+    }
+};
+//Start Conversation
+const startConversation = async (userId) => {
+    await checkExistingConversation(userId)
+};
+const startNewConversation = async () => {
+    if (!selectedUser.value) return;
+    await checkExistingConversation(selectedUser.value.id);
+    selectedUser.value = null;
+    openNewConversationModal.value = false;
+};
+const selectUser = (user) => {
+  selectedUser.value = user;
+}
+defineExpose({
+  startConversation
+})
+onMounted(async () => {
+  await fetchConversations();
+  fetchAvailableUsers();
   setupRealtimeListener();
 });
 
@@ -409,3 +442,39 @@ onUnmounted(() => {
   cleanupRealtimeListener();
 });
 </script>
+
+<style scoped>
+.message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  padding: 1rem;
+}
+
+.message-row {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.message-bubble {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  max-width: 80%;
+}
+
+.message-row.sent {
+  justify-content: flex-end;
+}
+
+.message-bubble.sent {
+  background-color: #007bff;
+  color: white;
+}
+
+.message-bubble.received {
+  background-color: #f0f0f0;
+}
+</style>
+
