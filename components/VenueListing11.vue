@@ -1,10 +1,6 @@
 
 <script setup lang="ts">
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Toggle } from '@/components/ui/toggle';
 import { Button } from '@/components/ui/button';
-import { Home, Calendar, MapPin, Clock, Check } from 'lucide-vue-next';
 import { Progress } from '@/components/ui/progress';
 
 

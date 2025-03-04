@@ -298,7 +298,8 @@ onMounted(() => {
   if (venueId != 0) {
     getVenueById(venueId)
   }
-  getSimilarVenues(null)
+  if(!props.isPreview)
+    getSimilarVenues(null)
 });
 watch(() => props.isVisible, (newValue) => {
   if (newValue) {

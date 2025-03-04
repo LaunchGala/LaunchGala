@@ -95,18 +95,28 @@ const formatTime = (time: string) => {
           <h3 class="font-semibold mb-2">Event Dates</h3>
           <div class="flex items-center">
             <CalendarIcon class="w-5 h-5 mr-2 text-orange-600" />
-            <span>{{ formatDate(event.event_start_date) }}</span>
-            <span v-if="event.event_end_date" class="mx-2">-</span>
-            <span v-if="event.event_end_date">{{ formatDate(event.event_end_date) }}</span>
+            <div v-if="!event.is_tbd">
+              <span>{{ formatDate(event.event_start_date) }}</span>
+              <span v-if="event.event_end_date" class="mx-2">-</span>
+              <span v-if="event.event_end_date">{{ formatDate(event.event_end_date) }}</span>
+            </div>
+            <div v-else>
+              <span class="text-gray-500">TBD</span>
+            </div>
           </div>
         </div>
         <div>
           <h3 class="font-semibold mb-2">Event Time</h3>
           <div class="flex items-center">
             <Clock class="w-5 h-5 mr-2 text-orange-600" />
-            <span>{{ formatTime(event.event_start_time) }}</span>
-            <span v-if="event.event_end_time" class="mx-2">-</span>
-            <span v-if="event.event_end_time">{{ formatTime(event.event_end_time) }}</span>
+            <div v-if="!event.is_tbd">
+              <span>{{ formatTime(event.event_start_time) }}</span>
+              <span v-if="event.event_end_time" class="mx-2">-</span>
+              <span v-if="event.event_end_time">{{ formatTime(event.event_end_time) }}</span>
+            </div>
+            <div v-else>
+              <span class="text-gray-500">TBD</span>
+            </div>
           </div>
         </div>
       </div>

@@ -43,31 +43,48 @@ console.log(props.event);
         </CardHeader>
         <CardContent>
           <div class="space-y-6">
-            <div class=" items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
-              <span class="text-lg font-semibold text-gray-900 dark:text-white mr-72 ">Allow Venue offering</span>
+            <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <div>
+                <span class="text-lg font-semibold text-gray-900 dark:text-white mr-72 ">Allow Venue offering</span>
+                <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
+              </div>
               <Switch :default-checked="props.event.allow_venue_offering" @update:checked="setVenueOffering" id="displayPrice" />
-              <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
               
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <div>
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow volunteers offering</span>
+                <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
+              </div>
               <Switch :default-checked="props.event.allow_volunteers_offering" @update:checked="setVolunteersOffering" id="displayPrice" />
 
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <div>
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow sponsorship offering</span>
+                <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
+              </div>
               <Switch :default-checked="props.event.allow_sponsorship_offering" @update:checked="setSponsorshipOffering" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <div>
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow expertise offering</span>
+                <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
+              </div>
               <Switch :default-checked="props.event.allow_expertise_offering" @update:checked="setExpertiseOffering" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <div>
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow vendors offering</span>
+                <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
+              </div>
               <Switch :default-checked="props.event.allow_vendors_offering" @update:checked="setVendorsOffering" id="displayPrice" />
             </div>
             <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+              <div>
               <span class="text-lg font-semibold text-gray-900 dark:text-white">Allow registration request</span>
+                <div class=" text-sm text-gray-500 dark:text-gray-300">Users can send you an offer providing a venue for your event </div>
+              </div>
               <Switch :default-checked="props.event.allow_registration_request" @update:checked="setRegistrationRequest" id="displayPrice" />
             </div>
                         <!-- <div class="flex items-center justify-between p-6 rounded-md bg-white dark:bg-gray-800 shadow-sm">
@@ -147,7 +164,7 @@ console.log(props.event);
               Back
             </div>
           </Button>
-          <Progress :model-value="90"  />
+          <Progress :model-value="87"  />
           <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2 ">
             <div  class="flex items-center">
               Next

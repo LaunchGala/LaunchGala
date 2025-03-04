@@ -738,7 +738,7 @@ async function refreshCompanies() {
                 <DropdownMenu>
                   <DropdownMenuTrigger :disabled="editDisabled"
                     class="mb-4 w-full rounded-md border border-gray-300 dark:border-orange-600 bg-white dark:bg-gray-800 py-2 px-3 flex justify-between items-center">
-                    <span>{{ userProfile.location || 'Select your city' }}</span>
+                    <<span>{{ userProfile.location }}</span>>
                     <ChevronDown class="w-5 h-5 text-orange-600 dark:text-orange-400" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent

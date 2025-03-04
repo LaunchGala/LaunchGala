@@ -371,7 +371,7 @@ function addevent_types(event_types: string) {
               Back
             </div>
           </Button>
-          <Progress :model-value="30" class=" text-white "  />
+          <Progress :model-value="12" class=" text-white "  />
           <Button @click="$emit('nextStep')" as-child variant="default" class="bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold ml-2">
             <div  class="flex items-center">
               Next

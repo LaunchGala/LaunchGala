@@ -51,6 +51,7 @@ import { cibSnapchat } from '@coreui/icons';
 import { DiscordLogoIcon } from '@radix-icons/vue';
 import TiktokIcon from '~/components/TiktokIcon.vue';
 import CIcon from '@coreui/icons-vue';
+import MiniAddressSelection from '~/components/MiniAddressSelection.vue';
 
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
@@ -1003,6 +1004,10 @@ async function updateProfile() {
     editDisabled.value = true;
   }
 }
+
+const updateAddress = (newAddress: string) => {
+  profileData.value.location = newAddress
+}
 onMounted(() => {
   getProfileWithDetails()
 });
@@ -1138,8 +1143,9 @@ onMounted(() => {
                 <div v-if="isVisible('location')" class="flex items-center mt-2 text-gray-600">
                   <MapPin class="w-5 h-5 mr-2" />
                   <span v-if="editDisabled">{{ profileData.location }}</span>
-                  <input v-if="!editDisabled" v-model="profileData.location" placeholder="Location"
-                    class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                  <MiniAddressSelection
+                    v-if="!editDisabled"
+                    v-model:address="profileData.location" @update-address="updateAddress"></MiniAddressSelection>
 
                 </div>
                 <p class="mt-2 text-sm text-gray-500">

@@ -6,7 +6,7 @@
         @input="onAddressInput"
         placeholder="Enter address"
         type="text"
-        class="address-input"
+        class="address-input mb-2"
       />
       <div ref="mapContainer" class="map"></div>
     </div>
@@ -122,11 +122,10 @@ watch(() => props.address, (newValue) => {
   }
   
   .address-input {
-    margin: 10px;
-    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
+    background-color: white;
   }
   
   .map {

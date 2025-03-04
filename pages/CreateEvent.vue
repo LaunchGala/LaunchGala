@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next';
 import { useToast } from 'vue-toastification';
+import { is } from 'date-fns/locale';
 
 const supabase = useSupabaseClient()
 
@@ -37,7 +38,8 @@ const newEvent = ref({
   allow_expertise_offering: true,
   allow_vendors_offering: true,
   allow_registration_request: true,
-  is_published: false
+  is_published: false,
+  is_tbd: false,
 
 
 
@@ -47,42 +49,104 @@ const newEvent = ref({
 
 const toast = useToast();
 
-function publishEvent(isPublished: boolean){
-  newEvent.value.is_published = isPublished;
-  var toastText = isPublished ? "Event Published" : "Event Unpublished";
+async function publishEvent(isPublished: boolean){
+  var errors = validateEventListing(newEvent.value);
+  if(errors.length > 0){
+    toast.error("Error: " + errors[0], {
+        timeout: 5000,
+      });
+    return;
+  }
+  newEvent.value.is_published = !newEvent.value.is_published;
+  var isPublished = newEvent.value.is_published;
+  var toastText = isPublished ? "Venue Published" : "Venue Unpublished";
   console.log(newEvent.value)
-  supabase.from('AllEvents').upsert([
-  newEvent.value
-  ]).then(response => {
-    console.log(response)
-    toast.success(toastText, {
-        timeout: 5000,
-      });
-  }).catch(error => {
-    console.log(error)
-    toast.error("Error: Event Not Updated", {
-        timeout: 5000,
-      });
-  })
+  try {
+    // Save venue to `AllVenues`
+    const { data, error } = await supabase
+      .from('AllEvents')
+      .upsert([newEvent.value])
+      .select(); // ✅ Ensure we retrieve the inserted/updated row(s)
+
+    if (error) {
+      throw error;
+    }
+
+    if (data && data.length > 0) {
+      newEvent.value.id = data[0].id; // ✅ Store the Supabase ID back in the object
+      console.log("New Event ID:", newEvent.value.id);
+    }
+
+    toast.success(toastText, { timeout: 5000 });
+
+  } catch (error) {
+    console.error("Error:", error);
+    newEvent.value.is_published = !isPublished;
+    toast.error("Error: Event Not Published", { timeout: 5000 });
+  }
 }
 
-function addEvent() {
-  console.log(newEvent.value)
-  supabase.from('AllEvents').upsert([
-  newEvent.value
-  ]).then(response => {
-    console.log(response)
-    toast.success("Event Saved", {
-        timeout: 5000,
-      });
-  }).catch(error => {
-    console.log(error)
-    toast.error("Error: Venue Not Saved", {
-        timeout: 5000,
-      });
-  })
+async function addEvent() {
+  console.log(newEvent.value);
+
+  try {
+    // Save venue to `AllVenues`
+    const { data, error } = await supabase
+      .from('AllEvents')
+      .upsert([newEvent.value])
+      .select(); // ✅ Ensure we retrieve the inserted/updated row(s)
+
+    if (error) {
+      throw error;
+    }
+
+    if (data && data.length > 0) {
+      newEvent.value.id = data[0].id; // ✅ Store the Supabase ID back in the object
+      console.log("New Event ID:", newEvent.value.id);
+    }
+
+    toast.success("Event Saved", { timeout: 1000 });
+
+  } catch (error) {
+    console.error("Error:", error);
+    toast.error("Error: Event Not Saved", { timeout: 5000 });
+  }
 }
 
+function validateEventListing(event: any) {
+  const errors: string[] = [];
+
+  if (!event.title || event.title.trim() === '') {
+    errors.push("Title is required.");
+  }
+
+  if (!event.location || event.location.trim() === '') {
+    errors.push("Location is required.");
+  }
+
+  if (!event.event_type || event.event_type.trim() === '') {
+    errors.push("Event type must be selected.");
+  }
+
+  if (!Array.isArray(event.industries) || event.industries.length < 1) {
+    errors.push("At least 1 industry must be selected.");
+  }
+
+  if (!event.event_start_date || !event.event_end_date) {
+    errors.push("Start and end dates are required.");
+  }
+  if (event.event_start_date >= event.event_end_date) {
+    errors.push("Start date must be before end date.");
+  }
+  if (!event.event_start_time || !event.event_end_time) {
+    errors.push("Start and end times are required.");
+  }
+  if (event.event_start_time >= event.event_end_time) {
+    errors.push("Start time must be before end time.");
+  }
+
+  return errors; // Returns an array of errors (empty if valid)
+}
 function nextStep(item) {
   if(!!item){
     newEvent.value = item;
@@ -91,6 +155,7 @@ function nextStep(item) {
   }
   currentStep.value += 1;
   window.scrollTo(0, 0);
+  addEvent()
 }
 
 function previousStep() {
@@ -101,13 +166,6 @@ function previousStep() {
 </script>
 
 <template>
-  <Button class=" text-l ml-14 mt-6 bg-white text-orange-500 border-orange-500 hover:bg-orange-100 font-bold" @click="addEvent">Save</Button>
-  <Button v-show="currentStep > 1 && !newEvent.is_published" @click="publishEvent(true)">
-    Publish
-  </Button>
-  <Button v-show="currentStep > 1 && newEvent.is_published" @click="publishEvent(false)">
-    Unpublish
-  </Button>
   <div>
     <EventCreating01 :event="newEvent" v-show="currentStep === 1" @next-step="nextStep" @previous-step="previousStep"/>
     <EventCreating02 :event="newEvent" v-show="currentStep === 2" @next-step="nextStep" @previous-step="previousStep"/>
@@ -117,7 +175,7 @@ function previousStep() {
     <EventCreating06 :event="newEvent" v-show="currentStep === 6" @next-step="nextStep" @previous-step="previousStep"/>
     <EventCreating07 :event="newEvent" v-show="currentStep === 7" @next-step="nextStep" @previous-step="previousStep"/>
     <EventCreating08 :event="newEvent" v-show="currentStep === 8" @next-step="nextStep" @previous-step="previousStep"/>
-    <EventCreating09 :event="newEvent" v-show="currentStep === 9" @next-step="nextStep" @previous-step="previousStep"/>     
+    <EventCreating09 :event="newEvent" v-show="currentStep === 9" :is-visible="currentStep === 9" @next-step="nextStep" @previous-step="previousStep" @publish="publishEvent"/>     
   </div>
 
 

@@ -1,195 +1,261 @@
-<script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import {
-  GlobeIcon,
-  MapPinIcon,
-  Calendar as CalendarIcon,
-  Clock,
-  UserIcon,
-  CheckCircle,
-  Check
-} from 'lucide-vue-next';
-import { Button } from '@/components/ui/button';
+<template>
+  <div class="min-h-screen bg-orange-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="relative h-96 overflow-hidden">
+        <TitleImagesBanner :imageNames="event.images" :showButton="true" />
+      </div>
+      <div class="relative">
+        <img :src="event?.event_owner?.avatarSRC" alt="Event logo" class="absolute left-8 -top-24 w-48 h-48 rounded-full border-4 border-white shadow-xl object-cover">
+      </div>
 
-const props = defineProps({
-  event: {
-    type: Object,
-    required: true,
-  }
+
+      <div class="p-8 pt-28">
+        <div class="flex justify-between items-start">
+          <div>
+            <h1 class="text-4xl font-bold text-gray-900">{{event.title}}</h1>
+            <p class="mt-1 text-2xl text-orange-600">{{event.event_type}}</p>
+            <div class="mt-2 flex items-center text-gray-600">
+              <MapPin class="h-5 w-5 mr-2" />
+              <span>{{event.location}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900">About the Event</h2>
+          <p class="mt-2 text-gray-600 text-lg">{{ event.description }}</p>
+        </div>
+        
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h2 class="text-2xl font-semibold text-gray-900">Date & Time</h2>
+            <div class="mt-3 flex items-center text-gray-600">
+              <Calendar class="h-5 w-5 mr-2 text-orange-500" />
+              <span>{{ event.is_tbd ? 'TBD' : formatDateRange(event.event_start_date, event.event_end_date) }}</span>
+            </div>
+            <div class="mt-2 flex items-center text-gray-600">
+              <Clock class="h-5 w-5 mr-2 text-orange-500" />
+              <span>{{ event.is_tbd ? 'TBD' : formatTimeRange(event.event_start_time, event.event_end_time)}}</span>
+            </div>
+          </div>
+          
+          <div>
+            <h2 class="text-2xl font-semibold text-gray-900">Ticket Information</h2>
+            <div class="mt-3 flex items-center text-gray-600">
+              <DollarSign class="h-5 w-5 mr-2 text-orange-500" />
+              <span>Price: {{event.ticket_price}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div v-if="event?.featured_speakers?.length" class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900">Featured Speakers</h2>
+          <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div v-for="speaker in speakers" :key="speaker.name" class="flex items-center p-3 bg-orange-100 rounded-lg">
+              <img :src="speaker.avatar" :alt="speaker.name" class="w-12 h-12 rounded-full mr-3 object-cover">
+              <div>
+                <h3 class="font-medium text-gray-900">{{ speaker.name }}</h3>
+                <p class="text-sm text-gray-600">{{ speaker.role }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">Event Industries</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div v-for="highlight in event.industries" :key="highlight" class="flex items-center p-4 bg-gray-100 rounded-lg">
+              <component :is="Network" class="h-6 w-6 text-orange-600 mr-3" />
+              <span class="text-gray-800 font-medium">{{ highlight }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-12">
+          <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Ready to join us?</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <button @click="registerNow" class="w-full px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center shadow-md">
+              <Ticket class="h-5 w-5 mr-2" />
+              Register Now
+            </button>
+            <button @click="offerVenue" class="w-full px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center shadow-md">
+              <Building class="h-5 w-5 mr-2" />
+              Offer Venue
+            </button>
+            <button @click="offerSponsorship" class="w-full px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-300 flex items-center justify-center shadow-md">
+              <DollarSign class="h-5 w-5 mr-2" />
+              Offer Sponsorship
+            </button>
+            <button @click="offerVolunteering" class="w-full px-6 py-3 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300 flex items-center justify-center shadow-md">
+              <Heart class="h-5 w-5 mr-2" />
+              Offer Volunteering
+            </button>
+            <button @click="offerExpertise" class="w-full px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-300 flex items-center justify-center shadow-md">
+              <Briefcase class="h-5 w-5 mr-2" />
+              Offer Expertise
+            </button>
+            <button @click="vendorsOffering" class="w-full px-6 py-3 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors duration-300 flex items-center justify-center shadow-md">
+              <ShoppingBag class="h-5 w-5 mr-2" />
+              Vendors Offering
+            </button>
+          </div>
+        </div>
+        
+        <div class="mt-12">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">Social</h2>
+          <div class="flex flex-wrap gap-4">
+            <a href="mailto:info@techconf2023.com" class="flex items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-300">
+              <Webhook class="h-5 w-5 text-orange-600 mr-2" />
+              <span class="text-gray-800">Website</span>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center p-3 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300">
+              <Twitter class="h-5 w-5 text-blue-600 mr-2" />
+              <span class="text-blue-800">Twitter</span>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center p-3 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors duration-300">
+              <Linkedin class="h-5 w-5 text-blue-600 mr-2" />
+              <span class="text-blue-800">LinkedIn</span>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center p-3 bg-pink-100 rounded-lg hover:bg-pink-200 transition-colors duration-300">
+              <Instagram class="h-5 w-5 text-pink-600 mr-2" />
+              <span class="text-pink-800">Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { format } from 'date-fns';
+import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
+import { MapPin, Ticket, Calendar, Clock, DollarSign, Mail, Twitter, Linkedin, Instagram, Users, Lightbulb, Mic, Network, Building, Heart, Briefcase, ShoppingBag, Webhook } from 'lucide-vue-next'
+
+const props = defineProps(['eventId', 'isVisible', 'isPreview'])
+const route = useRoute();
+const eventId = route.query.id;
+const event = ref({
+created_by: 1,
+title: '',
+description: '',
+invite_only: false,
+ticket_price: 0,
+event_type: '',
+industries: [],
+images: [],
+event_start_date: new Date(),
+event_end_date: new Date(),
+event_start_time: '12:00:00',
+event_end_time: '14:00:00',
+location: '',
+agenda: '',
+link: '',
+allow_venue_offering: true,
+allow_volunteers_offering: true,
+allow_sponsorship_offering: true,
+allow_expertise_offering: true,
+allow_vendors_offering: true,
+allow_registration_request: true,
+is_published: false,
+is_tbd: false,
+
+
+
+
 });
 const contactInfo = ref({})
-async function getEvent() {
-  const { data: AllEvents, error } = await supabase.from('AllEvents').select('*, event_owner:profiles!created_by(*)').eq('id', venueId)
-  console.log(error)
-  Promise.all(AllEvents.map(async (event) => {
-    event.event_owner.avatarSRC = await fetchImage(event.event_owner.avatar_url)
-  })).then(() => {
-    props.event.value = AllEvents[0];
-    contactInfo.value = {other_user_id: props.event.value.event_owner.id, other_user_name: props.event.value.event_owner.full_name}
-    console.log(AllEvents)
-  })
+async function getEvent(id) {
+const { data: AllEvents, error } = await supabase.from('AllEvents').select('*, event_owner:profiles!created_by(*)').eq('id', id)
+console.log(error)
+Promise.all(AllEvents.map(async (event) => {
+  event.event_owner.avatarSRC = await fetchImage(event.event_owner.avatar_url)
+})).then(() => {
+  event.value = AllEvents[0];
+  contactInfo.value = {other_user_id: event.value.event_owner.id, other_user_name: event.value.event_owner.full_name}
+  console.log(AllEvents)
+})
 }
 const fetchImage = async (id) => {
-    if(!!id)
-    {
-            const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
-            return urlData?.data?.signedUrl ?? "";
-    }
-    return "";
+  if(!!id)
+  {
+          const urlData = await supabase.storage.from('avatars').createSignedUrl(id, 60);
+          return urlData?.data?.signedUrl ?? "";
   }
+  return "";
+}
 onMounted(() => {
-  getEvent()
+  if (eventId != 0) {
+    getEvent(eventId)
+  }
+});
+watch(() => props.isVisible, (newValue) => {
+  if (newValue) {
+    getEvent(props.eventId)
+  }
 });
 
 // Function to handle the "Share" button click
 const sharePage = () => {
-  const url = window.location.href;
-  const title = props.event.value.title;
+const url = window.location.href;
+const title = event.value.title;
 
-  if (navigator.share) {
-    // Use Web Share API if available
-    navigator.share({
-      title: title,
-      text: `Check out this event: ${title}`,
-      url: url,
-    })
-    .then(() => console.log('Successfully shared'))
-    .catch((error) => console.error('Error sharing', error));
-  } else {
-    // Fallback: Copy URL to clipboard
-    copyToClipboard(url);
-    alert('Page link copied to clipboard!');
-  }
+if (navigator.share) {
+  // Use Web Share API if available
+  navigator.share({
+    title: title,
+    text: `Check out this event: ${title}`,
+    url: url,
+  })
+  .then(() => console.log('Successfully shared'))
+  .catch((error) => console.error('Error sharing', error));
+} else {
+  // Fallback: Copy URL to clipboard
+  copyToClipboard(url);
+  alert('Page link copied to clipboard!');
+}
 };
 
 // Function to copy a URL to clipboard
 const copyToClipboard = (text) => {
-  navigator.clipboard.writeText(text).then(
-    () => console.log('Text copied to clipboard'),
-    (error) => console.error('Could not copy text: ', error)
-  );
+navigator.clipboard.writeText(text).then(
+  () => console.log('Text copied to clipboard'),
+  (error) => console.error('Could not copy text: ', error)
+);
 };
-const date = ref<Date>()
+function formatDateRange(start, end) {
+if (!start || !end) return '';
 
-const formatArray = (arr: string[]) =>
-  arr.length > 3 ? `${arr.slice(0, 3).join(', ')}...` : arr.join(', ');
+const startMonth = format(start, 'MMMM');
+const endMonth = format(end, 'MMMM');
+const startYear = format(start, 'yyyy');
+const endYear = format(end, 'yyyy');
+const startDay = format(start, 'd');
+const endDay = format(end, 'd');
+const days = startDay == endDay ? `${startDay}` : `${startDay}-${endDay}`
+if (startYear === endYear) {
+  if (startMonth === endMonth) {
+    return `${startMonth} ${days}, ${startYear}`;
+  }
+  return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
+}
 
-const formatDate = (date: string) =>
-  new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+}
+function formatTimeRange(startTime, endTime) {
+if (!startTime || !endTime) return '';
 
-const formatTime = (time: string) =>
-  new Date(`1970-01-01T${time}:00Z`).toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Detect user's local timezone
+
+// Convert input time (HH:mm) to UTC, then format it for the user's timezone
+const startUtc = fromZonedTime(`1970-01-01T${startTime}`, 'UTC');
+const endUtc = fromZonedTime(`1970-01-01T${endTime}`, 'UTC');
+
+const startFormatted = formatInTimeZone(startUtc, timeZone, 'h:mm a');
+const endFormatted = formatInTimeZone(endUtc, timeZone, 'h:mm a');
+const timeZoneAbbr = formatInTimeZone(new Date(), timeZone, 'zzz'); // Get local timezone abbreviation
+
+return `${startFormatted} - ${endFormatted} (${timeZoneAbbr})`;
+}
 </script>
-
-<template>
-  <Card class="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden">
-    <CardHeader
-      class="bg-gradient-to-r from-orange-600 to-orange-400 p-6 flex flex-col items-center text-white"
-    >
-      <Avatar class="mb-4 w-24 h-24 ring-4 ring-white">
-        <AvatarImage :src="event.event_owner.avatarSRC" alt="Event Banner" />
-        <AvatarFallback>EV</AvatarFallback>
-      </Avatar>
-      <h3 class="font-semibold text-center text-md mt-2">{{ event.event_owner.full_name }}</h3>
-      <CardTitle class="text-2xl font-bold">{{ event.title }}</CardTitle>
-      <span v-if="!!event.event_type" class="text-lg opacity-90">{{ event.event_type }}</span>
-      <div v-if="!!event.location" class="flex items-center mt-2">
-        <MapPinIcon class="w-5 h-5" />
-        <span class="ml-2 font-semibold">{{ event.location }}</span>
-      </div>
-    </CardHeader>
-    <CardContent class="p-6">
-      <!-- Custom Buttons Slot -->
-      <div class="flex justify-end mt-1 space-x-4 align-middle">
-        <slot name="action-buttons">
-        </slot>
-      </div>
-      <h3 v-if="!!event.description" class="font-semibold mt-6 mb-2">Description:</h3>
-      <p v-if="!!event.description" class="text-gray-700 dark:text-gray-300 mb-6">{{ event.description }}</p>
-
-      <!-- Event Details -->
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <h3 class="font-semibold mb-2">Event Dates</h3>
-          <div class="flex items-center">
-            <CalendarIcon class="w-5 h-5 mr-2 text-orange-600" />
-            <span>{{ formatDate(event.event_start_date) }}</span>
-            <span v-if="event.event_end_date" class="mx-2">-</span>
-            <span v-if="event.event_end_date">{{ formatDate(event.event_end_date) }}</span>
-          </div>
-        </div>
-        <div>
-          <h3 class="font-semibold mb-2">Event Time</h3>
-          <div class="flex items-center">
-            <Clock class="w-5 h-5 mr-2 text-orange-600" />
-            <span>{{ formatTime(event.event_start_time) }}</span>
-            <span v-if="event.event_end_time" class="mx-2">-</span>
-            <span v-if="event.event_end_time">{{ formatTime(event.event_end_time) }}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Industries -->
-      <h3 v-if="!!event.industries" class="font-semibold mt-6 mb-2">Industries</h3>
-      <div v-if="!!event.industries" class="flex gap-2 flex-wrap">
-        <span
-          v-for="industry in event.industries"
-          :key="industry"
-          class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-100 text-sm font-medium px-2.5 py-0.5 rounded"
-        >
-          {{ industry }}
-        </span>
-      </div>
-
-      <!-- Features -->
-      <h3 class="font-semibold mt-6 mb-2">Event Features</h3>
-      <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
-        <li v-if="event.invite_only">Invite Only</li>
-        <li v-if="event.allow_volunteers_offering">Volunteer Opportunities</li>
-        <li v-if="event.allow_sponsorship_offering">Sponsorship Opportunities</li>
-        <li v-if="event.allow_expertise_offering">Expertise Opportunities</li>
-        <li v-if="event.allow_vendors_offering">Vendor Opportunities</li>
-        <li v-if="event.allow_registration_request">Registration Required</li>
-        <li v-if="event.allow_venue_offering">Venue Offering</li>
-      </ul>
-
-      <!-- Ticket Info -->
-      <h3 class="font-semibold mt-6 mb-2">Ticket Information</h3>
-      <div class="flex items-center">
-        <CheckCircle class="w-5 h-5 mr-2 text-green-600" />
-        <span>{{ event.ticket_price > 0 ? `$${event.ticket_price}` : 'Free' }}</span>
-      </div>
-
-      <!-- Number of Guests -->
-      <h3 v-if="!!event.number_of_guests" class="font-semibold mt-6 mb-2">Expected Guests</h3>
-      <div v-if="!!event.number_of_guests" class="flex items-center">
-        <UserIcon class="w-5 h-5 mr-2 text-blue-600" />
-        <span>{{ event.number_of_guests }}</span>
-      </div>
-
-      <!-- External Link -->
-      <h3 v-if="!!event.link" class="font-semibold mt-6 mb-2">Event Link</h3>
-      <div v-if="event.link" class="flex items-center bg-gray-100 dark:bg-gray-800 rounded-md p-2">
-        <GlobeIcon class="w-5 h-5 text-orange-600" />
-        <a :href="event.link" target="_blank" class="ml-2 hover:underline">{{ event.link }}</a>
-      </div>
-
-    </CardContent>
-      <CardFooter class="flex justify-between pt-4 border-t dark:border-gray-700">
-        <div>
-        </div>
-        <div class="flex flex-col items-end space-y-2">
-          
-          <MessagesButton v-if="Object.keys(contactInfo).length !== 0" :label="'Contact Host'" :isIcon="false" :newConversationInfo="contactInfo"></MessagesButton>
-        </div>
-      </CardFooter>
-  </Card>
-</template>
