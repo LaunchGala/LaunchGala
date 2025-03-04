@@ -47,12 +47,13 @@ const isScrolled = ref(false)
 const navigationItems = [
   { name: 'Venues', href: '/AllVenuesNew' },
   { name: 'Volunteers', href: '/AllVolunteers' },
-  { name: 'Startups', href: '/FoundersAndStartups', new: true },
+  { name: 'Startups', href: '/FoundersAndStartups', comingSoon: true },
   { name: 'Experts/Investors', href: '/AllSpeakers' },
-  { name: 'Vendors', href: '/AllVendors', new: true },
-  { name: 'Influencers', href: '/AllMedia', new: true },
+  { name: 'Sponsors', href: '/AllSponsors', comingSoon: true },
+  { name: 'Vendors', href: '/AllVendors', comingSoon: true },
+  { name: 'Influencers', href: '/AllMedia', comingSoon: true },
   { name: 'Talents', href: '/AllTalents' },
-  { name: 'AI Lounge', href: '/LaunchAI', new: true },
+  { name: 'AI Lounge', href: '/LaunchAI', comingSoon: true },
   { name: 'Events', href: '/AllEvents' },
   { name: 'Contact us', href: '/contactPage' }
 ]
@@ -185,10 +186,10 @@ onMounted(() => {
                 >
                   <span class="text-gray-600 group-hover:text-orange-500">{{ item.name }}</span>
                   <span 
-                    v-if="item.new" 
+                    v-if="item.comingSoon" 
                     class="px-2 py-1 text-xs bg-orange-100 text-orange-600 rounded-full"
                   >
-                    New
+                    Coming Soon
                   </span>
                 </NuxtLink>
               </div>
@@ -332,10 +333,10 @@ onMounted(() => {
         >
           <span class="text-gray-600 group-hover:text-orange-500">{{ item.name }}</span>
           <span 
-            v-if="item.new" 
+            v-if="item.comingSoon" 
             class="px-2 py-1 text-xs bg-orange-100 text-orange-600 rounded-full"
           >
-            New
+          comingSoon
           </span>
         </NuxtLink>
         <NuxtLink
