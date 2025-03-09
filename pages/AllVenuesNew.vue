@@ -515,10 +515,10 @@ const applyFilters = () => {
             <label class="flex items-center">
               <input
                 type="checkbox"
-                v-model="filters.instantBook"
+                v-model="filters.sponsorshipOption"
                 class="h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded"
               >
-              <span class="ml-2 text-sm text-gray-700">Instant Book available (change to Sponsorship available)</span>
+              <span class="ml-2 text-sm text-gray-700">Sponsorship Available</span>
             </label>
           </div>
 
@@ -573,7 +573,7 @@ const applyFilters = () => {
                 <!-- Instant Book Badge -->
                 <div v-if="venue.sponsorshipOption" 
                      class="absolute top-4 left-4 px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-full shadow-lg">
-                  Instant Book (change Sponsorship Available)
+                  Sponsorship Available
                 </div>
               </div>
               <div class="p-6 space-y-4 flex-grow flex flex-col">

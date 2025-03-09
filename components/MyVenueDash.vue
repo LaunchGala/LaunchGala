@@ -6,6 +6,7 @@ import {
   Clock, Filter, Search,
   ArrowUpRight
 } from 'lucide-vue-next';
+import { Button } from '@/components/ui/button';
 
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
@@ -195,6 +196,8 @@ const filteredVenues = computed(() => {
     return matchesSearch && matchesStatus;
   });
 });
+
+
 </script>
 
 <template>
@@ -202,7 +205,10 @@ const filteredVenues = computed(() => {
     <!-- Header Section -->
     <div class="bg-white rounded-2xl shadow-sm mb-6">
       <div class="p-6">
-        <h1 class="text-2xl font-bold text-gray-900">Venue Management</h1>
+        <div class="flex flex-row items-center justify-between"><h1 class="text-2xl font-bold text-gray-900">Venue Management</h1> <NuxtLink to="VenueListing" class="m-6 items-center">
+      <Button @click="console.log(allVenues)" class="bg-orange-500 text-white dark:bg-orange-600 dark:text-white hover:bg-gray-100 hover:text-orange-500">Manage your Venues</Button>
+    </NuxtLink>
+  </div>
         <p class="text-gray-600 mt-1">Manage your venue bookings and requests</p>
 
         <!-- Stats Grid -->
@@ -402,11 +408,9 @@ const filteredVenues = computed(() => {
 
             <!-- Action Buttons -->
             <div class="mt-6 flex items-center justify-end space-x-3">
-              <button
-                class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
-              >
-                <MessageCircle class="w-5 h-5" />
-              </button>
+              
+              <MessagesButton :label="'Contact'" :isIcon="true"
+              :start-conversation-user-id="activeTab === 'requested' ? selectedBooking.venue.venue_owner.id : selectedBooking.event.event_owner.id"></MessagesButton>
               
               <!-- Buttons for venue owner -->
               <template v-if="activeTab === 'requested-from-me'">

@@ -8,7 +8,7 @@
           class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
           {{ getLabel() }}
         </Button>
-        <MessageCircleIcon v-if="isIcon && !hidden" class="text-orange-500 rounded-md hover:bg-orange-200" />
+        <MessageCircleIcon v-if="isIcon && !hidden" @click="openAndStart" class="text-orange-500 rounded-md hover:bg-orange-200" />
         <span v-if="unreadCount > 0"
           class="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
           {{ unreadCount }}
