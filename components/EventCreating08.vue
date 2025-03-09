@@ -30,6 +30,17 @@ function setRegistrationRequest(toggleState: boolean) {
   props.event.allow_registration_request = toggleState
 }
 
+// Reactive variable for new rule input
+const newRule = ref('');
+
+// Function to add new rule to the list
+const addRule = () => {
+  if (newRule.value.trim()) {
+    if(!props.event.rules) props.event.rules = [];
+    props.event.rules.push(newRule.value.trim());  // Add new rule to the list
+    newRule.value = '';  // Clear the input
+  }
+};
 console.log(props.event);
 </script>
 
@@ -92,6 +103,29 @@ console.log(props.event);
               <Switch :default-checked="props.event.priceEnabled" @update:checked="priceEnabled" id="displayPrice" />
             </div> -->
             <!-- Current switch sections omitted for brevity -->
+            <h2 class="text-xl font-semibold mb-4">Additional Rules</h2>
+    
+    <!-- Input area to add new rule -->
+    <div class="flex items-center gap-2 mb-4">
+      <Textarea
+        v-model="newRule"
+        class="border rounded p-2 w-full"
+        placeholder="Enter a new rule"
+        @keydown.enter.prevent="addRule"
+      ></Textarea>
+      <Button
+        @click="addRule"
+        class="OrangeCol font-semibold text-white py-2 rounded-md transition ease-in-out duration-150 hover:bg-orange-400">
+        Add Rule
+      </Button>
+    </div>
+
+    <!-- Display list of rules -->
+    <ul class="list-disc ml-5">
+      <li v-for="(rule, index) in props.event.rules" :key="index" class="text-md text-gray-900 dark:text-white">
+        {{ rule }}
+      </li>
+    </ul>
           </div>
           <!-- Operating Days Section -->
           <!-- <div class="mt-8 border-t pt-6">

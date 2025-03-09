@@ -937,22 +937,3 @@ const getMessageIconColor = (type: string) => {
   animation: bounce 2s infinite;
 }
 </style>
-
-The enhanced dashboard now includes:
-
-1. Interactive stats cards with mini sparkline charts
-2. Detailed event cards with progress tracking
-3. Team member avatars and status indicators
-4. Activity feed with colorful icons
-5. Enhanced message cards with type indicators
-6. Improved notifications with custom icons
-7. Quick action buttons for common tasks
-8. Level progress visualization
-9. Achievement badges
-10. Animated elements and smooth transitions
-11. Better organized layout with clear hierarchy
-12. More detailed user profile information
-13. Enhanced visual feedback on interactions
-14. Improved mobile responsiveness
-
-Would you like me to explain any specific part in
