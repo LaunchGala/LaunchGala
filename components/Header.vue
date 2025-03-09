@@ -132,9 +132,8 @@ onMounted(() => {
           <ArrowLeft class=" text-orange-500 text-xl "></ArrowLeft>
         </Button>
           <a href="/" class="group flex items-center space-x-3">
-            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-all duration-300">
-              <span class="text-white text-xl font-bold">LG</span>
-            </div>
+            
+        <img src="public/Launch_Gala_Logo-removebgHD.png" class="w-16 h-16">
             <div class="flex flex-col">
               <span class="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
                 Launch Gala
